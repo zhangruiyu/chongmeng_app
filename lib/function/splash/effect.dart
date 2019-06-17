@@ -16,7 +16,7 @@ Effect<SplashState> buildEffect() {
 }
 
 void _pushMainPage(Action action, Context<SplashState> ctx) {
-  Navigator.popAndPushNamed(ctx.context, PageConstants.MainPage);
+  Navigator.pushReplacementNamed(ctx.context, PageConstants.MainPage);
 }
 
 void _initState(Action action, Context<SplashState> ctx) {

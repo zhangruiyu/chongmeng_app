@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'constants/constants.dart';
+import 'constants/page_constants.dart';
+import 'function/main/page.dart';
 import 'function/splash/page.dart';
 import 'global_store/store.dart';
 import 'localizetion/localizations_delegate.dart';
@@ -36,7 +38,7 @@ Widget createApp() {
     PageRoutes(
       pages: <String, Page<Object, dynamic>>{
         'splash': pageConfiguration(SplashPage()),
-//        PageConstants.MainPage: pageConfiguration(MainPage()),
+        PageConstants.MainPage: pageConfiguration(MainPage()),
 //        PageConstants.SearchPage: pageConfiguration(SearchPage()),
       },
     ),
