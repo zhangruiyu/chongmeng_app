@@ -11,7 +11,9 @@
 
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+import 'app.dart';
+
+void main() => runApp(createApp());
 
 /// This Widget is the main application widget.
 class MyApp extends StatelessWidget {
@@ -50,6 +52,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'Index 2: School',
       style: optionStyle,
     ),
+    Text(
+      '账户',
+      style: optionStyle,
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -79,6 +85,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
+            title: Text('School'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_balance),
             title: Text('School'),
           ),
         ],
