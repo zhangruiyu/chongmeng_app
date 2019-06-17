@@ -1,3 +1,4 @@
+import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ Page<T, dynamic> pageConfiguration<T extends Cloneable<T>>(
 }
 
 Widget createApp() {
+  JiguangUtils.init();
   final AbstractRoutes routes = HybridRoutes(routes: <AbstractRoutes>[
     PageRoutes(
       pages: <String, Page<Object, dynamic>>{
@@ -45,11 +47,11 @@ Widget createApp() {
   ]);
 
   return MaterialApp(
-    title: 'Fluro',
+    title: '萌宠',
     debugShowCheckedModeBanner: false,
     locale: GlobalStore.store.getState().locale,
     onGenerateTitle: (BuildContext context) {
-      return "有米来花";
+      return "萌宠";
     },
     localizationsDelegates: [
       // ... app-specific localization delegate[s] here

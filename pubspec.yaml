@@ -42,6 +42,8 @@ dependencies:
   fish_redux: any
   flutter_swiper: any
   device_info: any
+  janalytics: any
+  jpush_flutter: any
   flutter_webview_plugin:
     git: https://github.com/zhangruiyu/flutter_webview_plugin.git
 
