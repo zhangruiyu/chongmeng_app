@@ -12,7 +12,9 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
       leading: null,
       title: const Text('宠萌'),
     ),
-    body: Center(child: Text(state.mainPageIndex.toString())),
+    body: state.mainPageIndex == 3
+        ? viewService.buildComponent('account')
+        : Center(child: Text(state.mainPageIndex.toString())),
     bottomNavigationBar: BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       items: <BottomNavigationBarItem>[
