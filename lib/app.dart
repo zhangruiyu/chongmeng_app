@@ -47,11 +47,10 @@ Widget createApp() {
   ]);
 
   return MaterialApp(
-    title: '萌宠',
     debugShowCheckedModeBanner: false,
     locale: GlobalStore.store.getState().locale,
     onGenerateTitle: (BuildContext context) {
-      return "萌宠";
+      return DefaultLocalizations.of(context).appName;
     },
     localizationsDelegates: [
       // ... app-specific localization delegate[s] here

@@ -9,4 +9,7 @@ class LocaleStringEn extends AbstractLocaleString {
 
   @override
   String splashSkip = ' skip';
+
+  @override
+  String get appName => "萌宠";
 }

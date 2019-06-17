@@ -8,4 +8,7 @@ class LocaleStringZh extends AbstractLocaleString {
 
   @override
   String splashSkip = '跳过';
+
+  @override
+  String get appName => '萌宠';
 }
