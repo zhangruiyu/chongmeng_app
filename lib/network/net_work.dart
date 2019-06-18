@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:chongmeng/constants/constants.dart';
@@ -13,6 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 class RequestClient {
+  ///[queryParameters] 参数以map形式
+  ///[showLoadingIndicator] 为true时显示加载数据弹框 默认是false
+  ///[isPost] 为true时是post请求,默认是true
   static Future<T> request<T>(
     BuildContext context,
     String requestUrl, {
@@ -56,9 +58,6 @@ class RequestClient {
     }
   }
 
-  ///[queryParameters] 参数以map形式
-  ///[showLoadingIndicator] 为true时显示加载数据弹框 默认是false
-  ///[isPost] 为true时是post请求,默认是true
   static Future<T> _request<T>(
     BuildContext context,
     String requestUrl, {

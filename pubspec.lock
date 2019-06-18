@@ -342,6 +342,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
+  umengshare:
+    dependency: "direct main"
+    description:
+      path: "plugins/flutter_umengshare"
+      relative: true
+    source: path
+    version: "0.0.1"
   url_launcher:
     dependency: "direct main"
     description:

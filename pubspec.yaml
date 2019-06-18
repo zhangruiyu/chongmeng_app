@@ -47,6 +47,8 @@ dependencies:
   flutter_webview_plugin:
     git: https://github.com/zhangruiyu/flutter_webview_plugin.git
   jmessage_flutter: any
+  umengshare:
+    path: ./plugins/flutter_umengshare
 
 dev_dependencies:
   flutter_test:
