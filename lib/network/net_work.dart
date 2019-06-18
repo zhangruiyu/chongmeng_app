@@ -36,22 +36,23 @@ class RequestClient {
         NavigatorHelper.showLoadingDialog(context, false);
       }
       return Future<T>.value(result);
-    } on NetException {
-      if (showLoadingIndicator) {
-        NavigatorHelper.showLoadingDialog(context, false);
-      }
+    } on NetException catch (e) {
 //      buyMoreLlamas();
+      if (context != null && !ignoreToast) {
+        toast(context, '网络错误$e');
+      }
       return Future<T>.value();
     } catch (e) {
-      if (showLoadingIndicator) {
-        NavigatorHelper.showLoadingDialog(context, false);
-      }
       if (context != null && !ignoreToast) {
         toast(context, '网络错误$e');
       }
       // 非具体类型
       print('Something really unknown: $e');
       return Future<T>.value();
+    } finally {
+      if (showLoadingIndicator) {
+        NavigatorHelper.showLoadingDialog(context, false);
+      }
     }
   }
 
