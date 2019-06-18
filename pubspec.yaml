@@ -46,6 +46,7 @@ dependencies:
   jpush_flutter: any
   flutter_webview_plugin:
     git: https://github.com/zhangruiyu/flutter_webview_plugin.git
+  jmessage_flutter: any
 
 dev_dependencies:
   flutter_test:

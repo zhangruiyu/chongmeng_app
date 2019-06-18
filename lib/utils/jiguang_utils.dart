@@ -1,6 +1,9 @@
 import 'package:chongmeng/constants/constants.dart';
 import 'package:janalytics/janalytics.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
+import 'package:jmessage_flutter/jmessage_flutter.dart';
+
+JmessageFlutter JMessage = JmessageFlutter();
 
 class JiguangUtils {
   static Janalytics janalytics = new Janalytics();
