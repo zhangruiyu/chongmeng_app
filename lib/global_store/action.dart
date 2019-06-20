@@ -1,9 +1,14 @@
+import 'package:chongmeng/function/auto/model/login_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 
-enum GlobalAction { changeLanguage }
+enum GlobalAction { ChangeLanguage, UpdateLocalUser }
 
 class GlobalActionCreator {
-  static Action onchangeLanguage() {
-    return const Action(GlobalAction.changeLanguage);
+  static Action onChangeLanguage() {
+    return const Action(GlobalAction.ChangeLanguage);
+  }
+
+  static Action onUpdateLocalUser(LoginData user) {
+    return Action(GlobalAction.UpdateLocalUser, payload: user);
   }
 }

@@ -9,19 +9,17 @@ import 'state.dart';
 Reducer<GlobalState> buildReducer() {
   return asReducer(
     <Object, Reducer<GlobalState>>{
-      GlobalAction.changeLanguage: _onchangeLanguage,
+      GlobalAction.ChangeLanguage: _onChangeLanguage,
+      GlobalAction.UpdateLocalUser: _onUpdateLocalUser,
     },
   );
 }
 
-List<Color> _colors = <Color>[
-  Colors.green,
-  Colors.red,
-  Colors.black,
-  Colors.blue
-];
+GlobalState _onChangeLanguage(GlobalState state, Action action) {
+  return state.clone()..locale = Locale('en', 'US');
+}
 
-GlobalState _onchangeLanguage(GlobalState state, Action action) {
+GlobalState _onUpdateLocalUser(GlobalState state, Action action) {
 //  final Color next =
 //      _colors[((_colors.indexOf(state.themeColor) + 1) % _colors.length)];
   return state.clone()..locale = Locale('en', 'US');

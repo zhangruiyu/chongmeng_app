@@ -1,9 +1,13 @@
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/global_store/action.dart';
+import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/network/outermost_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/widgets.dart';
 import 'package:umengshare/umengshare.dart';
 import 'action.dart';
+import 'model/login_entity.dart';
 import 'state.dart';
 
 Effect<AutoState> buildEffect() {
@@ -37,18 +41,21 @@ Future _onSendAutoCode(Action action, Context<AutoState> ctx) async {
 Future _onLogin(Action action, Context<AutoState> ctx) async {
   if (action.payload == "qq") {
     await UMengShare.login(UMPlatform.QQ);
-  } else {
+  } else if (action.payload == "wechat") {
     //微信需要开发者资质认证
     var result = await UMengShare.login(UMPlatform.Wechat);
     println("result $result");
   }
 
-  var result = await RequestClient.request<OutermostEntity>(
+  var result = await RequestClient.request<LoginEntity>(
       ctx.context, HttpConstants.LoginAndRegister,
       queryParameters: {
         'tel': ctx.state.telTextEditingController.text,
         'type': 'tel',
         'autoCode': ctx.state.autoCodeTextEditingController.text
       });
-//  action.payload['completer']();
+  if (result != null) {
+    GlobalStore.store.dispatch(GlobalActionCreator.onUpdateLocalUser(result.data));
+    Navigator.pop(ctx.context);
+  }
 }
