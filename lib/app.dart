@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'constants/constants.dart';
 import 'constants/page_constants.dart';
+import 'function/auto/page.dart';
 import 'function/main/page.dart';
 import 'function/splash/page.dart';
 import 'global_store/store.dart';
@@ -31,6 +32,9 @@ Page<T, dynamic> pageConfiguration<T extends Cloneable<T>>(
       adapter: (List<AdapterMiddleware<T>> adapterMiddleware) {
         adapterMiddleware.add(safetyAdapter<T>());
       },
+      dispatch: (List<Middleware<T>> middleware) {
+        middleware.add(logMiddleware());
+      },
     );
 }
 
@@ -41,7 +45,7 @@ Widget createApp() {
       pages: <String, Page<Object, dynamic>>{
         'splash': pageConfiguration(SplashPage()),
         PageConstants.MainPage: pageConfiguration(MainPage()),
-//        PageConstants.SearchPage: pageConfiguration(SearchPage()),
+        PageConstants.AutoPage: pageConfiguration(AutoPage()),
       },
     ),
   ]);
@@ -65,8 +69,10 @@ Widget createApp() {
       // ... other locales the app supports
     ],
 //    theme: themeProvide.themeData,
-    theme:
-        ThemeData(primaryColor: Color(0xffED594A), dividerColor: colorf3f3f3),
+    theme: ThemeData(
+        primaryColor: Colors.amberAccent,
+        accentColor: Color(0xffED594A),
+        dividerColor: colorf3f3f3),
     home: routes.buildPage('splash', null),
     onGenerateRoute: (RouteSettings settings) {
       return MaterialPageRoute<Object>(builder: (BuildContext context) {

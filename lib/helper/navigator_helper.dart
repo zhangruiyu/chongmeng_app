@@ -42,4 +42,6 @@ class NavigatorHelper {
       _overlayEntry = null;
     }
   }
+
+  static void pushWebPage(BuildContext context, String s, String t) {}
 }

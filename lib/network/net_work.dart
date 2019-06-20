@@ -68,7 +68,9 @@ class RequestClient {
     bool ignoreToast = false,
   }) async {
     BaseOptions baseOptions = new BaseOptions(
-        baseUrl: HttpConstants.BaseUrl,
+        baseUrl: Platform.isAndroid
+            ? "http://192.168.43.148:8080/"
+            : HttpConstants.BaseUrl,
         connectTimeout: 10000,
         receiveTimeout: 10000,
         headers: {

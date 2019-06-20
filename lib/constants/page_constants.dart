@@ -10,11 +10,8 @@ class PageConstants {
   static const String PermissionPage = "youmi://PermissionPage"; //权限弹框
   static const String SettingForgetPasswordPage =
       'youmi://SettingForgetPasswordPage'; //设置忘记密码
-  static const String AuthPage = 'youmi://AuthPage'; //实名认证
-  static const String FiltratePage = 'youmi://FiltratePage'; //筛选项目
 
-  static const String SearchPage = 'id://SearchPage'; //搜索
-  static const String MainPage = "id://MainPage"; //主页
-  static const String MePage = "id://MePage"; //我的
-  static const String LoginPage = 'id://LoginPage'; //登录
+  static const String AutoPage = 'cm://AutoPage';
+  static const String MainPage = "cm://MainPage"; //主页
+  static const String MePage = "cm://MePage"; //我的
 }

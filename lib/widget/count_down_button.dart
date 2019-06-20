@@ -78,6 +78,8 @@ class _CountDownButtonState extends State<CountDownButton> {
                 });
               });
             }
+          }).catchError((onError) {
+            print(onError);
           });
         }
       },
