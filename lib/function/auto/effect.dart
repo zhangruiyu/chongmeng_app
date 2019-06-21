@@ -55,7 +55,8 @@ Future _onLogin(Action action, Context<AutoState> ctx) async {
         'autoCode': ctx.state.autoCodeTextEditingController.text
       });
   if (result != null) {
-    GlobalStore.store.dispatch(GlobalActionCreator.onUpdateLocalUser(result.data));
+    GlobalStore.store
+        .dispatch(GlobalActionCreator.onUpdateLocalUser(result.data));
     Navigator.pop(ctx.context);
   }
 }

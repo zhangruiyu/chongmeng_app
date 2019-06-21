@@ -11,4 +11,5 @@ class HttpConstants {
 
   static final String SendCode = "app/user/sendLoginCode"; //发送验证码
   static final String LoginAndRegister = "app/user/loginAndRegister";
+  static final String HomeIndex = "app/home/index";
 }

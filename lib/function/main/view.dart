@@ -14,7 +14,7 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
     ),
     body: state.mainPageIndex == 3
         ? viewService.buildComponent('account')
-        : Center(child: Text(state.mainPageIndex.toString())),
+        : viewService.buildComponent('home'),
     bottomNavigationBar: BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       items: <BottomNavigationBarItem>[

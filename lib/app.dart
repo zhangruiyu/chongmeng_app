@@ -11,6 +11,7 @@ import 'function/main/page.dart';
 import 'function/splash/page.dart';
 import 'global_store/store.dart';
 import 'localizetion/localizations_delegate.dart';
+import 'widget/no_scale_text_widget.dart';
 
 //create global page helper
 Page<T, dynamic> pageConfiguration<T extends Cloneable<T>>(
@@ -78,6 +79,11 @@ Widget createApp() {
       return MaterialPageRoute<Object>(builder: (BuildContext context) {
         return routes.buildPage(settings.name, settings.arguments);
       });
+    },
+    builder: (context, widget) {
+      return NoScaleTextWidget(
+        child: widget,
+      );
     },
   );
 }
