@@ -15,7 +15,7 @@ class RequestClient {
   ///[queryParameters] 参数以map形式
   ///[showLoadingIndicator] 为true时显示加载数据弹框 默认是false
   ///[isPost] 为true时是post请求,默认是true
-  static Future<T> request<T>(
+  static Future<Result<T>> request<T>(
     BuildContext context,
     String requestUrl, {
     Map<String, dynamic> queryParameters,
@@ -37,20 +37,23 @@ class RequestClient {
       if (showLoadingIndicator) {
         NavigatorHelper.showLoadingDialog(context, false);
       }
-      return Future<T>.value(result);
+
+      return Future<Result<T>>.value(Result<T>.iniSuccess(result));
     } on NetException catch (e) {
 //      buyMoreLlamas();
-      if (context != null && !ignoreToast) {
+      if (context != null &&
+          !ignoreToast &&
+          !ErrorCode.ignoreToastCode.contains(e.code)) {
         toast(context, '网络错误$e');
       }
-      return Future<T>.value();
+      return Future<Result<T>>.value(Result.iniFail(e.code));
     } catch (e) {
       if (context != null && !ignoreToast) {
         toast(context, '网络错误$e');
       }
       // 非具体类型
       print('Something really unknown: $e');
-      return Future<T>.value();
+      return Future<Result<T>>.value(Result.iniFail(ErrorCode.NormalError));
     } finally {
       if (showLoadingIndicator) {
         NavigatorHelper.showLoadingDialog(context, false);
@@ -69,7 +72,7 @@ class RequestClient {
   }) async {
     BaseOptions baseOptions = new BaseOptions(
         baseUrl: Platform.isAndroid
-            ? "http://192.168.43.148:8080/"
+            ? "http://192.168.6.211:8080/"
             : HttpConstants.BaseUrl,
         connectTimeout: 10000,
         receiveTimeout: 10000,
@@ -130,7 +133,28 @@ class RequestClient {
   }
 }
 
+class Result<T> {
+  bool hasError;
+  bool hasSuccess;
+  T data;
+
+  //错误码
+  int code;
+
+  Result.iniSuccess(
+    this.data,
+  )   : this.hasError = false,
+        this.hasSuccess = true;
+
+  Result.iniFail(
+    this.code, {
+    this.data,
+  })  : this.hasError = true,
+        this.hasSuccess = false;
+}
+
 class ErrorCode {
   static int NormalError = 500;
-  static int NO_SET_PAYPASSWROD = 1005;
+  static int BIND_TEL_ERROR_CODE = 1002; // 第三方登录需要绑定手机号
+  static List<int> ignoreToastCode = [BIND_TEL_ERROR_CODE];
 }

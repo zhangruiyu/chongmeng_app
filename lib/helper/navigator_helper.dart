@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 
 class NavigatorHelper {
   static popToMain(BuildContext context) {
-    Navigator.popUntil(context, (Route<dynamic> route) {
-      return route.settings.name == PageConstants.MainPage;
-    });
+    Navigator.popUntil(context, ModalRoute.withName(PageConstants.MainPage));
   }
 
   static popToMainByIndex(BuildContext context, int index) {

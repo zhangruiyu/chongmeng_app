@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'constants/constants.dart';
 import 'constants/page_constants.dart';
 import 'function/auto/page.dart';
+import 'function/bindtel/page.dart';
 import 'function/main/page.dart';
 import 'function/splash/page.dart';
 import 'global_store/store.dart';
@@ -47,6 +48,7 @@ Widget createApp() {
         'splash': pageConfiguration(SplashPage()),
         PageConstants.MainPage: pageConfiguration(MainPage()),
         PageConstants.AutoPage: pageConfiguration(AutoPage()),
+        PageConstants.BindTelPage: pageConfiguration(BindTelPage()),
       },
     ),
   ]);
@@ -76,9 +78,11 @@ Widget createApp() {
         dividerColor: colorf3f3f3),
     home: routes.buildPage('splash', null),
     onGenerateRoute: (RouteSettings settings) {
-      return MaterialPageRoute<Object>(builder: (BuildContext context) {
-        return routes.buildPage(settings.name, settings.arguments);
-      });
+      return MaterialPageRoute<Object>(
+          builder: (BuildContext context) {
+            return routes.buildPage(settings.name, settings.arguments);
+          },
+          settings: RouteSettings(name: settings.name));
     },
     builder: (context, widget) {
       return NoScaleTextWidget(

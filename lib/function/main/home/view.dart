@@ -44,38 +44,18 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
             },
 //      body: viewService.buildComponent("product"),
             body: ListView(
-              children: <Widget>[
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-                Text("123"),
-              ],
+              children: List.generate(1000, (int index) {
+                return "text $index";
+              }).map((text) {
+                return ListTile(
+                  title: Text(text),
+                  subtitle: Text("subtitle" + text),
+                  trailing: RaisedButton(
+                    child: Text("查看详情"),
+                    onPressed: () {},
+                  ),
+                );
+              }).toList(),
             ),
           ),
   );

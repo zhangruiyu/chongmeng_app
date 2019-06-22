@@ -1,4 +1,5 @@
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/constants/page_constants.dart';
 import 'package:chongmeng/global_store/action.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/network/net_work.dart';
@@ -32,31 +33,52 @@ void _initState(Action action, Context<AutoState> ctx) {
 Future _onSendAutoCode(Action action, Context<AutoState> ctx) async {
   var result = await RequestClient.request<OutermostEntity>(
       ctx.context, HttpConstants.SendCode,
-      queryParameters: {'tel': ctx.state.telTextEditingController.text});
-  if (result != null) {
+      queryParameters: {'tel': ctx.state.telTextEditingController.text},
+      showLoadingIndicator: true);
+  if (result.hasSuccess) {
     action.payload['completer']();
   }
 }
 
 Future _onLogin(Action action, Context<AutoState> ctx) async {
+  Result<LoginEntity> result;
+  //第三方登录的参数
+  Map<String, dynamic> queryParameters;
   if (action.payload == "qq") {
-    await UMengShare.login(UMPlatform.QQ);
+//{msg: , ret: 0, unionid: , gender: 男, is_yellow_vip: 0, city: 朝阳, level: 0, openid: 050DE67E9DF84FDA37DCF08F94D6FF2F, profile_image_url: http://thirdqq.qlogo.cn/g?b=oidb&k=3OPDOC5fkyMSpudJ2Hvdmw&s=100, accessToken: D9F5599646F6B19E59FA13D022433405, access_token: D9F5599646F6B19E59FA13D022433405, uid: 050DE67E9DF84FDA37DCF08F94D6FF2F, is_yellow_year_vip: 0, province: 北京, screen_name: 牛顿, name: 牛顿, iconurl: http://thirdqq.qlogo.cn/g?b=oidb&k=3OPDOC5fkyMSpudJ2Hvdmw&s=100, yellow_vip_level: 0, expiration: 1568907416357, vip: 0, expires_in: 1568907416357, um_status: SUCCESS}
+    //后台处理结果
+    queryParameters = ((await UMengShare.login(UMPlatform.QQ))
+            as Map<dynamic, dynamic>)
+        .map((key, value) {
+      return MapEntry(key.toString(), value);
+    })
+          ..['type'] = action.payload;
+    result = await RequestClient.request<LoginEntity>(
+        ctx.context, HttpConstants.LoginAndRegister,
+        queryParameters: queryParameters);
   } else if (action.payload == "wechat") {
     //微信需要开发者资质认证
     var result = await UMengShare.login(UMPlatform.Wechat);
     println("result $result");
+  } else {
+    result = await RequestClient.request<LoginEntity>(
+        ctx.context, HttpConstants.LoginAndRegister,
+        queryParameters: {
+          'tel': ctx.state.telTextEditingController.text,
+          'type': 'tel',
+          'autoCode': ctx.state.autoCodeTextEditingController.text,
+        },
+        showLoadingIndicator: true);
   }
 
-  var result = await RequestClient.request<LoginEntity>(
-      ctx.context, HttpConstants.LoginAndRegister,
-      queryParameters: {
-        'tel': ctx.state.telTextEditingController.text,
-        'type': 'tel',
-        'autoCode': ctx.state.autoCodeTextEditingController.text
-      });
-  if (result != null) {
+  if (result.hasSuccess) {
     GlobalStore.store
-        .dispatch(GlobalActionCreator.onUpdateLocalUser(result.data));
+        .dispatch(GlobalActionCreator.onUpdateLocalUser(result.data.data));
     Navigator.pop(ctx.context);
+  } else if (result.code == ErrorCode.BIND_TEL_ERROR_CODE) {
+    //跳转到验证手机号,然后绑定手机号
+    Navigator.pushNamed(ctx.context, PageConstants.BindTelPage, arguments: {
+      'queryParameters': queryParameters,
+    });
   }
 }

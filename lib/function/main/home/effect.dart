@@ -17,7 +17,7 @@ void _onAction(Action action, Context<HomeState> ctx) {}
 Future _initState(Action action, Context<HomeState> ctx) async {
   var homeData = await RequestClient.request<HomeEntity>(
       ctx.context, HttpConstants.HomeIndex);
-  if (homeData != null) {
-    ctx.dispatch(HomeActionCreator.onSetHomeData(homeData.data));
+  if (homeData.hasSuccess) {
+    ctx.dispatch(HomeActionCreator.onSetHomeData(homeData.data.data));
   }
 }

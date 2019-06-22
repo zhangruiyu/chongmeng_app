@@ -20,7 +20,7 @@ Widget buildView(TabState state, Dispatch dispatch, ViewService viewService) {
                 children: <Widget>[
                   new CachedNetworkImage(
                     imageUrl: itemMenu.picUrl,
-                    height: 51.0,
+                    height: 60.0,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 1.0),
