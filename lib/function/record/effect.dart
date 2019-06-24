@@ -16,7 +16,8 @@ void _dispose(Action action, Context<RecordState> ctx) {
 
 void _initState(Action action, Context<RecordState> ctx) {
   ctx.state.controller =
-      CameraController(ctx.state.cameras[0], ResolutionPreset.medium);
+      CameraController(ctx.state.cameras[0], ResolutionPreset.high);
+//  ctx.state.controller.description  = ctx.state.cameras[0];
   ctx.state.controller.initialize().then((_) {
     if (ctx.isDisposed) {
       return;
