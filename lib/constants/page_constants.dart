@@ -11,4 +11,5 @@ class PageConstants {
   static const String AutoPage = 'cm://AutoPage';
   static const String MainPage = "cm://MainPage"; //主页
   static const String MePage = "cm://MePage"; //我的
+  static const String RecordPage = "cm://RecordPage"; //录制视频
 }

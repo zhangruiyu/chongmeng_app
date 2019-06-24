@@ -26,15 +26,15 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          title: Text('Home'),
+          title: Text('首页'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.business),
-          title: Text('Business'),
+          icon: Icon(Icons.cloud_queue),
+          title: Text('云吸'),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.school),
-          title: Text('School'),
+          title: Text('商城'),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.account_balance),

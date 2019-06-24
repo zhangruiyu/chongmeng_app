@@ -39,6 +39,18 @@ class PermissionHelper {
     return permissions;
   }
 
+  static Future<bool> checkStoragePermission() async {
+    var isAgree = (await PermissionHandler().requestPermissions([
+      PermissionGroup.storage,
+    ]))
+        .values
+        .every((item) => item == PermissionStatus.granted);
+    if (!isAgree) {
+      PermissionHandler().openAppSettings();
+    }
+    return isAgree;
+  }
+
   static Future<bool> checkUpdatePermission() async {
     var isAgree = (await PermissionHandler().requestPermissions([
       PermissionGroup.storage,
