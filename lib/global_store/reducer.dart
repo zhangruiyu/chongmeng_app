@@ -1,5 +1,8 @@
 import 'dart:ui';
 
+import 'package:chongmeng/function/auto/model/login_entity.dart';
+import 'package:chongmeng/helper/model/local_user.dart';
+import 'package:chongmeng/helper/user_helper.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +23,7 @@ GlobalState _onChangeLanguage(GlobalState state, Action action) {
 }
 
 GlobalState _onUpdateLocalUser(GlobalState state, Action action) {
-//  final Color next =
-//      _colors[((_colors.indexOf(state.themeColor) + 1) % _colors.length)];
-  return state.clone()..locale = Locale('en', 'US');
+  LoginData loginData = action.payload;
+  UserHelper.setLogin(loginData);
+  return state.clone()..localUser = LocalUser.fromJson(loginData.toJson());
 }

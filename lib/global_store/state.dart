@@ -22,8 +22,8 @@ class GlobalState implements GlobalBaseState<GlobalState> {
 
   @override
   GlobalState clone() {
-    return GlobalState(locale: locale, localUser: localUser);
+    return GlobalState()
+      ..locale = locale
+      ..localUser = localUser;
   }
-
-  GlobalState({this.locale, this.localUser});
 }

@@ -10,7 +10,9 @@ import 'function/auto/page.dart';
 import 'function/bindtel/page.dart';
 import 'function/main/page.dart';
 import 'function/splash/page.dart';
+import 'global_store/state.dart';
 import 'global_store/store.dart';
+import 'helper/user_helper.dart';
 import 'localizetion/localizations_delegate.dart';
 import 'widget/no_scale_text_widget.dart';
 
@@ -18,13 +20,23 @@ import 'widget/no_scale_text_widget.dart';
 Page<T, dynamic> pageConfiguration<T extends Cloneable<T>>(
     Page<T, dynamic> page) {
   return page
-/*
+
     ///connect with app-store
-    ..connectExtraStore(GlobalStore.store, (T pagestate, GlobalState appState) {
-      return pagestate.locale == appState.locale
-          ? pagestate
-          : ((pagestate.clone())..locale = appState.locale);
-    })*/
+    ..connectExtraStore(GlobalStore.store, (T pageState, GlobalState appState) {
+      if (pageState is GlobalBaseState) {
+        dynamic newPageState = pageState as GlobalBaseState;
+        if (newPageState.locale == appState.locale &&
+            newPageState.localUser == appState.localUser) {
+          return pageState;
+        } else {
+          return (newPageState.clone()
+            ..locale = appState.locale
+            ..localUser = appState.localUser) as T;
+        }
+      } else {
+        return pageState;
+      }
+    })
 
     ///updateMiddleware
     ..updateMiddleware(
@@ -40,8 +52,10 @@ Page<T, dynamic> pageConfiguration<T extends Cloneable<T>>(
     );
 }
 
-Widget createApp() {
+Future<Widget> createApp() async {
   JiguangUtils.init();
+  //初始化用户数据
+  GlobalStore.store.getState().localUser = await UserHelper.initLocalUser();
   final AbstractRoutes routes = HybridRoutes(routes: <AbstractRoutes>[
     PageRoutes(
       pages: <String, Page<Object, dynamic>>{

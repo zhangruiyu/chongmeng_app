@@ -1,15 +1,29 @@
+import 'dart:ui';
+
 import 'package:chongmeng/function/main/account/state.dart';
 import 'package:chongmeng/function/main/home/model/home_entity.dart';
 import 'package:chongmeng/function/main/home/state.dart';
+import 'package:chongmeng/global_store/state.dart';
+import 'package:chongmeng/helper/model/local_user.dart';
 import 'package:fish_redux/fish_redux.dart';
 
-class MainState implements Cloneable<MainState> {
+class MainState implements GlobalBaseState<MainState> {
   int mainPageIndex;
   HomeData homeData;
+
   @override
   MainState clone() {
-    return MainState()..mainPageIndex = mainPageIndex;
+    return MainState()
+      ..mainPageIndex = mainPageIndex
+      ..localUser = localUser
+      ..locale = locale;
   }
+
+  @override
+  LocalUser localUser;
+
+  @override
+  Locale locale;
 }
 
 MainState initState(Map<String, dynamic> args) {
@@ -19,7 +33,9 @@ MainState initState(Map<String, dynamic> args) {
 ConnOp<MainState, AccountState> accountConnector() {
   return ConnOp<MainState, AccountState>(
     get: (MainState state) {
-      return AccountState();
+      return AccountState()
+        ..localUser = state.localUser
+        ..locale = state.locale;
     },
     set: (MainState state, AccountState subState) {
 //      state.bannerData = subState.bannerData;

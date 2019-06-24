@@ -42,4 +42,8 @@ class NavigatorHelper {
   }
 
   static void pushWebPage(BuildContext context, String s, String t) {}
+
+  static void pushPageLoginPage(BuildContext context) {
+    Navigator.pushNamed(context, PageConstants.AutoPage);
+  }
 }

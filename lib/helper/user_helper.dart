@@ -1,28 +1,36 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:chongmeng/function/auto/model/login_entity.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'model/auto_entity.dart';
+import 'model/local_user.dart';
 import 'navigator_helper.dart';
 
 class UserHelper {
-  static Future<bool> isLogin() async {
+  static Future<LocalUser> initLocalUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool flag = prefs.getBool("loginFlag");
-    debugPrint(flag.toString());
-    return flag ?? false;
+    String user = prefs.getString("user");
+    if (user != null) {
+      return LocalUser.fromJson(json.decode(user));
+    }
+    return null;
   }
 
-  static setLogin(AutoEntity autoEntity, String tel) async {
+  static Future<bool> isLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("loginFlag", true);
-    prefs.setString("token", autoEntity.data.token);
-    prefs.setString("tel", tel);
-    prefs.setString("user", json.encode(autoEntity.data.toJson()));
+    String user = prefs.getString("user");
+    debugPrint(user.toString());
+    return user != null;
+  }
+
+  static setLogin(LoginData autoEntity) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("user", json.encode(autoEntity.toJson()));
   }
 
   static loginCheck(BuildContext context, VoidCallback block) async {
@@ -38,9 +46,6 @@ class UserHelper {
   //context为null,就不跳转到登录
   static void logout(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool("loginFlag", false);
-    await prefs.setString("token", null);
-    await prefs.setString("tel", null);
     await prefs.setString("user", null);
     /*Navigator.of(context).pushAndRemoveUntil(
         new MaterialPageRoute(
@@ -51,7 +56,7 @@ class UserHelper {
       return null == route;
     });*/
     if (context != null) {
-//      NavigatorHelper.pushPageLoginPage(context);
+      NavigatorHelper.pushPageLoginPage(context);
     }
   }
 
@@ -79,12 +84,4 @@ class UserHelper {
     var sp = await SharedPreferences.getInstance();
     return sp.getString("tel") ?? "";
   }
-
-//  static Future<AutoData> getUser() async {
-//    var sp = await SharedPreferences.getInstance();
-//    if (sp.getString("user") == null) {
-//      return null;
-//    }
-//    return AutoData.fromJson(json.decode(sp.getString("user")));
-//  }
 }

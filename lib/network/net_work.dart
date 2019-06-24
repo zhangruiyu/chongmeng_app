@@ -72,7 +72,7 @@ class RequestClient {
   }) async {
     BaseOptions baseOptions = new BaseOptions(
         baseUrl: Platform.isAndroid
-            ? "http://192.168.6.211:8080/"
+            ? "http://192.168.43.148:8080/"
             : HttpConstants.BaseUrl,
         connectTimeout: 10000,
         receiveTimeout: 10000,
