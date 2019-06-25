@@ -19,6 +19,8 @@ void _dispose(Action action, Context<ReviewIVState> ctx) {
 }
 
 void _initState(Action action, Context<ReviewIVState> ctx) {
-  ctx.state.videoController
-      .setFileDataSource(File(ctx.state.filePath), autoPlay: true);
+  if (ctx.state.type == 'video') {
+    ctx.state.videoController
+        .setFileDataSource(File(ctx.state.filePath), autoPlay: true);
+  }
 }

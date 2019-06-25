@@ -10,13 +10,6 @@ import 'state.dart';
 
 Widget buildView(
     ReviewIVState state, Dispatch dispatch, ViewService viewService) {
-  if (state.type == "image") {
-    return Image.file(
-      File(state.filePath),
-      width: double.infinity,
-      height: double.infinity,
-    );
-  }
   return Scaffold(
     appBar: Toolbar(
       actions: <Widget>[
@@ -31,15 +24,21 @@ Widget buildView(
         ),
       ],
     ),
-    body: Container(
-      // height: 400, // 这里随意
-      child: SizedBox(
-        width: double.infinity,
-        height: double.infinity,
-        child: IjkPlayer(
-          mediaController: state.videoController,
-        ),
-      ),
-    ),
+    body: state.type == "image"
+        ? Image.file(
+            File(state.filePath),
+            width: double.infinity,
+            height: double.infinity,
+          )
+        : Container(
+            // height: 400, // 这里随意
+            child: SizedBox(
+              width: double.infinity,
+              height: double.infinity,
+              child: IjkPlayer(
+                mediaController: state.videoController,
+              ),
+            ),
+          ),
   );
 }

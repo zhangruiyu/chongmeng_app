@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/utils/window_utils.dart';
+import 'package:chongmeng/widget/record_button_widget.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -48,7 +49,7 @@ Widget buildView(
             padding: const EdgeInsets.only(bottom: 30.0),
             child: Align(
               alignment: Alignment.bottomCenter,
-              child: GestureDetector(
+              child: RecordButton(
                 onTap: () {
                   dispatch(RecordActionCreator.onTakePicture());
                 },
@@ -58,21 +59,7 @@ Widget buildView(
                 onLongPressEnd: (LongPressEndDetails details) {
                   dispatch(RecordActionCreator.onRecordEnd());
                 },
-                child: new CircularPercentIndicator(
-                  radius: 100.0,
-                  lineWidth: 10.0,
-                  percent: 0.8,
-                  center: new Container(
-                    width: 80.0,
-                    height: 80.0,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(90.0))),
-                  ),
-//                backgroundColor: Colors.white,
-                  backgroundColor: colord9d9d9,
-                  progressColor: accentColor,
-                ),
+                maxSecond: 10,
               ),
             ),
           ),
