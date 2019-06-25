@@ -109,7 +109,6 @@ void _onTakePicture(Action action, Context<RecordState> ctx) async {
 void _onRecordStart(Action action, Context<RecordState> ctx) async {
   if (!ctx.state.controller.value.isInitialized) {
     toast(ctx.context, 'Please wait');
-
     return null;
   }
 

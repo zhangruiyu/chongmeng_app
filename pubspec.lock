@@ -120,6 +120,13 @@ packages:
       url: "https://github.com/zhangruiyu/flutter_easyrefresh.git"
     source: git
     version: "1.2.7"
+  flutter_ijkplayer:
+    dependency: "direct main"
+    description:
+      name: flutter_ijkplayer
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.9"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
