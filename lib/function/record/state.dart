@@ -6,11 +6,14 @@ class RecordState implements Cloneable<RecordState> {
 
   CameraController controller;
 
+  String videoPath;
+
   @override
   RecordState clone() {
     return RecordState()
       ..cameras = cameras
-      ..controller = controller;
+      ..controller = controller
+      ..videoPath = videoPath;
   }
 }
 

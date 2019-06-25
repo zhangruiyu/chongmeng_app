@@ -10,5 +10,5 @@ Effect<BannerState> buildEffect() {
 }
 
 void _onSkipWebViewPage(Action action, Context<BannerState> ctx) {
-  NavigatorHelper.pusRecordPage(ctx.context);
+//  NavigatorHelper.pusRecordPage(ctx.context);
 }

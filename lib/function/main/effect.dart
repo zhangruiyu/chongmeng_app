@@ -1,4 +1,5 @@
 import 'package:chongmeng/constants/http_constants.dart';
+import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/helper/permission_helper.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -23,4 +24,5 @@ Future _initState(Action action, Context<MainState> ctx) async {
   if (await PermissionHelper.checkStoragePermission()) {
 //    filesPaths = await FilePicker.getMultiFilePath(type: FileType.IMAGE);
   }
+  NavigatorHelper.pusRecordPage(ctx.context);
 }

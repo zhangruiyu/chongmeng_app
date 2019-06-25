@@ -10,6 +10,7 @@ import 'function/auto/page.dart';
 import 'function/bindtel/page.dart';
 import 'function/main/page.dart';
 import 'function/record/page.dart';
+import 'function/record/review/page.dart';
 import 'function/splash/page.dart';
 import 'global_store/state.dart';
 import 'global_store/store.dart';
@@ -65,6 +66,7 @@ Future<Widget> createApp() async {
         PageConstants.AutoPage: pageConfiguration(AutoPage()),
         PageConstants.BindTelPage: pageConfiguration(BindTelPage()),
         PageConstants.RecordPage: pageConfiguration(RecordPage()),
+        PageConstants.ReviewIVPage: pageConfiguration(ReviewIVPage()),
       },
     ),
   ]);
