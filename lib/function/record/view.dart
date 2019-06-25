@@ -30,7 +30,7 @@ Widget buildView(
               alignment: Alignment.topRight,
               child: IconButton(
                 onPressed: () {
-//                  state.controller.
+                  dispatch(RecordActionCreator.onCameraSwitched());
                 },
                 icon: Icon(
                   MdiIcons.cameraRetakeOutline,
