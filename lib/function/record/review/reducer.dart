@@ -6,7 +6,7 @@ import 'state.dart';
 Reducer<ReviewIVState> buildReducer() {
   return asReducer(
     <Object, Reducer<ReviewIVState>>{
-      ReviewIVAction.action: _onAction,
+//      ReviewIVAction.action: _onAction,
     },
   );
 }

@@ -8,6 +8,8 @@ import 'constants/constants.dart';
 import 'constants/page_constants.dart';
 import 'function/auto/page.dart';
 import 'function/bindtel/page.dart';
+import 'function/main/community/commitmedia/page.dart';
+import 'function/main/community/selecttalktype/page.dart';
 import 'function/main/page.dart';
 import 'function/record/page.dart';
 import 'function/record/review/page.dart';
@@ -67,6 +69,9 @@ Future<Widget> createApp() async {
         PageConstants.BindTelPage: pageConfiguration(BindTelPage()),
         PageConstants.RecordPage: pageConfiguration(RecordPage()),
         PageConstants.ReviewIVPage: pageConfiguration(ReviewIVPage()),
+        PageConstants.SelectTalkTypePage:
+            pageConfiguration(SelectTalkTypePage()),
+        PageConstants.CommitMediaPage: pageConfiguration(CommitMediaPage()),
       },
     ),
   ]);
@@ -91,8 +96,8 @@ Future<Widget> createApp() async {
     ],
 //    theme: themeProvide.themeData,
     theme: ThemeData(
-        primaryColor: Colors.amberAccent,
-        accentColor: Color(0xffED594A),
+        primaryColor: Colors.amberAccent[200],
+        accentColor: Colors.amberAccent[200],
         dividerColor: colorf3f3f3),
     home: routes.buildPage('splash', null),
     onGenerateRoute: (RouteSettings settings) {

@@ -7,6 +7,8 @@ import 'package:chongmeng/global_store/state.dart';
 import 'package:chongmeng/helper/model/local_user.dart';
 import 'package:fish_redux/fish_redux.dart';
 
+import 'community/state.dart';
+
 class MainState implements GlobalBaseState<MainState> {
   int mainPageIndex;
   HomeData homeData;
@@ -38,6 +40,20 @@ ConnOp<MainState, AccountState> accountConnector() {
         ..locale = state.locale;
     },
     set: (MainState state, AccountState subState) {
+//      state.bannerData = subState.bannerData;
+    },
+  );
+}
+
+ConnOp<MainState, CommunityState> communityConnector() {
+  return ConnOp<MainState, CommunityState>(
+    get: (MainState state) {
+      return CommunityState()
+//        ..localUser = state.localUser
+//        ..locale = state.locale
+          ;
+    },
+    set: (MainState state, CommunityState subState) {
 //      state.bannerData = subState.bannerData;
     },
   );

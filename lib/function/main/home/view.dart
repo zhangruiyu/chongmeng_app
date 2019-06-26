@@ -6,7 +6,6 @@ import 'action.dart';
 import 'state.dart';
 
 Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
-  var primaryColor = Theme.of(viewService.context).primaryColor;
   return Scaffold(
     backgroundColor: Colors.white,
 //    appBar: Toolbar(),

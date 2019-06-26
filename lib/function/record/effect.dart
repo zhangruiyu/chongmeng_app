@@ -97,7 +97,7 @@ void _onTakePicture(Action action, Context<RecordState> ctx) async {
   try {
     await ctx.state.controller.takePicture(filePath);
     toast(ctx.context, "拍照成功");
-    Navigator.pushNamed(ctx.context, PageConstants.ReviewIVPage,
+    Navigator.popAndPushNamed(ctx.context, PageConstants.ReviewIVPage,
         arguments: {'filePath': filePath, 'type': 'image'});
     println(filePath);
   } on CameraException catch (e) {
@@ -128,8 +128,8 @@ void _onRecordStart(Action action, Context<RecordState> ctx) async {
       await File(ctx.state.videoPath).delete();
     }
     await ctx.state.controller.startVideoRecording(ctx.state.videoPath);
-//    Navigator.pushNamed(ctx.context, PageConstants.ReviewIVPage,
-//        arguments: {'filePath': filePath, 'type': 'image'});
+    Navigator.popAndPushNamed(ctx.context, PageConstants.ReviewIVPage,
+        arguments: {'filePath': ctx.state.videoPath, 'type': 'video'});
 //    println(filePath);
   } on CameraException catch (e) {
     toast(ctx.context, e.toString());

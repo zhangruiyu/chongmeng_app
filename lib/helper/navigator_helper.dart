@@ -3,6 +3,7 @@ import 'package:chongmeng/constants/page_constants.dart';
 import 'package:chongmeng/helper/permission_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 
 class NavigatorHelper {
   static popToMain(BuildContext context) {
@@ -45,13 +46,27 @@ class NavigatorHelper {
 
   static void pushWebPage(BuildContext context, String s, String t) {}
 
-  static Future<T> pusRecordPage<T>(BuildContext context) async {
+  static Future<T> pushRecordPage<T>(BuildContext context,
+      {bool isPop: true}) async {
     bool isAgree =
         await PermissionHelper.checkStorageCameraMicrophonePermission();
     if (isAgree) {
       var cameras = await availableCameras();
+      if (isPop) {
+        return await Navigator.popAndPushNamed(
+            context, PageConstants.RecordPage,
+            arguments: {"cameras": cameras});
+      }
       return await Navigator.pushNamed<T>(context, PageConstants.RecordPage,
           arguments: {"cameras": cameras});
+    } else
+      return null;
+  }
+
+  static Future<Map<String, String>> pushFileSelectPage() async {
+    bool isAgree = await PermissionHelper.checkStoragePermission();
+    if (isAgree) {
+      return await FilePicker.getMultiFilePath(type: FileType.ANY);
     } else
       return null;
   }

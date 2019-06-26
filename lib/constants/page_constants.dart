@@ -13,4 +13,7 @@ class PageConstants {
   static const String MePage = "cm://MePage"; //我的
   static const String RecordPage = "cm://RecordPage"; //录制视频
   static const String ReviewIVPage = "cm://ReviewIVPage"; //预览录制视频和拍照图片
+  static const String SelectTalkTypePage = "cm://SelectTalkTypePage"; //选择说说类型
+  static const String CommitMediaPage = "cm://CommitMediaPage"; //发布文字评论
+  static const String CommitTextPage = "cm://CommitTextPage"; //发布文字评论
 }

@@ -1,10 +1,9 @@
 import 'package:fish_redux/fish_redux.dart';
 
-//TODO replace with your own action
-enum ReviewIVAction { action }
+enum ReviewIVAction { SkipCommitPage }
 
 class ReviewIVActionCreator {
-  static Action onAction() {
-    return const Action(ReviewIVAction.action);
+  static Action onSkipCommitPage() {
+    return const Action(ReviewIVAction.SkipCommitPage);
   }
 }

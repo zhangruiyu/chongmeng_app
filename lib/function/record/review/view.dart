@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import 'action.dart';
 import 'state.dart';
 
 Widget buildView(
@@ -15,7 +16,7 @@ Widget buildView(
       actions: <Widget>[
         IconButton(
           onPressed: () {
-//                      dispatch(RecordActionCreator.onCameraSwitched());
+            dispatch(ReviewIVActionCreator.onSkipCommitPage());
           },
           icon: Icon(
             MdiIcons.send,

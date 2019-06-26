@@ -1,6 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
 
 import 'account/component.dart';
+import 'community/component.dart';
 import 'effect.dart';
 import 'home/component.dart';
 import 'reducer.dart';
@@ -18,6 +19,7 @@ class MainPage extends Page<MainState, Map<String, dynamic>> {
               adapter: null,
               slots: <String, Dependent<MainState>>{
                 'home': homeConnector() + HomeComponent(),
+                'community': communityConnector() + CommunityComponent(),
                 'account': accountConnector() + AccountComponent()
               }),
           middleware: <Middleware<MainState>>[],

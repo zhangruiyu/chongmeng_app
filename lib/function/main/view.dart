@@ -15,16 +15,18 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
     body: state.mainPageIndex == 0
         ? viewService.buildComponent('home')
         : state.mainPageIndex == 1
-            ? Container()
+            ? viewService.buildComponent('community')
             : state.mainPageIndex == 2
                 ? Container()
                 : state.mainPageIndex == 3
                     ? viewService.buildComponent('account')
                     : viewService.buildComponent('accountr'),
     floatingActionButton: FloatingActionButton(
-      onPressed: () {},
+      onPressed: () {
+        dispatch(MainActionCreator.onSkipSelectTalkTypePage());
+      },
       child: Icon(Icons.add, semanticLabel: 'Action'),
-      backgroundColor: Colors.orange,
+      backgroundColor: Theme.of(viewService.context).accentColor,
     ),
     floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     bottomNavigationBar: CMBottomAppBar(
@@ -102,14 +104,14 @@ class _CMBottomAppBarState extends State<CMBottomAppBar> {
                   item.icon,
                   color: widget.currentIndex == index
                       ? Theme.of(context).accentColor
-                      : Colors.black,
+                      : Colors.black45,
                 ),
                 new Text(
                   item.title,
                   style: Theme.of(context).textTheme.body2.merge(new TextStyle(
                         color: widget.currentIndex == index
                             ? Theme.of(context).accentColor
-                            : Colors.black,
+                            : Colors.black45,
                       )),
                 )
               ],
