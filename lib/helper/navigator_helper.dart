@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:chongmeng/constants/page_constants.dart';
+import 'package:chongmeng/helper/permission_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -45,9 +46,14 @@ class NavigatorHelper {
   static void pushWebPage(BuildContext context, String s, String t) {}
 
   static Future<T> pusRecordPage<T>(BuildContext context) async {
-    var cameras = await availableCameras();
-    return await Navigator.pushNamed<T>(context, PageConstants.RecordPage,
-        arguments: {"cameras": cameras});
+    bool isAgree =
+        await PermissionHelper.checkStorageCameraMicrophonePermission();
+    if (isAgree) {
+      var cameras = await availableCameras();
+      return await Navigator.pushNamed<T>(context, PageConstants.RecordPage,
+          arguments: {"cameras": cameras});
+    } else
+      return null;
   }
 
   static void pushPageLoginPage(BuildContext context) {

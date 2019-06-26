@@ -38,7 +38,7 @@ class _RecordButtonState extends State<RecordButton> {
       onLongPressStart: (e) {
         longPressTime = DateTime.now().millisecondsSinceEpoch;
         timer =
-            new Timer.periodic(new Duration(milliseconds: 100), (Timer timer) {
+            new Timer.periodic(new Duration(milliseconds: 30), (Timer timer) {
           changePercent();
         });
         widget.onLongPressStart(e);
@@ -49,6 +49,11 @@ class _RecordButtonState extends State<RecordButton> {
           widget.onLongPressEnd(e);
         }
         disposeTimer();
+        if (!mounted) {
+          setState(() {
+            percent = 0.0;
+          });
+        }
       },
       child: new CircularPercentIndicator(
         radius: 100.0,
@@ -82,7 +87,6 @@ class _RecordButtonState extends State<RecordButton> {
         percent = 0.0;
         widget.onLongPressEnd(null);
       }
-//      println(DateTime.now().millisecondsSinceEpoch - longPressTime);
     });
   }
 
@@ -91,5 +95,11 @@ class _RecordButtonState extends State<RecordButton> {
       timer.cancel();
       timer = null;
     }
+  }
+
+  @override
+  void dispose() {
+    disposeTimer();
+    super.dispose();
   }
 }
