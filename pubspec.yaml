@@ -52,6 +52,9 @@ dependencies:
   camera: any
   percent_indicator: "^2.1.0"
   flutter_ijkplayer: "^0.2.9"
+  dragablegridview_flutter: any
+#  extended_text_field: any
+  multi_image_picker: any
   umengshare:
     path: ./plugins/flutter_umengshare
 

@@ -8,7 +8,7 @@
          additional functionality it is fine to subclass or reimplement
          FlutterApplication and put your custom class here. -->
     <!--    看看录像以后会兼容到16不-->
-    <uses-sdk tools:overrideLibrary="io.flutter.plugins.camera"/>
+<!--    <uses-sdk tools:overrideLibrary="io.flutter.plugins.camera,com.vitanov.multiimagepicker"/>-->
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="@string/name"
