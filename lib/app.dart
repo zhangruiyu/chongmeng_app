@@ -57,7 +57,7 @@ Page<T, dynamic> pageConfiguration<T extends Cloneable<T>>(
 }
 
 Future<Widget> createApp() async {
-  JiguangUtils.init();
+  configProject();
   //初始化用户数据
   GlobalStore.store.getState().localUser = await UserHelper.initLocalUser();
   final AbstractRoutes routes = HybridRoutes(routes: <AbstractRoutes>[
@@ -113,4 +113,8 @@ Future<Widget> createApp() async {
       );
     },
   );
+}
+
+void configProject() {
+  JiguangUtils.init();
 }

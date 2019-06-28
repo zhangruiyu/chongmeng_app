@@ -81,7 +81,7 @@ class UserHelper {
   }
 
   static Future<String> getUserTel() async {
-    var sp = await SharedPreferences.getInstance();
-    return sp.getString("tel") ?? "";
+    var sp = await initLocalUser();
+    return sp.token;
   }
 }

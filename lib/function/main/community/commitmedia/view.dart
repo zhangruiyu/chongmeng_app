@@ -5,7 +5,6 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:dragablegridview_flutter/dragablegridview_flutter.dart';
 import 'package:dragablegridview_flutter/dragablegridviewbin.dart';
-import 'package:multi_image_picker/multi_image_picker.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -24,7 +23,7 @@ Widget buildView(
           padding: const EdgeInsets.only(right: 22.0),
           child: InkResponse(
             onTap: () {
-              state.editSwitchController.editStateChanged();
+//              state.editSwitchController.editStateChanged();
             },
             child: Container(
               alignment: Alignment.center,
@@ -77,18 +76,12 @@ Widget buildView(
                     margin: EdgeInsets.all(4.0),
                     padding: EdgeInsets.zero,
                     //itemData is String 判断是不是本地图片
-                    child: itemData is String
-                        ? Image.file(
-                            File(itemData),
-                            fit: BoxFit.fitWidth,
-                            width: size.toDouble(),
-                            height: size.toDouble(),
-                          )
-                        : AssetThumb(
-                            asset: itemData,
-                            width: size,
-                            height: size,
-                          ),
+                    child: Image.file(
+                      File(itemData),
+                      fit: BoxFit.fitWidth,
+                      width: size.toDouble(),
+                      height: size.toDouble(),
+                    ),
                   );
                 },
               ),
