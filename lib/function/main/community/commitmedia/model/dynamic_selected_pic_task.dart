@@ -21,9 +21,9 @@ class DynamicSelectedPicTask {
     cosPath,
   ) {
     TencentCos.uploadByFile(
-        'ap-beijing-1',
+        'ap-beijing',
         '1253631018',
-        "",
+        "mengchong",
         tmpSecretId,
         tmpSecretKey,
         sessionToken,

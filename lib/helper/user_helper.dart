@@ -73,8 +73,8 @@ class UserHelper {
 
   static Future<String> getUserToken() async {
     if (await isLogin()) {
-      var sp = await SharedPreferences.getInstance();
-      return sp.getString("token") ?? "";
+      var sp = await initLocalUser();
+      return sp.token ?? "";
     } else {
       return null;
     }

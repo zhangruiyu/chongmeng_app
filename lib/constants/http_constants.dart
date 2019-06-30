@@ -15,4 +15,11 @@ class HttpConstants {
   static final String LoginAndRegister = "app/auth/loginAndRegister";
   static final String ThirdLoginAndRegister = "app/auth/thirdLoginAndRegister";
   static final String HomeIndex = "app/auth/home/index";
+  static final String PeriodEffectiveSign =
+      "app/cos/common/periodEffectiveSign";
+}
+
+class CommitType {
+  static const PIC_TYPE = 0;
+  static const VIDEO_TYPE = 1;
 }

@@ -16,6 +16,7 @@ class CommitMediaState implements Cloneable<CommitMediaState> {
   //视频播放才有
   FlutterVideoCompress flutterVideoCompress;
 
+  int successCount;
   @override
   CommitMediaState clone() {
     return CommitMediaState()
@@ -24,6 +25,7 @@ class CommitMediaState implements Cloneable<CommitMediaState> {
       ..picFilePath = picFilePath
       ..editSwitchController = editSwitchController
       ..flutterVideoCompress = flutterVideoCompress
+      ..successCount = successCount
       ..type = type;
   }
 }

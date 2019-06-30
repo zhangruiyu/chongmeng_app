@@ -144,11 +144,12 @@ void _onRecordEnd(Action action, Context<RecordState> ctx) async {
         ctx.state.videoPath,
         quality: 50,
       );
-      Navigator.pushNamed(ctx.context, PageConstants.ReviewIVPage, arguments: {
-        'filePath': ctx.state.videoPath,
-        'type': 'video',
-        'thumbnailFile': thumbnailFile
-      });
+      Navigator.popAndPushNamed(ctx.context, PageConstants.ReviewIVPage,
+          arguments: {
+            'filePath': ctx.state.videoPath,
+            'type': 'video',
+            'thumbnailFile': thumbnailFile
+          });
     } on CameraException catch (e) {
       toast(ctx.context, e.toString());
       return null;
