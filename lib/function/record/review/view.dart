@@ -13,17 +13,19 @@ Widget buildView(
     ReviewIVState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
     appBar: Toolbar(
-      actions: <Widget>[
-        IconButton(
-          onPressed: () {
-            dispatch(ReviewIVActionCreator.onSkipCommitPage());
-          },
-          icon: Icon(
-            MdiIcons.send,
-            color: Colors.black,
-          ),
-        ),
-      ],
+      actions: state.canSkip
+          ? <Widget>[
+              IconButton(
+                onPressed: () {
+                  dispatch(ReviewIVActionCreator.onSkipCommitPage());
+                },
+                icon: Icon(
+                  MdiIcons.send,
+                  color: Colors.black,
+                ),
+              ),
+            ]
+          : null,
     ),
     body: state.type == "image"
         ? Image.file(

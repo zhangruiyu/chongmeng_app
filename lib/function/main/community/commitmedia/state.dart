@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dragablegridview_flutter/dragablegridview_flutter.dart';
 import 'package:fish_redux/fish_redux.dart';
 
@@ -6,10 +8,11 @@ import 'package:flutter_video_compress/flutter_video_compress.dart';
 
 class CommitMediaState implements Cloneable<CommitMediaState> {
   String videoFilePath;
-  String thumbnailFile;
+  File thumbnailFile;
   List<DynamicSelectedPicTask> picFilePath;
   EditSwitchController editSwitchController;
   String type;
+
   //视频播放才有
   FlutterVideoCompress flutterVideoCompress;
 
@@ -30,13 +33,13 @@ CommitMediaState initState(Map<String, dynamic> args) {
     ..type = args['type']
     ..editSwitchController = EditSwitchController();
   if (reviewIVState.type == "video") {
-    reviewIVState.videoFilePath = args['filePath'];
-    reviewIVState.flutterVideoCompress = FlutterVideoCompress();
+    reviewIVState
+      ..videoFilePath = args['filePath']
+      ..flutterVideoCompress = FlutterVideoCompress()
+      ..thumbnailFile = args['thumbnailFile'];
   } else {
     if (args['filePath'] is String) {
-      reviewIVState
-        ..picFilePath = [DynamicSelectedPicTask(args['filePath'])]
-        ..thumbnailFile = args['thumbnailFile'];
+      reviewIVState..picFilePath = [DynamicSelectedPicTask(args['filePath'])];
     } else {
       reviewIVState.picFilePath = (args['filePath'] as List).map((item) {
         return DynamicSelectedPicTask(item);

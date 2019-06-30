@@ -9,6 +9,9 @@ class ReviewIVState implements Cloneable<ReviewIVState> {
   File thumbnailFile;
   IjkMediaController videoController;
 
+  //是否能跳转到提交页面
+  bool canSkip;
+
   @override
   ReviewIVState clone() {
     return ReviewIVState()
@@ -26,6 +29,12 @@ ReviewIVState initState(Map<String, dynamic> args) {
   if (reviewIVState.type == "video") {
     reviewIVState.videoController = IjkMediaController();
     reviewIVState.thumbnailFile = args['thumbnailFile'];
+  }
+  if (args['canSkip'] == null) {
+    //可能为空
+    reviewIVState.canSkip = true;
+  } else {
+    reviewIVState.canSkip = false;
   }
   return reviewIVState;
 }
