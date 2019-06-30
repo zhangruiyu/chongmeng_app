@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:chongmeng/constants/page_constants.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_video_compress/flutter_video_compress.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:path_provider/path_provider.dart';
 import 'action.dart';
@@ -141,8 +142,16 @@ void _onRecordEnd(Action action, Context<RecordState> ctx) async {
       ctx.state.controller.value.isRecordingVideo) {
     try {
       await ctx.state.controller.stopVideoRecording();
-      Navigator.pushNamed(ctx.context, PageConstants.ReviewIVPage,
-          arguments: {'filePath': ctx.state.videoPath, 'type': 'video'});
+      final _flutterVideoCompress = FlutterVideoCompress();
+      final thumbnailFile = await _flutterVideoCompress.getThumbnailWithFile(
+        ctx.state.videoPath,
+        quality: 50,
+      );
+      Navigator.pushNamed(ctx.context, PageConstants.ReviewIVPage, arguments: {
+        'filePath': ctx.state.videoPath,
+        'type': 'video',
+        'thumbnailFile': thumbnailFile
+      });
     } on CameraException catch (e) {
       toast(ctx.context, e.toString());
       return null;

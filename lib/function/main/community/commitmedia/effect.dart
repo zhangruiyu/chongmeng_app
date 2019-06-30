@@ -1,15 +1,24 @@
-import 'package:chongmeng/function/main/community/commitmedia/view.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:fish_redux/fish_redux.dart';
+
 import 'action.dart';
+import 'model/dynamic_selected_pic_task.dart';
 import 'state.dart';
 
 Effect<CommitMediaState> buildEffect() {
   return combineEffects(<Object, Effect<CommitMediaState>>{
-    CommitMediaAction.action: _onAction,
+    CommitMediaAction.ReselectPic: _onReselectPic,
     Lifecycle.initState: _initState,
   });
 }
 
-void _onAction(Action action, Context<CommitMediaState> ctx) {}
+Future _onReselectPic(Action action, Context<CommitMediaState> ctx) async {
+  Map<String, String> file =
+      await FilePicker.getMultiFilePath(type: FileType.ANY);
+  if ((file?.length ?? 0) > 0) {
+    ctx.dispatch(CommitMediaActionCreator.onChangeSelectPic(
+        file.values.map((item) => DynamicSelectedPicTask(item)).toList()));
+  }
+}
 
 void _initState(Action action, Context<CommitMediaState> ctx) {}

@@ -6,12 +6,13 @@ import 'state.dart';
 Reducer<CommitMediaState> buildReducer() {
   return asReducer(
     <Object, Reducer<CommitMediaState>>{
-      CommitMediaAction.action: _onAction,
+      CommitMediaAction.ChangeSelectPic: _onChangeSelectPic,
     },
   );
 }
 
-CommitMediaState _onAction(CommitMediaState state, Action action) {
-  final CommitMediaState newState = state.clone();
+CommitMediaState _onChangeSelectPic(CommitMediaState state, Action action) {
+  final CommitMediaState newState = state.clone()..picFilePath = action.payload;
+
   return newState;
 }

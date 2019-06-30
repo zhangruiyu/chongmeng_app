@@ -139,13 +139,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_multiple_image_picker:
-    dependency: "direct main"
-    description:
-      name: flutter_multiple_image_picker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.1"
   flutter_page_indicator:
     dependency: transitive
     description:
@@ -172,6 +165,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_video_compress:
+    dependency: "direct main"
+    description:
+      name: flutter_video_compress
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.7+6"
   flutter_webview_plugin:
     dependency: "direct main"
     description:
@@ -363,6 +363,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0+1"
+  tencent_cos:
+    dependency: "direct main"
+    description:
+      name: tencent_cos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.8"
   term_glyph:
     dependency: transitive
     description:

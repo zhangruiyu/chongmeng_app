@@ -4,6 +4,7 @@ import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 class ReviewIVState implements Cloneable<ReviewIVState> {
   String filePath;
   String type;
+  String thumbnailFile;
   IjkMediaController videoController;
 
   @override
@@ -11,6 +12,7 @@ class ReviewIVState implements Cloneable<ReviewIVState> {
     return ReviewIVState()
       ..filePath = filePath
       ..type = type
+      ..thumbnailFile = thumbnailFile
       ..videoController = videoController;
   }
 }
@@ -21,6 +23,7 @@ ReviewIVState initState(Map<String, dynamic> args) {
     ..type = args['type'];
   if (reviewIVState.type == "video") {
     reviewIVState.videoController = IjkMediaController();
+    reviewIVState.thumbnailFile = args['thumbnailFile'];
   }
   return reviewIVState;
 }

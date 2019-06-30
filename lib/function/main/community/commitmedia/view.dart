@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:chongmeng/function/main/community/commitmedia/model/dynamic_selected_pic_task.dart';
+import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +15,38 @@ Widget buildView(
   int gridCount = 3;
   //是否是视频
   bool isVideo = state.type == "video";
-  int size =
-      (MediaQuery.of(viewService.context).size.width / gridCount).floor() -
-          (18 - gridCount);
+
+  List<Widget> gridItems = new List<Widget>();
+
+  double itemWidth = WindowUtils.getScreenWidth() / 5.toDouble();
+  List<DynamicSelectedPicTask> selectedPics = state.picFilePath;
+  if (!isVideo) {
+    selectedPics.forEach((DynamicSelectedPicTask selectedPic) {
+      selectedPic.sequence = selectedPics.indexOf(selectedPic);
+      Widget item = new Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: new Image.file(
+          new File(selectedPic.localUrl.toString()),
+          fit: BoxFit.fitWidth,
+          width: itemWidth,
+          height: itemWidth,
+        ),
+      );
+      gridItems.add(item);
+    });
+    if (state.picFilePath.length < 9) {
+      gridItems.add(new IconButton(
+          icon: new Icon(
+            Icons.add_a_photo,
+            size: 30.0,
+            color: const Color(0x40808080),
+          ),
+          onPressed: () {
+            dispatch(CommitMediaActionCreator.onReselectPic());
+          }));
+    }
+  } else {}
+
   return Scaffold(
     appBar: Toolbar(
       actions: <Widget>[
@@ -23,7 +54,7 @@ Widget buildView(
           padding: const EdgeInsets.only(right: 22.0),
           child: InkResponse(
             onTap: () {
-//              state.editSwitchController.editStateChanged();
+              dispatch(CommitMediaActionCreator.onUploadCommit());
             },
             child: Container(
               alignment: Alignment.center,
@@ -50,40 +81,10 @@ Widget buildView(
               height: MediaQuery.of(viewService.context).size.width /
                   gridCount *
                   (state.picFilePath.length / gridCount).ceil(),
-              child: DragAbleGridView(
-                childAspectRatio: 1,
-                crossAxisCount: gridCount,
-                itemBins: state.picFilePath,
-                editSwitchController: state.editSwitchController,
-                isOpenDragAble: true,
-                animationDuration: 300,
-                longPressDuration: 500,
-                deleteIcon: Container(
-                  padding: EdgeInsets.all(3.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.redAccent,
-                  ),
-                  child: Icon(
-                    Icons.delete,
-                    color: Colors.white,
-                    size: 10.0 + 16 * (1 / gridCount),
-                  ),
-                ),
-                child: (int position) {
-                  var itemData = state.picFilePath[position].data;
-                  return Container(
-                    margin: EdgeInsets.all(4.0),
-                    padding: EdgeInsets.zero,
-                    //itemData is String 判断是不是本地图片
-                    child: Image.file(
-                      File(itemData),
-                      fit: BoxFit.fitWidth,
-                      width: size.toDouble(),
-                      height: size.toDouble(),
-                    ),
-                  );
-                },
+              child: GridView(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 5),
+                children: gridItems,
               ),
             ),
           ],

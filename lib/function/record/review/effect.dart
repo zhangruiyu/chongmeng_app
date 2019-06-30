@@ -16,7 +16,11 @@ Effect<ReviewIVState> buildEffect() {
 
 void _onSkipCommitPage(Action action, Context<ReviewIVState> ctx) {
   Navigator.popAndPushNamed(ctx.context, PageConstants.CommitMediaPage,
-      arguments: {'filePath': ctx.state.filePath, 'type': ctx.state.type});
+      arguments: {
+        'filePath': ctx.state.filePath,
+        'type': ctx.state.type,
+        'thumbnailFile': ctx.state.thumbnailFile
+      });
 }
 
 void _dispose(Action action, Context<ReviewIVState> ctx) {

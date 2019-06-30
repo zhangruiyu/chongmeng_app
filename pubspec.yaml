@@ -54,10 +54,10 @@ dependencies:
   flutter_ijkplayer: "^0.2.9"
   dragablegridview_flutter: any
 #  extended_text_field: any
-  flutter_multiple_image_picker: any
-#  tencent_cos: 0.0.8
+  tencent_cos: 0.0.8
   umengshare:
     path: ./plugins/flutter_umengshare
+  flutter_video_compress: any
 
 dev_dependencies:
   flutter_test:
