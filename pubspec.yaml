@@ -56,7 +56,7 @@ dependencies:
 #  extended_text_field: any
   tencent_cos: 0.0.8
   umengshare:
-    path: ./plugins/umengshare
+    path: ./plugins/flutter_umengshare
   flutter_video_compress: any
 
 dev_dependencies:
