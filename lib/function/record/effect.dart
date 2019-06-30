@@ -129,9 +129,6 @@ void _onRecordStart(Action action, Context<RecordState> ctx) async {
       await File(ctx.state.videoPath).delete();
     }
     await ctx.state.controller.startVideoRecording(ctx.state.videoPath);
-    Navigator.popAndPushNamed(ctx.context, PageConstants.ReviewIVPage,
-        arguments: {'filePath': ctx.state.videoPath, 'type': 'video'});
-//    println(filePath);
   } on CameraException catch (e) {
     toast(ctx.context, e.toString());
   }
@@ -143,7 +140,7 @@ void _onRecordEnd(Action action, Context<RecordState> ctx) async {
     try {
       await ctx.state.controller.stopVideoRecording();
       final _flutterVideoCompress = FlutterVideoCompress();
-      final thumbnailFile = await _flutterVideoCompress.getThumbnailWithFile(
+      File thumbnailFile = await _flutterVideoCompress.getThumbnailWithFile(
         ctx.state.videoPath,
         quality: 50,
       );

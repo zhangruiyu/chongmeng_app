@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 
 class ReviewIVState implements Cloneable<ReviewIVState> {
   String filePath;
   String type;
-  String thumbnailFile;
+  File thumbnailFile;
   IjkMediaController videoController;
 
   @override
