@@ -41,7 +41,8 @@ Widget buildView(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               child: TextFormField(
-                maxLines: 5,
+                controller: state.contentTextEditingController,
+                maxLines: 4,
                 decoration: InputDecoration(
                     hintText: "分享你的故事", border: InputBorder.none),
               ),
@@ -119,7 +120,7 @@ Widget buildPicsView(
         (state.picFilePath.length / gridCount).ceil(),
     child: GridView(
       gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5),
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: gridCount),
       children: gridItems,
     ),
   );

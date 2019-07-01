@@ -13,6 +13,7 @@ class HttpConstants {
   static final String SendThirdLoginCode =
       "app/auth/sendThirdLoginCode"; //发送验证码
   static final String LoginAndRegister = "app/auth/loginAndRegister";
+  static final String CommitDynamicPic = "dynamic/commitDynamicPic";
   static final String ThirdLoginAndRegister = "app/auth/thirdLoginAndRegister";
   static final String HomeIndex = "app/auth/home/index";
   static final String PeriodEffectiveSign =

@@ -13,14 +13,14 @@ class DynamicSelectedPicTask {
 
   DynamicSelectedPicTask(this.localUrl);
 
-  void upload(
+  Future<Map<String, dynamic>> upload(
     tmpSecretId,
     tmpSecretKey,
     sessionToken,
     expiredTime,
     cosPath,
   ) {
-    TencentCos.uploadByFile(
+    return TencentCos.uploadByFile(
         'ap-beijing',
         '1253631018',
         "mengchong",
@@ -30,5 +30,10 @@ class DynamicSelectedPicTask {
         expiredTime,
         cosPath + localUrl.substring(localUrl.lastIndexOf("/")),
         localUrl.toString());
+  }
+
+  @override
+  String toString() {
+    return 'DynamicSelectedPicTask{localUrl: $localUrl, resourcePath: $resourcePath, sequence: $sequence}';
   }
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dragablegridview_flutter/dragablegridview_flutter.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/material.dart';
 
 import 'model/dynamic_selected_pic_task.dart';
 import 'package:flutter_video_compress/flutter_video_compress.dart';
@@ -11,12 +12,12 @@ class CommitMediaState implements Cloneable<CommitMediaState> {
   File thumbnailFile;
   List<DynamicSelectedPicTask> picFilePath;
   EditSwitchController editSwitchController;
+  TextEditingController contentTextEditingController;
   String type;
 
   //视频播放才有
   FlutterVideoCompress flutterVideoCompress;
 
-  int successCount;
   @override
   CommitMediaState clone() {
     return CommitMediaState()
@@ -25,7 +26,7 @@ class CommitMediaState implements Cloneable<CommitMediaState> {
       ..picFilePath = picFilePath
       ..editSwitchController = editSwitchController
       ..flutterVideoCompress = flutterVideoCompress
-      ..successCount = successCount
+      ..contentTextEditingController = contentTextEditingController
       ..type = type;
   }
 }
@@ -33,7 +34,8 @@ class CommitMediaState implements Cloneable<CommitMediaState> {
 CommitMediaState initState(Map<String, dynamic> args) {
   var reviewIVState = CommitMediaState()
     ..type = args['type']
-    ..editSwitchController = EditSwitchController();
+    ..editSwitchController = EditSwitchController()
+    ..contentTextEditingController = TextEditingController();
   if (reviewIVState.type == "video") {
     reviewIVState
       ..videoFilePath = args['filePath']

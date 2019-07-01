@@ -1,16 +1,21 @@
-import 'package:chongmeng/constants/constants.dart';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/constants/page_constants.dart';
+import 'package:chongmeng/function/main/community/commitmedia/state.dart';
 import 'package:chongmeng/network/entity/cos_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:overlay_support/overlay_support.dart';
+import 'package:path/path.dart' as path;
 import 'package:tencent_cos/tencent_cos.dart';
 
 import 'action.dart';
 import 'model/dynamic_selected_pic_task.dart';
-import 'state.dart';
 
 Effect<CommitMediaState> buildEffect() {
   return combineEffects(<Object, Effect<CommitMediaState>>{
@@ -40,7 +45,14 @@ void _onSkipReviewPage(Action action, Context<CommitMediaState> ctx) {
 }
 
 Future _onUploadCommit(Action action, Context<CommitMediaState> ctx) async {
-  var a = ctx.state.successCount = 0;
+  if (ctx.state.contentTextEditingController.text.length < 5) {
+    toast(ctx.context, "不能低于5字");
+    return;
+  }
+  if (ctx.state.contentTextEditingController.text.length > 3000) {
+    toast(ctx.context, "不能大于2000字");
+    return;
+  }
   Result<CosEntity> cosEntity = await RequestClient.request<CosEntity>(
       ctx.context, HttpConstants.PeriodEffectiveSign,
       queryParameters: {'type': CommitType.PIC_TYPE});
@@ -62,35 +74,46 @@ Future _onUploadCommit(Action action, Context<CommitMediaState> ctx) async {
         print('没找到');
         return;
       }
-      print(call.method);
-      print(call.arguments);
+      //todo  修改进度
       if (call.method == "onProgress") {
         print(call.arguments['progress'].toInt());
-        print('call.arguments[' '] as int');
-        print('call.arguments[' '] as int');
 //    containsSelectedPic.progressImageKey.currentState
 //        .setProgress((call.arguments['progress'] as double).toInt());
-      } else if (call.method == "onSuccess") {
-        ctx.state.successCount = ctx.state.successCount + 1;
-        String netUrl = call.arguments['url'];
-        containsSelectedPic.resourcePath =
-            "$netUrl*${containsSelectedPic.sequence}";
-        if (ctx.state.successCount == ctx.state.picFilePath.length) {
-          commitComment();
-        }
-      }
+      } else if (call.method == "onSuccess") {}
     }
 
     TencentCos.setMethodCallHandler(_handleMessages);
-    ctx.state.picFilePath.forEach((itemDynamicSelectedPicTask) {
-      itemDynamicSelectedPicTask.upload(
+
+    Future.wait(ctx.state.picFilePath.map((itemDynamicSelectedPicTask) {
+      return itemDynamicSelectedPicTask.upload(
           tmpSecretId, tmpSecretKey, sessionToken, expiredTime, cosPath);
+    })).then((List onValue) {
+      ctx.state.picFilePath.forEach((item) {
+        //修改resourcePath
+        item.resourcePath =
+            "$cosPath/${path.basename(File(item.localUrl).path)}";
+      });
+      commitComment(ctx.context, ctx.state.contentTextEditingController.text,
+          ctx.state.picFilePath);
+      println("onValue $onValue");
+    }).catchError((onError) {
+//      toast(ctx.context,"图片上传失败,发布失败");
     });
   }
 }
 
-void commitComment() {
-  println("commitComment");
+void commitComment(
+    context, String text, List<DynamicSelectedPicTask> picFilePath) {
+  //图片上传完毕 开始把信息给服务端
+  String urls = json.encode(picFilePath.map((DynamicSelectedPicTask dspt) {
+    return dspt.resourcePath;
+  }).toList());
+  RequestClient.request(context, HttpConstants.CommitDynamicPic,
+      queryParameters: {
+        'type': 0,
+        'dynamic_content': text,
+        'urls': urls,
+      });
 }
 
 void _initState(Action action, Context<CommitMediaState> ctx) {}
