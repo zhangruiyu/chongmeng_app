@@ -1,10 +1,17 @@
 import 'package:fish_redux/fish_redux.dart';
 
-//TODO replace with your own action
-enum CommunityAction { action }
+enum CommunityAction { action, Refresh, LoadMore }
 
 class CommunityActionCreator {
   static Action onAction() {
     return const Action(CommunityAction.action);
+  }
+
+  static Action onRefresh(Map<String, dynamic> map) {
+    return Action(CommunityAction.Refresh, payload: map);
+  }
+
+  static Action onLoadMore(Map<String, dynamic> map) {
+    return Action(CommunityAction.LoadMore, payload: map);
   }
 }

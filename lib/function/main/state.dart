@@ -12,13 +12,15 @@ import 'community/state.dart';
 class MainState implements GlobalBaseState<MainState> {
   int mainPageIndex;
   HomeData homeData;
+  CommunityState communityState;
 
   @override
   MainState clone() {
     return MainState()
       ..mainPageIndex = mainPageIndex
       ..localUser = localUser
-      ..locale = locale;
+      ..locale = locale
+      ..communityState = communityState;
   }
 
   @override
@@ -29,7 +31,9 @@ class MainState implements GlobalBaseState<MainState> {
 }
 
 MainState initState(Map<String, dynamic> args) {
-  return MainState()..mainPageIndex = 0;
+  return MainState()
+    ..mainPageIndex = 0
+    ..communityState = CommunityState.initState(args);
 }
 
 ConnOp<MainState, AccountState> accountConnector() {
@@ -48,13 +52,14 @@ ConnOp<MainState, AccountState> accountConnector() {
 ConnOp<MainState, CommunityState> communityConnector() {
   return ConnOp<MainState, CommunityState>(
     get: (MainState state) {
-      return CommunityState()
+      return state.communityState
 //        ..localUser = state.localUser
 //        ..locale = state.locale
           ;
     },
     set: (MainState state, CommunityState subState) {
 //      state.bannerData = subState.bannerData;
+      state.communityState = subState;
     },
   );
 }

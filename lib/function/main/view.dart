@@ -8,10 +8,6 @@ import 'state.dart';
 
 Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
-    appBar: Toolbar(
-      leading: null,
-      title: const Text('宠萌'),
-    ),
     body: state.mainPageIndex == 0
         ? viewService.buildComponent('home')
         : state.mainPageIndex == 1
@@ -20,7 +16,7 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
                 ? Container()
                 : state.mainPageIndex == 3
                     ? viewService.buildComponent('account')
-                    : viewService.buildComponent('accountr'),
+                    : viewService.buildComponent('account'),
     floatingActionButton: FloatingActionButton(
       onPressed: () {
         dispatch(MainActionCreator.onSkipSelectTalkTypePage());

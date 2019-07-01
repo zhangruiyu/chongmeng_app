@@ -14,6 +14,7 @@ class HttpConstants {
       "app/auth/sendThirdLoginCode"; //发送验证码
   static final String LoginAndRegister = "app/auth/loginAndRegister";
   static final String CommitDynamic = "app/dynamic/common/commitDynamic";
+  static final String DynamicList = "app/dynamic/dynamic/list";
   static final String ThirdLoginAndRegister =
       "app/auth/common/thirdLoginAndRegister";
   static final String HomeIndex = "app/auth/home/index";
