@@ -58,7 +58,7 @@ dependencies:
     path: ./plugins/tencent_cos
   umengshare:
     path: ./plugins/flutter_umengshare
-  flutter_video_compress: any
+  thumbnails: ^1.0.1
 
 dev_dependencies:
   flutter_test:

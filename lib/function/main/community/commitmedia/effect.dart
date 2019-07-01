@@ -4,8 +4,10 @@ import 'dart:io';
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/constants/page_constants.dart';
 import 'package:chongmeng/function/main/community/commitmedia/state.dart';
+import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/network/entity/cos_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
+import 'package:chongmeng/network/outermost_entity.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
@@ -83,35 +85,40 @@ Future _onUploadCommit(Action action, Context<CommitMediaState> ctx) async {
     }
 
     TencentCos.setMethodCallHandler(_handleMessages);
-
+    NavigatorHelper.showLoadingDialog(ctx.context, true);
     Future.wait(ctx.state.picFilePath.map((itemDynamicSelectedPicTask) {
       return itemDynamicSelectedPicTask.upload(
           tmpSecretId, tmpSecretKey, sessionToken, expiredTime, cosPath);
-    })).then((List onValue) {
+    })).then((List onValue) async {
       ctx.state.picFilePath.forEach((item) {
         //修改resourcePath
         item.resourcePath =
-            "$cosPath/${path.basename(File(item.localUrl).path)}";
+            "$cosPath${path.basename(File(item.localUrl).path)}";
       });
-      commitComment(ctx.context, ctx.state.contentTextEditingController.text,
-          ctx.state.picFilePath);
-      println("onValue $onValue");
+      var result = await commitComment(ctx.context,
+          ctx.state.contentTextEditingController.text, ctx.state.picFilePath);
+      NavigatorHelper.showLoadingDialog(ctx.context, false);
+      if (result.hasSuccess) {
+        NavigatorHelper.popToMain(ctx.context);
+      }
     }).catchError((onError) {
 //      toast(ctx.context,"图片上传失败,发布失败");
+      NavigatorHelper.showLoadingDialog(ctx.context, false);
     });
   }
 }
 
-void commitComment(
-    context, String text, List<DynamicSelectedPicTask> picFilePath) {
+Future<Result<OutermostEntity>> commitComment(
+    context, String text, List<DynamicSelectedPicTask> picFilePath) async {
   //图片上传完毕 开始把信息给服务端
   String urls = json.encode(picFilePath.map((DynamicSelectedPicTask dspt) {
     return dspt.resourcePath;
   }).toList());
-  RequestClient.request(context, HttpConstants.CommitDynamicPic,
+  return RequestClient.request<OutermostEntity>(
+      context, HttpConstants.CommitDynamic,
       queryParameters: {
         'type': 0,
-        'dynamic_content': text,
+        'dynamicContent': text,
         'urls': urls,
       });
 }

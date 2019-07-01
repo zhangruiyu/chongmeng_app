@@ -5,7 +5,6 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 
 import 'model/dynamic_selected_pic_task.dart';
-import 'package:flutter_video_compress/flutter_video_compress.dart';
 
 class CommitMediaState implements Cloneable<CommitMediaState> {
   String videoFilePath;
@@ -15,9 +14,6 @@ class CommitMediaState implements Cloneable<CommitMediaState> {
   TextEditingController contentTextEditingController;
   String type;
 
-  //视频播放才有
-  FlutterVideoCompress flutterVideoCompress;
-
   @override
   CommitMediaState clone() {
     return CommitMediaState()
@@ -25,7 +21,6 @@ class CommitMediaState implements Cloneable<CommitMediaState> {
       ..thumbnailFile = thumbnailFile
       ..picFilePath = picFilePath
       ..editSwitchController = editSwitchController
-      ..flutterVideoCompress = flutterVideoCompress
       ..contentTextEditingController = contentTextEditingController
       ..type = type;
   }
@@ -39,7 +34,6 @@ CommitMediaState initState(Map<String, dynamic> args) {
   if (reviewIVState.type == "video") {
     reviewIVState
       ..videoFilePath = args['filePath']
-      ..flutterVideoCompress = FlutterVideoCompress()
       ..thumbnailFile = args['thumbnailFile'];
   } else {
     if (args['filePath'] is String) {

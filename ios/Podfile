@@ -34,7 +34,7 @@ end
 
 target 'Runner' do
   #为添加视频压缩和缩略图插件加的
-  use_frameworks!
+  #use_frameworks!
   # Prepare symlinks folder. We use symlinks to avoid having Podfile.lock
   # referring to absolute paths on developers' machines.
   system('rm -rf .symlinks')
@@ -61,19 +61,6 @@ target 'Runner' do
     pod p[:name], :path => File.join(symlink, 'ios')
   }
 end
-# -----insert code start-----
-pre_install do |installer|
-  Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
-  installer.analysis_result.specifications.each do |s|
-      if s.name == 'Regift'
-        s.swift_version = '4.0'
-    # elsif s.name == 'other-Plugin'
-    #   s.swift_version = '5.0'
-    # else
-    #   s.swift_version = '4.0'
-      end
-  end
-end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
@@ -82,4 +69,3 @@ post_install do |installer|
     end
   end
 end
-# -----insert code end-----
