@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'model/dynamic_selected_pic_task.dart';
 
 class CommitMediaState implements Cloneable<CommitMediaState> {
-  String videoFilePath;
-  File thumbnailFile;
+  DynamicSelectedPicTask videoFilePath;
+  DynamicSelectedPicTask videoThumbnail;
   List<DynamicSelectedPicTask> picFilePath;
   EditSwitchController editSwitchController;
   TextEditingController contentTextEditingController;
@@ -18,7 +18,7 @@ class CommitMediaState implements Cloneable<CommitMediaState> {
   CommitMediaState clone() {
     return CommitMediaState()
       ..videoFilePath = videoFilePath
-      ..thumbnailFile = thumbnailFile
+      ..videoThumbnail = videoThumbnail
       ..picFilePath = picFilePath
       ..editSwitchController = editSwitchController
       ..contentTextEditingController = contentTextEditingController
@@ -33,8 +33,8 @@ CommitMediaState initState(Map<String, dynamic> args) {
     ..contentTextEditingController = TextEditingController();
   if (reviewIVState.type == "video") {
     reviewIVState
-      ..videoFilePath = args['filePath']
-      ..thumbnailFile = args['thumbnailFile'];
+      ..videoFilePath = DynamicSelectedPicTask(args['filePath'])
+      ..videoThumbnail = DynamicSelectedPicTask(args['videoThumbnail']);
   } else {
     if (args['filePath'] is String) {
       reviewIVState..picFilePath = [DynamicSelectedPicTask(args['filePath'])];

@@ -2,7 +2,8 @@ import 'package:fish_redux/fish_redux.dart';
 
 enum CommitMediaAction {
   ChangeSelectPic,
-  UploadCommit,
+  UploadCommitPic,
+  UploadCommitVideo,
   ReselectPic,
   SkipReviewPage
 }
@@ -12,8 +13,12 @@ class CommitMediaActionCreator {
     return Action(CommitMediaAction.ChangeSelectPic, payload: data);
   }
 
-  static Action onUploadCommit() {
-    return const Action(CommitMediaAction.UploadCommit);
+  static Action onUploadCommitPic() {
+    return const Action(CommitMediaAction.UploadCommitPic);
+  }
+
+  static Action onUploadCommitVideo() {
+    return const Action(CommitMediaAction.UploadCommitVideo);
   }
 
   static Action onReselectPic() {

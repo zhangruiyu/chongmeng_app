@@ -6,7 +6,7 @@ import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 class ReviewIVState implements Cloneable<ReviewIVState> {
   String filePath;
   String type;
-  File thumbnailFile;
+  String videoThumbnail;
   IjkMediaController videoController;
 
   //是否能跳转到提交页面
@@ -17,7 +17,7 @@ class ReviewIVState implements Cloneable<ReviewIVState> {
     return ReviewIVState()
       ..filePath = filePath
       ..type = type
-      ..thumbnailFile = thumbnailFile
+      ..videoThumbnail = videoThumbnail
       ..videoController = videoController;
   }
 }
@@ -28,7 +28,7 @@ ReviewIVState initState(Map<String, dynamic> args) {
     ..type = args['type'];
   if (reviewIVState.type == "video") {
     reviewIVState.videoController = IjkMediaController();
-    reviewIVState.thumbnailFile = args['thumbnailFile'];
+    reviewIVState.videoThumbnail = args['videoThumbnail'];
   }
   if (args['canSkip'] == null) {
     //可能为空

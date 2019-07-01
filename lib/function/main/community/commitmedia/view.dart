@@ -23,7 +23,11 @@ Widget buildView(
           padding: const EdgeInsets.only(right: 22.0),
           child: InkResponse(
             onTap: () {
-              dispatch(CommitMediaActionCreator.onUploadCommit());
+              if (isVideo) {
+                dispatch(CommitMediaActionCreator.onUploadCommitVideo());
+              } else {
+                dispatch(CommitMediaActionCreator.onUploadCommitPic());
+              }
             },
             child: Container(
               alignment: Alignment.center,
@@ -67,7 +71,7 @@ Widget buildVideoView(
       alignment: Alignment.center,
       children: <Widget>[
         Image.file(
-          state.thumbnailFile,
+          File(state.videoThumbnail.localUrl),
           width: itemWidth,
         ),
         IconButton(

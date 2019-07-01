@@ -19,7 +19,7 @@ void _onSkipCommitPage(Action action, Context<ReviewIVState> ctx) {
       arguments: {
         'filePath': ctx.state.filePath,
         'type': ctx.state.type,
-        'thumbnailFile': ctx.state.thumbnailFile
+        'videoThumbnail': ctx.state.videoThumbnail
       });
 }
 

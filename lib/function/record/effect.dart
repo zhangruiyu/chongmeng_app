@@ -142,7 +142,7 @@ void _onRecordEnd(Action action, Context<RecordState> ctx) async {
       String thumb = await Thumbnails.getThumbnail(
           thumbnailFolder: (await getApplicationDocumentsDirectory()).path +
               "/thumb", // creates the specified path if it doesnt exist
-          videoFile: '[VIDEO PATH HERE]',
+          videoFile: ctx.state.videoPath,
           imageType: ThumbFormat.PNG,
           quality: 50);
 
@@ -150,7 +150,7 @@ void _onRecordEnd(Action action, Context<RecordState> ctx) async {
           arguments: {
             'filePath': ctx.state.videoPath,
             'type': 'video',
-            'thumbnailFile': File(thumb)
+            'videoThumbnail': thumb
           });
     } on CameraException catch (e) {
       toast(ctx.context, e.toString());

@@ -8,12 +8,12 @@ import 'view.dart';
 class CommunityComponent extends Component<CommunityState> {
   CommunityComponent()
       : super(
-            effect: buildEffect(),
-            reducer: buildReducer(),
-            view: buildView,
-            dependencies: Dependencies<CommunityState>(
-                adapter: null,
-                slots: <String, Dependent<CommunityState>>{
-                }),);
-
+          effect: buildEffect(),
+          reducer: buildReducer(),
+          view: buildView,
+          dependencies: Dependencies<CommunityState>(
+              adapter: null, slots: <String, Dependent<CommunityState>>{}),
+        );
+  static const DynamicTypePic = 0;
+  static const DynamicTypeVideo = 1;
 }

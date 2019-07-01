@@ -16,6 +16,7 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:path/path.dart' as path;
 import 'package:tencent_cos/tencent_cos.dart';
 
+import '../component.dart';
 import 'action.dart';
 import 'model/dynamic_selected_pic_task.dart';
 
@@ -23,7 +24,8 @@ Effect<CommitMediaState> buildEffect() {
   return combineEffects(<Object, Effect<CommitMediaState>>{
     CommitMediaAction.ReselectPic: _onReselectPic,
     CommitMediaAction.SkipReviewPage: _onSkipReviewPage,
-    CommitMediaAction.UploadCommit: _onUploadCommit,
+    CommitMediaAction.UploadCommitPic: _onUploadCommitPic,
+    CommitMediaAction.UploadCommitVideo: _onUploadCommitVideo,
     Lifecycle.initState: _initState,
   });
 }
@@ -40,13 +42,13 @@ Future _onReselectPic(Action action, Context<CommitMediaState> ctx) async {
 void _onSkipReviewPage(Action action, Context<CommitMediaState> ctx) {
   Navigator.pushNamed(ctx.context, PageConstants.ReviewIVPage, arguments: {
     'canSkip': false,
-    'filePath': ctx.state.videoFilePath,
+    'filePath': ctx.state.videoFilePath.localUrl,
     'type': "video",
-    'thumbnailFile': ctx.state.thumbnailFile,
+    'videoThumbnail': ctx.state.videoThumbnail.localUrl,
   });
 }
 
-Future _onUploadCommit(Action action, Context<CommitMediaState> ctx) async {
+Future _onUploadCommitPic(Action action, Context<CommitMediaState> ctx) async {
   if (ctx.state.contentTextEditingController.text.length < 5) {
     toast(ctx.context, "不能低于5字");
     return;
@@ -95,8 +97,69 @@ Future _onUploadCommit(Action action, Context<CommitMediaState> ctx) async {
         item.resourcePath =
             "$cosPath${path.basename(File(item.localUrl).path)}";
       });
-      var result = await commitComment(ctx.context,
-          ctx.state.contentTextEditingController.text, ctx.state.picFilePath);
+      //图片json串
+      String picJson =
+          json.encode(ctx.state.picFilePath.map((DynamicSelectedPicTask dspt) {
+        return dspt.resourcePath;
+      }).toList());
+      var result = await commitComment(
+          ctx.context,
+          CommunityComponent.DynamicTypePic,
+          ctx.state.contentTextEditingController.text,
+          picJson);
+      NavigatorHelper.showLoadingDialog(ctx.context, false);
+      if (result.hasSuccess) {
+        NavigatorHelper.popToMain(ctx.context);
+      }
+    }).catchError((onError) {
+//      toast(ctx.context,"图片上传失败,发布失败");
+      NavigatorHelper.showLoadingDialog(ctx.context, false);
+    });
+  }
+}
+
+Future _onUploadCommitVideo(
+    Action action, Context<CommitMediaState> ctx) async {
+  if (ctx.state.contentTextEditingController.text.length < 5) {
+    toast(ctx.context, "不能低于5字");
+    return;
+  }
+  if (ctx.state.contentTextEditingController.text.length > 3000) {
+    toast(ctx.context, "不能大于2000字");
+    return;
+  }
+  Result<CosEntity> cosEntity = await RequestClient.request<CosEntity>(
+      ctx.context, HttpConstants.PeriodEffectiveSign,
+      queryParameters: {'type': CommitType.VIDEO_TYPE});
+  if (cosEntity.hasSuccess) {
+    CosData data = cosEntity.data.data;
+    var tmpSecretId = data.tmpSecretId;
+    var tmpSecretKey = data.tmpSecretKey;
+    var sessionToken = data.sessionToken;
+    var cosPath = data.cosPath;
+    var expiredTime = data.expiredTime;
+    NavigatorHelper.showLoadingDialog(ctx.context, true);
+
+    //修改地址
+    ctx.state.videoThumbnail.resourcePath =
+        "$cosPath${path.basename(File(ctx.state.videoThumbnail.localUrl).path)}";
+    //修改地址
+    ctx.state.videoFilePath.resourcePath =
+        "$cosPath${path.basename(File(ctx.state.videoFilePath.localUrl).path)}";
+
+    var videoFutrue = ctx.state.videoFilePath
+        .upload(tmpSecretId, tmpSecretKey, sessionToken, expiredTime, cosPath);
+    var videoThumbnailFutrue = ctx.state.videoThumbnail
+        .upload(tmpSecretId, tmpSecretKey, sessionToken, expiredTime, cosPath);
+    Future.wait([videoFutrue, videoThumbnailFutrue]).then((List onValue) async {
+      var result = await commitComment(
+          ctx.context,
+          CommunityComponent.DynamicTypeVideo,
+          ctx.state.contentTextEditingController.text,
+          json.encode({
+            'videoPath': ctx.state.videoFilePath.resourcePath,
+            'videoThumbnailPath': ctx.state.videoThumbnail.resourcePath
+          }));
       NavigatorHelper.showLoadingDialog(ctx.context, false);
       if (result.hasSuccess) {
         NavigatorHelper.popToMain(ctx.context);
@@ -109,17 +172,14 @@ Future _onUploadCommit(Action action, Context<CommitMediaState> ctx) async {
 }
 
 Future<Result<OutermostEntity>> commitComment(
-    context, String text, List<DynamicSelectedPicTask> picFilePath) async {
+    context, int type, String text, String picJson) async {
   //图片上传完毕 开始把信息给服务端
-  String urls = json.encode(picFilePath.map((DynamicSelectedPicTask dspt) {
-    return dspt.resourcePath;
-  }).toList());
   return RequestClient.request<OutermostEntity>(
       context, HttpConstants.CommitDynamic,
       queryParameters: {
-        'type': 0,
+        'type': type,
         'dynamicContent': text,
-        'urls': urls,
+        'urls': picJson,
       });
 }
 
