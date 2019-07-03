@@ -122,9 +122,9 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
-      resolved-ref: "51d8b90b13acc083296f284cf3e4ad84cf2e2d1f"
-      url: "https://github.com/zhangruiyu/flutter_easyrefresh.git"
+      ref: v2
+      resolved-ref: "278abc2ffcbf7101adda1bcf2e205091728b2f62"
+      url: "https://github.com/xuelongqy/flutter_easyrefresh.git"
     source: git
     version: "1.2.7"
   flutter_ijkplayer:

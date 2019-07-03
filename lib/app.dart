@@ -13,6 +13,7 @@ import 'function/main/community/selecttalktype/page.dart';
 import 'function/main/page.dart';
 import 'function/record/page.dart';
 import 'function/record/review/page.dart';
+import 'function/setting/page.dart';
 import 'function/splash/page.dart';
 import 'global_store/state.dart';
 import 'global_store/store.dart';
@@ -71,7 +72,7 @@ Future<Widget> createApp() async {
         PageConstants.ReviewIVPage: pageConfiguration(ReviewIVPage()),
         PageConstants.SelectTalkTypePage:
             pageConfiguration(SelectTalkTypePage()),
-        PageConstants.CommitMediaPage: pageConfiguration(CommitMediaPage()),
+        PageConstants.SettingPage: pageConfiguration(SettingPage()),
       },
     ),
   ]);
@@ -98,7 +99,7 @@ Future<Widget> createApp() async {
     theme: ThemeData(
         primaryColor: Colors.amberAccent[200],
         accentColor: Colors.amberAccent[200],
-        dividerColor: colorf3f3f3),
+        dividerColor: colorE4E4E4),
     home: routes.buildPage('splash', null),
     onGenerateRoute: (RouteSettings settings) {
       return MaterialPageRoute<Object>(

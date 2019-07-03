@@ -14,6 +14,7 @@ Reducer<GlobalState> buildReducer() {
     <Object, Reducer<GlobalState>>{
       GlobalAction.ChangeLanguage: _onChangeLanguage,
       GlobalAction.UpdateLocalUser: _onUpdateLocalUser,
+      GlobalAction.LoginOut: _onLoginOut,
     },
   );
 }
@@ -26,4 +27,8 @@ GlobalState _onUpdateLocalUser(GlobalState state, Action action) {
   LoginData loginData = action.payload;
   UserHelper.setLogin(loginData);
   return state.clone()..localUser = LocalUser.fromJson(loginData.toJson());
+}
+
+GlobalState _onLoginOut(GlobalState state, Action action) {
+  return state.clone()..localUser = null;
 }

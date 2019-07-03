@@ -29,7 +29,8 @@ dependencies:
   cached_network_image: any
   flutter_easyrefresh:
     git:
-      url: https://github.com/zhangruiyu/flutter_easyrefresh.git
+      url: https://github.com/xuelongqy/flutter_easyrefresh.git
+      ref: v2
   dio: any
   flutter_localizations:
     sdk: flutter
@@ -69,3 +70,4 @@ flutter:
   assets:
     - assets/auto_page_bg.png
     - assets/splash_page_bg.png
+    - assets/account_page_no_login.png

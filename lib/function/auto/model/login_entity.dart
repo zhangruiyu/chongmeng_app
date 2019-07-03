@@ -24,6 +24,7 @@ class LoginData {
   int userId;
   String nickName;
   int sex;
+  String avatar;
   String description;
   String tel;
   String token;
@@ -34,6 +35,7 @@ class LoginData {
       this.nickName,
       this.sex,
       this.description,
+      this.avatar,
       this.tel,
       this.token});
 
@@ -43,6 +45,7 @@ class LoginData {
     nickName = json['nick_name'];
     sex = json['sex'];
     description = json['description'];
+    avatar = json['avatar'];
     tel = json['tel'];
     token = json['token'];
   }
@@ -55,6 +58,7 @@ class LoginData {
     data['sex'] = this.sex;
     data['description'] = this.description;
     data['tel'] = this.tel;
+    data['avatar'] = this.avatar;
     data['token'] = this.token;
     return data;
   }

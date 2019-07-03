@@ -4,6 +4,7 @@ class LocalUser {
   String nickName;
   int sex;
   String description;
+  String avatar;
   String tel;
   String token;
 
@@ -21,6 +22,7 @@ class LocalUser {
     userId = json['user_id'];
     nickName = json['nick_name'];
     sex = json['sex'];
+    avatar = json['avatar'];
     description = json['description'];
     tel = json['tel'];
     token = json['token'];
@@ -35,6 +37,7 @@ class LocalUser {
     data['description'] = this.description;
     data['tel'] = this.tel;
     data['token'] = this.token;
+    data['avatar'] = this.avatar;
     return data;
   }
 }

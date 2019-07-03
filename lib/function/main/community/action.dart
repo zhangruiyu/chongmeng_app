@@ -1,6 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 
-enum CommunityAction { action, Refresh, LoadMore }
+enum CommunityAction { action, Refresh, LoadMore, AddPageListData }
 
 class CommunityActionCreator {
   static Action onAction() {
@@ -13,5 +13,9 @@ class CommunityActionCreator {
 
   static Action onLoadMore(Map<String, dynamic> map) {
     return Action(CommunityAction.LoadMore, payload: map);
+  }
+
+  static Action onAddPageListData(Map<String, dynamic> map) {
+    return Action(CommunityAction.AddPageListData, payload: map);
   }
 }

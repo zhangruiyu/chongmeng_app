@@ -3,6 +3,7 @@ import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/network/outermost_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'action.dart';
 import 'model/dynamic_list_entity.dart';
 import 'state.dart';
@@ -16,6 +17,8 @@ Effect<CommunityState> buildEffect() {
 }
 
 void _initState(Action action, Context<CommunityState> ctx) {
+  ctx.state.refreshController = EasyRefreshController();
+  ctx.state.refreshController.callRefresh();
   final TickerProvider tickerProvider = ctx.stfState as CommunityPageState;
   println("initstate: ${ctx.state.runtimeType}");
   ctx.state
@@ -40,8 +43,12 @@ Future _onRefresh(Action action, Context<CommunityState> ctx) async {
     },
   );
   action.payload['completer']();
+
   if (result.hasSuccess) {
-    result.data;
+    ctx.dispatch(CommunityActionCreator.onAddPageListData({
+      'data': result.data.data,
+      'filtrateType': action.payload['filtrateType']
+    }));
   }
 }
 
