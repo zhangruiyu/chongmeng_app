@@ -18,9 +18,9 @@ Widget buildView(TabState state, Dispatch dispatch, ViewService viewService) {
               onTap: () {},
               child: Column(
                 children: <Widget>[
-                  new CachedNetworkImage(
-                    imageUrl: itemMenu.picUrl,
-                    height: 60.0,
+                  new Image.asset(
+                    itemMenu.picUrl,
+                    height: 40.0,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 1.0),

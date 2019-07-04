@@ -1,16 +1,19 @@
 class HomeEntity {
+  String msg;
   HomeData data;
   int status;
 
-  HomeEntity({this.data, this.status});
+  HomeEntity({this.msg, this.data, this.status});
 
   HomeEntity.fromJson(Map<String, dynamic> json) {
+    msg = json['msg'];
     data = json['data'] != null ? new HomeData.fromJson(json['data']) : null;
     status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['msg'] = this.msg;
     if (this.data != null) {
       data['data'] = this.data.toJson();
     }
@@ -22,8 +25,9 @@ class HomeEntity {
 class HomeData {
   List<HomeDataTab> tab;
   List<HomeDataBanner> banners;
+  List<HomeDataContent> content;
 
-  HomeData({this.tab, this.banners});
+  HomeData({this.tab, this.banners, this.content});
 
   HomeData.fromJson(Map<String, dynamic> json) {
     if (json['tab'] != null) {
@@ -38,6 +42,12 @@ class HomeData {
         banners.add(new HomeDataBanner.fromJson(v));
       });
     }
+    if (json['content'] != null) {
+      content = new List<HomeDataContent>();
+      (json['content'] as List).forEach((v) {
+        content.add(new HomeDataContent.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -47,6 +57,9 @@ class HomeData {
     }
     if (this.banners != null) {
       data['banners'] = this.banners.map((v) => v.toJson()).toList();
+    }
+    if (this.content != null) {
+      data['content'] = this.content.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -105,6 +118,28 @@ class HomeDataBanner {
     data['banner_id'] = this.bannerId;
     data['img_url'] = this.imgUrl;
     data['can_share'] = this.canShare;
+    data['title'] = this.title;
+    data['url'] = this.url;
+    return data;
+  }
+}
+
+class HomeDataContent {
+  String picUrl;
+  String title;
+  String url;
+
+  HomeDataContent({this.picUrl, this.title, this.url});
+
+  HomeDataContent.fromJson(Map<String, dynamic> json) {
+    picUrl = json['picUrl'];
+    title = json['title'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['picUrl'] = this.picUrl;
     data['title'] = this.title;
     data['url'] = this.url;
     return data;

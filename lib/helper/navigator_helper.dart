@@ -44,7 +44,10 @@ class NavigatorHelper {
     }
   }
 
-  static void pushWebPage(BuildContext context, String s, String t) {}
+  static void pushWebPage(BuildContext context, String title, String url) {
+    Navigator.pushNamed(context, PageConstants.WebviewPage,
+        arguments: {'title': title, 'url': url});
+  }
 
   static Future<T> pushRecordPage<T>(BuildContext context,
       {bool isPop: true}) async {

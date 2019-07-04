@@ -15,6 +15,7 @@ import 'function/record/page.dart';
 import 'function/record/review/page.dart';
 import 'function/setting/page.dart';
 import 'function/splash/page.dart';
+import 'function/webview/page.dart';
 import 'global_store/state.dart';
 import 'global_store/store.dart';
 import 'helper/user_helper.dart';
@@ -72,7 +73,7 @@ Future<Widget> createApp() async {
         PageConstants.ReviewIVPage: pageConfiguration(ReviewIVPage()),
         PageConstants.SelectTalkTypePage:
             pageConfiguration(SelectTalkTypePage()),
-        PageConstants.SettingPage: pageConfiguration(SettingPage()),
+        PageConstants.WebviewPage: pageConfiguration(WebviewPage()),
       },
     ),
   ]);

@@ -1,3 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chongmeng/constants/page_constants.dart';
+import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +10,10 @@ import 'state.dart';
 
 Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
+    appBar: Toolbar(
+      leading: null,
+
+    ),
     backgroundColor: Colors.white,
 //    appBar: Toolbar(),
     body: state.homeData == null
@@ -36,22 +43,30 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
                     delegate: _SliverAppBarDelegate(
                       PreferredSize(
                         child: viewService.buildComponent("tab"),
-                        preferredSize: Size(double.infinity, 128.0),
+                        preferredSize: Size(double.infinity, 96.0),
                       ),
                     ))
               ];
             },
-//      body: viewService.buildComponent("product"),
             body: ListView(
-              children: List.generate(1000, (int index) {
-                return "text $index";
-              }).map((text) {
-                return ListTile(
-                  title: Text(text),
-                  subtitle: Text("subtitle" + text),
-                  trailing: RaisedButton(
-                    child: Text("查看详情"),
-                    onPressed: () {},
+              children: state.homeData.content.map((item) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: ListTile(
+                    onTap: () {
+                      NavigatorHelper.pushWebPage(
+                          viewService.context, item.title, item.url);
+                    },
+                    title: Text(item.title),
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: CachedNetworkImage(
+                        imageUrl: item.picUrl,
+                        fit: BoxFit.fill,
+                        width: 60.0,
+                        height: 60.0,
+                      ),
+                    ),
                   ),
                 );
               }).toList(),

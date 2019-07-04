@@ -1,5 +1,4 @@
 class PageConstants {
-  static const String WebViewPage = 'cm://WebViewPage'; //WebViewPage
   static const String ForgetPasswordPage = 'cm://ForgetPasswordPage'; //忘记密码
   static const String SettingPage = 'cm://SettingPage'; //设置界面
   static const String NoticePage = 'cm://NoticePage'; //公告
@@ -16,4 +15,5 @@ class PageConstants {
   static const String SelectTalkTypePage = "cm://SelectTalkTypePage"; //选择说说类型
   static const String CommitMediaPage = "cm://CommitMediaPage"; //发布文字评论
   static const String CommitTextPage = "cm://CommitTextPage"; //发布文字评论
+  static const String WebviewPage = "cm://WebviewPage"; //WebviewPage
 }

@@ -45,8 +45,7 @@ dependencies:
   device_info: any
   janalytics: any
   jpush_flutter: any
-  flutter_webview_plugin:
-    git: https://github.com/zhangruiyu/flutter_webview_plugin.git
+  webview_flutter: any
   jmessage_flutter: any
   material_design_icons_flutter: ^3.2.3695
   file_picker: ^1.3.6
@@ -71,3 +70,7 @@ flutter:
     - assets/auto_page_bg.png
     - assets/splash_page_bg.png
     - assets/account_page_no_login.png
+    - assets/home_page_sign.png
+    - assets/home_page_doctor.png
+    - assets/home_page_qa.png
+    - assets/home_page_lingyang.png
