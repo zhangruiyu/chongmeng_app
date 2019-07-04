@@ -12,10 +12,8 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
     appBar: Toolbar(
       leading: null,
-
     ),
     backgroundColor: Colors.white,
-//    appBar: Toolbar(),
     body: state.homeData == null
         ? Container(
             child: Text("没有数据"),

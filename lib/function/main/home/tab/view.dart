@@ -8,7 +8,6 @@ import 'state.dart';
 
 Widget buildView(TabState state, Dispatch dispatch, ViewService viewService) {
   return Container(
-    padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
     color: colorWhite,
     child: Row(
       children: state.tabData.map((itemMenu) {
