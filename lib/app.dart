@@ -18,6 +18,8 @@ import 'function/record/page.dart';
 import 'function/record/review/page.dart';
 import 'function/setting/page.dart';
 import 'function/splash/page.dart';
+import 'function/tally/add/page.dart';
+import 'function/tally/page.dart';
 import 'function/webview/page.dart';
 import 'global_store/state.dart';
 import 'global_store/store.dart';
@@ -83,6 +85,8 @@ Future<Widget> createApp() async {
         PageConstants.SelectSubTypePage: pageConfiguration(SelectSubTypePage()),
         PageConstants.SelectPetAvatarPage:
             pageConfiguration(SelectPetAvatarPage()),
+        PageConstants.TallyPage: pageConfiguration(TallyPage()),
+        PageConstants.AddTallyPage: pageConfiguration(AddTallyPage()),
       },
     ),
   ]);

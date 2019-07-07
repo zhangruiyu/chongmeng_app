@@ -19,4 +19,6 @@ class PageConstants {
   static const String SelectTypePage = "cm://SelectTypePage"; //
   static const String SelectSubTypePage = "cm://SelectSubTypePage"; //
   static const String SelectPetAvatarPage = "cm://SelectPetAvatarPage"; //
+  static const String TallyPage = "cm://TallyPage"; //
+  static const String AddTallyPage = "cm://AddTallyPage"; //
 }

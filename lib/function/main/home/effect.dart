@@ -21,7 +21,7 @@ Future _initState(Action action, Context<HomeState> ctx) async {
 //    "医疗", "问答", "领养", "签到"
     homeData.data.data.tab = [
       HomeDataTab(title: "医疗", picUrl: "assets/home_page_doctor.png"),
-      HomeDataTab(title: "问答", picUrl: "assets/home_page_qa.png"),
+      HomeDataTab(title: "记一笔", picUrl: "assets/home_page_qa.png"),
       HomeDataTab(title: "食谱", picUrl: "assets/home_page_lingyang.png"),
       HomeDataTab(title: "签到", picUrl: "assets/home_page_sign.png")
     ];

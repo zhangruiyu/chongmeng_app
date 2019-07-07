@@ -2,6 +2,7 @@ import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
+import 'package:chongmeng/utils/date_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'action.dart';
@@ -24,7 +25,7 @@ Future _onSelectPetAvatar(
 }
 
 Future _onAddPet(Action action, Context<SelectPetAvatarState> ctx) async {
-  String dateTime = DateFormat('yyyy-MM-dd').format(action.payload);
+  String dateTime = DateUtils.formatData(action.payload);
   var result = await RequestClient.request<OutermostEntity>(
       ctx.context, HttpConstants.AddPet,
       queryParameters: {
@@ -32,7 +33,8 @@ Future _onAddPet(Action action, Context<SelectPetAvatarState> ctx) async {
         'subId': ctx.state.subId,
         'avatar': ctx.state.petAvatar,
         'birthday': dateTime,
-      });
+      },
+      showLoadingIndicator: true);
   if (result.hasSuccess) {
     NavigatorHelper.popToMain(ctx.context);
   }

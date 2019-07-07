@@ -23,6 +23,8 @@ class HttpConstants {
   static final String HomeIndex = "app/auth/home/index";
   static final String PeriodEffectiveSign =
       "app/cos/common/periodEffectiveSign";
+
+  static String get AddTally => "app/tally/common/add/tally";
 }
 
 class CommitType {
