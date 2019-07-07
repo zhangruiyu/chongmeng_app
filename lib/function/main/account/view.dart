@@ -2,9 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/page_constants.dart';
+import 'package:chongmeng/function/pet/selecttype/model/pet_type_entity.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/model/local_user.dart';
 import 'package:chongmeng/helper/user_helper.dart';
+import 'package:chongmeng/network/net_work.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 
@@ -94,8 +96,20 @@ Widget buildLoginView(
               ),
             ),
             Expanded(
-              child: Column(
-                children: <Widget>[Text("1"), Text("宠物")],
+              child: InkResponse(
+                onTap: () async {
+                  var petTypeEntity =
+                      await RequestClient.request<PetTypeEntity>(
+                          viewService.context, HttpConstants.PetType);
+                  if (petTypeEntity.hasSuccess) {
+                    Navigator.popAndPushNamed(
+                        viewService.context, PageConstants.SelectTypePage,
+                        arguments: {'petTypeEntity': petTypeEntity.data.data});
+                  }
+                },
+                child: Column(
+                  children: <Widget>[Text("1"), Text("宠物")],
+                ),
               ),
             )
           ],

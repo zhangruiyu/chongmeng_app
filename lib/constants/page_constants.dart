@@ -16,4 +16,7 @@ class PageConstants {
   static const String CommitMediaPage = "cm://CommitMediaPage"; //发布文字评论
   static const String CommitTextPage = "cm://CommitTextPage"; //发布文字评论
   static const String WebviewPage = "cm://WebviewPage"; //WebviewPage
+  static const String SelectTypePage = "cm://SelectTypePage"; //
+  static const String SelectSubTypePage = "cm://SelectSubTypePage"; //
+  static const String SelectPetAvatarPage = "cm://SelectPetAvatarPage"; //
 }

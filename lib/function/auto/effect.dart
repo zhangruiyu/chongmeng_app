@@ -1,5 +1,6 @@
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/page_constants.dart';
+import 'package:chongmeng/function/pet/selecttype/model/pet_type_entity.dart';
 import 'package:chongmeng/global_store/action.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/network/net_work.dart';
@@ -46,6 +47,10 @@ Future _onLogin(Action action, Context<AutoState> ctx) async {
   Map<String, dynamic> queryParameters;
   if (action.payload == "qq") {
 //{msg: , ret: 0, unionid: , gender: 男, is_yellow_vip: 0, city: 朝阳, level: 0, openid: 050DE67E9DF84FDA37DCF08F94D6FF2F, profile_image_url: http://thirdqq.qlogo.cn/g?b=oidb&k=3OPDOC5fkyMSpudJ2Hvdmw&s=100, accessToken: D9F5599646F6B19E59FA13D022433405, access_token: D9F5599646F6B19E59FA13D022433405, uid: 050DE67E9DF84FDA37DCF08F94D6FF2F, is_yellow_year_vip: 0, province: 北京, screen_name: 牛顿, name: 牛顿, iconurl: http://thirdqq.qlogo.cn/g?b=oidb&k=3OPDOC5fkyMSpudJ2Hvdmw&s=100, yellow_vip_level: 0, expiration: 1568907416357, vip: 0, expires_in: 1568907416357, um_status: SUCCESS}
+    var qqResult = await UMengShare.login(UMPlatform.QQ);
+    if (qqResult['um_status'] != "SUCCESS") {
+      return;
+    }
     //后台处理结果
     queryParameters = ((await UMengShare.login(UMPlatform.QQ))
             as Map<dynamic, dynamic>)
@@ -74,7 +79,18 @@ Future _onLogin(Action action, Context<AutoState> ctx) async {
   if (result.hasSuccess) {
     GlobalStore.store
         .dispatch(GlobalActionCreator.onUpdateLocalUser(result.data.data));
-    Navigator.pop(ctx.context);
+    if (result.data.data.hasPet) {
+      Navigator.pop(ctx.context);
+    } else {
+      var petTypeEntity = await RequestClient.request<PetTypeEntity>(
+          ctx.context, HttpConstants.PetType);
+      if (petTypeEntity.hasSuccess) {
+        Navigator.popAndPushNamed(ctx.context, PageConstants.SelectTypePage,
+            arguments: {'petTypeEntity': petTypeEntity.data.data});
+      } else {
+        Navigator.pop(ctx.context);
+      }
+    }
   } else if (result.code == ErrorCode.BIND_TEL_ERROR_CODE) {
     //跳转到验证手机号,然后绑定手机号
     Navigator.pushNamed(ctx.context, PageConstants.BindTelPage, arguments: {

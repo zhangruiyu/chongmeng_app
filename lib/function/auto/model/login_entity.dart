@@ -28,6 +28,7 @@ class LoginData {
   String description;
   String tel;
   String token;
+  bool hasPet;
 
   LoginData(
       {this.createTime,
@@ -37,7 +38,8 @@ class LoginData {
       this.description,
       this.avatar,
       this.tel,
-      this.token});
+      this.token,
+      this.hasPet});
 
   LoginData.fromJson(Map<String, dynamic> json) {
     createTime = json['create_time'];
@@ -48,6 +50,7 @@ class LoginData {
     avatar = json['avatar'];
     tel = json['tel'];
     token = json['token'];
+    hasPet = json['has_pet'];
   }
 
   Map<String, dynamic> toJson() {
@@ -60,6 +63,7 @@ class LoginData {
     data['tel'] = this.tel;
     data['avatar'] = this.avatar;
     data['token'] = this.token;
+    data['has_pet'] = this.hasPet;
     return data;
   }
 }

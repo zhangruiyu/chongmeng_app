@@ -93,9 +93,8 @@ Widget buildView(
               ? null
               : new FlatButton(
                   padding: new EdgeInsets.only(
-                      bottom: WindowUtils.isIPhoneX(viewService.context)
-                          ? 26.0
-                          : 0.0),
+                      bottom:
+                          MediaQuery.of(viewService.context).padding.bottom),
                   child: new SizedBox(
                       width: WindowUtils.getScreenWidth(),
                       height: 45.0,

@@ -23,7 +23,7 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
-                SliverAppBar(
+                /* SliverAppBar(
 //            backgroundColor: colorWhite,
                   pinned: false,
                   floating: true,
@@ -35,7 +35,7 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
                     collapseMode: CollapseMode.parallax,
                     background: viewService.buildComponent("banner"),
                   ),
-                ),
+                ),*/
                 SliverPersistentHeader(
                     pinned: true,
                     delegate: _SliverAppBarDelegate(

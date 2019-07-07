@@ -11,6 +11,9 @@ import 'function/bindtel/page.dart';
 import 'function/main/community/commitmedia/page.dart';
 import 'function/main/community/selecttalktype/page.dart';
 import 'function/main/page.dart';
+import 'function/pet/selectpetavatar/page.dart';
+import 'function/pet/selectsubtype/page.dart';
+import 'function/pet/selecttype/page.dart';
 import 'function/record/page.dart';
 import 'function/record/review/page.dart';
 import 'function/setting/page.dart';
@@ -74,6 +77,12 @@ Future<Widget> createApp() async {
         PageConstants.SelectTalkTypePage:
             pageConfiguration(SelectTalkTypePage()),
         PageConstants.WebviewPage: pageConfiguration(WebviewPage()),
+        PageConstants.SettingPage: pageConfiguration(SettingPage()),
+        PageConstants.SelectTypePage: pageConfiguration(SelectTypePage()),
+        PageConstants.CommitMediaPage: pageConfiguration(CommitMediaPage()),
+        PageConstants.SelectSubTypePage: pageConfiguration(SelectSubTypePage()),
+        PageConstants.SelectPetAvatarPage:
+            pageConfiguration(SelectPetAvatarPage()),
       },
     ),
   ]);
