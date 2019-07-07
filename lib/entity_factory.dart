@@ -1,4 +1,4 @@
-import 'package:chongmeng/network/outermost_entity.dart';
+import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:chongmeng/network/entity/cos_entity.dart';
 import 'package:chongmeng/function/auto/model/login_entity.dart';
 import 'package:chongmeng/function/pet/selecttype/model/pet_type_entity.dart';

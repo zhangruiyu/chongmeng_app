@@ -15,6 +15,7 @@ class HttpConstants {
   static final String LoginAndRegister = "app/auth/loginAndRegister";
   static final String PetType = "app/pet/type";
   static final String PetSubType = "app/pet/subType";
+  static final String AddPet = "app/pet/common/addPet";
   static final String CommitDynamic = "app/dynamic/common/commitDynamic";
   static final String DynamicList = "app/dynamic/dynamic/list";
   static final String ThirdLoginAndRegister =

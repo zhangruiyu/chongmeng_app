@@ -8,6 +8,7 @@ import 'state.dart';
 
 Widget buildView(
     SelectPetAvatarState state, Dispatch dispatch, ViewService viewService) {
+  var accentColor = Theme.of(viewService.context).accentColor;
   return Scaffold(
     appBar: Toolbar(
       title: Text("添加宠物"),
@@ -25,10 +26,12 @@ Widget buildView(
               height: 60.0,
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
-                  color: Theme.of(viewService.context).accentColor,
+                  color: accentColor,
                   borderRadius: BorderRadius.all((Radius.circular(70.0))),
-                  image: DecorationImage(
-                      image: FileImage(state.petAvatar), fit: BoxFit.fill)),
+                  image: state.petAvatar == null
+                      ? null
+                      : DecorationImage(
+                          image: FileImage(state.petAvatar), fit: BoxFit.fill)),
             ),
           ),
         ),
@@ -59,6 +62,22 @@ Widget buildView(
               style: TextStyle(
                 fontSize: 20.0,
               )),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 22.0, left: 22.0, top: 30.0),
+          child: SizedBox(
+            width: double.infinity,
+            height: 45.0,
+            child: RaisedButton(
+              color: accentColor,
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(22.0)),
+              child: Text("完成"),
+              onPressed: () {
+                dispatch(SelectPetAvatarActionCreator.onAddPet());
+              },
+            ),
+          ),
         )
       ],
     ),

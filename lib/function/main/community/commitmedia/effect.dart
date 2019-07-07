@@ -7,7 +7,7 @@ import 'package:chongmeng/function/main/community/commitmedia/state.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/network/entity/cos_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
-import 'package:chongmeng/network/outermost_entity.dart';
+import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';

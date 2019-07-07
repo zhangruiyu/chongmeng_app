@@ -102,7 +102,7 @@ Widget buildLoginView(
                       await RequestClient.request<PetTypeEntity>(
                           viewService.context, HttpConstants.PetType);
                   if (petTypeEntity.hasSuccess) {
-                    Navigator.popAndPushNamed(
+                    Navigator.pushNamed(
                         viewService.context, PageConstants.SelectTypePage,
                         arguments: {'petTypeEntity': petTypeEntity.data.data});
                   }

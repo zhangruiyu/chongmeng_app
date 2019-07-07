@@ -4,7 +4,7 @@ import 'package:chongmeng/function/pet/selecttype/model/pet_type_entity.dart';
 import 'package:chongmeng/global_store/action.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/network/net_work.dart';
-import 'package:chongmeng/network/outermost_entity.dart';
+import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/widgets.dart';
 import 'package:umengshare/umengshare.dart';
