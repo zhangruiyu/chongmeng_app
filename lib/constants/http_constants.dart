@@ -27,7 +27,10 @@ class HttpConstants {
   static String get AddTally => "app/tally/common/add/tally";
 }
 
-class CommitType {
+class CosType {
   static const PIC_TYPE = 0;
   static const VIDEO_TYPE = 1;
+  static const AVATAR_TYPE = 2;
+  static const Pet_AVATAR_TYPE = 3;
+  static const Tally_TYPE = 4;
 }

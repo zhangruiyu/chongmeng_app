@@ -8,6 +8,7 @@ Reducer<AddTallyState> buildReducer() {
     <Object, Reducer<AddTallyState>>{
       AddTallyAction.SetChipCheck: _onSetChipCheck,
       AddTallyAction.SetDate: _onSetDate,
+      AddTallyAction.SetTallyImage: _onSetTallyImage,
     },
   );
 }
@@ -25,5 +26,10 @@ AddTallyState _onSetChipCheck(AddTallyState state, Action action) {
 AddTallyState _onSetDate(AddTallyState state, Action action) {
   final AddTallyState newState = state.clone();
   newState.takeDate = action.payload;
+  return newState;
+}
+
+AddTallyState _onSetTallyImage(AddTallyState state, Action action) {
+  final AddTallyState newState = state.clone()..image = action.payload;
   return newState;
 }

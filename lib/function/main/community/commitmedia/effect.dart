@@ -18,7 +18,7 @@ import 'package:tencent_cos/tencent_cos.dart';
 
 import '../component.dart';
 import 'action.dart';
-import 'model/dynamic_selected_pic_task.dart';
+import 'model/upload_task.dart';
 
 Effect<CommitMediaState> buildEffect() {
   return combineEffects(<Object, Effect<CommitMediaState>>{
@@ -35,7 +35,7 @@ Future _onReselectPic(Action action, Context<CommitMediaState> ctx) async {
       await FilePicker.getMultiFilePath(type: FileType.ANY);
   if ((file?.length ?? 0) > 0) {
     ctx.dispatch(CommitMediaActionCreator.onChangeSelectPic(
-        file.values.map((item) => DynamicSelectedPicTask(item)).toList()));
+        file.values.map((item) => UploadTask(item)).toList()));
   }
 }
 
@@ -59,7 +59,7 @@ Future _onUploadCommitPic(Action action, Context<CommitMediaState> ctx) async {
   }
   Result<CosEntity> cosEntity = await RequestClient.request<CosEntity>(
       ctx.context, HttpConstants.PeriodEffectiveSign,
-      queryParameters: {'type': CommitType.PIC_TYPE});
+      queryParameters: {'type': CosType.PIC_TYPE});
   if (cosEntity.hasSuccess) {
     CosData data = cosEntity.data.data;
     var tmpSecretId = data.tmpSecretId;
@@ -70,8 +70,8 @@ Future _onUploadCommitPic(Action action, Context<CommitMediaState> ctx) async {
 
     Future<Null> _handleMessages(MethodCall call) async {
       String localUrl = call.arguments['localUrl'];
-      DynamicSelectedPicTask containsSelectedPic = ctx.state.picFilePath
-          .singleWhere((DynamicSelectedPicTask selectedPic) {
+      UploadTask containsSelectedPic =
+          ctx.state.picFilePath.singleWhere((UploadTask selectedPic) {
         return selectedPic.localUrl == localUrl;
       });
       if (containsSelectedPic == null) {
@@ -89,18 +89,11 @@ Future _onUploadCommitPic(Action action, Context<CommitMediaState> ctx) async {
     TencentCos.setMethodCallHandler(_handleMessages);
     NavigatorHelper.showLoadingDialog(ctx.context, true);
     Future.wait(ctx.state.picFilePath.map((itemDynamicSelectedPicTask) {
-      return itemDynamicSelectedPicTask.upload(
-          tmpSecretId, tmpSecretKey, sessionToken, expiredTime, cosPath);
+      return itemDynamicSelectedPicTask.uploadByData(cosEntity.data.data);
     })).then((List onValue) async {
-      ctx.state.picFilePath.forEach((item) {
-        //修改resourcePath
-        item.resourcePath =
-            "$cosPath${path.basename(File(item.localUrl).path)}";
-      });
       //图片json串
-      String picJson =
-          json.encode(ctx.state.picFilePath.map((DynamicSelectedPicTask dspt) {
-        return dspt.resourcePath;
+      String picJson = json.encode(ctx.state.picFilePath.map((UploadTask dspt) {
+        return dspt.resourcePath();
       }).toList());
       var result = await commitComment(
           ctx.context,
@@ -130,7 +123,7 @@ Future _onUploadCommitVideo(
   }
   Result<CosEntity> cosEntity = await RequestClient.request<CosEntity>(
       ctx.context, HttpConstants.PeriodEffectiveSign,
-      queryParameters: {'type': CommitType.VIDEO_TYPE});
+      queryParameters: {'type': CosType.VIDEO_TYPE});
   if (cosEntity.hasSuccess) {
     CosData data = cosEntity.data.data;
     var tmpSecretId = data.tmpSecretId;
@@ -139,6 +132,7 @@ Future _onUploadCommitVideo(
     var cosPath = data.cosPath;
     var expiredTime = data.expiredTime;
     NavigatorHelper.showLoadingDialog(ctx.context, true);
+/*
 
     //修改地址
     ctx.state.videoThumbnail.resourcePath =
@@ -146,6 +140,7 @@ Future _onUploadCommitVideo(
     //修改地址
     ctx.state.videoFilePath.resourcePath =
         "$cosPath${path.basename(File(ctx.state.videoFilePath.localUrl).path)}";
+*/
 
     var videoFutrue = ctx.state.videoFilePath
         .upload(tmpSecretId, tmpSecretKey, sessionToken, expiredTime, cosPath);
@@ -157,8 +152,8 @@ Future _onUploadCommitVideo(
           CommunityComponent.DynamicTypeVideo,
           ctx.state.contentTextEditingController.text,
           json.encode({
-            'videoPath': ctx.state.videoFilePath.resourcePath,
-            'videoThumbnailPath': ctx.state.videoThumbnail.resourcePath
+            'videoPath': ctx.state.videoFilePath.resourcePath(),
+            'videoThumbnailPath': ctx.state.videoThumbnail.resourcePath()
           }));
       NavigatorHelper.showLoadingDialog(ctx.context, false);
       if (result.hasSuccess) {

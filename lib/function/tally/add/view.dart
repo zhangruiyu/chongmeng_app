@@ -14,6 +14,7 @@ import 'state.dart';
 
 Widget buildView(
     AddTallyState state, Dispatch dispatch, ViewService viewService) {
+  var accentColor = Theme.of(viewService.context).accentColor;
   return Scaffold(
     appBar: Toolbar(
       title: Text("添加新笔记"),
@@ -64,20 +65,54 @@ Widget buildView(
           ),
           Padding(
             padding: const EdgeInsets.only(left: 18.0, right: 18.0, top: 20.0),
-            child: TextField(
-                controller: state.remarkTextEditingController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.only(
-                      left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
-                  labelText: "备注(可不添加)",
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: TextField(
+                      controller: state.remarkTextEditingController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.only(
+                            left: 20.0, right: 20.0, top: 20.0, bottom: 20.0),
+                        labelText: "备注(可不添加)",
+                      ),
+                      buildCounter: (BuildContext context,
+                              {int currentLength,
+                              int maxLength,
+                              bool isFocused}) =>
+                          null,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      )),
                 ),
-                buildCounter: (BuildContext context,
-                        {int currentLength, int maxLength, bool isFocused}) =>
-                    null,
-                style: TextStyle(
-                  fontSize: 20.0,
-                )),
+                Expanded(
+                  child: Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        dispatch(AddTallyActionCreator.onSelectTallyImage());
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: 80.0,
+                        height: 80.0,
+                        decoration: BoxDecoration(
+                          color: accentColor,
+                          borderRadius:
+                              BorderRadius.all((Radius.circular(4.0))),
+                        ),
+                        child: state.image == null
+                            ? Text(
+                                "点击此处\n选择图片",
+                                textAlign: TextAlign.center,
+                              )
+                            : Image.file(state.image, fit: BoxFit.fill),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 18.0, right: 18.0, top: 20.0),

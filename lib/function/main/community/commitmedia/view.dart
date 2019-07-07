@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:chongmeng/function/main/community/commitmedia/model/dynamic_selected_pic_task.dart';
+import 'package:chongmeng/function/main/community/commitmedia/model/upload_task.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -93,8 +93,8 @@ Widget buildPicsView(
   List<Widget> gridItems = new List<Widget>();
 
   double itemWidth = WindowUtils.getScreenWidth() / 5.toDouble();
-  List<DynamicSelectedPicTask> selectedPics = state.picFilePath;
-  selectedPics.forEach((DynamicSelectedPicTask selectedPic) {
+  List<UploadTask> selectedPics = state.picFilePath;
+  selectedPics.forEach((UploadTask selectedPic) {
     selectedPic.sequence = selectedPics.indexOf(selectedPic);
     Widget item = new Padding(
       padding: const EdgeInsets.all(8.0),
