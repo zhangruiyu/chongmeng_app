@@ -11,7 +11,7 @@ class SelectPetAvatarActionCreator {
     return const Action(SelectPetAvatarAction.SelectPetAvatar);
   }
 
-  static Action onAddPet() {
-    return const Action(SelectPetAvatarAction.AddPet);
+  static Action onAddPet(DateTime dateTime) {
+    return Action(SelectPetAvatarAction.AddPet, payload: dateTime);
   }
 }

@@ -2,6 +2,7 @@ import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -43,7 +44,6 @@ Widget buildView(
           padding: const EdgeInsets.only(left: 58.0, right: 58.0),
           child: TextField(
               autofocus: true,
-              keyboardType: TextInputType.phone,
               controller: state.nickTextEditingController,
               decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -72,9 +72,13 @@ Widget buildView(
               color: accentColor,
               shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(22.0)),
-              child: Text("完成"),
+              child: Text("设置宠物生日"),
               onPressed: () {
-                dispatch(SelectPetAvatarActionCreator.onAddPet());
+                DatePicker.showDatePicker(viewService.context,
+                    locale: DateTimePickerLocale.zh_cn,
+                    onConfirm: (DateTime dateTime, List<int> selectedIndex) {
+                  dispatch(SelectPetAvatarActionCreator.onAddPet(dateTime));
+                });
               },
             ),
           ),

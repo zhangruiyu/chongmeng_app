@@ -6,6 +6,8 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'action.dart';
 import 'state.dart';
+import 'package:intl/intl.dart';
+
 import 'package:image_picker/image_picker.dart';
 
 Effect<SelectPetAvatarState> buildEffect() {
@@ -22,12 +24,14 @@ Future _onSelectPetAvatar(
 }
 
 Future _onAddPet(Action action, Context<SelectPetAvatarState> ctx) async {
+  String dateTime = DateFormat('yyyy-MM-dd').format(action.payload);
   var result = await RequestClient.request<OutermostEntity>(
       ctx.context, HttpConstants.AddPet,
       queryParameters: {
         'id': ctx.state.id,
         'subId': ctx.state.subId,
         'avatar': ctx.state.petAvatar,
+        'birthday': dateTime,
       });
   if (result.hasSuccess) {
     NavigatorHelper.popToMain(ctx.context);

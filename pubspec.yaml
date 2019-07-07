@@ -62,6 +62,7 @@ dependencies:
   azlistview: ^0.1.2
   lpinyin: any
   image_picker: any
+  flutter_cupertino_date_picker: ^1.0.4
 
 dev_dependencies:
   flutter_test:

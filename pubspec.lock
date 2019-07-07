@@ -63,7 +63,7 @@ packages:
       name: cookie_jar
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.1"
   crypto:
     dependency: transitive
     description:
@@ -91,7 +91,7 @@ packages:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.7"
+    version: "2.1.10"
   dragablegridview_flutter:
     dependency: "direct main"
     description:
@@ -125,12 +125,19 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  flutter_cupertino_date_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_cupertino_date_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   flutter_easyrefresh:
     dependency: "direct main"
     description:
       path: "."
       ref: v2
-      resolved-ref: "278abc2ffcbf7101adda1bcf2e205091728b2f62"
+      resolved-ref: "65397d449d27956e8b7a13db89cd23cfedbb426d"
       url: "https://github.com/xuelongqy/flutter_easyrefresh.git"
     source: git
     version: "1.2.7"
@@ -213,7 +220,7 @@ packages:
       name: jmessage_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.16"
+    version: "0.0.17"
   jpush_flutter:
     dependency: "direct main"
     description:
