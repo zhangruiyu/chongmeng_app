@@ -71,10 +71,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/auto_page_bg.png
-    - assets/splash_page_bg.png
-    - assets/account_page_no_login.png
-    - assets/home_page_sign.png
-    - assets/home_page_doctor.png
-    - assets/home_page_qa.png
-    - assets/home_page_lingyang.png
+    - assets/
+
