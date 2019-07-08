@@ -47,20 +47,20 @@ Widget buildView(
             child: GridView.builder(
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4, childAspectRatio: 2.0),
+                  crossAxisCount: 3, childAspectRatio: 2.0),
               itemBuilder: (BuildContext context, int index) {
-                var id = index;
+                var id = state.tags[index].id;
                 return FilterChip(
                   selectedColor: Theme.of(viewService.context).accentColor,
                   backgroundColor: ColorUtils.randomColor(index.toString()),
-                  label: Text("洗澡"),
+                  label: Text(state.tags[index].name),
                   selected: state.selectId.contains(id),
                   onSelected: (bool value) {
                     dispatch(AddTallyActionCreator.onSetChipCheck(id));
                   },
                 );
               },
-              itemCount: 9,
+              itemCount: state.tags.length,
             ),
           ),
           Padding(

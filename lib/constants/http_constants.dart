@@ -25,6 +25,7 @@ class HttpConstants {
       "app/cos/common/periodEffectiveSign";
 
   static String get AddTally => "app/tally/common/add/tally";
+  static String get TallyTags => "app/tally/common/tags";
 }
 
 class CosType {

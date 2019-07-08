@@ -15,8 +15,7 @@ Widget buildView(TallyState state, Dispatch dispatch, ViewService viewService) {
           padding: const EdgeInsets.only(right: 22.0),
           child: InkResponse(
             onTap: () {
-              Navigator.pushNamed(
-                  viewService.context, PageConstants.AddTallyPage);
+              dispatch(TallyActionCreator.onSkipAddTallyPage());
             },
             child: Container(
               alignment: Alignment.center,
