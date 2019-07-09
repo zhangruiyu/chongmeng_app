@@ -1,7 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 
-//TODO replace with your own action
-enum TallyAction { action, SkipAddTallyPage }
+enum TallyAction { action, SkipAddTallyPage, Refresh, AddPageListData }
 
 class TallyActionCreator {
   static Action onAction() {
@@ -10,5 +9,13 @@ class TallyActionCreator {
 
   static Action onSkipAddTallyPage() {
     return const Action(TallyAction.SkipAddTallyPage);
+  }
+
+  static Action onRefresh(Map<String, dynamic> map) {
+    return Action(TallyAction.Refresh, payload: map);
+  }
+
+  static Action onAddPageListData(Map<String, dynamic> map) {
+    return Action(TallyAction.AddPageListData, payload: map);
   }
 }

@@ -6,12 +6,13 @@ import 'state.dart';
 Reducer<TallyState> buildReducer() {
   return asReducer(
     <Object, Reducer<TallyState>>{
-      TallyAction.action: _onAction,
+      TallyAction.AddPageListData: _onAddPageListData,
     },
   );
 }
 
-TallyState _onAction(TallyState state, Action action) {
+TallyState _onAddPageListData(TallyState state, Action action) {
   final TallyState newState = state.clone();
+  newState.data = action.payload['data'];
   return newState;
 }
