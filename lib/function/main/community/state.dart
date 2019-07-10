@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 import 'model/dynamic_list_entity.dart';

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:chongmeng/network/entity/cos_entity.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'package:tencent_cos/tencent_cos.dart';
 import 'package:path/path.dart' as path;
 

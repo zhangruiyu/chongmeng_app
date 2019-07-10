@@ -3,7 +3,7 @@ import 'package:chongmeng/constants/page_constants.dart';
 import 'package:chongmeng/function/pet/selectsubtype/model/pet_sub_type_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'action.dart';
 import 'state.dart';
 

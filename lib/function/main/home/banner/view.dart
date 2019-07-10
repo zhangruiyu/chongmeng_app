@@ -1,7 +1,7 @@
 import 'package:chongmeng/function/main/home/model/home_entity.dart';
 import 'package:chongmeng/widget/oval_swiper_pagination_builder.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'action.dart';
 import 'package:cached_network_image/cached_network_image.dart';

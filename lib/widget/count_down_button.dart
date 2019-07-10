@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/localizetion/default_localization.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 
 class CountDownButton extends StatefulWidget {
   final Future<void> Function() future;

@@ -2,7 +2,7 @@ import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'action.dart';
 import 'model/dynamic_list_entity.dart';

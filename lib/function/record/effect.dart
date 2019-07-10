@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:chongmeng/constants/page_constants.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'package:thumbnails/thumbnails.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:path_provider/path_provider.dart';

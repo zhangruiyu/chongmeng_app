@@ -3,7 +3,7 @@ import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/helper/permission_helper.dart';
 import 'package:chongmeng/helper/user_helper.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'action.dart';
 import 'state.dart';
 

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dragablegridview_flutter/dragablegridview_flutter.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 
 import 'model/upload_task.dart';
 

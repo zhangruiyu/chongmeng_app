@@ -2,7 +2,7 @@ import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/page_constants.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'action.dart';
 import 'entity/current_user_tally_entity.dart';
 import 'entity/tally_tag_entity.dart';

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 
 class VerticalLine extends StatelessWidget {
   final Color dividerColor;

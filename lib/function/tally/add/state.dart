@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:chongmeng/function/tally/entity/tally_tag_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 
 class AddTallyState implements Cloneable<AddTallyState> {
   TextEditingController remarkTextEditingController;

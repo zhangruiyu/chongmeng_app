@@ -10,7 +10,7 @@ import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/services.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:path/path.dart' as path;

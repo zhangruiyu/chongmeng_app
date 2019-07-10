@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:chongmeng/constants/colors.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class RecordButton extends StatefulWidget {

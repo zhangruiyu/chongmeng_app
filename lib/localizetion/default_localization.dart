@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 
 import 'data/abstract_locale_string.dart';
 import 'data/locale_string_en.dart';

@@ -4,7 +4,7 @@ import 'package:chongmeng/function/main/community/commitmedia/model/upload_task.
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/widgets.dart';
 
 import 'action.dart';

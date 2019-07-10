@@ -8,7 +8,7 @@ import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/utils/date_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'action.dart';
 import 'state.dart';
 import 'package:intl/intl.dart';

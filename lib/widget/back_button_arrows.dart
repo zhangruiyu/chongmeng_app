@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
+
 class BackButtonIcon extends StatelessWidget {
   /// Creates an icon that shows the appropriate "back" image for
   /// the current platform (as obtained from the [Theme]).
-  const BackButtonIcon({ Key key }) : super(key: key);
+  const BackButtonIcon({Key key}) : super(key: key);
 
   /// Returns the appropriate "back" icon for the given `platform`.
   static IconData _getIconData(TargetPlatform platform) {
@@ -10,12 +11,14 @@ class BackButtonIcon extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => new Icon(_getIconData(Theme.of(context).platform));
+  Widget build(BuildContext context) =>
+      new Icon(_getIconData(Theme.of(context).platform));
 }
+
 class BackButtonArrows extends StatelessWidget {
   /// Creates an [IconButton] with the appropriate "back" icon for the current
   /// target platform.
-  const BackButtonArrows({ Key key, this.color }) : super(key: key);
+  const BackButtonArrows({Key key, this.color}) : super(key: key);
 
   /// The color to use for the icon.
   ///
@@ -31,7 +34,6 @@ class BackButtonArrows extends StatelessWidget {
         tooltip: MaterialLocalizations.of(context).backButtonTooltip,
         onPressed: () {
           Navigator.maybePop(context);
-        }
-    );
+        });
   }
 }

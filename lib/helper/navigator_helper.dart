@@ -2,7 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:chongmeng/constants/page_constants.dart';
 import 'package:chongmeng/helper/permission_helper.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'package:file_picker/file_picker.dart';
 
 class NavigatorHelper {

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 

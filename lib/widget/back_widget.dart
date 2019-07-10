@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 
 class BackWidget extends StatefulWidget implements PreferredSizeWidget {
   @override

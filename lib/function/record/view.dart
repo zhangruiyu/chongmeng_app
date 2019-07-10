@@ -3,7 +3,7 @@ import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/record_button_widget.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 

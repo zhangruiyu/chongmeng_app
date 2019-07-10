@@ -1,7 +1,7 @@
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 
 import 'action.dart';

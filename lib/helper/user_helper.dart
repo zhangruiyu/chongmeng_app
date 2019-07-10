@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:chongmeng/function/auto/model/login_entity.dart';
 import 'package:cookie_jar/cookie_jar.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

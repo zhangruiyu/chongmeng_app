@@ -1,6 +1,6 @@
 import 'package:chongmeng/constants/colors.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'action.dart';
