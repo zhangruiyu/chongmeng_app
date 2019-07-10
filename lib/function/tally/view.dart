@@ -107,7 +107,7 @@ Widget buildView(TallyState state, Dispatch dispatch, ViewService viewService) {
                           children: <Widget>[
                             RichText(
                               text: TextSpan(
-                                text: "预计时间:",
+                                text: "预计时间: ",
                                 children: [
                                   TextSpan(
                                     text: itemData.takeDate,
@@ -123,7 +123,7 @@ Widget buildView(TallyState state, Dispatch dispatch, ViewService viewService) {
                             ),
                             RichText(
                               text: TextSpan(
-                                text: "创建时间:",
+                                text: "创建时间: ",
                                 children: [
                                   TextSpan(
                                     text: itemData.createTime,
