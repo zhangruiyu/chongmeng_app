@@ -63,6 +63,7 @@ dependencies:
   lpinyin: any
   image_picker: any
   flutter_cupertino_date_picker: ^1.0.4
+  table_calendar: ^1.2.3
 
 dev_dependencies:
   flutter_test:

@@ -22,6 +22,11 @@ Widget buildView(TabState state, Dispatch dispatch, ViewService viewService) {
                     Navigator.pushNamed(
                         viewService.context, PageConstants.TallyPage);
                   });
+                } else if (itemMenu.title == "签到") {
+                  UserHelper.loginCheck(viewService.context, () {
+                    Navigator.pushNamed(
+                        viewService.context, PageConstants.SignInPage);
+                  });
                 }
               },
               child: Column(

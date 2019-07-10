@@ -17,6 +17,7 @@ import 'function/pet/selecttype/page.dart';
 import 'function/record/page.dart';
 import 'function/record/review/page.dart';
 import 'function/setting/page.dart';
+import 'function/signin/page.dart';
 import 'function/splash/page.dart';
 import 'function/tally/add/page.dart';
 import 'function/tally/page.dart';
@@ -34,7 +35,7 @@ Future<Widget> createApp() async {
 
   final AbstractRoutes routes = PageRoutes(
     pages: <String, Page<Object, dynamic>>{
-      'splash': SplashPage(),
+      PageConstants.SplashPage: SplashPage(),
       PageConstants.MainPage: MainPage(),
       PageConstants.AutoPage: AutoPage(),
       PageConstants.BindTelPage: BindTelPage(),
@@ -49,9 +50,9 @@ Future<Widget> createApp() async {
       PageConstants.SelectPetAvatarPage: SelectPetAvatarPage(),
       PageConstants.TallyPage: TallyPage(),
       PageConstants.AddTallyPage: AddTallyPage(),
+      PageConstants.SignInPage: SignInPage(),
     },
     visitor: (String path, Page<Object, dynamic> page) {
-      /// XXX
       if (page.isTypeof<GlobalBaseState>()) {
         page.connectExtraStore<GlobalState>(GlobalStore.store,
             (Object pageState, GlobalState appState) {
@@ -79,18 +80,6 @@ Future<Widget> createApp() async {
         effectMiddleware: [],
         middleware: <Middleware<dynamic>>[logMiddleware<dynamic>()],
       );
-
-      // }
-      ///updateMiddleware
-      /// TODO
-      // ..updateMiddleware(
-      //   view: (List<ViewMiddleware<T>> viewMiddleware) {
-      //     viewMiddleware.add(safetyView<T>());
-      //   },
-      //   adapter: (List<AdapterMiddleware<T>> adapterMiddleware) {
-      //     adapterMiddleware.add(safetyAdapter<T>());
-      //   },
-      // )
     },
   );
 
@@ -117,7 +106,7 @@ Future<Widget> createApp() async {
         primaryColor: Colors.amberAccent[200],
         accentColor: Colors.amberAccent[200],
         dividerColor: colorE4E4E4),
-    home: routes.buildPage('splash', null),
+    home: routes.buildPage(PageConstants.SplashPage, null),
     onGenerateRoute: (RouteSettings settings) {
       return MaterialPageRoute<Object>(
           builder: (BuildContext context) {

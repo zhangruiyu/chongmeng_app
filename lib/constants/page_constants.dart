@@ -1,4 +1,5 @@
 class PageConstants {
+  static const String SplashPage = 'cm://ForgetPasswordPage'; //忘记密码
   static const String ForgetPasswordPage = 'cm://ForgetPasswordPage'; //忘记密码
   static const String SettingPage = 'cm://SettingPage'; //设置界面
   static const String NoticePage = 'cm://NoticePage'; //公告
@@ -21,4 +22,5 @@ class PageConstants {
   static const String SelectPetAvatarPage = "cm://SelectPetAvatarPage"; //
   static const String TallyPage = "cm://TallyPage"; //
   static const String AddTallyPage = "cm://AddTallyPage"; //
+  static const String SignInPage = "cm://SignInPage"; //
 }

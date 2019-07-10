@@ -13,13 +13,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/services.dart';
-
+import 'package:intl/date_symbol_data_local.dart';
 import 'app.dart';
 import 'helper/permission_helper.dart';
 
 Future main() async {
   var isAgree = await PermissionHelper.checkPhonePermission();
   if (isAgree) {
+//    await initializeDateFormatting("zh");
     runApp((await createApp()));
   }
   if (Platform.isAndroid) {
