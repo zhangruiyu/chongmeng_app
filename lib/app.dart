@@ -1,3 +1,4 @@
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,56 +33,6 @@ Future<Widget> createApp() async {
   configProject();
   //初始化用户数据
   GlobalStore.store.getState().localUser = await UserHelper.initLocalUser();
-
-  final AbstractRoutes routes = PageRoutes(
-    pages: <String, Page<Object, dynamic>>{
-      PageConstants.SplashPage: SplashPage(),
-      PageConstants.MainPage: MainPage(),
-      PageConstants.AutoPage: AutoPage(),
-      PageConstants.BindTelPage: BindTelPage(),
-      PageConstants.RecordPage: RecordPage(),
-      PageConstants.ReviewIVPage: ReviewIVPage(),
-      PageConstants.SelectTalkTypePage: SelectTalkTypePage(),
-      PageConstants.WebviewPage: WebviewPage(),
-      PageConstants.SettingPage: SettingPage(),
-      PageConstants.SelectTypePage: SelectTypePage(),
-      PageConstants.CommitMediaPage: CommitMediaPage(),
-      PageConstants.SelectSubTypePage: SelectSubTypePage(),
-      PageConstants.SelectPetAvatarPage: SelectPetAvatarPage(),
-      PageConstants.TallyPage: TallyPage(),
-      PageConstants.AddTallyPage: AddTallyPage(),
-      PageConstants.SignInPage: SignInPage(),
-    },
-    visitor: (String path, Page<Object, dynamic> page) {
-      if (page.isTypeof<GlobalBaseState>()) {
-        page.connectExtraStore<GlobalState>(GlobalStore.store,
-            (Object pageState, GlobalState appState) {
-          if (pageState is GlobalBaseState) {
-            dynamic newPageState = pageState;
-            if (newPageState.locale == appState.locale &&
-                newPageState.localUser == appState.localUser) {
-              return pageState;
-            } else {
-              return (newPageState.clone()
-                ..locale = appState.locale
-                ..localUser = appState.localUser);
-            }
-          } else {
-            return pageState;
-          }
-        });
-      }
-
-      page.enhancer.append(
-        viewMiddleware: <ViewMiddleware<dynamic>>[safetyView<dynamic>()],
-        adapterMiddleware: <AdapterMiddleware<dynamic>>[
-          safetyAdapter<dynamic>()
-        ],
-        effectMiddleware: [],
-        middleware: <Middleware<dynamic>>[logMiddleware<dynamic>()],
-      );
-    },
-  );
 
   return MaterialApp(
     debugShowCheckedModeBanner: false,
