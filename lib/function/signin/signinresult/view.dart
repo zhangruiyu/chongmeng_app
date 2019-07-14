@@ -32,7 +32,7 @@ Widget buildView(
                   RichText(
                     text: TextSpan(children: [
                       TextSpan(
-                          text: "+20",
+                          text: "+${state.pageData.addIntegral}",
                           style: TextStyle(
                               fontSize: 25.0,
                               color: accentColor,
@@ -52,7 +52,7 @@ Widget buildView(
                             style:
                                 TextStyle(fontSize: 15.0, color: Colors.black)),
                         TextSpan(
-                            text: "1",
+                            text: state.pageData.continuousSignCount.toString(),
                             style:
                                 TextStyle(fontSize: 15.0, color: accentColor)),
                         TextSpan(

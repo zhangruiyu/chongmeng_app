@@ -27,6 +27,10 @@ class HttpConstants {
   static String get AddTally => "app/tally/common/add/tally";
   static String get TallyTags => "app/tally/common/tags";
   static String get CurrentAllTally => "app/tally/common/currentAllTally";
+
+  //签到
+  static String get SignList => "app/sign/common/signList";
+  static String get Sign => "app/sign/common/sign";
 }
 
 class CosType {

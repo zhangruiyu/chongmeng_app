@@ -3,6 +3,8 @@ import 'package:chongmeng/network/entity/cos_entity.dart';
 import 'package:chongmeng/function/auto/model/login_entity.dart';
 import 'package:chongmeng/function/tally/entity/current_user_tally_entity.dart';
 import 'package:chongmeng/function/tally/entity/tally_tag_entity.dart';
+import 'package:chongmeng/function/signin/model/sign_in_result_entity.dart';
+import 'package:chongmeng/function/signin/model/sign_list_entity.dart';
 import 'package:chongmeng/function/pet/selecttype/model/pet_type_entity.dart';
 import 'package:chongmeng/function/pet/selectsubtype/model/pet_sub_type_entity.dart';
 import 'package:chongmeng/function/main/home/model/home_entity.dart';
@@ -23,6 +25,10 @@ class EntityFactory {
       return CurrentUserTallyEntity.fromJson(json) as T;
     } else if (T.toString() == "TallyTagEntity") {
       return TallyTagEntity.fromJson(json) as T;
+    } else if (T.toString() == "SignInResultEntity") {
+      return SignInResultEntity.fromJson(json) as T;
+    } else if (T.toString() == "SignListEntity") {
+      return SignListEntity.fromJson(json) as T;
     } else if (T.toString() == "PetTypeEntity") {
       return PetTypeEntity.fromJson(json) as T;
     } else if (T.toString() == "PetSubTypeEntity") {
