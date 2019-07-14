@@ -11,6 +11,7 @@ import 'state.dart';
 Widget buildView(TabState state, Dispatch dispatch, ViewService viewService) {
   return Container(
     color: colorWhite,
+    padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
     child: Row(
       children: state.tabData.map((itemMenu) {
         return Flexible(
@@ -36,7 +37,7 @@ Widget buildView(TabState state, Dispatch dispatch, ViewService viewService) {
                     height: 40.0,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 1.0),
+                    padding: const EdgeInsets.only(top: 8.0),
                     child: Text(itemMenu.title),
                   )
                 ],

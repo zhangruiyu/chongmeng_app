@@ -9,9 +9,9 @@ import 'state.dart';
 
 Widget buildView(
     BannerState state, Dispatch dispatch, ViewService viewService) {
+  var accentColor = Theme.of(viewService.context).accentColor;
   return Container(
-//      height: 174.0,
-      color: Colors.white,
+      height: 174.0,
       padding: EdgeInsets.only(
         top: 13.0,
       ),
@@ -45,14 +45,14 @@ Widget buildView(
         },
         itemCount: state.bannerData.length,
         viewportFraction: 0.8,
-        scale: 0.9,
-        outer: true,
+        scale: 0.75,
+        outer: false,
         autoplay: true,
         pagination: new SwiperPagination(
             builder: OvalSwiperPaginationBuilder(
                 color: Color(0xffE1DEDE),
-                activeColor: Color(0xffE1DEDE),
-                activeSize: 23.0)),
+                activeColor: accentColor,
+                activeSize: 20.0)),
 //        layout: SwiperLayout.STACK,
 //        control: new SwiperControl(),
       ));
