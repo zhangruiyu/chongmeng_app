@@ -31,6 +31,9 @@ class HttpConstants {
   //签到
   static String get SignList => "app/sign/common/signList";
   static String get Sign => "app/sign/common/sign";
+  //积分
+  static String get IntegralList => "app/integral/common/integralList";
+  static String get TotalIntegral => "app/integral/common/totalIntegral";
 }
 
 class CosType {

@@ -24,4 +24,5 @@ class PageConstants {
   static const String AddTallyPage = "cm://AddTallyPage"; //
   static const String SignInPage = "cm://SignInPage"; //
   static const String SignInResultDialog = "cm://SignInResultDialog"; //
+  static const String IntegralRecordPage = "cm://IntegralRecordPage"; //
 }

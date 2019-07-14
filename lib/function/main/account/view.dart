@@ -116,8 +116,13 @@ Widget buildLoginView(
         ),
       ),
       ListTile(
-        onTap: () {},
-        title: Text("积分记录"),
+        onTap: () {
+          UserHelper.loginCheck(viewService.context, () {
+            Navigator.pushNamed(
+                viewService.context, PageConstants.IntegralRecordPage);
+          });
+        },
+        title: Text("萌镚记录"),
         trailing: new Icon(
           Icons.keyboard_arrow_right,
           size: 30.0,

@@ -103,26 +103,32 @@ Widget buildView(
                                         color: Colors.black))
                               ]),
                         ),
-                        Row(
-                          children: <Widget>[
-                            RichText(
-                              text: TextSpan(children: [
-                                TextSpan(
-                                    text: "我的积分 ",
-                                    style: TextStyle(
-                                        fontSize: 15.0, color: Colors.black)),
-                                TextSpan(
-                                    text: (state.data?.totalIntegral ?? 0)
-                                        .toString(),
-                                    style: TextStyle(
-                                        fontSize: 15.0, color: accentColor)),
-                              ]),
-                            ),
-                            Icon(
-                              MdiIcons.chevronRight,
-                              color: Colors.grey,
-                            ),
-                          ],
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(viewService.context,
+                                PageConstants.IntegralRecordPage);
+                          },
+                          child: Row(
+                            children: <Widget>[
+                              RichText(
+                                text: TextSpan(children: [
+                                  TextSpan(
+                                      text: "我的萌镚 ",
+                                      style: TextStyle(
+                                          fontSize: 15.0, color: Colors.black)),
+                                  TextSpan(
+                                      text: (state.data?.totalIntegral ?? 0)
+                                          .toString(),
+                                      style: TextStyle(
+                                          fontSize: 15.0, color: accentColor)),
+                                ]),
+                              ),
+                              Icon(
+                                MdiIcons.chevronRight,
+                                color: Colors.grey,
+                              ),
+                            ],
+                          ),
                         )
                       ],
                     ),

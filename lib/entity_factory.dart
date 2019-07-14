@@ -9,6 +9,8 @@ import 'package:chongmeng/function/pet/selecttype/model/pet_type_entity.dart';
 import 'package:chongmeng/function/pet/selectsubtype/model/pet_sub_type_entity.dart';
 import 'package:chongmeng/function/main/home/model/home_entity.dart';
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
+import 'package:chongmeng/function/integral/model/total_integral_entity.dart';
+import 'package:chongmeng/function/integral/model/integral_record_entity.dart';
 import 'package:chongmeng/helper/model/auto_entity.dart';
 
 class EntityFactory {
@@ -37,6 +39,10 @@ class EntityFactory {
       return HomeEntity.fromJson(json) as T;
     } else if (T.toString() == "DynamicListEntity") {
       return DynamicListEntity.fromJson(json) as T;
+    } else if (T.toString() == "TotalIntegralEntity") {
+      return TotalIntegralEntity.fromJson(json) as T;
+    } else if (T.toString() == "IntegralRecordEntity") {
+      return IntegralRecordEntity.fromJson(json) as T;
     } else if (T.toString() == "AutoEntity") {
       return AutoEntity.fromJson(json) as T;
     } else {

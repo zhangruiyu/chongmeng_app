@@ -4,6 +4,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'constants/page_constants.dart';
 import 'function/auto/page.dart';
 import 'function/bindtel/page.dart';
+import 'function/integral/record/page.dart';
 import 'function/main/community/commitmedia/page.dart';
 import 'function/main/community/selecttalktype/page.dart';
 import 'function/main/page.dart';
@@ -40,6 +41,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.AddTallyPage: AddTallyPage(),
     PageConstants.SignInPage: SignInPage(),
     PageConstants.SignInResultDialog: SignInResultDialogPage(),
+    PageConstants.IntegralRecordPage: IntegralRecordPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {
