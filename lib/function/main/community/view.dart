@@ -74,12 +74,14 @@ Widget buildContent(DynamicListData data) {
       children: <Widget>[
         Row(
           children: <Widget>[
-            CircleAvatar(
-              child: Text("123"),
-            ),
+            ClipOval(
+                child: CachedNetworkImage(
+              width: 50.0,
+              imageUrl: data.avatar,
+            )),
             Column(
               children: <Widget>[
-                Text("nickName"),
+                Text(data.nickName),
                 Text("新车上路"),
               ],
             ),
@@ -100,7 +102,7 @@ Widget buildContent(DynamicListData data) {
                   return new Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: new CachedNetworkImage(
-                      fit: BoxFit.fitWidth,
+                      fit: BoxFit.cover,
                       width: itemWidth,
                       height: itemWidth,
                       imageUrl:

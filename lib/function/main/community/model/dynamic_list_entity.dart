@@ -31,26 +31,32 @@ class DynamicListData {
   List<String> images;
   String createTime;
   int userId;
+  String nickName;
   int id;
   DynamicListDataVideo video;
+  String avatar;
   String content;
 
   DynamicListData(
       {this.images,
       this.createTime,
       this.userId,
+      this.nickName,
       this.id,
       this.video,
+      this.avatar,
       this.content});
 
   DynamicListData.fromJson(Map<String, dynamic> json) {
     images = json['images']?.cast<String>();
     createTime = json['create_time'];
     userId = json['user_id'];
+    nickName = json['nick_name'];
     id = json['id'];
     video = json['video'] != null
         ? new DynamicListDataVideo.fromJson(json['video'])
         : null;
+    avatar = json['avatar'];
     content = json['content'];
   }
 
@@ -59,10 +65,12 @@ class DynamicListData {
     data['images'] = this.images;
     data['create_time'] = this.createTime;
     data['user_id'] = this.userId;
+    data['nick_name'] = this.nickName;
     data['id'] = this.id;
     if (this.video != null) {
       data['video'] = this.video.toJson();
     }
+    data['avatar'] = this.avatar;
     data['content'] = this.content;
     return data;
   }

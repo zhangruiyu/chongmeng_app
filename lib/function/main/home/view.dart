@@ -8,7 +8,8 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'state.dart';
 
 Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
-  var accentColor = Theme.of(viewService.context).accentColor;
+  var themeData = Theme.of(viewService.context);
+  var accentColor = themeData.accentColor;
   return Scaffold(
     backgroundColor: Colors.white,
     body: state.homeData == null
@@ -62,21 +63,112 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
               SliverList(
                 delegate:
                     SliverChildListDelegate(state.homeData.content.map((item) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: ListTile(
-                      onTap: () {
-                        NavigatorHelper.pushWebPage(
-                            viewService.context, item.title, item.url);
-                      },
-                      title: Text(item.title),
-                      leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: CachedNetworkImage(
-                          imageUrl: item.picUrl,
-                          fit: BoxFit.fill,
-                          width: 60.0,
-                          height: 60.0,
+                  return Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: themeData.dividerColor,
+                          style: BorderStyle.solid,
+                          width: 1,
+                        ),
+                      ),
+                      color: colorWhite,
+                    ),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: <Widget>[
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: CachedNetworkImage(
+                                imageUrl:
+                                    "https://img.alicdn.com/imgextra/i3/678669052/O1CN01hpqOYo2GjrhmAThZA_!!0-item_pic.jpg",
+                                fit: BoxFit.fill,
+                                width: 120.0,
+                                height: 120.0,
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                height: 120.0,
+                                padding: const EdgeInsets.only(
+                                    top: 5.0, bottom: 5.0, left: 10.0),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(item.title),
+                                    Column(
+                                      children: <Widget>[
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            Text(
+                                              "原价 ¥49",
+                                              style: themeData.textTheme.caption
+                                                  .merge(TextStyle(
+                                                      color: colorA4A4A4)),
+                                            ),
+                                            Text("已售 7.2万件",
+                                                style: themeData
+                                                    .textTheme.caption
+                                                    .merge(TextStyle(
+                                                        color: colorA4A4A4))),
+                                          ],
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 8.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: <Widget>[
+                                              RichText(
+                                                text: TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                        text: "券后价 ",
+                                                        style: TextStyle(
+                                                            fontSize: 12.0,
+                                                            color:
+                                                                accentColor)),
+                                                    TextSpan(
+                                                        text: "¥29",
+                                                        style: TextStyle(
+                                                            fontSize: 18.0,
+                                                            color:
+                                                                accentColor)),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 25.0,
+                                                child: OutlineButton(
+                                                  disabledBorderColor:
+                                                      accentColor,
+                                                  child: Text(
+                                                    '20元券',
+                                                    style: TextStyle(
+                                                        fontSize: 12.0,
+                                                        color: accentColor),
+                                                  ),
+                                                  onPressed: null,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
