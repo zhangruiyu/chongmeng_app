@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
@@ -65,10 +66,14 @@ Widget buildView(
 
 Widget buildContent(DynamicListData data) {
   int gridCount = 3;
-
-  double itemWidth = WindowUtils.getScreenWidth() / gridCount.toDouble();
+  var paddingLeft = 18.0;
+  var itemPaddingLeft = 8.0;
+  double itemWidth =
+      (WindowUtils.getScreenWidth() - paddingLeft * 2 - itemPaddingLeft * 2) /
+          gridCount.toDouble();
 
   return Container(
+    padding: EdgeInsets.only(top: 18.0, left: paddingLeft, right: paddingLeft),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -76,43 +81,59 @@ Widget buildContent(DynamicListData data) {
           children: <Widget>[
             ClipOval(
                 child: CachedNetworkImage(
-              width: 50.0,
+              width: 40.0,
               imageUrl: data.avatar,
             )),
-            Column(
-              children: <Widget>[
-                Text(data.nickName),
-                Text("新车上路"),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 18.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(data.nickName),
+                  Text(
+                    "新车上路",
+                    style: TextStyle(fontSize: 12.0, color: color7E7E7E),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
-        Text(data.content),
+        Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: Text(data.content),
+        ),
         data.images?.isEmpty == true
             ? Container(
                 child: Stack(
                   children: <Widget>[],
                 ),
               )
-            : GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: data.images.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return new Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: new CachedNetworkImage(
-                      fit: BoxFit.cover,
-                      width: itemWidth,
-                      height: itemWidth,
-                      imageUrl:
-                          "http://mengchong-1253631018.picbj.myqcloud.com/" +
-                              data.images[index],
+            : Row(
+                children: data.images
+                    .sublist(0, data.images.length > 3 ? 3 : data.images.length)
+                    .map((itemImage) {
+                  var isCenter = false;
+                  if (data.images.length >= 3 &&
+                      data.images.indexOf(itemImage) == 1) {
+                    isCenter = true;
+                  }
+                  return Container(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: isCenter ? itemPaddingLeft : 0.0,
+                          right: isCenter ? itemPaddingLeft : 0.0),
+                      child: new CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        width: itemWidth,
+                        height: itemWidth,
+                        imageUrl:
+                            "http://mengchong-1253631018.picbj.myqcloud.com/" +
+                                itemImage,
+                      ),
                     ),
                   );
-                },
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: gridCount),
+                }).toList(),
               ),
         VerticalLine()
       ],
