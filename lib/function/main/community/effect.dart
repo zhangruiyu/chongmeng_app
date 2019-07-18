@@ -13,6 +13,7 @@ Effect<CommunityState> buildEffect() {
     Lifecycle.initState: _initState,
     Lifecycle.dispose: _dispose,
     CommunityAction.Refresh: _onRefresh,
+    CommunityAction.LoadMore: _onLoadMore,
   });
 }
 
@@ -33,13 +34,37 @@ void _dispose(Action action, Context<CommunityState> ctx) {
 }
 
 Future _onRefresh(Action action, Context<CommunityState> ctx) async {
+  var filtrateType = action.payload['filtrateType'];
   var result = await RequestClient.request<DynamicListEntity>(
     ctx.context,
     HttpConstants.DynamicList,
     queryParameters: {
       'filtrateType': action.payload['filtrateType'],
-      "pageSize": 5,
+      "pageSize": 8,
       "pageIndex": 0
+    },
+  );
+  action.payload['completer']();
+
+  if (result.hasSuccess) {
+    ctx.dispatch(CommunityActionCreator.onResetPageData({
+      'data': result.data.data,
+      'filtrateType': action.payload['filtrateType'],
+      'pageIndex': 1,
+    }));
+  }
+}
+
+Future _onLoadMore(Action action, Context<CommunityState> ctx) async {
+  var filtrateType = action.payload['filtrateType'];
+  var itemPageData = ctx.state.pageData[filtrateType];
+  var result = await RequestClient.request<DynamicListEntity>(
+    ctx.context,
+    HttpConstants.DynamicList,
+    queryParameters: {
+      'filtrateType': action.payload['filtrateType'],
+      "pageSize": 8,
+      "pageIndex": itemPageData.pageIndex
     },
   );
   action.payload['completer']();
@@ -47,9 +72,8 @@ Future _onRefresh(Action action, Context<CommunityState> ctx) async {
   if (result.hasSuccess) {
     ctx.dispatch(CommunityActionCreator.onAddPageListData({
       'data': result.data.data,
-      'filtrateType': action.payload['filtrateType']
+      'filtrateType': action.payload['filtrateType'],
+      'pageIndex': (itemPageData.pageIndex + 1)
     }));
   }
 }
-
-void _onAction(Action action, Context<CommunityState> ctx) {}

@@ -29,7 +29,7 @@ Widget buildView(
       content = [Container()];
     }
   } else {
-    content = [Container()];
+    content = buildVideoView(state, dispatch, viewService);
   }
   return Container(
     padding: EdgeInsets.only(top: 18.0, left: paddingLeft, right: paddingLeft),
@@ -177,6 +177,40 @@ List<Widget> buildTwoPicView(
             })
             .values
             .toList(),
+      ),
+    )
+  ];
+}
+
+List<Widget> buildVideoView(
+    DynamicItemState state, Dispatch dispatch, ViewService viewService) {
+  var video = state.video;
+  return [
+    Padding(
+      padding: const EdgeInsets.only(top: 10.0, bottom: 5.0),
+      child: Text(state.content),
+    ),
+    Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: Stack(
+        alignment: AlignmentDirectional.center,
+        children: <Widget>[
+          new CachedNetworkImage(
+            fit: BoxFit.cover,
+            height: WindowUtils.getScreenWidth() * 0.45,
+            width: double.infinity,
+            imageUrl: "http://mengchong-1253631018.picbj.myqcloud.com/" +
+                video.videoThumbnailPath,
+          ),
+          IconButton(
+            onPressed: () {
+//              dispatch(CommitMediaActionCreator.onSkipReviewPage());
+            },
+            icon: Icon(Icons.play_circle_outline),
+            color: Theme.of(viewService.context).accentColor,
+            iconSize: 50.0,
+          )
+        ],
       ),
     )
   ];

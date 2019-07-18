@@ -23,8 +23,8 @@ class CommunityState implements Cloneable<CommunityState> {
   static CommunityState initState(Map<String, dynamic> args) {
     return CommunityState()
       ..pageData = LinkedHashMap.from({
-        0: ItemPageData(name: "最新", filtrateType: 0, data: []),
-        1: ItemPageData(name: "关注", filtrateType: 1, data: [])
+        0: ItemPageData(name: "最新", filtrateType: 0, data: [], pageIndex: 0),
+        1: ItemPageData(name: "关注", filtrateType: 1, data: [], pageIndex: 0)
       });
   }
 }
@@ -35,9 +35,10 @@ class CommunityPageState extends ComponentState<CommunityState>
 class ItemPageData {
   String name;
   int filtrateType;
+  int pageIndex;
   List<DynamicListData> data;
 
-  ItemPageData({this.name, this.filtrateType, this.data});
+  ItemPageData({this.name, this.filtrateType, this.data, this.pageIndex});
 }
 
 class DynamicListConnector extends ConnOp<CommunityState, DynamicListState> {
