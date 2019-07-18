@@ -13,7 +13,7 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
         : state.mainPageIndex == 1
             ? viewService.buildComponent('community')
             : state.mainPageIndex == 2
-                ? Container()
+                ? viewService.buildComponent('store')
                 : state.mainPageIndex == 3
                     ? viewService.buildComponent('account')
                     : viewService.buildComponent('account'),

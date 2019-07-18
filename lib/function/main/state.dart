@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:chongmeng/function/main/account/state.dart';
 import 'package:chongmeng/function/main/home/model/home_entity.dart';
 import 'package:chongmeng/function/main/home/state.dart';
+import 'package:chongmeng/function/main/store/state.dart';
 import 'package:chongmeng/global_store/state.dart';
 import 'package:chongmeng/helper/model/local_user.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -71,6 +72,17 @@ ConnOp<MainState, HomeState> homeConnector() {
     },
     set: (MainState state, HomeState subState) {
       state.homeData = subState.homeData;
+    },
+  );
+}
+
+ConnOp<MainState, StoreState> storeConnector() {
+  return ConnOp<MainState, StoreState>(
+    get: (MainState state) {
+      return StoreState()..storeData = state.homeData;
+    },
+    set: (MainState state, StoreState subState) {
+//      state.homeData = subState.homeData;
     },
   );
 }

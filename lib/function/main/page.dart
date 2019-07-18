@@ -1,3 +1,4 @@
+import 'package:chongmeng/function/main/store/component.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'account/component.dart';
@@ -20,6 +21,7 @@ class MainPage extends Page<MainState, Map<String, dynamic>> {
               slots: <String, Dependent<MainState>>{
                 'home': homeConnector() + HomeComponent(),
                 'community': communityConnector() + CommunityComponent(),
+                'store': storeConnector() + StoreComponent(),
                 'account': accountConnector() + AccountComponent()
               }),
           middleware: <Middleware<MainState>>[],
