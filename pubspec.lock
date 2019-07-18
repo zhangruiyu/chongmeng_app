@@ -138,13 +138,13 @@ packages:
       name: flutter_cupertino_date_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.7"
+    version: "1.0.8"
   flutter_easyrefresh:
     dependency: "direct main"
     description:
       path: "."
       ref: v2
-      resolved-ref: "95904c80d07b90a52b210144ddce14d57f723d6f"
+      resolved-ref: fc377efb97c8a6cc3057fa5ea029d6f5354e3e0c
       url: "https://github.com/xuelongqy/flutter_easyrefresh.git"
     source: git
     version: "1.2.7"

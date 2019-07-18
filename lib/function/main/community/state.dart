@@ -4,12 +4,14 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
+import 'adapter/state.dart';
 import 'model/dynamic_list_entity.dart';
 
 class CommunityState implements Cloneable<CommunityState> {
   TabController tabController;
   LinkedHashMap<int, ItemPageData> pageData;
   EasyRefreshController refreshController;
+
   @override
   CommunityState clone() {
     return CommunityState()
@@ -36,4 +38,16 @@ class ItemPageData {
   List<DynamicListData> data;
 
   ItemPageData({this.name, this.filtrateType, this.data});
+}
+
+class DynamicListConnector extends ConnOp<CommunityState, DynamicListState> {
+  @override
+  void set(CommunityState state, DynamicListState subState) {
+    super.set(state, subState);
+  }
+
+  @override
+  DynamicListState get(CommunityState state) {
+    return DynamicListState()..data = state.pageData;
+  }
 }

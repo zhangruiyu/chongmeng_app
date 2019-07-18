@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:chongmeng/function/main/community/commitmedia/model/upload_task.dart';
+import 'package:chongmeng/function/main/community/commit_media/model/upload_task.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';

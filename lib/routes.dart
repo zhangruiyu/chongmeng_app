@@ -5,7 +5,7 @@ import 'constants/page_constants.dart';
 import 'function/auto/page.dart';
 import 'function/bindtel/page.dart';
 import 'function/integral/record/page.dart';
-import 'function/main/community/commitmedia/page.dart';
+import 'function/main/community/commit_media/page.dart';
 import 'function/main/community/selecttalktype/page.dart';
 import 'function/main/page.dart';
 import 'function/pet/selectpetavatar/page.dart';

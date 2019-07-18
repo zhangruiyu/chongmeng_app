@@ -14,6 +14,7 @@ import 'state.dart';
 
 Widget buildView(
     CommunityState state, Dispatch dispatch, ViewService viewService) {
+  var buildAdapter = viewService.buildAdapter();
   return Container(
     child: Column(
       children: <Widget>[
@@ -49,9 +50,9 @@ Widget buildView(
                   }),
                   slivers: <Widget>[
                     SliverList(
-                      delegate: SliverChildBuilderDelegate((context, index) {
-                        return buildContent(page.data[index]);
-                      }, childCount: page.data.length),
+                      delegate: SliverChildBuilderDelegate(
+                          buildAdapter.itemBuilder,
+                          childCount: buildAdapter.itemCount),
                     )
                   ],
                 ),
@@ -59,83 +60,6 @@ Widget buildView(
             }).toList(),
           ),
         )
-      ],
-    ),
-  );
-}
-
-Widget buildContent(DynamicListData data) {
-  int gridCount = 3;
-  var paddingLeft = 18.0;
-  var itemPaddingLeft = 8.0;
-  double itemWidth =
-      (WindowUtils.getScreenWidth() - paddingLeft * 2 - itemPaddingLeft * 2) /
-          gridCount.toDouble();
-
-  return Container(
-    padding: EdgeInsets.only(top: 18.0, left: paddingLeft, right: paddingLeft),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            ClipOval(
-                child: CachedNetworkImage(
-              width: 40.0,
-              imageUrl: data.avatar,
-            )),
-            Padding(
-              padding: const EdgeInsets.only(left: 18.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(data.nickName),
-                  Text(
-                    "新车上路",
-                    style: TextStyle(fontSize: 12.0, color: color7E7E7E),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: Text(data.content),
-        ),
-        data.images?.isEmpty == true
-            ? Container(
-                child: Stack(
-                  children: <Widget>[],
-                ),
-              )
-            : Row(
-                children: data.images
-                    .sublist(0, data.images.length > 3 ? 3 : data.images.length)
-                    .map((itemImage) {
-                  var isCenter = false;
-                  if (data.images.length >= 3 &&
-                      data.images.indexOf(itemImage) == 1) {
-                    isCenter = true;
-                  }
-                  return Container(
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          left: isCenter ? itemPaddingLeft : 0.0,
-                          right: isCenter ? itemPaddingLeft : 0.0),
-                      child: new CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        width: itemWidth,
-                        height: itemWidth,
-                        imageUrl:
-                            "http://mengchong-1253631018.picbj.myqcloud.com/" +
-                                itemImage,
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-        VerticalLine()
       ],
     ),
   );
