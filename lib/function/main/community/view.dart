@@ -16,6 +16,7 @@ Widget buildView(
     CommunityState state, Dispatch dispatch, ViewService viewService) {
   var buildAdapter = viewService.buildAdapter();
   return Container(
+    color: colorWhite,
     child: Column(
       children: <Widget>[
         Container(
