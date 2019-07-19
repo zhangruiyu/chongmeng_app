@@ -3,7 +3,6 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
-import 'action.dart';
 import 'state.dart';
 
 Widget buildView(StoreState state, Dispatch dispatch, ViewService viewService) {
@@ -18,8 +17,8 @@ Widget buildView(StoreState state, Dispatch dispatch, ViewService viewService) {
         SliverGrid(
           delegate: SliverChildBuilderDelegate(buildAdapter.itemBuilder,
               childCount: buildAdapter.itemCount),
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, mainAxisSpacing: 4.0, crossAxisSpacing: 4.0),
         )
       ],
     ),

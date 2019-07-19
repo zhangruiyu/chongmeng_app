@@ -60,7 +60,6 @@ class CanSetWidthDialog extends StatelessWidget {
   final Widget child;
   final double minWidth;
 
-  // TODO(johnsonmh): Update default dialog border radius to 4.0 to match material spec.
   static const RoundedRectangleBorder _defaultDialogShape =
       RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(2.0)));

@@ -8,6 +8,7 @@ import 'function/integral/record/page.dart';
 import 'function/main/community/commit_media/page.dart';
 import 'function/main/community/selecttalktype/page.dart';
 import 'function/main/page.dart';
+import 'function/main/store/integral_commodity_detail/page.dart';
 import 'function/pet/selectpetavatar/page.dart';
 import 'function/pet/selectsubtype/page.dart';
 import 'function/pet/selecttype/page.dart';
@@ -42,6 +43,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.SignInPage: SignInPage(),
     PageConstants.SignInResultDialog: SignInResultDialogPage(),
     PageConstants.IntegralRecordPage: IntegralRecordPage(),
+    PageConstants.IntegralCommodityDetailPage: IntegralCommodityDetailPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {
