@@ -15,6 +15,8 @@ import 'function/pet/selecttype/page.dart';
 import 'function/record/page.dart';
 import 'function/record/review/page.dart';
 import 'function/setting/page.dart';
+import 'function/shipping_address/page.dart';
+import 'function/shipping_address/shipping_address_add/page.dart';
 import 'function/signin/page.dart';
 import 'function/splash/page.dart';
 import 'function/tally/add/page.dart';
@@ -44,6 +46,8 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.SignInResultDialog: SignInResultDialogPage(),
     PageConstants.IntegralRecordPage: IntegralRecordPage(),
     PageConstants.IntegralCommodityDetailPage: IntegralCommodityDetailPage(),
+    PageConstants.ShippingAddressPage: ShippingAddressPage(),
+    PageConstants.ShippingAddressAddPage: ShippingAddressAddPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

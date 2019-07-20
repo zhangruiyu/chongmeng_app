@@ -34,6 +34,8 @@ class HttpConstants {
   //积分
   static String get IntegralList => "app/integral/common/integralList";
   static String get TotalIntegral => "app/integral/common/totalIntegral";
+
+  static String get AddAddress => null;
 }
 
 class CosType {

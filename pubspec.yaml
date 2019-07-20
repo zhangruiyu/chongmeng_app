@@ -52,6 +52,7 @@ dependencies:
   camera: any
   percent_indicator: "^2.1.0"
   flutter_ijkplayer: "^0.3.0"
+  city_pickers: ^0.1.22
   dragablegridview_flutter: any
 #  extended_text_field: any
   tencent_cos:

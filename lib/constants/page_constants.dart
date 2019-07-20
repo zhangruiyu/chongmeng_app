@@ -17,14 +17,17 @@ class PageConstants {
   static const String CommitMediaPage = "cm://CommitMediaPage"; //发布文字评论
   static const String CommitTextPage = "cm://CommitTextPage"; //发布文字评论
   static const String WebviewPage = "cm://WebviewPage"; //WebviewPage
-  static const String SelectTypePage = "cm://SelectTypePage"; //
-  static const String SelectSubTypePage = "cm://SelectSubTypePage"; //
-  static const String SelectPetAvatarPage = "cm://SelectPetAvatarPage"; //
+  static const String SelectTypePage = "cm://SelectTypePage"; //选择宠物大类型
+  static const String SelectSubTypePage = "cm://SelectSubTypePage"; //选择宠物子类型
+  static const String SelectPetAvatarPage = "cm://SelectPetAvatarPage"; //选择宠物头像
   static const String TallyPage = "cm://TallyPage"; //
   static const String AddTallyPage = "cm://AddTallyPage"; //
-  static const String SignInPage = "cm://SignInPage"; //
-  static const String SignInResultDialog = "cm://SignInResultDialog"; //
-  static const String IntegralRecordPage = "cm://IntegralRecordPage"; //
+  static const String SignInPage = "cm://SignInPage"; //签到
+  static const String SignInResultDialog = "cm://SignInResultDialog"; //签到结果弹框
+  static const String IntegralRecordPage = "cm://IntegralRecordPage"; //积分记录
   static const String IntegralCommodityDetailPage =
-      "cm://IntegralCommodityDetailPage"; //
+      "cm://IntegralCommodityDetailPage"; //积分商品详情
+  static const String ShippingAddressPage = "cm://ShippingAddressPage"; //收货地址
+  static const String ShippingAddressAddPage =
+      "cm://ShippingAddressAddPage"; //添加收货地址
 }
