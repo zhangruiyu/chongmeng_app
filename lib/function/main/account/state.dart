@@ -15,8 +15,8 @@ class AccountState implements GlobalBaseState<AccountState> {
 
   @override
   Locale locale;
-}
 
-AccountState initState(Map<String, dynamic> args) {
-  return AccountState();
+  static AccountState initState(Map<String, dynamic> args) {
+    return AccountState();
+  }
 }

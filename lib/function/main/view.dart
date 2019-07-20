@@ -1,22 +1,27 @@
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
+import 'package:chongmeng/widget/keep_alive_widget.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
+import 'package:flutter/widgets.dart';
 
 import 'action.dart';
 import 'state.dart';
 
 Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
+  if (state.views == null) {
+    state.views = [
+      viewService.buildComponent('home'),
+      viewService.buildComponent('community'),
+      viewService.buildComponent('store'),
+      viewService.buildComponent('account')
+    ];
+  }
   return Scaffold(
-    body: state.mainPageIndex == 0
-        ? viewService.buildComponent('home')
-        : state.mainPageIndex == 1
-            ? viewService.buildComponent('community')
-            : state.mainPageIndex == 2
-                ? viewService.buildComponent('store')
-                : state.mainPageIndex == 3
-                    ? viewService.buildComponent('account')
-                    : viewService.buildComponent('account'),
+    body: IndexedStack(
+      children: state.views,
+      index: state.mainPageIndex,
+    ),
     floatingActionButton: FloatingActionButton(
       onPressed: () {
         dispatch(MainActionCreator.onSkipSelectTalkTypePage());

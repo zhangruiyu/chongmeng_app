@@ -12,10 +12,10 @@ class StoreState implements Cloneable<StoreState> {
   StoreState clone() {
     return StoreState();
   }
-}
 
-StoreState initState(Map<String, dynamic> args) {
-  return StoreState();
+  static StoreState initState(Map<String, dynamic> args) {
+    return StoreState();
+  }
 }
 
 class IntegralStoreConnector extends ConnOp<StoreState, IntegralStoreState> {

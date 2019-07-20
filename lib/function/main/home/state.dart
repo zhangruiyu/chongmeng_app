@@ -11,10 +11,10 @@ class HomeState implements Cloneable<HomeState> {
   HomeState clone() {
     return HomeState();
   }
-}
 
-HomeState initState(Map<String, dynamic> args) {
-  return HomeState();
+  static HomeState initState(Map<String, dynamic> args) {
+    return HomeState();
+  }
 }
 
 ConnOp<HomeState, BannerState> bannerConnector() {
