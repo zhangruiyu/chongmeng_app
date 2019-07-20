@@ -6,12 +6,12 @@ import 'state.dart';
 Reducer<ShippingAddressState> buildReducer() {
   return asReducer(
     <Object, Reducer<ShippingAddressState>>{
-      ShippingAddressAction.action: _onAction,
+      ShippingAddressAction.ResetData: _onResetData,
     },
   );
 }
 
-ShippingAddressState _onAction(ShippingAddressState state, Action action) {
-  final ShippingAddressState newState = state.clone();
+ShippingAddressState _onResetData(ShippingAddressState state, Action action) {
+  final ShippingAddressState newState = state.clone()..data = action.payload;
   return newState;
 }

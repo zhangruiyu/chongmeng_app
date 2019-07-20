@@ -1,5 +1,7 @@
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/function/shipping_address/model/shipping_address_entity.dart';
+import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -23,22 +25,16 @@ Widget buildView(
         children: <Widget>[
           Expanded(
             child: EasyRefresh.custom(
+              onRefresh: CompleterUtils.produceCompleterAction(
+                dispatch,
+                ShippingAddressActionCreator.onRefresh,
+              ),
               slivers: <Widget>[
                 SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      buildItem(of),
-                      buildItem(of),
-                      buildItem(of),
-                      buildItem(of),
-                      buildItem(of),
-                      buildItem(of),
-                      buildItem(of),
-                      buildItem(of),
-                      buildItem(of),
-                      buildItem(of),
-                    ],
-                  ),
+                  delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                    return buildItem(of, state.data[index]);
+                  }, childCount: state.data?.length ?? 0),
                 )
               ],
             ),
@@ -66,7 +62,7 @@ Widget buildView(
   );
 }
 
-Widget buildItem(ThemeData of) {
+Widget buildItem(ThemeData of, ShippingAddressData data) {
   return Column(
     children: <Widget>[
       Padding(
@@ -77,12 +73,19 @@ Widget buildItem(ThemeData of) {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text("张瑞宇"),
-                Text("15201238101"),
+                Text(data.consignee),
+                Text(data.tel),
               ],
             ),
+            Padding(
+              padding: const EdgeInsets.only(top: 5.0),
+              child: Text(
+                data.areaText,
+                style: of.textTheme.caption,
+              ),
+            ),
             Text(
-              "北京 东城区 八里庄",
+              data.address,
               style: of.textTheme.caption,
             ),
             Padding(

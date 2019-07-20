@@ -25,17 +25,24 @@ class HttpConstants {
       "app/cos/common/periodEffectiveSign";
 
   static String get AddTally => "app/tally/common/add/tally";
+
   static String get TallyTags => "app/tally/common/tags";
+
   static String get CurrentAllTally => "app/tally/common/currentAllTally";
 
   //签到
   static String get SignList => "app/sign/common/signList";
+
   static String get Sign => "app/sign/common/sign";
+
   //积分
   static String get IntegralList => "app/integral/common/integralList";
+
   static String get TotalIntegral => "app/integral/common/totalIntegral";
 
-  static String get AddAddress => null;
+  //商城
+  static String get AddAddress => "app/store/common/addAddress";
+  static String get AddressList => "app/store/common/addressList";
 }
 
 class CosType {

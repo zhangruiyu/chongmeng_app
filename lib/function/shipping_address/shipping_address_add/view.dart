@@ -42,6 +42,7 @@ Widget buildView(
               ),
               Expanded(
                 child: TextFormField(
+                  autofocus: true,
                   controller: state.consigneeTextEditingController,
                   decoration: InputDecoration(
                       border: InputBorder.none, hintText: "收货人姓名"),
@@ -62,6 +63,7 @@ Widget buildView(
               Expanded(
                 child: TextFormField(
                   maxLength: 11,
+                  keyboardType: TextInputType.phone,
                   controller: state.telTextEditingController,
                   decoration: InputDecoration(
                       border: InputBorder.none, hintText: "11位手机号"),
