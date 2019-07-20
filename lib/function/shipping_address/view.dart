@@ -8,6 +8,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -33,7 +34,8 @@ Widget buildView(
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                    return buildItem(of, state.data[index]);
+                    return buildItem(
+                        of, state.data[index], viewService.context);
                   }, childCount: state.data?.length ?? 0),
                 )
               ],
@@ -62,7 +64,7 @@ Widget buildView(
   );
 }
 
-Widget buildItem(ThemeData of, ShippingAddressData data) {
+Widget buildItem(ThemeData of, ShippingAddressData data, BuildContext context) {
   return Column(
     children: <Widget>[
       Padding(
@@ -100,14 +102,18 @@ Widget buildItem(ThemeData of, ShippingAddressData data) {
                     MdiIcons.playlistEdit,
                   ),
                   label: Text("编辑"),
-                  onPressed: () {},
+                  onPressed: () {
+                    toast(context, "暂未开放");
+                  },
                 ),
                 FlatButton.icon(
                   icon: Icon(
                     MdiIcons.deleteOutline,
                   ),
                   label: Text("删除"),
-                  onPressed: () {},
+                  onPressed: () {
+                    toast(context, "暂未开放");
+                  },
                 ),
               ],
             ),
