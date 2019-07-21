@@ -142,7 +142,9 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
                 style: new TextStyle(fontSize: 18.0),
               ),
             ),
-            onPressed: () async {},
+            onPressed: () async {
+              dispatch(IntegralCommodityDetailActionCreator.onBuy());
+            },
             color: Theme.of(viewService.context).accentColor,
           ),
         ),

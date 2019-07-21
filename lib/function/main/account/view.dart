@@ -3,6 +3,7 @@ import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/page_constants.dart';
 import 'package:chongmeng/function/pet/selecttype/model/pet_type_entity.dart';
+import 'package:chongmeng/function/shipping_address/state.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/model/local_user.dart';
 import 'package:chongmeng/helper/user_helper.dart';
@@ -91,8 +92,14 @@ Widget buildLoginView(
               ),
             ),
             Expanded(
-              child: Column(
-                children: <Widget>[Text("1"), Text("协议")],
+              child: InkResponse(
+                onTap: () async {
+                  Navigator.pushNamed(
+                      viewService.context, PageConstants.IntegralRecordPage);
+                },
+                child: Column(
+                  children: <Widget>[Text("100"), Text("萌镚")],
+                ),
               ),
             ),
             Expanded(
@@ -119,22 +126,8 @@ Widget buildLoginView(
         onTap: () {
           UserHelper.loginCheck(viewService.context, () {
             Navigator.pushNamed(
-                viewService.context, PageConstants.IntegralRecordPage);
-          });
-        },
-        title: Text("萌镚记录"),
-        trailing: new Icon(
-          Icons.keyboard_arrow_right,
-          size: 30.0,
-          color: const Color(0x40808080),
-        ),
-      ),
-      VerticalLine(),
-      ListTile(
-        onTap: () {
-          UserHelper.loginCheck(viewService.context, () {
-            Navigator.pushNamed(
-                viewService.context, PageConstants.ShippingAddressPage);
+                viewService.context, PageConstants.ShippingAddressPage,
+                arguments: {"type": ShippingAddressState.SEE});
           });
         },
         title: Text("收货地址"),

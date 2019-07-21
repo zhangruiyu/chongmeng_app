@@ -35,7 +35,7 @@ Widget buildView(
                   delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
                     return buildItem(
-                        of, state.data[index], viewService.context);
+                        of, state.data[index], viewService.context, state);
                   }, childCount: state.data?.length ?? 0),
                 )
               ],
@@ -64,65 +64,73 @@ Widget buildView(
   );
 }
 
-Widget buildItem(ThemeData of, ShippingAddressData data, BuildContext context) {
-  return Column(
-    children: <Widget>[
-      Padding(
-        padding: const EdgeInsets.only(left: 18.0, right: 18.0, top: 14.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(data.consignee),
-                Text(data.tel),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 5.0),
-              child: Text(
-                data.areaText,
+Widget buildItem(ThemeData of, ShippingAddressData data, BuildContext context,
+    ShippingAddressState state) {
+  return InkWell(
+    onTap: state.type == ShippingAddressState.SEE
+        ? null
+        : () {
+            Navigator.pop(context, data);
+          },
+    child: Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(left: 18.0, right: 18.0, top: 14.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(data.consignee),
+                  Text(data.tel),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 5.0),
+                child: Text(
+                  data.areaText,
+                  style: of.textTheme.caption,
+                ),
+              ),
+              Text(
+                data.address,
                 style: of.textTheme.caption,
               ),
-            ),
-            Text(
-              data.address,
-              style: of.textTheme.caption,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 14.0),
-              child: VerticalLine(),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                FlatButton.icon(
-                  icon: Icon(
-                    MdiIcons.playlistEdit,
+              Padding(
+                padding: const EdgeInsets.only(top: 14.0),
+                child: VerticalLine(),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  FlatButton.icon(
+                    icon: Icon(
+                      MdiIcons.playlistEdit,
+                    ),
+                    label: Text("编辑"),
+                    onPressed: () {
+                      toast(context, "暂未开放");
+                    },
                   ),
-                  label: Text("编辑"),
-                  onPressed: () {
-                    toast(context, "暂未开放");
-                  },
-                ),
-                FlatButton.icon(
-                  icon: Icon(
-                    MdiIcons.deleteOutline,
+                  FlatButton.icon(
+                    icon: Icon(
+                      MdiIcons.deleteOutline,
+                    ),
+                    label: Text("删除"),
+                    onPressed: () {
+                      toast(context, "暂未开放");
+                    },
                   ),
-                  label: Text("删除"),
-                  onPressed: () {
-                    toast(context, "暂未开放");
-                  },
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
-      VerticalLine(
-        height: 5.0,
-      )
-    ],
+        VerticalLine(
+          height: 5.0,
+        )
+      ],
+    ),
   );
 }
