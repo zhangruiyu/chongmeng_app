@@ -51,7 +51,7 @@ MainState initState(Map<String, dynamic> args) {
 ConnOp<MainState, AccountState> accountConnector() {
   return ConnOp<MainState, AccountState>(
     get: (MainState state) {
-      return state.accountState;
+      return state.accountState.clone();
     },
     set: (MainState state, AccountState subState) {
       state.accountState = subState;
@@ -62,7 +62,7 @@ ConnOp<MainState, AccountState> accountConnector() {
 ConnOp<MainState, CommunityState> communityConnector() {
   return ConnOp<MainState, CommunityState>(
     get: (MainState state) {
-      return state.communityState;
+      return state.communityState.clone();
     },
     set: (MainState state, CommunityState subState) {
       state.communityState = subState;
@@ -73,7 +73,7 @@ ConnOp<MainState, CommunityState> communityConnector() {
 ConnOp<MainState, HomeState> homeConnector() {
   return ConnOp<MainState, HomeState>(
     get: (MainState state) {
-      return state.homeState;
+      return state.homeState.clone();
     },
     set: (MainState state, HomeState subState) {
       state.homeState = subState;
@@ -84,7 +84,7 @@ ConnOp<MainState, HomeState> homeConnector() {
 ConnOp<MainState, StoreState> storeConnector() {
   return ConnOp<MainState, StoreState>(
     get: (MainState state) {
-      return state.storeState;
+      return state.storeState.clone();
     },
     set: (MainState state, StoreState subState) {
       state.storeState = subState;
