@@ -1,13 +1,17 @@
+import 'package:chongmeng/function/main/store/model/integral_commodity_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 class IntegralItemState implements Cloneable<IntegralItemState> {
-  var index = 0;
+  var index;
+  IntegralCommodityData itemData;
 
-  IntegralItemState({this.index});
+  IntegralItemState({this.index, this.itemData});
 
   @override
   IntegralItemState clone() {
-    return IntegralItemState()..index = index;
+    return IntegralItemState()
+      ..index = index
+      ..itemData = itemData;
   }
 }
 

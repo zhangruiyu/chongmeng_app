@@ -42,7 +42,11 @@ class HttpConstants {
 
   //商城
   static String get AddAddress => "app/store/common/addAddress";
+
   static String get AddressList => "app/store/common/addressList";
+
+  static String get IntegralCommodityList =>
+      "app/store/integralCommodityList"; //积分商城列表
 }
 
 class CosType {

@@ -6,7 +6,7 @@ import 'state.dart';
 Reducer<IntegralItemState> buildReducer() {
   return asReducer(
     <Object, Reducer<IntegralItemState>>{
-      IntegralItemAction.action: _onAction,
+//      IntegralItemAction.action: _onAction,
     },
   );
 }

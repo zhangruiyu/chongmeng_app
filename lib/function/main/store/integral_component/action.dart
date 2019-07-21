@@ -1,10 +1,9 @@
 import 'package:fish_redux/fish_redux.dart';
 
-//TODO replace with your own action
-enum IntegralItemAction { action }
+enum IntegralItemAction { SkipIntegralCommodityDetailPage }
 
 class IntegralItemActionCreator {
-  static Action onAction() {
-    return const Action(IntegralItemAction.action);
+  static Action onSkipIntegralCommodityDetailPage() {
+    return const Action(IntegralItemAction.SkipIntegralCommodityDetailPage);
   }
 }

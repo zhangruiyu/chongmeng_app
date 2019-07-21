@@ -2,15 +2,16 @@ import 'package:chongmeng/function/main/home/model/home_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'adapter/state.dart';
+import 'model/integral_commodity_entity.dart';
 
 class StoreState implements Cloneable<StoreState> {
   HomeData storeData;
 
-  get pageData => null;
+  List<IntegralCommodityData> integralCommodityData;
 
   @override
   StoreState clone() {
-    return StoreState();
+    return StoreState()..integralCommodityData = integralCommodityData;
   }
 
   static StoreState initState(Map<String, dynamic> args) {
@@ -26,6 +27,7 @@ class IntegralStoreConnector extends ConnOp<StoreState, IntegralStoreState> {
 
   @override
   IntegralStoreState get(StoreState state) {
-    return IntegralStoreState()..data = state.pageData;
+    return IntegralStoreState()
+      ..integralCommodityData = state.integralCommodityData;
   }
 }

@@ -1,12 +1,21 @@
+import 'package:chongmeng/constants/http_constants.dart';
+import 'package:chongmeng/network/net_work.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
+import 'model/integral_commodity_entity.dart';
 import 'state.dart';
 
 Effect<StoreState> buildEffect() {
   return combineEffects(<Object, Effect<StoreState>>{
-    StoreAction.action: _onAction,
+    StoreAction.Refresh: _onRefresh,
   });
 }
 
-void _onAction(Action action, Context<StoreState> ctx) {
+Future _onRefresh(Action action, Context<StoreState> ctx) async {
+  var result = await RequestClient.request<IntegralCommodityEntity>(
+      ctx.context, HttpConstants.IntegralCommodityList);
+  action.payload['completer']();
+  if (result.hasSuccess) {
+    ctx.dispatch(StoreActionCreator.onResetPageData(result.data.data));
+  }
 }

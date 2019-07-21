@@ -151,10 +151,10 @@ packages:
     description:
       path: "."
       ref: v2
-      resolved-ref: fc377efb97c8a6cc3057fa5ea029d6f5354e3e0c
+      resolved-ref: "10b6c452f846059b92637d4b89106eff3b52c75f"
       url: "https://github.com/xuelongqy/flutter_easyrefresh.git"
     source: git
-    version: "1.2.7"
+    version: "2.0.0-dev"
   flutter_ijkplayer:
     dependency: "direct main"
     description:
@@ -262,7 +262,7 @@ packages:
       name: material_design_icons_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.3695"
+    version: "3.2.3895"
   meta:
     dependency: transitive
     description:
@@ -367,7 +367,7 @@ packages:
       name: sqflite
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.6+1"
+    version: "1.1.6+2"
   stack_trace:
     dependency: transitive
     description:
@@ -402,7 +402,7 @@ packages:
       name: table_calendar
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.4"
+    version: "1.2.5"
   tencent_cos:
     dependency: "direct main"
     description:

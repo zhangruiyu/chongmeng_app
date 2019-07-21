@@ -27,10 +27,10 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Hero(
-                  tag: "0",
+                  tag: state.index.toString(),
                   child: CachedNetworkImage(
                     fit: BoxFit.cover,
-                    imageUrl: imageUrl,
+                    imageUrl: state.itemData.pic[0],
                     width: WindowUtils.getScreenWidth(),
                     height: WindowUtils.getScreenWidth() * 0.55,
                   ),
@@ -40,12 +40,12 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text("得得得狗粮"),
+                        child: Text(state.itemData.name),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text(
-                          "库存12件",
+                          "库存${state.itemData.count}件",
                           style: of.textTheme.caption,
                         ),
                       ),
@@ -58,7 +58,7 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text("数量"),
+                      Text("兑换数量"),
                       Text("1个"),
                     ],
                   ),
@@ -81,9 +81,9 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
                   child: Text("商品简介"),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 18.0),
+                  padding: const EdgeInsets.only(left: 18.0, right: 18.0),
                   child: Text(
-                    "好吃的狗粮啊哇哇哇",
+                    state.itemData.details,
                     style: of.textTheme.caption,
                   ),
                 ),
@@ -96,7 +96,7 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
                 Padding(
                   padding: const EdgeInsets.only(left: 18.0, right: 18.0),
                   child: Text(
-                    "本活动会在每周末根据您所填写的默认地址统一邮寄发放。",
+                    "商品兑换成功后会在每周五根据您所填写的默认地址统一邮寄发放。",
                     style: of.textTheme.caption,
                   ),
                 ),
@@ -137,7 +137,7 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
           child: new FlatButton(
             child: new Center(
               child: new Text(
-                '10积分兑换',
+                '${state.itemData.integralPrice}萌镚兑换',
                 textAlign: TextAlign.center,
                 style: new TextStyle(fontSize: 18.0),
               ),

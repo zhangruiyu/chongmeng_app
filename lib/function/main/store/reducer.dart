@@ -6,12 +6,13 @@ import 'state.dart';
 Reducer<StoreState> buildReducer() {
   return asReducer(
     <Object, Reducer<StoreState>>{
-      StoreAction.action: _onAction,
+      StoreAction.ResetPageData: _onResetPageData,
     },
   );
 }
 
-StoreState _onAction(StoreState state, Action action) {
-  final StoreState newState = state.clone();
+StoreState _onResetPageData(StoreState state, Action action) {
+  final StoreState newState = state.clone()
+    ..integralCommodityData = action.payload;
   return newState;
 }
