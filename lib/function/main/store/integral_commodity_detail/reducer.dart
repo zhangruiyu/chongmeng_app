@@ -6,13 +6,14 @@ import 'state.dart';
 Reducer<IntegralCommodityDetailState> buildReducer() {
   return asReducer(
     <Object, Reducer<IntegralCommodityDetailState>>{
-//      IntegralCommodityDetailAction.action: _onAction,
+      IntegralCommodityDetailAction.SetTotalIntegral: _onSetTotalIntegral,
     },
   );
 }
 
-IntegralCommodityDetailState _onAction(
+IntegralCommodityDetailState _onSetTotalIntegral(
     IntegralCommodityDetailState state, Action action) {
-  final IntegralCommodityDetailState newState = state.clone();
+  final IntegralCommodityDetailState newState = state.clone()
+    ..totalIntegral = action.payload;
   return newState;
 }

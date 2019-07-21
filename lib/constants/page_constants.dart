@@ -30,4 +30,5 @@ class PageConstants {
   static const String ShippingAddressPage = "cm://ShippingAddressPage"; //收货地址
   static const String ShippingAddressAddPage =
       "cm://ShippingAddressAddPage"; //添加收货地址
+  static const String MyOrderPage = "cm://MyOrderPage"; //我的订单
 }

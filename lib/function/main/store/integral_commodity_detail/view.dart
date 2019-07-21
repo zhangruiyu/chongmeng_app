@@ -69,8 +69,10 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text("可用积分"),
-                      Text("100"),
+                      Text("可用萌镚"),
+                      Text(state.totalIntegral == null
+                          ? "正在获取"
+                          : state.totalIntegral.toString()),
                     ],
                   ),
                 ),

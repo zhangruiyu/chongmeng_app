@@ -7,6 +7,7 @@ import 'function/bindtel/page.dart';
 import 'function/integral/record/page.dart';
 import 'function/main/community/commit_media/page.dart';
 import 'function/main/community/selecttalktype/page.dart';
+import 'function/main/my_order/page.dart';
 import 'function/main/page.dart';
 import 'function/main/store/integral_commodity_detail/page.dart';
 import 'function/pet/selectpetavatar/page.dart';
@@ -48,6 +49,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.IntegralCommodityDetailPage: IntegralCommodityDetailPage(),
     PageConstants.ShippingAddressPage: ShippingAddressPage(),
     PageConstants.ShippingAddressAddPage: ShippingAddressAddPage(),
+    PageConstants.MyOrderPage: MyOrderPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

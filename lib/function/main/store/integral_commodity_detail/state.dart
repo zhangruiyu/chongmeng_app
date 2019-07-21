@@ -6,9 +6,12 @@ class IntegralCommodityDetailState
   int index;
   IntegralCommodityData itemData;
 
+  int totalIntegral;
+
   @override
   IntegralCommodityDetailState clone() {
     return IntegralCommodityDetailState()
+      ..totalIntegral = totalIntegral
       ..index = index
       ..itemData = itemData;
   }
