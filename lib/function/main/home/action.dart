@@ -1,10 +1,10 @@
 import 'package:fish_redux/fish_redux.dart';
 
-enum HomeAction { action, SetHomeData }
+enum HomeAction { Refresh, SetHomeData }
 
 class HomeActionCreator {
-  static Action onAction() {
-    return const Action(HomeAction.action);
+  static Action onRefresh(data) {
+    return Action(HomeAction.Refresh, payload: data);
   }
 
   static Action onSetHomeData(data) {

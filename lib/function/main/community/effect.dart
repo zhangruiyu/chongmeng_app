@@ -19,7 +19,7 @@ Effect<CommunityState> buildEffect() {
 
 void _initState(Action action, Context<CommunityState> ctx) {
   ctx.state.refreshController = EasyRefreshController();
-  ctx.state.refreshController.callRefresh();
+  ctx.state.refreshController?.callRefresh();
   final TickerProvider tickerProvider = ctx.stfState as CommunityPageState;
   println("initstate: ${ctx.state.runtimeType}");
   ctx.state

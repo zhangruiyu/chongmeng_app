@@ -54,7 +54,7 @@ ConnOp<MainState, AccountState> accountConnector() {
       return state.accountState.clone();
     },
     set: (MainState state, AccountState subState) {
-      state.accountState = subState;
+      state.accountState = subState.clone();
     },
   );
 }
@@ -62,7 +62,7 @@ ConnOp<MainState, AccountState> accountConnector() {
 ConnOp<MainState, CommunityState> communityConnector() {
   return ConnOp<MainState, CommunityState>(
     get: (MainState state) {
-      return state.communityState.clone();
+      return state.communityState;
     },
     set: (MainState state, CommunityState subState) {
       state.communityState = subState;
@@ -73,7 +73,7 @@ ConnOp<MainState, CommunityState> communityConnector() {
 ConnOp<MainState, HomeState> homeConnector() {
   return ConnOp<MainState, HomeState>(
     get: (MainState state) {
-      return state.homeState.clone();
+      return state.homeState;
     },
     set: (MainState state, HomeState subState) {
       state.homeState = subState;
@@ -84,7 +84,7 @@ ConnOp<MainState, HomeState> homeConnector() {
 ConnOp<MainState, StoreState> storeConnector() {
   return ConnOp<MainState, StoreState>(
     get: (MainState state) {
-      return state.storeState.clone();
+      return state.storeState;
     },
     set: (MainState state, StoreState subState) {
       state.storeState = subState;

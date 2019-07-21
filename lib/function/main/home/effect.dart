@@ -7,16 +7,15 @@ import 'state.dart';
 
 Effect<HomeState> buildEffect() {
   return combineEffects(<Object, Effect<HomeState>>{
-    HomeAction.action: _onAction,
+    HomeAction.Refresh: _onRefresh,
     Lifecycle.initState: _initState,
   });
 }
 
-void _onAction(Action action, Context<HomeState> ctx) {}
-
-Future _initState(Action action, Context<HomeState> ctx) async {
+Future _onRefresh(Action action, Context<HomeState> ctx) async {
   var homeData = await RequestClient.request<HomeEntity>(
       ctx.context, HttpConstants.HomeIndex);
+  action.payload['completer']();
   if (homeData.hasSuccess) {
 //    "医疗", "问答", "领养", "签到"
     homeData.data.data.tab = [
@@ -25,6 +24,9 @@ Future _initState(Action action, Context<HomeState> ctx) async {
       HomeDataTab(title: "食谱", picUrl: "assets/home_page_lingyang.png"),
       HomeDataTab(title: "签到", picUrl: "assets/home_page_sign.png")
     ];
+
     ctx.dispatch(HomeActionCreator.onSetHomeData(homeData.data.data));
   }
 }
+
+Future _initState(Action action, Context<HomeState> ctx) async {}

@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
+import 'package:chongmeng/function/main/home/action.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
+import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -12,24 +14,18 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
   var accentColor = themeData.accentColor;
   return Scaffold(
     backgroundColor: Colors.white,
-    body: state.homeData == null
-        ? Container(
-            child: Column(
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Container(
-                      width: double.infinity,
-                      height: 100.0,
-                      color: accentColor,
-                    ),
-                  ],
-                )
-              ],
-            ),
-          )
-        : EasyRefresh.custom(
-            slivers: <Widget>[
+    body: EasyRefresh.custom(
+      onRefresh: CompleterUtils.produceCompleterAction(
+        dispatch,
+        HomeActionCreator.onRefresh,
+      ),
+      slivers: state.homeData == null
+          ? [
+              SliverList(
+                delegate: SliverChildListDelegate([]),
+              )
+            ]
+          : [
               SliverAppBar(
                 title: Text(
                   "宠萌",
@@ -176,6 +172,6 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
                 }).toList()),
               ),
             ],
-          ),
+    ),
   );
 }
