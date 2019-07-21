@@ -6,12 +6,12 @@ import 'state.dart';
 Reducer<MyOrderState> buildReducer() {
   return asReducer(
     <Object, Reducer<MyOrderState>>{
-      MyOrderAction.action: _onAction,
+      MyOrderAction.ResetPageData: _onResetPageData,
     },
   );
 }
 
-MyOrderState _onAction(MyOrderState state, Action action) {
-  final MyOrderState newState = state.clone();
+MyOrderState _onResetPageData(MyOrderState state, Action action) {
+  final MyOrderState newState = state.clone()..data = action.payload;
   return newState;
 }

@@ -49,7 +49,10 @@ class HttpConstants {
       "app/store/integralCommodityList"; //积分商城列表
 
   static String get BuyIntegralCommodity =>
-      "app/store/common/buyIntegralCommodity"; //兑换商品
+      "app/store/common/buyIntegralCommodity"; //
+
+  static String get IntegralOrderList =>
+      "app/store/common/integralOrderList"; //兑换订单
 }
 
 class CosType {

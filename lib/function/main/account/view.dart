@@ -141,6 +141,23 @@ Widget buildLoginView(
       ListTile(
         onTap: () {
           UserHelper.loginCheck(viewService.context, () {
+            Navigator.pushNamed(
+              viewService.context,
+              PageConstants.MyOrderPage,
+            );
+          });
+        },
+        title: Text("我的订单"),
+        trailing: new Icon(
+          Icons.keyboard_arrow_right,
+          size: 30.0,
+          color: const Color(0x40808080),
+        ),
+      ),
+      VerticalLine(),
+      ListTile(
+        onTap: () {
+          UserHelper.loginCheck(viewService.context, () {
             Navigator.pushNamed(viewService.context, PageConstants.SettingPage);
           });
         },

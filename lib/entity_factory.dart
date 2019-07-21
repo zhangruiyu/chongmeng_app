@@ -2,6 +2,7 @@ import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:chongmeng/network/entity/cos_entity.dart';
 import 'package:chongmeng/function/shipping_address/model/shipping_address_entity.dart';
 import 'package:chongmeng/function/auto/model/login_entity.dart';
+import 'package:chongmeng/function/my_order/model/my_order_entity.dart';
 import 'package:chongmeng/function/tally/entity/current_user_tally_entity.dart';
 import 'package:chongmeng/function/tally/entity/tally_tag_entity.dart';
 import 'package:chongmeng/function/signin/model/sign_in_result_entity.dart';
@@ -27,6 +28,8 @@ class EntityFactory {
       return ShippingAddressEntity.fromJson(json) as T;
     } else if (T.toString() == "LoginEntity") {
       return LoginEntity.fromJson(json) as T;
+    } else if (T.toString() == "MyOrderEntity") {
+      return MyOrderEntity.fromJson(json) as T;
     } else if (T.toString() == "CurrentUserTallyEntity") {
       return CurrentUserTallyEntity.fromJson(json) as T;
     } else if (T.toString() == "TallyTagEntity") {
