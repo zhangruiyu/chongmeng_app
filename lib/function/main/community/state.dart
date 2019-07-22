@@ -44,7 +44,7 @@ class ItemPageData {
 class DynamicListConnector extends ConnOp<CommunityState, DynamicListState> {
   @override
   void set(CommunityState state, DynamicListState subState) {
-    super.set(state, subState);
+//    super.set(state, subState);
   }
 
   @override

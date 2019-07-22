@@ -101,15 +101,6 @@ Widget buildFunCell(
               },
             };
             dispatch(DynamicItemActionCreator.onRequestSetLiked(paramsMap));
-/*  Timer(const Duration(milliseconds: 200), () {
-    item.isFavorite = !item.isFavorite;
-    item.favorites =
-    item.isFavorite ? item.favorites + 1 : item.favorites - 1;
-
-    // if your request is failed,return null,
-    completer.complete(item.isFavorite);
-  });*/
-
             return completer.future;
           },
           circleColor: CircleColor(start: accentColor, end: primaryColor),
