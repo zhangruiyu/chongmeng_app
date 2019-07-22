@@ -6,6 +6,7 @@ import 'function/auto/page.dart';
 import 'function/bindtel/page.dart';
 import 'function/integral/record/page.dart';
 import 'function/main/community/commit_media/page.dart';
+import 'function/main/community/commit_text/page.dart';
 import 'function/main/community/selecttalktype/page.dart';
 import 'function/main/page.dart';
 import 'function/main/store/integral_commodity_detail/page.dart';
@@ -50,6 +51,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.ShippingAddressPage: ShippingAddressPage(),
     PageConstants.ShippingAddressAddPage: ShippingAddressAddPage(),
     PageConstants.MyOrderPage: MyOrderPage(),
+    PageConstants.CommitTextPage: CommitTextPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

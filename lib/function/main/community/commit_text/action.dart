@@ -1,10 +1,9 @@
 import 'package:fish_redux/fish_redux.dart';
 
-//TODO replace with your own action
-enum CommitTextAction { action }
+enum CommitTextAction { UploadCommit }
 
 class CommitTextActionCreator {
-  static Action onAction() {
-    return const Action(CommitTextAction.action);
+  static Action onUploadCommit() {
+    return const Action(CommitTextAction.UploadCommit);
   }
 }

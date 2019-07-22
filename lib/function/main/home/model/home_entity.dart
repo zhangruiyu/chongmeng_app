@@ -50,6 +50,8 @@ class HomeData {
     }
   }
 
+  List<String> sysNotices = ["有个奥特曼从天而降", "有个奥特曼从天而降"];
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.tab != null) {

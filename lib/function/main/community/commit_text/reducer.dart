@@ -6,7 +6,7 @@ import 'state.dart';
 Reducer<CommitTextState> buildReducer() {
   return asReducer(
     <Object, Reducer<CommitTextState>>{
-      CommitTextAction.action: _onAction,
+//      CommitTextAction.action: _onAction,
     },
   );
 }

@@ -3,9 +3,11 @@ import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/function/main/home/action.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
+import 'package:chongmeng/widget/vertical_line.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_vertical_marquee/flutter_vertical_marquee.dart';
 
 import 'state.dart';
 
@@ -54,6 +56,52 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
                     ],
                   ),
                   viewService.buildComponent("tab"),
+                  VerticalLine(),
+                  Container(
+                    height: 37.0,
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 20.0, right: 5.0),
+                          child: Image.asset(
+                            "assets/home_page_icon_gonggao.png",
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 21.0),
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              onTap: () {
+                                /*var itemNotice =
+                                homeEntity.sysNotices[controller.position ?? 0];
+                            NavigatorHelper.pushWebPage(
+                              context,
+                              itemNotice.title,
+                              HttpConstants.NoticeDetail +
+                                  itemNotice.noticeId.toString(),
+                            );*/
+                              },
+                              child: Container(
+                                height: 34.0,
+                                child: Marquee(
+                                  fontSize: 12.0,
+                                  textColor: color343434,
+                                  aligment: MarqueeAligment.left,
+                                  textList: ["有个奥特曼从天而降", "有个奥特曼从天而降"]
+                                      .map((itemNotice) {
+                                    return itemNotice;
+                                  }).toList(),
+                                  controller: MarqueeController(),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ]),
               ),
               SliverList(

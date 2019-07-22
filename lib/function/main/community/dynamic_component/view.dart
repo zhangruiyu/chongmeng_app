@@ -28,8 +28,16 @@ Widget buildView(
     } else {
       content = [Container()];
     }
-  } else {
+  } else if (state.video != null) {
     content = buildVideoView(state, dispatch, viewService);
+  } else {
+    content = [
+      Container(
+        padding: EdgeInsets.only(top: 10.0),
+        child:
+            Text(state.content, maxLines: 5, overflow: TextOverflow.ellipsis),
+      )
+    ];
   }
   return Container(
     padding: EdgeInsets.only(top: 18.0, left: paddingLeft, right: paddingLeft),

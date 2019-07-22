@@ -24,4 +24,5 @@ class CommunityComponent extends Component<CommunityState> {
 
   static const DynamicTypePic = 0;
   static const DynamicTypeVideo = 1;
+  static const DynamicTypeText = 2;
 }

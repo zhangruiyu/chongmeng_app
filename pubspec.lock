@@ -193,6 +193,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_vertical_marquee:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "24119add90c1845b62ebe9f43314b60abb1bdfcc"
+      url: "https://github.com/zhangruiyu/flutter_vertical_marquee.git"
+    source: git
+    version: "0.2.3"
   http:
     dependency: transitive
     description:

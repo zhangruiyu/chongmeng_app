@@ -29,5 +29,7 @@ Future _onSkipPage(Action action, Context<SelectTalkTypeState> ctx) async {
       Navigator.popAndPushNamed(ctx.context, PageConstants.CommitMediaPage,
           arguments: {'filePath': file.values.toList(), 'type': 'image'});
     }
-  } else if (type == "article") {}
+  } else if (type == "article") {
+    Navigator.popAndPushNamed(ctx.context, PageConstants.CommitTextPage);
+  }
 }

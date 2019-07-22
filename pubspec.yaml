@@ -65,6 +65,9 @@ dependencies:
   image_picker: any
   flutter_cupertino_date_picker: ^1.0.4
   table_calendar: ^1.2.3
+  flutter_vertical_marquee:
+    git:
+      url: https://github.com/zhangruiyu/flutter_vertical_marquee.git
 
 dev_dependencies:
   flutter_test:
@@ -78,4 +81,5 @@ flutter:
     - assets/signin_page_banner.png
     - assets/signin_page_sign_item_bg.png
     - assets/signin_page_sign_success.png
+    - assets/home_page_icon_gonggao.png
 

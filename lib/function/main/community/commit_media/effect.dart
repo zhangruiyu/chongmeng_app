@@ -157,6 +157,7 @@ Future _onUploadCommitVideo(
           }));
       NavigatorHelper.showLoadingDialog(ctx.context, false);
       if (result.hasSuccess) {
+        toast(ctx.context, "动态发布成功");
         NavigatorHelper.popToMain(ctx.context);
       }
     }).catchError((onError) {
