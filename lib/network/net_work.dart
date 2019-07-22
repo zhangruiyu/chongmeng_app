@@ -44,7 +44,7 @@ class RequestClient {
       if (context != null &&
           !ignoreToast &&
           !ErrorCode.ignoreToastCode.contains(e.code)) {
-        toast(context, '网络错误$e');
+        toast(context, '$e');
       }
       return Future<Result<T>>.value(Result.iniFail(e.code));
     } catch (e) {

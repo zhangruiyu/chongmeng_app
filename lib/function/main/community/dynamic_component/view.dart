@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/global_store/store.dart';
@@ -6,6 +8,7 @@ import 'package:chongmeng/widget/vertical_line.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
+
 import 'action.dart';
 import 'state.dart';
 
@@ -68,7 +71,7 @@ Widget buildView(
           ],
         ),
         ...content,
-        buildFunCell(state, viewService),
+        buildFunCell(state, dispatch, viewService),
         Padding(
           padding: const EdgeInsets.only(top: 18.0),
           child: VerticalLine(),
@@ -78,7 +81,8 @@ Widget buildView(
   );
 }
 
-Widget buildFunCell(DynamicItemState state, ViewService viewService) {
+Widget buildFunCell(
+    DynamicItemState state, Dispatch dispatch, ViewService viewService) {
   var data = state.data;
   var accentColor = Theme.of(viewService.context).accentColor;
   var primaryColor = Theme.of(viewService.context).primaryColor;
@@ -88,6 +92,26 @@ Widget buildFunCell(DynamicItemState state, ViewService viewService) {
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         LikeButton(
+          onTap: (isLiked) {
+            final Completer<bool> completer = new Completer<bool>();
+            Map<String, dynamic> paramsMap = {
+              "isLiked": isLiked,
+              "completer": (bool liked) {
+                completer.complete(liked);
+              },
+            };
+            dispatch(DynamicItemActionCreator.onRequestSetLiked(paramsMap));
+/*  Timer(const Duration(milliseconds: 200), () {
+    item.isFavorite = !item.isFavorite;
+    item.favorites =
+    item.isFavorite ? item.favorites + 1 : item.favorites - 1;
+
+    // if your request is failed,return null,
+    completer.complete(item.isFavorite);
+  });*/
+
+            return completer.future;
+          },
           circleColor: CircleColor(start: accentColor, end: primaryColor),
           bubblesColor: BubblesColor(
             dotPrimaryColor: accentColor,

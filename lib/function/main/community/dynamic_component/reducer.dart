@@ -1,3 +1,4 @@
+import 'package:chongmeng/global_store/store.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'action.dart';
@@ -6,12 +7,13 @@ import 'state.dart';
 Reducer<DynamicItemState> buildReducer() {
   return asReducer(
     <Object, Reducer<DynamicItemState>>{
-      DynamicItemAction.action: _onAction,
+      DynamicItemAction.ResetLiked: _onResetLiked,
     },
   );
 }
 
-DynamicItemState _onAction(DynamicItemState state, Action action) {
+DynamicItemState _onResetLiked(DynamicItemState state, Action action) {
   final DynamicItemState newState = state.clone();
+  newState.data.liked = action.payload;
   return newState;
 }
