@@ -65,6 +65,7 @@ dependencies:
   image_picker: any
   flutter_cupertino_date_picker: ^1.0.4
   table_calendar: ^1.2.3
+  like_button: ^0.1.7
   flutter_vertical_marquee:
     git:
       url: https://github.com/zhangruiyu/flutter_vertical_marquee.git

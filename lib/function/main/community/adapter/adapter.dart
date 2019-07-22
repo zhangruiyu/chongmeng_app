@@ -21,7 +21,7 @@ class _DynamicListConnector extends ConnOp<DynamicListState, List<ItemBean>> {
     if (state.data?.isNotEmpty == true) {
       return state.data[0].data
           .map<ItemBean>((DynamicListData data) =>
-              ItemBean('dynamic', DynamicItemState.fromDynamicListData(data)))
+              ItemBean('dynamic', DynamicItemState(data: data)))
           .toList(growable: true);
     } else {
       return <ItemBean>[];

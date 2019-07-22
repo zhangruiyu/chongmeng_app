@@ -29,6 +29,7 @@ class DynamicListEntity {
 
 class DynamicListData {
   List<String> images;
+  List<int> liked;
   String createTime;
   int userId;
   String nickName;
@@ -39,6 +40,7 @@ class DynamicListData {
 
   DynamicListData(
       {this.images,
+      this.liked,
       this.createTime,
       this.userId,
       this.nickName,
@@ -49,6 +51,7 @@ class DynamicListData {
 
   DynamicListData.fromJson(Map<String, dynamic> json) {
     images = json['images']?.cast<String>();
+    liked = json['liked']?.cast<int>();
     createTime = json['create_time'];
     userId = json['user_id'];
     nickName = json['nick_name'];
@@ -63,6 +66,7 @@ class DynamicListData {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['images'] = this.images;
+    data['liked'] = this.liked;
     data['create_time'] = this.createTime;
     data['user_id'] = this.userId;
     data['nick_name'] = this.nickName;
