@@ -329,21 +329,16 @@ List<Widget> buildVideoView(
       child: Stack(
         alignment: AlignmentDirectional.center,
         children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              dispatch(DynamicItemActionCreator.onSkipReviewPage(0));
-            },
-            child: new CachedNetworkImage(
-              fit: BoxFit.cover,
-              height: WindowUtils.getScreenWidth() * 0.45,
-              width: double.infinity,
-              imageUrl: "http://mengchong-1253631018.picbj.myqcloud.com/" +
-                  video.videoThumbnailPath,
-            ),
+          new CachedNetworkImage(
+            fit: BoxFit.cover,
+            height: WindowUtils.getScreenWidth() * 0.45,
+            width: double.infinity,
+            imageUrl: "http://mengchong-1253631018.picbj.myqcloud.com/" +
+                video.videoThumbnailPath,
           ),
           IconButton(
             onPressed: () {
-//              dispatch(CommitMediaActionCreator.onSkipReviewPage());
+              dispatch(DynamicItemActionCreator.onSkipReviewPage(0));
             },
             icon: Icon(Icons.play_circle_outline),
             color: Theme.of(viewService.context).accentColor,

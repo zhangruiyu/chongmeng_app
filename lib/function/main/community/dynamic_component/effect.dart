@@ -39,5 +39,13 @@ Future _onSkipReviewPage(Action action, Context<DynamicItemState> ctx) async {
   if (ctx.state.data.images != null && ctx.state.data.images.length > 0) {
     Navigator.pushNamed(ctx.context, PageConstants.ReviewImagePage,
         arguments: {"images": ctx.state.data.images, "index": action.payload});
+  } else if (ctx.state.data.video != null) {
+    Navigator.pushNamed(ctx.context, PageConstants.ReviewIVPage, arguments: {
+      'canSkip': false,
+      'filePath': "http://mengchong-1253631018.picbj.myqcloud.com/" +
+          ctx.state.data.video.videoPath,
+      'type': "video",
+      'videoThumbnail': ctx.state.data.video.videoThumbnailPath,
+    });
   }
 }

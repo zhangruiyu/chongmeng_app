@@ -100,7 +100,7 @@ Widget buildPicsView(
       padding: const EdgeInsets.all(8.0),
       child: new Image.file(
         new File(selectedPic.localUrl.toString()),
-        fit: BoxFit.fitWidth,
+        fit: BoxFit.cover,
         width: itemWidth,
         height: itemWidth,
       ),
@@ -118,11 +118,10 @@ Widget buildPicsView(
           dispatch(CommitMediaActionCreator.onReselectPic());
         }));
   }
-  //state.picFilePath.length+1 是添加选择按钮
   return Container(
     height: MediaQuery.of(viewService.context).size.width /
         gridCount *
-        ((state.picFilePath.length + 1) / gridCount).ceil(),
+        ((gridItems.length) / gridCount).ceil(),
     child: GridView(
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: gridCount),

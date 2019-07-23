@@ -29,7 +29,12 @@ void _dispose(Action action, Context<ReviewIVState> ctx) {
 
 void _initState(Action action, Context<ReviewIVState> ctx) {
   if (ctx.state.type == 'video') {
-    ctx.state.videoController
-        .setFileDataSource(File(ctx.state.filePath), autoPlay: true);
+    if (ctx.state.filePath.startsWith("http")) {
+      ctx.state.videoController
+          .setNetworkDataSource(ctx.state.filePath, autoPlay: true);
+    } else {
+      ctx.state.videoController
+          .setFileDataSource(File(ctx.state.filePath), autoPlay: true);
+    }
   }
 }
