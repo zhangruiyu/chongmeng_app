@@ -118,10 +118,11 @@ Widget buildPicsView(
           dispatch(CommitMediaActionCreator.onReselectPic());
         }));
   }
+  //state.picFilePath.length+1 是添加选择按钮
   return Container(
     height: MediaQuery.of(viewService.context).size.width /
         gridCount *
-        (state.picFilePath.length / gridCount).ceil(),
+        ((state.picFilePath.length + 1) / gridCount).ceil(),
     child: GridView(
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: gridCount),
