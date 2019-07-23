@@ -8,6 +8,7 @@ import 'package:chongmeng/widget/vertical_line.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -91,6 +92,13 @@ Widget buildFunCell(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
+        /* IconButton(
+          onPressed: () {},
+          icon: Icon(
+            MdiIcons.messageOutline,
+            color: Colors.grey,
+          ),
+        ),*/
         LikeButton(
           onTap: (isLiked) {
             final Completer<bool> completer = new Completer<bool>();
@@ -136,45 +144,6 @@ Widget buildFunCell(
       ],
     ),
   );
-}
-
-List<Widget> buildThreePicView(
-    DynamicItemState state, Dispatch dispatch, ViewService viewService) {
-  var data = state.data;
-  int gridCount = 3;
-  var paddingLeft = 18.0;
-  var itemPaddingLeft = 8.0;
-  double itemWidth =
-      (WindowUtils.getScreenWidth() - paddingLeft * 2 - itemPaddingLeft * 2) /
-          gridCount.toDouble();
-  return [
-    Padding(
-      padding: const EdgeInsets.only(top: 10.0, bottom: 5.0),
-      child: Text(data.content),
-    ),
-    Row(
-      children: data.images.sublist(0, 3).map((itemImage) {
-        var isCenter = false;
-        if (data.images.length >= 3 && data.images.indexOf(itemImage) == 1) {
-          isCenter = true;
-        }
-        return Container(
-          child: Padding(
-            padding: EdgeInsets.only(
-                left: isCenter ? itemPaddingLeft : 0.0,
-                right: isCenter ? itemPaddingLeft : 0.0),
-            child: new CachedNetworkImage(
-              fit: BoxFit.cover,
-              width: itemWidth,
-              height: itemWidth,
-              imageUrl:
-                  "http://mengchong-1253631018.picbj.myqcloud.com/" + itemImage,
-            ),
-          ),
-        );
-      }).toList(),
-    )
-  ];
 }
 
 List<Widget> buildOnePicView(
@@ -250,6 +219,72 @@ List<Widget> buildTwoPicView(
             })
             .values
             .toList(),
+      ),
+    )
+  ];
+}
+
+List<Widget> buildThreePicView(
+    DynamicItemState state, Dispatch dispatch, ViewService viewService) {
+  var of = Theme.of(viewService.context);
+  var data = state.data;
+  int gridCount = 3;
+  var paddingLeft = 18.0;
+  var itemPaddingLeft = 8.0;
+  double itemWidth =
+      (WindowUtils.getScreenWidth() - paddingLeft * 2 - itemPaddingLeft * 2) /
+          gridCount.toDouble();
+  return [
+    Padding(
+      padding: const EdgeInsets.only(top: 10.0, bottom: 5.0),
+      child: Text(data.content),
+    ),
+    SizedBox(
+      height: itemWidth,
+      child: Stack(
+        children: <Widget>[
+          Row(
+            children: data.images.sublist(0, 3).map((itemImage) {
+              var isCenter = false;
+              if (data.images.length >= 3 &&
+                  data.images.indexOf(itemImage) == 1) {
+                isCenter = true;
+              }
+              return Container(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: isCenter ? itemPaddingLeft : 0.0,
+                      right: isCenter ? itemPaddingLeft : 0.0),
+                  child: new CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    width: itemWidth,
+                    height: itemWidth,
+                    imageUrl:
+                        "http://mengchong-1253631018.picbj.myqcloud.com/" +
+                            itemImage,
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          data.images.length == 3
+              ? Container()
+              : Align(
+                  alignment: Alignment.bottomRight,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.black45,
+                        borderRadius: new BorderRadius.only(
+                            topLeft: Radius.circular(10.0))),
+                    padding: EdgeInsets.only(right: 5.0, left: 8.0),
+                    child: Text(
+                      (data.images.length - 3).toString(),
+                      style: of.textTheme.caption
+                          .merge(TextStyle(color: colorWhite)),
+                    ),
+                  ),
+                )
+        ],
       ),
     )
   ];
