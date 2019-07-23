@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:chongmeng/constants/page_constants.dart';
 import 'package:chongmeng/helper/permission_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:file_picker/file_picker.dart';
+import 'package:photo/photo.dart';
+import 'package:photo_manager/photo_manager.dart';
 
 class NavigatorHelper {
   static popToMain(BuildContext context) {
@@ -66,12 +69,19 @@ class NavigatorHelper {
       return null;
   }
 
-  static Future<Map<String, String>> pushFileSelectPage() async {
-    bool isAgree = await PermissionHelper.checkStoragePermission();
-    if (isAgree) {
-      return await FilePicker.getMultiFilePath(type: FileType.ANY);
-    } else
-      return null;
+  static Future<List<File>> pushFileSelectPageFile(BuildContext context) async {
+    List<AssetEntity> imgList = await PhotoPicker.pickAsset(
+        context: context, pickType: PickType.onlyImage);
+    return Future.wait(imgList.map((item) async {
+      return (await item.file);
+    }).toList());
+  }
+
+  static Future<List<String>> pushFileSelectPageString(
+      BuildContext context) async {
+    return (await pushFileSelectPageFile(context))
+        .map<String>((File itemFile) => itemFile.path)
+        .toList();
   }
 
   static void pushPageLoginPage(BuildContext context) {

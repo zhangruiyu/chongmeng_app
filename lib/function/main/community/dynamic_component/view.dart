@@ -166,12 +166,17 @@ List<Widget> buildOnePicView(
             child: Padding(
               padding: EdgeInsets.only(
                   left: itemPaddingLeft, right: itemPaddingLeft),
-              child: new CachedNetworkImage(
-                fit: BoxFit.cover,
-                width: itemWidth * 1.2,
-                height: itemWidth,
-                imageUrl: "http://mengchong-1253631018.picbj.myqcloud.com/" +
-                    itemImage,
+              child: GestureDetector(
+                onTap: () {
+                  dispatch(DynamicItemActionCreator.onSkipReviewPage(0));
+                },
+                child: new CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  width: itemWidth * 1.2,
+                  height: itemWidth,
+                  imageUrl: "http://mengchong-1253631018.picbj.myqcloud.com/" +
+                      itemImage,
+                ),
               ),
             ),
           ),
@@ -205,13 +210,19 @@ List<Widget> buildTwoPicView(
                       child: Padding(
                         padding: EdgeInsets.only(
                             right: index == 0 ? itemPaddingLeft : 0),
-                        child: new CachedNetworkImage(
-                          fit: BoxFit.cover,
-                          height: itemWidth,
-                          width: double.infinity,
-                          imageUrl:
-                              "http://mengchong-1253631018.picbj.myqcloud.com/" +
-                                  itemImage,
+                        child: GestureDetector(
+                          onTap: () {
+                            dispatch(DynamicItemActionCreator.onSkipReviewPage(
+                                index));
+                          },
+                          child: new CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            height: itemWidth,
+                            width: double.infinity,
+                            imageUrl:
+                                "http://mengchong-1253631018.picbj.myqcloud.com/" +
+                                    itemImage,
+                          ),
                         ),
                       ),
                     ),
@@ -244,28 +255,42 @@ List<Widget> buildThreePicView(
       child: Stack(
         children: <Widget>[
           Row(
-            children: data.images.sublist(0, 3).map((itemImage) {
-              var isCenter = false;
-              if (data.images.length >= 3 &&
-                  data.images.indexOf(itemImage) == 1) {
-                isCenter = true;
-              }
-              return Container(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      left: isCenter ? itemPaddingLeft : 0.0,
-                      right: isCenter ? itemPaddingLeft : 0.0),
-                  child: new CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    width: itemWidth,
-                    height: itemWidth,
-                    imageUrl:
-                        "http://mengchong-1253631018.picbj.myqcloud.com/" +
-                            itemImage,
-                  ),
-                ),
-              );
-            }).toList(),
+            children: data.images
+                .sublist(0, 3)
+                .asMap()
+                .map((index, itemImage) {
+                  var isCenter = false;
+                  if (data.images.length >= 3 &&
+                      data.images.indexOf(itemImage) == 1) {
+                    isCenter = true;
+                  }
+                  return MapEntry(
+                      index,
+                      Container(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              left: isCenter ? itemPaddingLeft : 0.0,
+                              right: isCenter ? itemPaddingLeft : 0.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              dispatch(
+                                  DynamicItemActionCreator.onSkipReviewPage(
+                                      index));
+                            },
+                            child: new CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              width: itemWidth,
+                              height: itemWidth,
+                              imageUrl:
+                                  "http://mengchong-1253631018.picbj.myqcloud.com/" +
+                                      itemImage,
+                            ),
+                          ),
+                        ),
+                      ));
+                })
+                .values
+                .toList(),
           ),
           data.images.length == 3
               ? Container()
@@ -304,12 +329,17 @@ List<Widget> buildVideoView(
       child: Stack(
         alignment: AlignmentDirectional.center,
         children: <Widget>[
-          new CachedNetworkImage(
-            fit: BoxFit.cover,
-            height: WindowUtils.getScreenWidth() * 0.45,
-            width: double.infinity,
-            imageUrl: "http://mengchong-1253631018.picbj.myqcloud.com/" +
-                video.videoThumbnailPath,
+          GestureDetector(
+            onTap: () {
+              dispatch(DynamicItemActionCreator.onSkipReviewPage(0));
+            },
+            child: new CachedNetworkImage(
+              fit: BoxFit.cover,
+              height: WindowUtils.getScreenWidth() * 0.45,
+              width: double.infinity,
+              imageUrl: "http://mengchong-1253631018.picbj.myqcloud.com/" +
+                  video.videoThumbnailPath,
+            ),
           ),
           IconButton(
             onPressed: () {

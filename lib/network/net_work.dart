@@ -9,7 +9,7 @@ import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/network/net_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:overlay_support/overlay_support.dart';
+import 'package:oktoast/oktoast.dart';
 
 class RequestClient {
   ///[queryParameters] 参数以map形式
@@ -44,12 +44,12 @@ class RequestClient {
       if (context != null &&
           !ignoreToast &&
           !ErrorCode.ignoreToastCode.contains(e.code)) {
-        toast(context, '$e');
+        showToast('$e');
       }
       return Future<Result<T>>.value(Result.iniFail(e.code));
     } catch (e) {
       if (context != null && !ignoreToast) {
-        toast(context, '网络错误$e');
+        showToast('网络错误$e');
       }
       // 非具体类型
       print('Something really unknown: $e');
@@ -113,7 +113,7 @@ class RequestClient {
           UserHelper.logout(context);
         } else {
           if (context != null && !ignoreToast) {
-            toast(context, toastMsg);
+            showToast(toastMsg);
           }
         }
         return new Future.error(new NetException(data['status'], data['msg']));

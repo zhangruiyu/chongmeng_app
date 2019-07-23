@@ -8,7 +8,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:overlay_support/overlay_support.dart';
+import 'package:oktoast/oktoast.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -110,7 +110,7 @@ Widget buildItem(ThemeData of, ShippingAddressData data, BuildContext context,
                     ),
                     label: Text("编辑"),
                     onPressed: () {
-                      toast(context, "暂未开放");
+                      showToast("暂未开放");
                     },
                   ),
                   FlatButton.icon(
@@ -119,7 +119,7 @@ Widget buildItem(ThemeData of, ShippingAddressData data, BuildContext context,
                     ),
                     label: Text("删除"),
                     onPressed: () {
-                      toast(context, "暂未开放");
+                      showToast("暂未开放");
                     },
                   ),
                 ],

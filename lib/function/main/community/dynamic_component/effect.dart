@@ -1,7 +1,9 @@
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/constants/page_constants.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'action.dart';
 import 'model/dynamic_liked_entity.dart';
 import 'state.dart';
@@ -9,6 +11,7 @@ import 'state.dart';
 Effect<DynamicItemState> buildEffect() {
   return combineEffects(<Object, Effect<DynamicItemState>>{
     DynamicItemAction.RequestSetLiked: _onRequestSetLiked,
+    DynamicItemAction.SkipReviewPage: _onSkipReviewPage,
   });
 }
 
@@ -29,5 +32,12 @@ Future _onRequestSetLiked(Action action, Context<DynamicItemState> ctx) async {
   if (result.hasSuccess) {
     ctx.dispatch(DynamicItemActionCreator.onResetLiked(
         {"liked": result.data.data.liked, "dynamic_id": ctx.state.data.id}));
+  }
+}
+
+Future _onSkipReviewPage(Action action, Context<DynamicItemState> ctx) async {
+  if (ctx.state.data.images != null && ctx.state.data.images.length > 0) {
+    Navigator.pushNamed(ctx.context, PageConstants.ReviewImagePage,
+        arguments: {"images": ctx.state.data.images, "index": action.payload});
   }
 }

@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:chongmeng/constants/page_constants.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
+import 'package:oktoast/oktoast.dart';
 import 'package:thumbnails/thumbnails.dart';
-import 'package:overlay_support/overlay_support.dart';
 import 'package:path_provider/path_provider.dart';
 import 'action.dart';
 import 'state.dart';
@@ -60,15 +60,14 @@ void _onCameraSwitched(Action action, Context<RecordState> ctx) async {
     }
 
     if (ctx.state.controller.value.hasError) {
-      toast(ctx.context,
-          'Camera error ${ctx.state.controller.value.errorDescription}');
+      showToast('Camera error ${ctx.state.controller.value.errorDescription}');
     }
   });
 
   try {
     await ctx.state.controller.initialize();
   } on CameraException catch (e) {
-    toast(ctx.context, 'Camera error $e');
+    showToast('Camera error $e');
   }
 
   if (!ctx.isDisposed) {
@@ -78,7 +77,7 @@ void _onCameraSwitched(Action action, Context<RecordState> ctx) async {
 
 void _onTakePicture(Action action, Context<RecordState> ctx) async {
   if (!ctx.state.controller.value.isInitialized) {
-    toast(ctx.context, 'Please wait');
+    showToast('Please wait');
 
     return null;
   }
@@ -97,19 +96,19 @@ void _onTakePicture(Action action, Context<RecordState> ctx) async {
 
   try {
     await ctx.state.controller.takePicture(filePath);
-    toast(ctx.context, "拍照成功");
+    showToast("拍照成功");
     Navigator.popAndPushNamed(ctx.context, PageConstants.ReviewIVPage,
         arguments: {'filePath': filePath, 'type': 'image'});
     println(filePath);
   } on CameraException catch (e) {
-    toast(ctx.context, e.toString());
+    showToast(e.toString());
     return null;
   }
 }
 
 void _onRecordStart(Action action, Context<RecordState> ctx) async {
   if (!ctx.state.controller.value.isInitialized) {
-    toast(ctx.context, 'Please wait');
+    showToast('Please wait');
     return null;
   }
 
@@ -130,7 +129,7 @@ void _onRecordStart(Action action, Context<RecordState> ctx) async {
     }
     await ctx.state.controller.startVideoRecording(ctx.state.videoPath);
   } on CameraException catch (e) {
-    toast(ctx.context, e.toString());
+    showToast(e.toString());
   }
 }
 
@@ -153,7 +152,7 @@ void _onRecordEnd(Action action, Context<RecordState> ctx) async {
             'videoThumbnail': thumb
           });
     } on CameraException catch (e) {
-      toast(ctx.context, e.toString());
+      showToast(e.toString());
       return null;
     }
   }

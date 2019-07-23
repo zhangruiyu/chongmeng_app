@@ -9,8 +9,6 @@ import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/widget/custom_dialog.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:flutter/material.dart' as prefix0;
-import 'package:overlay_support/overlay_support.dart';
 
 import 'action.dart';
 import 'state.dart';

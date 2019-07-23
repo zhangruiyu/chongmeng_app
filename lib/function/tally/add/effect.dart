@@ -9,7 +9,7 @@ import 'package:chongmeng/network/net_work.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:image_picker/image_picker.dart';
-import 'package:overlay_support/overlay_support.dart';
+import 'package:oktoast/oktoast.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -22,7 +22,7 @@ Effect<AddTallyState> buildEffect() {
 
 Future _onAddTally(Action action, Context<AddTallyState> ctx) async {
   if (ctx.state.selectId.length == 0) {
-    toast(ctx.context, "最少应选择一个标签");
+    showToast("最少应选择一个标签");
   } else {
     if (ctx.state.image != null) {
       NavigatorHelper.showLoadingDialog(ctx.context, true);

@@ -16,6 +16,7 @@ import 'function/pet/selectsubtype/page.dart';
 import 'function/pet/selecttype/page.dart';
 import 'function/record/page.dart';
 import 'function/record/review/page.dart';
+import 'function/review_image/page.dart';
 import 'function/setting/page.dart';
 import 'function/shipping_address/page.dart';
 import 'function/shipping_address/shipping_address_add/page.dart';
@@ -52,6 +53,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.ShippingAddressAddPage: ShippingAddressAddPage(),
     PageConstants.MyOrderPage: MyOrderPage(),
     PageConstants.CommitTextPage: CommitTextPage(),
+    PageConstants.ReviewImagePage: ReviewImagePage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

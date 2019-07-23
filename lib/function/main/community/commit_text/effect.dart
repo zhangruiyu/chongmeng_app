@@ -3,7 +3,7 @@ import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:overlay_support/overlay_support.dart';
+import 'package:oktoast/oktoast.dart';
 import '../component.dart';
 import 'action.dart';
 import 'state.dart';
@@ -24,7 +24,7 @@ Future _onUploadCommit(Action action, Context<CommitTextState> ctx) async {
       },
       showLoadingIndicator: true);
   if (result.hasSuccess) {
-    toast(ctx.context, "动态发布成功");
+    showToast("动态发布成功");
     NavigatorHelper.popToMain(ctx.context);
   }
 }

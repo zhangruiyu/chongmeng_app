@@ -8,11 +8,10 @@ import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/network/entity/cos_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/network/entity/outermost_entity.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/services.dart';
-import 'package:overlay_support/overlay_support.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:path/path.dart' as path;
 import 'package:tencent_cos/tencent_cos.dart';
 
@@ -31,11 +30,11 @@ Effect<CommitMediaState> buildEffect() {
 }
 
 Future _onReselectPic(Action action, Context<CommitMediaState> ctx) async {
-  Map<String, String> file =
-      await FilePicker.getMultiFilePath(type: FileType.ANY);
-  if ((file?.length ?? 0) > 0) {
+  List<String> imgList =
+      await NavigatorHelper.pushFileSelectPageString(ctx.context);
+  if ((imgList?.length ?? 0) > 0) {
     ctx.dispatch(CommitMediaActionCreator.onChangeSelectPic(
-        file.values.map((item) => UploadTask(item)).toList()));
+        imgList.map((item) => UploadTask(item)).toList()));
   }
 }
 
@@ -50,11 +49,11 @@ void _onSkipReviewPage(Action action, Context<CommitMediaState> ctx) {
 
 Future _onUploadCommitPic(Action action, Context<CommitMediaState> ctx) async {
   if (ctx.state.contentTextEditingController.text.length < 5) {
-    toast(ctx.context, "不能低于5字");
+    showToast("不能低于5字");
     return;
   }
   if (ctx.state.contentTextEditingController.text.length > 3000) {
-    toast(ctx.context, "不能大于2000字");
+    showToast("不能大于2000字");
     return;
   }
   Result<CosEntity> cosEntity = await RequestClient.request<CosEntity>(
@@ -105,7 +104,7 @@ Future _onUploadCommitPic(Action action, Context<CommitMediaState> ctx) async {
         NavigatorHelper.popToMain(ctx.context);
       }
     }).catchError((onError) {
-//      toast(ctx.context,"图片上传失败,发布失败");
+//      showToast("图片上传失败,发布失败");
       NavigatorHelper.showLoadingDialog(ctx.context, false);
     });
   }
@@ -114,11 +113,11 @@ Future _onUploadCommitPic(Action action, Context<CommitMediaState> ctx) async {
 Future _onUploadCommitVideo(
     Action action, Context<CommitMediaState> ctx) async {
   if (ctx.state.contentTextEditingController.text.length < 5) {
-    toast(ctx.context, "不能低于5字");
+    showToast("不能低于5字");
     return;
   }
   if (ctx.state.contentTextEditingController.text.length > 3000) {
-    toast(ctx.context, "不能大于2000字");
+    showToast("不能大于2000字");
     return;
   }
   Result<CosEntity> cosEntity = await RequestClient.request<CosEntity>(
@@ -157,11 +156,11 @@ Future _onUploadCommitVideo(
           }));
       NavigatorHelper.showLoadingDialog(ctx.context, false);
       if (result.hasSuccess) {
-        toast(ctx.context, "动态发布成功");
+        showToast("动态发布成功");
         NavigatorHelper.popToMain(ctx.context);
       }
     }).catchError((onError) {
-//      toast(ctx.context,"图片上传失败,发布失败");
+//      showToast("图片上传失败,发布失败");
       NavigatorHelper.showLoadingDialog(ctx.context, false);
     });
   }

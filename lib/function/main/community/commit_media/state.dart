@@ -39,7 +39,8 @@ CommitMediaState initState(Map<String, dynamic> args) {
     if (args['filePath'] is String) {
       reviewIVState..picFilePath = [UploadTask(args['filePath'])];
     } else {
-      reviewIVState.picFilePath = (args['filePath'] as List).map((item) {
+      reviewIVState.picFilePath =
+          (args['filePath'] as List<String>).map((item) {
         return UploadTask(item);
       }).toList();
     }
