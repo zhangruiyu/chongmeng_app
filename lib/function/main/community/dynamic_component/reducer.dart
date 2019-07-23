@@ -13,7 +13,11 @@ Reducer<DynamicItemState> buildReducer() {
 }
 
 DynamicItemState _onResetLiked(DynamicItemState state, Action action) {
-  final DynamicItemState newState = state.clone();
-  newState.data.liked = action.payload;
-  return newState;
+  if (state.data.id == action.payload['dynamic_id']) {
+    final DynamicItemState newState = state.clone();
+    newState.data.liked = action.payload['liked'];
+    return newState;
+  } else {
+    return state;
+  }
 }

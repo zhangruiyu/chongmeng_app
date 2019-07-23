@@ -27,6 +27,7 @@ Future _onRequestSetLiked(Action action, Context<DynamicItemState> ctx) async {
     "dynamicId": ctx.state.data.id
   });
   if (result.hasSuccess) {
-    ctx.dispatch(DynamicItemActionCreator.onResetLiked(result.data.data.liked));
+    ctx.dispatch(DynamicItemActionCreator.onResetLiked(
+        {"liked": result.data.data.liked, "dynamic_id": ctx.state.data.id}));
   }
 }
