@@ -9,7 +9,7 @@ import 'model/dynamic_list_entity.dart';
 
 class CommunityState implements Cloneable<CommunityState> {
   TabController tabController;
-  LinkedHashMap<int, ItemPageData> pageData;
+  LinkedHashMap<String, ItemPageData> pageData;
   EasyRefreshController refreshController;
 
   @override
@@ -23,8 +23,10 @@ class CommunityState implements Cloneable<CommunityState> {
   static CommunityState initState(Map<String, dynamic> args) {
     return CommunityState()
       ..pageData = LinkedHashMap.from({
-        0: ItemPageData(name: "最新", filtrateType: 0, data: [], pageIndex: 0),
-        1: ItemPageData(name: "关注", filtrateType: 1, data: [], pageIndex: 0)
+        "NewType": ItemPageData(
+            name: "最新", filtrateType: "NewType", data: [], pageIndex: 0),
+        "VideoType": ItemPageData(
+            name: "视频", filtrateType: "VideoType", data: [], pageIndex: 0)
       });
   }
 }
@@ -34,7 +36,7 @@ class CommunityPageState extends ComponentState<CommunityState>
 
 class ItemPageData {
   String name;
-  int filtrateType;
+  String filtrateType;
   int pageIndex;
   List<DynamicListData> data;
 
@@ -49,6 +51,8 @@ class DynamicListConnector extends ConnOp<CommunityState, DynamicListState> {
 
   @override
   DynamicListState get(CommunityState state) {
-    return DynamicListState()..data = state.pageData;
+    return DynamicListState()
+      ..data = state.pageData
+      ..tabController = state.tabController;
   }
 }

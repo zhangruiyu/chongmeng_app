@@ -2,6 +2,7 @@ import 'package:chongmeng/function/main/community/dynamic_component/component.da
 import 'package:chongmeng/function/main/community/dynamic_component/state.dart';
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:oktoast/oktoast.dart';
 
 import 'reducer.dart';
 import 'state.dart';
@@ -18,8 +19,11 @@ class DynamicListAdapter extends DynamicFlowAdapter<DynamicListState> {
 class _DynamicListConnector extends ConnOp<DynamicListState, List<ItemBean>> {
   @override
   List<ItemBean> get(DynamicListState state) {
-    if (state.data?.isNotEmpty == true) {
-      return state.data[0].data
+    println("index  ${state.tabController.index.toString()}");
+    var data =
+        state.data[state.data.keys.toList()[state.tabController.index]].data;
+    if (data?.isNotEmpty == true) {
+      return data
           .map<ItemBean>((DynamicListData data) =>
               ItemBean('dynamic', DynamicItemState(data: data)))
           .toList(growable: true);
@@ -33,7 +37,6 @@ class _DynamicListConnector extends ConnOp<DynamicListState, List<ItemBean>> {
 
   @override
   subReducer(reducer) {
-    // TODO: implement subReducer
     return super.subReducer(reducer);
   }
 }

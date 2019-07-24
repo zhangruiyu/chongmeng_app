@@ -10,6 +10,7 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 import 'action.dart';
+import 'index_inherited.dart';
 import 'state.dart';
 
 Widget buildView(
@@ -36,27 +37,30 @@ Widget buildView(
           child: TabBarView(
             controller: state.tabController,
             children: state.pageData.values.map<Widget>((page) {
-              return SafeArea(
-                top: false,
-                child: EasyRefresh.custom(
-                  onRefresh: CompleterUtils.produceCompleterAction(
-                      dispatch, CommunityActionCreator.onRefresh,
-                      params: (Map<String, dynamic> p) {
-                    p['filtrateType'] = page.filtrateType;
-                  }),
-                  onLoad: CompleterUtils.produceCompleterAction(
-                      dispatch, CommunityActionCreator.onLoadMore,
-                      params: (Map<String, dynamic> p) {
-                    p['filtrateType'] = page.filtrateType;
-                  }),
-                  slivers: <Widget>[
-                    SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                          buildAdapter.itemBuilder,
-                          childCount: buildAdapter.itemCount),
-                    )
-                  ],
+              return IndexInherited(
+                child: SafeArea(
+                  top: false,
+                  child: EasyRefresh.custom(
+                    onRefresh: CompleterUtils.produceCompleterAction(
+                        dispatch, CommunityActionCreator.onRefresh,
+                        params: (Map<String, dynamic> p) {
+                      p['filtrateType'] = page.filtrateType;
+                    }),
+                    onLoad: CompleterUtils.produceCompleterAction(
+                        dispatch, CommunityActionCreator.onLoadMore,
+                        params: (Map<String, dynamic> p) {
+                      p['filtrateType'] = page.filtrateType;
+                    }),
+                    slivers: <Widget>[
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                            buildAdapter.itemBuilder,
+                            childCount: buildAdapter.itemCount),
+                      )
+                    ],
+                  ),
                 ),
+                index: page.filtrateType,
               );
             }).toList(),
           ),

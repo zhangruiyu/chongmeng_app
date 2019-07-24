@@ -14,7 +14,7 @@ Reducer<CommunityState> buildReducer() {
 
 CommunityState _onResetPageData(CommunityState state, Action action) {
   final CommunityState newState = state.clone();
-  int filtrateType = action.payload['filtrateType'];
+  String filtrateType = action.payload['filtrateType'];
   newState.pageData[filtrateType].data = action.payload['data'];
   newState.pageData[filtrateType].pageIndex = action.payload['pageIndex'];
   return newState;
@@ -22,7 +22,7 @@ CommunityState _onResetPageData(CommunityState state, Action action) {
 
 CommunityState _onAddPageListData(CommunityState state, Action action) {
   final CommunityState newState = state.clone();
-  int filtrateType = action.payload['filtrateType'];
+  String filtrateType = action.payload['filtrateType'];
   newState.pageData[filtrateType].data.addAll(action.payload['data']);
   newState.pageData[filtrateType].pageIndex = action.payload['pageIndex'];
   return newState;

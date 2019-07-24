@@ -34,7 +34,6 @@ void _dispose(Action action, Context<CommunityState> ctx) {
 }
 
 Future _onRefresh(Action action, Context<CommunityState> ctx) async {
-  var filtrateType = action.payload['filtrateType'];
   var result = await RequestClient.request<DynamicListEntity>(
     ctx.context,
     HttpConstants.DynamicList,
