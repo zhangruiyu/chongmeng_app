@@ -76,9 +76,10 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
                 SliverPersistentHeader(
                     pinned: true,
                     floating: true,
-                    delegate: _SliverAppBarDelegate(
-                      viewService.buildComponent("tab"),
-                    )),
+                    delegate: _SliverAppBarDelegate(Card(
+                      margin: const EdgeInsets.all(8.0),
+                      child: viewService.buildComponent("tab"),
+                    ))),
                 SliverToBoxAdapter(
                   child: Container(
                     height: 37.0,
@@ -96,16 +97,7 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
                             padding: const EdgeInsets.only(left: 11.0),
                             child: GestureDetector(
                               behavior: HitTestBehavior.opaque,
-                              onTap: () {
-                                /*var itemNotice =
-                                  homeEntity.sysNotices[controller.position ?? 0];
-                              NavigatorHelper.pushWebPage(
-                                context,
-                                itemNotice.title,
-                                HttpConstants.NoticeDetail +
-                                    itemNotice.noticeId.toString(),
-                              );*/
-                              },
+                              onTap: () {},
                               child: Container(
                                 height: 34.0,
                                 child: Marquee(
@@ -126,125 +118,115 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
                     ),
                   ),
                 ),
-                SliverList(
+                /*  SliverList(
                   delegate: SliverChildListDelegate(
                       state.homeData.recommendProduct.map((item) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: themeData.dividerColor,
-                            style: BorderStyle.solid,
-                            width: 1,
-                          ),
+                    return buildItem(themeData,accentColor);
+                  }).toList()),
+                )*/
+              ],
+      ),
+    ),
+  );
+}
+
+buildItem(themeData, accentColor) {
+  return Container(
+    decoration: BoxDecoration(
+      border: Border(
+        bottom: BorderSide(
+          color: themeData.dividerColor,
+          style: BorderStyle.solid,
+          width: 1,
+        ),
+      ),
+      color: colorWhite,
+    ),
+    child: InkWell(
+      onTap: () {},
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: CachedNetworkImage(
+                imageUrl:
+                    "https://img.alicdn.com/imgextra/i3/678669052/O1CN01hpqOYo2GjrhmAThZA_!!0-item_pic.jpg",
+                fit: BoxFit.fill,
+                width: 120.0,
+                height: 120.0,
+              ),
+            ),
+            Expanded(
+              child: Container(
+                height: 120.0,
+                padding:
+                    const EdgeInsets.only(top: 5.0, bottom: 5.0, left: 10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text("德尔的额"),
+                    Column(
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              "原价 ¥49",
+                              style: themeData.textTheme.caption
+                                  .merge(TextStyle(color: colorA4A4A4)),
+                            ),
+                            Text("已售 7.2万件",
+                                style: themeData.textTheme.caption
+                                    .merge(TextStyle(color: colorA4A4A4))),
+                          ],
                         ),
-                        color: colorWhite,
-                      ),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: CachedNetworkImage(
-                                  imageUrl:
-                                      "https://img.alicdn.com/imgextra/i3/678669052/O1CN01hpqOYo2GjrhmAThZA_!!0-item_pic.jpg",
-                                  fit: BoxFit.fill,
-                                  width: 120.0,
-                                  height: 120.0,
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                        text: "券后价 ",
+                                        style: TextStyle(
+                                            fontSize: 12.0,
+                                            color: accentColor)),
+                                    TextSpan(
+                                        text: "¥29",
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            color: accentColor)),
+                                  ],
                                 ),
                               ),
-                              Expanded(
-                                child: Container(
-                                  height: 120.0,
-                                  padding: const EdgeInsets.only(
-                                      top: 5.0, bottom: 5.0, left: 10.0),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text("德尔的额"),
-                                      Column(
-                                        children: <Widget>[
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: <Widget>[
-                                              Text(
-                                                "原价 ¥49",
-                                                style: themeData
-                                                    .textTheme.caption
-                                                    .merge(TextStyle(
-                                                        color: colorA4A4A4)),
-                                              ),
-                                              Text("已售 7.2万件",
-                                                  style: themeData
-                                                      .textTheme.caption
-                                                      .merge(TextStyle(
-                                                          color: colorA4A4A4))),
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 8.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: <Widget>[
-                                                RichText(
-                                                  text: TextSpan(
-                                                    children: [
-                                                      TextSpan(
-                                                          text: "券后价 ",
-                                                          style: TextStyle(
-                                                              fontSize: 12.0,
-                                                              color:
-                                                                  accentColor)),
-                                                      TextSpan(
-                                                          text: "¥29",
-                                                          style: TextStyle(
-                                                              fontSize: 18.0,
-                                                              color:
-                                                                  accentColor)),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: 25.0,
-                                                  child: OutlineButton(
-                                                    disabledBorderColor:
-                                                        accentColor,
-                                                    child: Text(
-                                                      '20元券',
-                                                      style: TextStyle(
-                                                          fontSize: 12.0,
-                                                          color: accentColor),
-                                                    ),
-                                                    onPressed: null,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                              Container(
+                                height: 25.0,
+                                child: OutlineButton(
+                                  disabledBorderColor: accentColor,
+                                  child: Text(
+                                    '20元券',
+                                    style: TextStyle(
+                                        fontSize: 12.0, color: accentColor),
                                   ),
+                                  onPressed: null,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      ),
-                    );
-                  }).toList()),
-                )
-              ],
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     ),
   );
@@ -256,10 +238,10 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final Widget _tabBar;
 
   @override
-  double get minExtent => WindowUtils.getScreenWidth() / 4 * 2;
+  double get minExtent => 180.0;
 
   @override
-  double get maxExtent => WindowUtils.getScreenWidth() / 4 * 2;
+  double get maxExtent => 180.0;
 
   @override
   Widget build(

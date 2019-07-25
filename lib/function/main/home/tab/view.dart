@@ -7,24 +7,27 @@ import 'package:flutter/material.dart' hide Action;
 import 'state.dart';
 
 Widget buildView(TabState state, Dispatch dispatch, ViewService viewService) {
-  return Card(
-    margin: const EdgeInsets.all(8.0),
-    child: Column(
-      children: <Widget>[
-        Row(
+  return Column(
+    children: <Widget>[
+      SizedBox(
+        height: 80.0,
+        child: Row(
           children: state.tabData
               .sublist(0, 4)
               .map<Widget>((itemMenu) => buildItem(itemMenu, viewService))
               .toList(),
         ),
-        Row(
+      ),
+      SizedBox(
+        height: 80.0,
+        child: Row(
           children: state.tabData
               .sublist(4, state.tabData.length)
               .map<Widget>((itemMenu) => buildItem(itemMenu, viewService))
               .toList(),
         ),
-      ],
-    ),
+      ),
+    ],
   );
 }
 
@@ -43,6 +46,7 @@ buildItem(itemMenu, viewService) {
         }
       },
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           itemMenu.imageUrl.startsWith("http")
               ? CachedNetworkImage(
@@ -52,10 +56,7 @@ buildItem(itemMenu, viewService) {
                   itemMenu.imageUrl,
                   height: 40.0,
                 ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Text(itemMenu.title),
-          )
+          Text(itemMenu.title)
         ],
       ),
     ),

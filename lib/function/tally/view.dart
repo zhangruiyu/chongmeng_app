@@ -4,6 +4,7 @@ import 'package:chongmeng/constants/page_constants.dart';
 import 'package:chongmeng/utils/color_utils.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
+import 'package:chongmeng/widget/loadling_widget.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -31,6 +32,8 @@ Widget buildView(TallyState state, Dispatch dispatch, ViewService viewService) {
       ],
     ),
     body: EasyRefresh.custom(
+      firstRefresh: true,
+      firstRefreshWidget: LoadingWidget(),
       controller: state.easyRefreshController,
       onRefresh: CompleterUtils.produceCompleterAction(
         dispatch,
@@ -46,6 +49,7 @@ Widget buildView(TallyState state, Dispatch dispatch, ViewService viewService) {
           delegate:
               SliverChildBuilderDelegate((BuildContext context, int index) {
             var itemData = state.data[index];
+
             return Column(
               children: <Widget>[
                 InkWell(
@@ -143,9 +147,11 @@ Widget buildView(TallyState state, Dispatch dispatch, ViewService viewService) {
                     ),
                   ),
                 ),
-                VerticalLine(
-                  height: 10.0,
-                )
+                index == state.data.length - 1
+                    ? Container()
+                    : VerticalLine(
+                        height: 10.0,
+                      )
               ],
             );
           }, childCount: state.data.length),
