@@ -19,7 +19,7 @@ class HttpConstants {
   static final String DynamicList = "app/dynamic/dynamic/list";
   static final String ThirdLoginAndRegister =
       "app/auth/common/thirdLoginAndRegister";
-  static final String HomeIndex = "app/auth/home/index";
+  static final String HomeIndex = "app/home/index";
   static final String PeriodEffectiveSign =
       "app/cos/common/periodEffectiveSign";
 

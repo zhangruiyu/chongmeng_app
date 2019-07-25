@@ -28,24 +28,19 @@ Widget buildView(
             },
             child: Container(
               height: 150.0,
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(5.0),
-                ),
-                child: new CachedNetworkImage(
-                  imageUrl: itemBanner.imgUrl,
-                  fit: BoxFit.fill,
-                  errorWidget: (b, c, e) {
-                    return new Container();
-                  },
-                ),
+              child: new CachedNetworkImage(
+                imageUrl: itemBanner.pictUrl,
+                fit: BoxFit.fill,
+                errorWidget: (b, c, e) {
+                  return new Container();
+                },
               ),
             ),
           );
         },
         itemCount: state.bannerData.length,
-        viewportFraction: 0.8,
-        scale: 0.75,
+//        viewportFraction: 0.8,
+//        scale: 0.75,
         outer: false,
         autoplay: true,
         pagination: new SwiperPagination(

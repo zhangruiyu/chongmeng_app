@@ -24,7 +24,7 @@ class OvalSwiperPaginationBuilder extends SwiperPlugin {
       {this.activeColor,
       this.color,
       this.key,
-      this.size: 10.0,
+      this.size: 7.0,
       this.activeSize: 10.0,
       this.space: 3.0});
 
@@ -70,7 +70,7 @@ class OvalSwiperPaginationBuilder extends SwiperPlugin {
             decoration: BoxDecoration(
                 color: active ? activeColor : color,
                 borderRadius:
-                    BorderRadius.all((Radius.circular(active ? 13.0 : size)))),
+                    BorderRadius.all((Radius.circular(active ? 7.0 : size)))),
             width: active ? activeSize : size,
             height: active ? size : size,
             duration: Duration(milliseconds: 300),

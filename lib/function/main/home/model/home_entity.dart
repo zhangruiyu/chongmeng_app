@@ -24,10 +24,11 @@ class HomeEntity {
 
 class HomeData {
   List<HomeDataTab> tab;
-  List<HomeDataBanner> banners;
-  List<HomeDataContent> content;
+  List<String> recommendProduct;
+  List<HomeDataBanner> banner;
+  List<String> sysNotices;
 
-  HomeData({this.tab, this.banners, this.content});
+  HomeData({this.tab, this.recommendProduct, this.banner, this.sysNotices});
 
   HomeData.fromJson(Map<String, dynamic> json) {
     if (json['tab'] != null) {
@@ -36,114 +37,160 @@ class HomeData {
         tab.add(new HomeDataTab.fromJson(v));
       });
     }
-    if (json['banners'] != null) {
-      banners = new List<HomeDataBanner>();
-      (json['banners'] as List).forEach((v) {
-        banners.add(new HomeDataBanner.fromJson(v));
+    recommendProduct = json['recommendProduct']?.cast<String>();
+    if (json['banner'] != null) {
+      banner = new List<HomeDataBanner>();
+      (json['banner'] as List).forEach((v) {
+        banner.add(new HomeDataBanner.fromJson(v));
       });
     }
-    if (json['content'] != null) {
-      content = new List<HomeDataContent>();
-      (json['content'] as List).forEach((v) {
-        content.add(new HomeDataContent.fromJson(v));
-      });
-    }
+    sysNotices = json['sysNotices']?.cast<String>();
   }
-
-  List<String> sysNotices = ["有个奥特曼从天而降", "有个奥特曼从天而降"];
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.tab != null) {
       data['tab'] = this.tab.map((v) => v.toJson()).toList();
     }
-    if (this.banners != null) {
-      data['banners'] = this.banners.map((v) => v.toJson()).toList();
+    data['recommendProduct'] = this.recommendProduct;
+    if (this.banner != null) {
+      data['banner'] = this.banner.map((v) => v.toJson()).toList();
     }
-    if (this.content != null) {
-      data['content'] = this.content.map((v) => v.toJson()).toList();
-    }
+    data['sysNotices'] = this.sysNotices;
     return data;
   }
 }
 
 class HomeDataTab {
-  String picUrl;
+  bool isH5;
+  String imageUrl;
   String title;
-  String url;
+  dynamic skipUrl;
 
-  HomeDataTab({this.picUrl, this.title, this.url});
+  HomeDataTab({this.isH5, this.imageUrl, this.title, this.skipUrl});
 
   HomeDataTab.fromJson(Map<String, dynamic> json) {
-    picUrl = json['picUrl'];
+    isH5 = json['isH5'];
+    imageUrl = json['imageUrl'];
     title = json['title'];
-    url = json['url'];
+    skipUrl = json['skipUrl'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['picUrl'] = this.picUrl;
+    data['isH5'] = this.isH5;
+    data['imageUrl'] = this.imageUrl;
     data['title'] = this.title;
-    data['url'] = this.url;
+    data['skipUrl'] = this.skipUrl;
     return data;
   }
 }
 
 class HomeDataBanner {
-  String createTime;
-  int bannerId;
-  String imgUrl;
-  int canShare;
+  String zkFinalPrice;
+  int numIid;
+  String pictUrl;
   String title;
-  String url;
+  int type;
+  String zkFinalPriceWap;
+  String eventEndTime;
+  String nick;
+  int volume;
+  String tkRate;
+  int userType;
+  String provcity;
+  String itemUrl;
+  String shopTitle;
+  HomeDataBannerSmallImages smallImages;
+  String eventStartTime;
+  String reservePrice;
+  int sellerId;
+  int status;
 
   HomeDataBanner(
-      {this.createTime,
-      this.bannerId,
-      this.imgUrl,
-      this.canShare,
+      {this.zkFinalPrice,
+      this.numIid,
+      this.pictUrl,
       this.title,
-      this.url});
+      this.type,
+      this.zkFinalPriceWap,
+      this.eventEndTime,
+      this.nick,
+      this.volume,
+      this.tkRate,
+      this.userType,
+      this.provcity,
+      this.itemUrl,
+      this.shopTitle,
+      this.smallImages,
+      this.eventStartTime,
+      this.reservePrice,
+      this.sellerId,
+      this.status});
 
   HomeDataBanner.fromJson(Map<String, dynamic> json) {
-    createTime = json['create_time'];
-    bannerId = json['banner_id'];
-    imgUrl = json['img_url'];
-    canShare = json['can_share'];
+    zkFinalPrice = json['zk_final_price'];
+    numIid = json['num_iid'];
+    pictUrl = json['pict_url'];
     title = json['title'];
-    url = json['url'];
+    type = json['type'];
+    zkFinalPriceWap = json['zk_final_price_wap'];
+    eventEndTime = json['event_end_time'];
+    nick = json['nick'];
+    volume = json['volume'];
+    tkRate = json['tk_rate'];
+    userType = json['user_type'];
+    provcity = json['provcity'];
+    itemUrl = json['item_url'];
+    shopTitle = json['shop_title'];
+    smallImages = json['small_images'] != null
+        ? new HomeDataBannerSmallImages.fromJson(json['small_images'])
+        : null;
+    eventStartTime = json['event_start_time'];
+    reservePrice = json['reserve_price'];
+    sellerId = json['seller_id'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['create_time'] = this.createTime;
-    data['banner_id'] = this.bannerId;
-    data['img_url'] = this.imgUrl;
-    data['can_share'] = this.canShare;
+    data['zk_final_price'] = this.zkFinalPrice;
+    data['num_iid'] = this.numIid;
+    data['pict_url'] = this.pictUrl;
     data['title'] = this.title;
-    data['url'] = this.url;
+    data['type'] = this.type;
+    data['zk_final_price_wap'] = this.zkFinalPriceWap;
+    data['event_end_time'] = this.eventEndTime;
+    data['nick'] = this.nick;
+    data['volume'] = this.volume;
+    data['tk_rate'] = this.tkRate;
+    data['user_type'] = this.userType;
+    data['provcity'] = this.provcity;
+    data['item_url'] = this.itemUrl;
+    data['shop_title'] = this.shopTitle;
+    if (this.smallImages != null) {
+      data['small_images'] = this.smallImages.toJson();
+    }
+    data['event_start_time'] = this.eventStartTime;
+    data['reserve_price'] = this.reservePrice;
+    data['seller_id'] = this.sellerId;
+    data['status'] = this.status;
     return data;
   }
 }
 
-class HomeDataContent {
-  String picUrl;
-  String title;
-  String url;
+class HomeDataBannerSmallImages {
+  List<String> string;
 
-  HomeDataContent({this.picUrl, this.title, this.url});
+  HomeDataBannerSmallImages({this.string});
 
-  HomeDataContent.fromJson(Map<String, dynamic> json) {
-    picUrl = json['picUrl'];
-    title = json['title'];
-    url = json['url'];
+  HomeDataBannerSmallImages.fromJson(Map<String, dynamic> json) {
+    string = json['string']?.cast<String>();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['picUrl'] = this.picUrl;
-    data['title'] = this.title;
-    data['url'] = this.url;
+    data['string'] = this.string;
     return data;
   }
 }

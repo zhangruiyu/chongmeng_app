@@ -20,7 +20,7 @@ class HomeState implements Cloneable<HomeState> {
 ConnOp<HomeState, BannerState> bannerConnector() {
   return ConnOp<HomeState, BannerState>(
     get: (HomeState state) {
-      return BannerState()..bannerData = state.homeData?.banners;
+      return BannerState()..bannerData = state.homeData?.banner;
     },
     set: (HomeState state, BannerState subState) {
       throw Exception("不支持改变数据");

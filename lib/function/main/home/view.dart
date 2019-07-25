@@ -70,7 +70,7 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 21.0),
+                            padding: const EdgeInsets.only(left: 11.0),
                             child: GestureDetector(
                               behavior: HitTestBehavior.opaque,
                               onTap: () {
@@ -89,7 +89,7 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
                                   fontSize: 12.0,
                                   textColor: color343434,
                                   aligment: MarqueeAligment.left,
-                                  textList: ["有个奥特曼从天而降", "有个奥特曼从天而降"]
+                                  textList: state.homeData.sysNotices
                                       .map((itemNotice) {
                                     return itemNotice;
                                   }).toList(),
@@ -105,8 +105,8 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
                 ]),
               ),
               SliverList(
-                delegate:
-                    SliverChildListDelegate(state.homeData.content.map((item) {
+                delegate: SliverChildListDelegate(
+                    state.homeData.recommendProduct.map((item) {
                   return Container(
                     decoration: BoxDecoration(
                       border: Border(
@@ -144,7 +144,7 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
                                       MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text(item.title),
+                                    Text("德尔的额"),
                                     Column(
                                       children: <Widget>[
                                         Row(
