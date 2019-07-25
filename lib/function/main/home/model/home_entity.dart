@@ -106,6 +106,7 @@ class HomeDataBanner {
   String reservePrice;
   int sellerId;
   int status;
+  String clickUrl;
 
   HomeDataBanner(
       {this.zkFinalPrice,
@@ -150,6 +151,7 @@ class HomeDataBanner {
     reservePrice = json['reserve_price'];
     sellerId = json['seller_id'];
     status = json['status'];
+    clickUrl = json['click_url'];
   }
 
   Map<String, dynamic> toJson() {

@@ -11,10 +11,7 @@ Widget buildView(
     BannerState state, Dispatch dispatch, ViewService viewService) {
   var accentColor = Theme.of(viewService.context).accentColor;
   return Container(
-      height: 174.0,
-      padding: EdgeInsets.only(
-        top: 13.0,
-      ),
+      height: 194.0,
       child:
           /*(state?.bannerData?.banners?.length ?? 0) == 0
           ? Container()

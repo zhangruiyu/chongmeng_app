@@ -35,7 +35,7 @@ packages:
       name: cached_network_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   camera:
     dependency: "direct main"
     description:
@@ -138,7 +138,7 @@ packages:
       name: flutter_cache_manager
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   flutter_cupertino_date_picker:
     dependency: "direct main"
     description:
@@ -151,7 +151,7 @@ packages:
     description:
       path: "."
       ref: v2
-      resolved-ref: b6fe38037e5d64164486795a2910cf62e1a9ad66
+      resolved-ref: "9973c2b624839e0b3f9e3a870d34dfebafeeca3a"
       url: "https://github.com/xuelongqy/flutter_easyrefresh.git"
     source: git
     version: "2.0.0-dev"
@@ -243,7 +243,7 @@ packages:
       name: jmessage_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.17"
+    version: "0.0.20"
   jpush_flutter:
     dependency: "direct main"
     description:
@@ -299,7 +299,7 @@ packages:
       name: package_info
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.0+5"
+    version: "0.4.0+6"
   path:
     dependency: transitive
     description:
@@ -313,7 +313,7 @@ packages:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.2"
+    version: "1.2.0"
   pedantic:
     dependency: transitive
     description:

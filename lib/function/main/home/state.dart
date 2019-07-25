@@ -1,19 +1,23 @@
 import 'package:chongmeng/function/main/home/tab/state.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 import 'banner/state.dart';
 import 'model/home_entity.dart';
 
 class HomeState implements Cloneable<HomeState> {
   HomeData homeData;
+  EasyRefreshController controller;
 
   @override
   HomeState clone() {
-    return HomeState();
+    return HomeState()
+      ..controller = controller
+      ..homeData = homeData;
   }
 
   static HomeState initState(Map<String, dynamic> args) {
-    return HomeState();
+    return HomeState()..controller = EasyRefreshController();
   }
 }
 

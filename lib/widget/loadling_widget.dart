@@ -8,7 +8,7 @@ class LoadingWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        SpinKitCircle(color: Color(0xfff5f5f5)),
+        SpinKitCircle(color: theme.accentColor),
       ],
     );
   }
