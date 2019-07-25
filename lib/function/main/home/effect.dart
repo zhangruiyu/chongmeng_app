@@ -23,7 +23,7 @@ Future _onRefresh(Action action, Context<HomeState> ctx) async {
 }
 
 Future _initState(Action action, Context<HomeState> ctx) async {
-  SchedulerBinding.instance.addPostFrameCallback((Duration timestamp) {
-    ctx.state.controller.callRefresh();
-  });
+//  SchedulerBinding.instance.addPostFrameCallback((Duration timestamp) {
+//    ctx.state.controller.callRefresh();
+//  });
 }
