@@ -14,5 +14,5 @@ Effect<BannerState> buildEffect() {
 void _onSkipWebViewPage(Action action, Context<BannerState> ctx) {
   AliProductItem itemBanner = action.payload;
   NavigatorHelper.pushWebPage(
-      ctx.context, itemBanner.title, itemBanner.itemUrl);
+      ctx.context, itemBanner.title, itemBanner.couponClickUrl);
 }
