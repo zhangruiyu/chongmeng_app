@@ -1,3 +1,4 @@
+import 'package:chongmeng/function/main/home/model/ali_product_item.dart';
 import 'package:chongmeng/function/main/home/model/home_entity.dart';
 import 'package:chongmeng/widget/oval_swiper_pagination_builder.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -20,7 +21,7 @@ Widget buildView(
           : */
               new Swiper(
             itemBuilder: (BuildContext context, int index) {
-              HomeDataBanner itemBanner = state.bannerData[index];
+              AliProductItem itemBanner = state.bannerData[index];
               return GestureDetector(
                 onTap: () {
                   dispatch(BannerActionCreator.onSkipWebViewPage(itemBanner));
