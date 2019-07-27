@@ -38,8 +38,8 @@ Future<Widget> createApp() async {
       ],
 //    theme: themeProvide.themeData,
       theme: ThemeData(
-          primaryColor: Colors.amberAccent[200],
-          accentColor: Colors.amberAccent[200],
+          primaryColor: Color(0xffEB0E0E),
+          accentColor: Color(0xffEB0E0E),
           dividerColor: colorE4E4E4),
       home: routes.buildPage(PageConstants.SplashPage, null),
       onGenerateRoute: (RouteSettings settings) {

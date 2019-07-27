@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 
+import 'adapter/adapter.dart';
 import 'banner/component.dart';
 import 'effect.dart';
 import 'reducer.dart';
@@ -14,7 +15,7 @@ class HomeComponent extends Component<HomeState> {
           reducer: buildReducer(),
           view: buildView,
           dependencies: Dependencies<HomeState>(
-              adapter: null,
+              adapter: HomeListConnector() + HomeListAdapter(),
               slots: <String, Dependent<HomeState>>{
                 'banner': bannerConnector() + BannerComponent(),
                 'tab': tabConnector() + TabComponent(),

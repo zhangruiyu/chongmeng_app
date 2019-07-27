@@ -2,6 +2,7 @@ import 'package:chongmeng/function/main/home/tab/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
+import 'adapter/state.dart';
 import 'banner/state.dart';
 import 'model/home_entity.dart';
 
@@ -41,4 +42,16 @@ ConnOp<HomeState, TabState> tabConnector() {
       throw Exception("不支持改变数据");
     },
   );
+}
+
+class HomeListConnector extends ConnOp<HomeState, HomeListState> {
+  @override
+  void set(HomeState state, HomeListState subState) {
+//    super.set(state, subState);
+  }
+
+  @override
+  HomeListState get(HomeState state) {
+    return HomeListState()..data = state.homeData?.recommendProduct ?? [];
+  }
 }

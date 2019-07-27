@@ -14,6 +14,7 @@ import 'state.dart';
 Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
   var themeData = Theme.of(viewService.context);
   var accentColor = themeData.accentColor;
+  var buildAdapter = viewService.buildAdapter();
   return Scaffold(
     backgroundColor: colorWhite,
     body: NestedScrollView(
@@ -118,115 +119,11 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
                     ),
                   ),
                 ),
-                /*  SliverList(
-                  delegate: SliverChildListDelegate(
-                      state.homeData.recommendProduct.map((item) {
-                    return buildItem(themeData,accentColor);
-                  }).toList()),
-                )*/
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(buildAdapter.itemBuilder,
+                      childCount: buildAdapter.itemCount),
+                )
               ],
-      ),
-    ),
-  );
-}
-
-buildItem(themeData, accentColor) {
-  return Container(
-    decoration: BoxDecoration(
-      border: Border(
-        bottom: BorderSide(
-          color: themeData.dividerColor,
-          style: BorderStyle.solid,
-          width: 1,
-        ),
-      ),
-      color: colorWhite,
-    ),
-    child: InkWell(
-      onTap: () {},
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: CachedNetworkImage(
-                imageUrl:
-                    "https://img.alicdn.com/imgextra/i3/678669052/O1CN01hpqOYo2GjrhmAThZA_!!0-item_pic.jpg",
-                fit: BoxFit.fill,
-                width: 120.0,
-                height: 120.0,
-              ),
-            ),
-            Expanded(
-              child: Container(
-                height: 120.0,
-                padding:
-                    const EdgeInsets.only(top: 5.0, bottom: 5.0, left: 10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text("德尔的额"),
-                    Column(
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "原价 ¥49",
-                              style: themeData.textTheme.caption
-                                  .merge(TextStyle(color: colorA4A4A4)),
-                            ),
-                            Text("已售 7.2万件",
-                                style: themeData.textTheme.caption
-                                    .merge(TextStyle(color: colorA4A4A4))),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                        text: "券后价 ",
-                                        style: TextStyle(
-                                            fontSize: 12.0,
-                                            color: accentColor)),
-                                    TextSpan(
-                                        text: "¥29",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            color: accentColor)),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                height: 25.0,
-                                child: OutlineButton(
-                                  disabledBorderColor: accentColor,
-                                  child: Text(
-                                    '20元券',
-                                    style: TextStyle(
-                                        fontSize: 12.0, color: accentColor),
-                                  ),
-                                  onPressed: null,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     ),
   );
