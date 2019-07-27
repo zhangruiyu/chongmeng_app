@@ -32,4 +32,6 @@ class PageConstants {
       "cm://ShippingAddressAddPage"; //添加收货地址
   static const String MyOrderPage = "cm://MyOrderPage"; //我的订单
   static const String ReviewImagePage = "cm://ReviewImagePage"; //图片预览
+  static const String ProductDetailsPage =
+      "cm://ProductDetailsPage"; //淘宝推荐产品详情页
 }

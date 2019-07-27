@@ -58,6 +58,21 @@ android {
                 JPUSH_PKGNAME : "com.chongmeng.chongmeng",
                 JPUSH_APPKEY : "5273001af03971f6b56827d1", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                // 设置manifest.xml中的变量
+                HUAWEI_APPID : "您的应用对应华为的appID", // 华为平台注册的appid
+                // 设置manifest.xml中的变量
+                XIAOMI_APPKEY : "5821799899831", // 小米平台注册的appkey
+                XIAOMI_APPID : "2882303761517998831", // 小米平台注册的appid
+                MEIZU_APPKEY:"bc83ca3ac1e64bcfbca237e12837a1f8",//魅族平台注册的appkey
+                MEIZU_APPID:"3245543",//魅族平台注册的appid
+                // 设置manifest.xml中的变量
+                OPPO_APPKEY : "OP-您的应用对应的OPPO的APPKEY", // OPPO平台注册的appkey
+                OPPO_APPID : "OP-您的应用对应的OPPO的APPID", // OPPO平台注册的appid
+                OPPO_APPSECRET: "OP-您的应用对应的OPPO的APPSECRET", //OPPO平台注册的appsecret
+                // 设置manifest.xml中的变量
+                VIVO_APPKEY : "您的应用对应的VIVO的APPKEY", // VIVO平台注册的appkey
+                VIVO_APPID : "您的应用对应的VIVO的APPID", // VIVO平台注册的appid
+
         ]
     }
     signingConfigs {
@@ -93,6 +108,12 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'cn.jiguang.sdk.plugin:huawei:3.3.4'//和对应JPush版本相同
+    implementation 'cn.jiguang.sdk.plugin:xiaomi:3.3.4'//此版本插件仅支持JPushSDK3.2.0及以上版本
+    implementation'cn.jiguang.sdk.plugin:meizu:3.3.4'//此版本插件仅支持JPushSDK3.2.0及以上版本
+    implementation 'cn.jiguang.sdk.plugin:oppo:3.3.4'
+    implementation 'cn.jiguang.sdk.plugin:oppo:3.3.4'
+    implementation 'cn.jiguang.sdk.plugin:vivo:3.3.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
