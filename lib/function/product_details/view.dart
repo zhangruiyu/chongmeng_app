@@ -149,7 +149,7 @@ SizedBox buildBanner(AliProductItem itemData, ThemeData of) {
     height: WindowUtils.getScreenWidth(),
     child: new Swiper(
       itemBuilder: (BuildContext context, int index) {
-        String itemBanner = itemData.smallImages.string[index];
+        String itemBanner = itemData.smallImages[index];
         return new CachedNetworkImage(
           imageUrl: itemBanner,
           fit: BoxFit.fill,
@@ -158,7 +158,7 @@ SizedBox buildBanner(AliProductItem itemData, ThemeData of) {
           },
         );
       },
-      itemCount: itemData.smallImages.string.length,
+      itemCount: itemData.smallImages.length,
       outer: false,
       autoplay: true,
       pagination: new SwiperPagination(

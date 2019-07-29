@@ -38,6 +38,7 @@ Future<Widget> createApp() async {
       ],
 //    theme: themeProvide.themeData,
       theme: ThemeData(
+          platform: TargetPlatform.iOS,
           primaryColor: Color(0xffEB0E0E),
           accentColor: Color(0xffEB0E0E),
           dividerColor: colorE4E4E4),

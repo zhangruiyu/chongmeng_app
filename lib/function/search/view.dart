@@ -1,0 +1,113 @@
+import 'package:chongmeng/constants/colors.dart';
+import 'package:chongmeng/utils/completer_utils.dart';
+import 'package:chongmeng/widget/back_button_arrows.dart';
+import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+
+import 'action.dart';
+import 'state.dart';
+
+Widget buildView(
+    SearchState state, Dispatch dispatch, ViewService viewService) {
+  var of = Theme.of(viewService.context);
+  return Scaffold(
+      body: NestedScrollView(
+    body: EasyRefresh.custom(
+//            enableControlFinishLoad: true,
+//            enableControlFinishRefresh: true,
+      onRefresh: CompleterUtils.produceCompleterAction(
+        dispatch,
+        SearchActionCreator.onRefresh,
+      ),
+      onLoad: CompleterUtils.produceCompleterAction(
+        dispatch,
+        SearchActionCreator.onLoadMore,
+      ),
+      slivers: <Widget>[
+        SliverList(
+          delegate:
+              SliverChildBuilderDelegate((BuildContext context, int index) {
+            var itemData = state.data[index];
+            return Text(index.toString());
+          }, childCount: state.data?.length ?? 0),
+        )
+      ],
+    ),
+    headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+      return [
+        SliverAppBar(
+          backgroundColor: of.accentColor,
+          pinned: true,
+          elevation: 0.0,
+          floating: true,
+          primary: true,
+          leading: new IconButton(
+              padding: const EdgeInsets.all(0.0),
+              icon: Icon(Icons.arrow_back),
+              tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+              onPressed: () {
+                Navigator.maybePop(context);
+              }),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 22.0),
+              child: InkResponse(
+                onTap: () {
+                  dispatch(SearchActionCreator.onSearch());
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text("搜索"),
+                ),
+              ),
+            )
+          ],
+          title: Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Row(
+                children: <Widget>[
+                  new Icon(
+                    Icons.search,
+                    size: 25.0,
+                    color: of.accentColor,
+                  ),
+                  Expanded(
+                    child: TextField(
+                      scrollPadding: const EdgeInsets.all(0.0),
+                      controller: state.textEditingController,
+                      textInputAction: TextInputAction.search,
+                      onSubmitted: (str) {
+                        dispatch(SearchActionCreator.onSearch());
+                      },
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.zero,
+                          border: InputBorder.none,
+                          hintText: "",
+                          hintStyle:
+                              TextStyle(color: colorD1D0D0, fontSize: 12.0)),
+                      autofocus: true,
+                      style: TextStyle(fontSize: 14.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            decoration: BoxDecoration(
+                color: Color(0x96ffffff),
+                borderRadius: BorderRadius.all(Radius.circular(30.0))),
+          ),
+          /*
+          expandedHeight: 197,
+          flexibleSpace: FlexibleSpaceBar(
+            collapseMode: CollapseMode.parallax,
+            background: viewService.buildComponent("banner"),
+          ),*/
+        )
+      ];
+    },
+  ));
+}

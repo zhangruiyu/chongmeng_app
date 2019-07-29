@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
+import 'package:chongmeng/constants/page_constants.dart';
 import 'package:chongmeng/function/main/home/action.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
@@ -29,28 +30,34 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
             automaticallyImplyLeading: false,
             expandedHeight: 197,
             primary: true,
-            title: Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Row(
-                  children: <Widget>[
-                    new Icon(
-                      Icons.search,
-                      size: 30.0,
-                      color: accentColor,
-                    ),
-                    Text(
-                      "寻觅快乐",
-                      style: TextStyle(fontSize: 14.0, color: accentColor),
-                    )
-                  ],
+            title: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(
+                    viewService.context, PageConstants.SearchPage);
+              },
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Row(
+                    children: <Widget>[
+                      new Icon(
+                        Icons.search,
+                        size: 25.0,
+                        color: accentColor,
+                      ),
+                      Text(
+                        "寻觅快乐",
+                        style: TextStyle(fontSize: 14.0, color: accentColor),
+                      )
+                    ],
+                  ),
                 ),
+                decoration: BoxDecoration(
+                    color: Color(0x96ffffff),
+                    borderRadius: BorderRadius.all(Radius.circular(30.0))),
               ),
-              decoration: BoxDecoration(
-                  color: Color(0x96ffffff),
-                  borderRadius: BorderRadius.all(Radius.circular(30.0))),
             ),
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.parallax,

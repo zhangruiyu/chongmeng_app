@@ -27,6 +27,7 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Hero(
+                  transitionOnUserGestures: true,
                   tag: state.index.toString(),
                   child: CachedNetworkImage(
                     fit: BoxFit.cover,

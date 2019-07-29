@@ -34,4 +34,5 @@ class PageConstants {
   static const String ReviewImagePage = "cm://ReviewImagePage"; //图片预览
   static const String ProductDetailsPage =
       "cm://ProductDetailsPage"; //淘宝推荐产品详情页
+  static const String SearchPage = "cm://SearchPage"; //搜索页面
 }

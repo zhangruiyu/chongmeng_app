@@ -52,6 +52,8 @@ class HttpConstants {
 
   static String get IntegralOrderList =>
       "app/store/common/integralOrderList"; //兑换订单
+
+  static String get AliSearch => "app/ali/search"; //淘宝客搜索
 }
 
 class CosType {

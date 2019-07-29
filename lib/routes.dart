@@ -18,6 +18,7 @@ import 'function/product_details/page.dart';
 import 'function/record/page.dart';
 import 'function/record/review/page.dart';
 import 'function/review_image/page.dart';
+import 'function/search/page.dart';
 import 'function/setting/page.dart';
 import 'function/shipping_address/page.dart';
 import 'function/shipping_address/shipping_address_add/page.dart';
@@ -56,6 +57,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.CommitTextPage: CommitTextPage(),
     PageConstants.ReviewImagePage: ReviewImagePage(),
     PageConstants.ProductDetailsPage: ProductDetailsPage(),
+    PageConstants.SearchPage: SearchPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

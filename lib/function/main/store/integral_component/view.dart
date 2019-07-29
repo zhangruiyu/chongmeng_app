@@ -14,6 +14,7 @@ Widget buildView(
       dispatch(IntegralItemActionCreator.onSkipIntegralCommodityDetailPage());
     },
     child: Hero(
+      transitionOnUserGestures: true,
       key: Key(state.index.toString()),
       tag: state.index.toString(),
       child: CachedNetworkImage(
