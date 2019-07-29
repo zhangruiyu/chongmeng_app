@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -131,7 +131,7 @@ Widget buildView(
                   ),
                   textColor: colorWhite,
                   onPressed: () {
-//                dispatch(AutoActionCreator.onLogin("tel"));
+                    launch(itemData.couponClickUrl);
                   },
                 ),
               )
