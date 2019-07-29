@@ -7,6 +7,8 @@ class AliProductItem {
   double zkFinalPriceWap;
   double favourablePrice;
   String couponValue;
+  String couponStartTime;
+  String couponEndTime;
 
   AliProductItem(
       {this.volume,
@@ -29,6 +31,8 @@ class AliProductItem {
     zkFinalPriceWap = json['zk_final_price_wap'];
     favourablePrice = json['favourable_price'];
     couponValue = json['coupon_value'];
+    couponStartTime = json['coupon_start_time'];
+    couponEndTime = json['coupon_end_time'];
   }
 
   Map<String, dynamic> toJson() {
@@ -43,6 +47,8 @@ class AliProductItem {
     data['zk_final_price_wap'] = this.zkFinalPriceWap;
     data['favourable_price'] = this.favourablePrice;
     data['coupon_value'] = this.couponValue;
+    data['coupon_start_time'] = this.couponStartTime;
+    data['coupon_end_time'] = this.couponEndTime;
     return data;
   }
 }

@@ -22,7 +22,9 @@ Widget buildView(
       color: colorWhite,
     ),
     child: InkWell(
-      onTap: () {},
+      onTap: () {
+        dispatch(AliItemProductActionCreator.onSkipProductDetailsPage());
+      },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(

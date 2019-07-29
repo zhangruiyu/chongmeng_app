@@ -151,7 +151,7 @@ packages:
     description:
       path: "."
       ref: v2
-      resolved-ref: "9973c2b624839e0b3f9e3a870d34dfebafeeca3a"
+      resolved-ref: faf9beb8fcc8b8116d8fa6bb9be404a2c643484c
       url: "https://github.com/xuelongqy/flutter_easyrefresh.git"
     source: git
     version: "2.0.0-dev"
@@ -243,14 +243,14 @@ packages:
       name: jmessage_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.20"
+    version: "0.1.0"
   jpush_flutter:
     dependency: "direct main"
     description:
       name: jpush_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.12"
+    version: "0.0.13"
   like_button:
     dependency: "direct main"
     description:
@@ -493,7 +493,7 @@ packages:
       name: url_launcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.1.0"
+    version: "5.1.1"
   uuid:
     dependency: transitive
     description:
@@ -514,7 +514,7 @@ packages:
       name: webview_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.10+3"
+    version: "0.3.10+4"
 sdks:
   dart: ">=2.3.0 <3.0.0"
   flutter: ">=1.5.9-pre.94 <2.0.0"
