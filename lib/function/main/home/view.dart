@@ -27,6 +27,7 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
             elevation: 0.0,
             floating: true,
             leading: null,
+            brightness: Brightness.light,
             automaticallyImplyLeading: false,
             expandedHeight: 197,
             primary: true,

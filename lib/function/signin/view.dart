@@ -22,7 +22,7 @@ Widget buildView(
     backgroundColor: bgColor,
     appBar: Toolbar(
       title: Text("签到"),
-      backgroundColor: colorWhite,
+      backgroundColor: accentColor,
     ),
     body: EasyRefresh.custom(
       slivers: <Widget>[

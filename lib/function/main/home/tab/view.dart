@@ -18,15 +18,16 @@ Widget buildView(TabState state, Dispatch dispatch, ViewService viewService) {
               .toList(),
         ),
       ),
-      SizedBox(
-        height: 80.0,
-        child: Row(
-          children: state.tabData
-              .sublist(4, state.tabData.length)
-              .map<Widget>((itemMenu) => buildItem(itemMenu, viewService))
-              .toList(),
+      if (state.tabData.length > 4)
+        SizedBox(
+          height: 80.0,
+          child: Row(
+            children: state.tabData
+                .sublist(4, state.tabData.length)
+                .map<Widget>((itemMenu) => buildItem(itemMenu, viewService))
+                .toList(),
+          ),
         ),
-      ),
     ],
   );
 }
@@ -55,6 +56,8 @@ buildItem(itemMenu, viewService) {
               : new Image.asset(
                   itemMenu.imageUrl,
                   height: 40.0,
+                  width: 40.0,
+                  fit: BoxFit.contain,
                 ),
           Text(itemMenu.title)
         ],
