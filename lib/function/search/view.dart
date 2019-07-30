@@ -11,6 +11,7 @@ import 'state.dart';
 Widget buildView(
     SearchState state, Dispatch dispatch, ViewService viewService) {
   var of = Theme.of(viewService.context);
+  var buildAdapter = viewService.buildAdapter();
   return Scaffold(
       body: NestedScrollView(
     body: EasyRefresh.custom(
@@ -26,11 +27,8 @@ Widget buildView(
       ),
       slivers: <Widget>[
         SliverList(
-          delegate:
-              SliverChildBuilderDelegate((BuildContext context, int index) {
-            var itemData = state.data[index];
-            return Text(index.toString());
-          }, childCount: state.data?.length ?? 0),
+          delegate: SliverChildBuilderDelegate(buildAdapter.itemBuilder,
+              childCount: buildAdapter.itemCount),
         )
       ],
     ),

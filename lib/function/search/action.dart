@@ -1,7 +1,7 @@
 import 'package:chongmeng/function/main/home/model/ali_product_item.dart';
 import 'package:fish_redux/fish_redux.dart';
 
-enum SearchAction { ResetData, Search, Refresh, LoadMore }
+enum SearchAction { ResetData, AddData, Search, Refresh, LoadMore }
 
 class SearchActionCreator {
   static Action onResetData(List<AliProductItem> data) {
@@ -18,5 +18,10 @@ class SearchActionCreator {
 
   static Action onLoadMore(data) {
     return Action(SearchAction.LoadMore, payload: data);
+  }
+
+  static Action onAddData(List<AliProductItem> data, index) {
+    return Action(SearchAction.AddData,
+        payload: {'data': data, 'index': index});
   }
 }

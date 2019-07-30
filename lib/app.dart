@@ -25,9 +25,8 @@ Future<Widget> createApp() async {
         return DefaultLocalizations.of(context).appName;
       },
       localizationsDelegates: [
-        // ... app-specific localization delegate[s] here
-        const DefaultLocalizationsDelegate(),
         DefaultCupertinoLocalizations.delegate,
+        const DefaultLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
@@ -38,7 +37,7 @@ Future<Widget> createApp() async {
       ],
 //    theme: themeProvide.themeData,
       theme: ThemeData(
-          platform: TargetPlatform.iOS,
+//          platform: TargetPlatform.iOS,
           primaryColor: Color(0xffEB0E0E),
           accentColor: Color(0xffEB0E0E),
           dividerColor: colorE4E4E4),

@@ -1,5 +1,6 @@
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/network/net_work.dart';
+import 'package:chongmeng/utils/keyboard_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
 import 'model/search_result_entity.dart';
@@ -8,14 +9,41 @@ import 'state.dart';
 Effect<SearchState> buildEffect() {
   return combineEffects(<Object, Effect<SearchState>>{
     SearchAction.Search: _onSearch,
+    SearchAction.Refresh: _onRefresh,
+    SearchAction.LoadMore: _onLoadMore,
   });
 }
 
 Future _onSearch(Action action, Context<SearchState> ctx) async {
+  _onRefresh(action, ctx);
+}
+
+Future _onRefresh(Action action, Context<SearchState> ctx) async {
+  var payloadMap = action.payload as Map<String, dynamic>;
+  if (payloadMap != null && payloadMap.containsKey("completer")) {
+    action.payload['completer']();
+  }
   var result = await RequestClient.request<SearchResultEntity>(
-      ctx.context, HttpConstants.AliSearch,
-      queryParameters: {"query": ctx.state.textEditingController.text});
+      ctx.context, HttpConstants.AliSearch, queryParameters: {
+    "query": ctx.state.textEditingController.text,
+    'index': 1
+  });
   if (result.hasSuccess) {
+    KeyboardUtils.hide();
     ctx.dispatch(SearchActionCreator.onResetData(result.data.data));
+  }
+}
+
+Future _onLoadMore(Action action, Context<SearchState> ctx) async {
+  var index = ctx.state.index + 1;
+  var result = await RequestClient.request<SearchResultEntity>(
+      ctx.context, HttpConstants.AliSearch, queryParameters: {
+    "query": ctx.state.textEditingController.text,
+    'index': index
+  });
+  action.payload['completer']();
+  if (result.hasSuccess) {
+    KeyboardUtils.hide();
+    ctx.dispatch(SearchActionCreator.onAddData(result.data.data, index));
   }
 }
