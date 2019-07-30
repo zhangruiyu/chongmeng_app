@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/page_constants.dart';
+import 'package:chongmeng/function/main/home/model/home_entity.dart';
 import 'package:chongmeng/helper/user_helper.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
@@ -32,7 +33,7 @@ Widget buildView(TabState state, Dispatch dispatch, ViewService viewService) {
   );
 }
 
-buildItem(itemMenu, viewService) {
+buildItem(HomeDataTab itemMenu, viewService) {
   return Expanded(
     child: GestureDetector(
       onTap: () {
@@ -44,6 +45,9 @@ buildItem(itemMenu, viewService) {
           UserHelper.loginCheck(viewService.context, () {
             Navigator.pushNamed(viewService.context, PageConstants.SignInPage);
           });
+        } else if (itemMenu.title == "猫猫" || itemMenu.title == "狗狗") {
+          Navigator.pushNamed(viewService.context, PageConstants.SearchPage,
+              arguments: {'initChip': itemMenu.chips});
         }
       },
       child: Column(

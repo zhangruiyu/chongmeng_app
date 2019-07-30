@@ -30,36 +30,9 @@ Widget buildView(
         if (state.pageState == SearchState.EMPTY ||
             state.pageState == SearchState.INIT)
           SliverToBoxAdapter(
-            child: SizedBox(
-              height: 120.0,
-              child: Column(
+            child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: ["狗粮", "狗零食", "狗玩具", "狗窝"]
-                        .map(
-                          (itemTitle) => ActionChip(
-                            label: Text(itemTitle),
-                            onPressed: () {},
-                          ),
-                        )
-                        .toList(),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: ["猫粮", "猫零食", "猫玩具", "猫窝"]
-                        .map(
-                          (itemTitle) => ActionChip(
-                            label: Text(itemTitle),
-                            onPressed: () {},
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ],
-              ),
-            ),
+                children: buildEmptyView(state, dispatch)),
           ),
         if (state.pageState == SearchState.HASDATA)
           SliverList(
@@ -138,4 +111,23 @@ Widget buildView(
       ];
     },
   ));
+}
+
+List<Row> buildEmptyView(SearchState state, Dispatch dispatch) {
+  return state.recommendChip.map((itemListTitle) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: itemListTitle
+          .map(
+            (itemTitle) => ActionChip(
+              label: Text(itemTitle),
+              onPressed: () {
+                state.textEditingController.text = itemTitle;
+                dispatch(SearchActionCreator.onSearch());
+              },
+            ),
+          )
+          .toList(),
+    );
+  }).toList();
 }

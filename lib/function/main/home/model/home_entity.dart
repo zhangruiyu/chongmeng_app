@@ -76,6 +76,7 @@ class HomeDataTab {
   String imageUrl;
   String title;
   dynamic skipUrl;
+  List<List<String>> chips;
 
   HomeDataTab({this.isH5, this.imageUrl, this.title, this.skipUrl});
 
@@ -84,6 +85,12 @@ class HomeDataTab {
     imageUrl = json['imageUrl'];
     title = json['title'];
     skipUrl = json['skipUrl'];
+    if (json['chips'] != null) {
+      chips = new List<List<String>>();
+      (json['chips'] as List).forEach((v) {
+        chips.add(new List.from(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -92,6 +99,9 @@ class HomeDataTab {
     data['imageUrl'] = this.imageUrl;
     data['title'] = this.title;
     data['skipUrl'] = this.skipUrl;
+    if (this.chips != null) {
+      data['chips'] = this.chips.map((v) => List.from(v)).toList();
+    }
     return data;
   }
 }
