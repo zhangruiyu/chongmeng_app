@@ -12,8 +12,8 @@ Effect<RecipeState> buildEffect() {
 }
 
 Future _onRefresh(Action action, Context<RecipeState> ctx) async {
-  var result =
-      await RequestClient.request<RecipeEntity>(ctx.context, HttpConstants.RecipeList);
+  var result = await RequestClient.request<RecipeEntity>(
+      ctx.context, HttpConstants.RecipeList);
   action.payload['completer']();
   if (result.hasSuccess) {
     ctx.dispatch(RecipeActionCreator.onRefresh(result.data.data));
