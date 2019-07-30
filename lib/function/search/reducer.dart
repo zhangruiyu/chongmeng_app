@@ -1,3 +1,4 @@
+import 'package:chongmeng/function/main/home/model/ali_product_item.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'action.dart';
@@ -16,6 +17,9 @@ SearchState _onResetData(SearchState state, Action action) {
   final SearchState newState = state.clone()
     ..data = action.payload
     ..index = 1;
+  if ((action.payload as List<AliProductItem>)?.isNotEmpty == true) {
+    newState.pageState = SearchState.HASDATA;
+  }
   return newState;
 }
 

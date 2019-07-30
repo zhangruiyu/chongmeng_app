@@ -8,20 +8,27 @@ class SearchState implements Cloneable<SearchState> {
   List<AliProductItem> data;
   TextEditingController textEditingController;
   var index;
+  int pageState;
 
   @override
   SearchState clone() {
     return SearchState()
       ..index = index
+      ..pageState = pageState
       ..data = data
       ..textEditingController = textEditingController;
   }
+
+  static int INIT = 0;
+  static int EMPTY = 1;
+  static int HASDATA = 2;
 }
 
 SearchState initState(Map<String, dynamic> args) {
   return SearchState()
     ..data = []
     ..index = 1
+    ..pageState = SearchState.INIT
     ..textEditingController = TextEditingController(text: "狗粮");
 }
 

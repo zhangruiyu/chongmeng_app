@@ -1,6 +1,7 @@
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/widget/back_button_arrows.dart';
+import 'package:chongmeng/widget/sliver_app_bar_delegate.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -26,10 +27,45 @@ Widget buildView(
         SearchActionCreator.onLoadMore,
       ),
       slivers: <Widget>[
-        SliverList(
-          delegate: SliverChildBuilderDelegate(buildAdapter.itemBuilder,
-              childCount: buildAdapter.itemCount),
-        )
+        if (state.pageState == SearchState.EMPTY ||
+            state.pageState == SearchState.INIT)
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 120.0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: ["狗粮", "狗零食", "狗玩具", "狗窝"]
+                        .map(
+                          (itemTitle) => ActionChip(
+                            label: Text(itemTitle),
+                            onPressed: () {},
+                          ),
+                        )
+                        .toList(),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: ["猫粮", "猫零食", "猫玩具", "猫窝"]
+                        .map(
+                          (itemTitle) => ActionChip(
+                            label: Text(itemTitle),
+                            onPressed: () {},
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        if (state.pageState == SearchState.HASDATA)
+          SliverList(
+            delegate: SliverChildBuilderDelegate(buildAdapter.itemBuilder,
+                childCount: buildAdapter.itemCount),
+          )
       ],
     ),
     headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -98,12 +134,6 @@ Widget buildView(
                 color: Color(0x96ffffff),
                 borderRadius: BorderRadius.all(Radius.circular(30.0))),
           ),
-          /*
-          expandedHeight: 197,
-          flexibleSpace: FlexibleSpaceBar(
-            collapseMode: CollapseMode.parallax,
-            background: viewService.buildComponent("banner"),
-          ),*/
         )
       ];
     },
