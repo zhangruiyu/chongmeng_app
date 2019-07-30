@@ -48,6 +48,8 @@ buildItem(HomeDataTab itemMenu, viewService) {
         } else if (itemMenu.title == "猫猫" || itemMenu.title == "狗狗") {
           Navigator.pushNamed(viewService.context, PageConstants.SearchPage,
               arguments: {'initChip': itemMenu.chips});
+        } else if (itemMenu.title == "食谱") {
+          Navigator.pushNamed(viewService.context, PageConstants.RecipePage);
         }
       },
       child: Column(

@@ -15,6 +15,7 @@ import 'function/pet/selectpetavatar/page.dart';
 import 'function/pet/selectsubtype/page.dart';
 import 'function/pet/selecttype/page.dart';
 import 'function/product_details/page.dart';
+import 'function/recipe/page.dart';
 import 'function/record/page.dart';
 import 'function/record/review/page.dart';
 import 'function/review_image/page.dart';
@@ -58,6 +59,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.ReviewImagePage: ReviewImagePage(),
     PageConstants.ProductDetailsPage: ProductDetailsPage(),
     PageConstants.SearchPage: SearchPage(),
+    PageConstants.RecipePage: RecipePage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {
