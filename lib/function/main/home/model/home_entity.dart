@@ -29,7 +29,7 @@ class HomeData {
   List<AliProductItem> recommendProduct;
   List<AliProductItem> banner;
   List<String> sysNotices;
-
+  List<HomeDataRecipe> recipe;
   HomeData({this.tab, this.recommendProduct, this.banner, this.sysNotices});
 
   HomeData.fromJson(Map<String, dynamic> json) {
@@ -51,6 +51,12 @@ class HomeData {
         banner.add(new AliProductItem.fromJson(v));
       });
     }
+    if (json['recipe'] != null) {
+      recipe = new List<HomeDataRecipe>();
+      (json['recipe'] as List).forEach((v) {
+        recipe.add(new HomeDataRecipe.fromJson(v));
+      });
+    }
     sysNotices = json['sysNotices']?.cast<String>();
   }
 
@@ -65,6 +71,9 @@ class HomeData {
     }
     if (this.banner != null) {
       data['banner'] = this.banner.map((v) => v.toJson()).toList();
+    }
+    if (this.recipe != null) {
+      data['recipe'] = this.recipe.map((v) => v.toJson()).toList();
     }
     data['sysNotices'] = this.sysNotices;
     return data;
@@ -102,6 +111,28 @@ class HomeDataTab {
     if (this.chips != null) {
       data['chips'] = this.chips.map((v) => List.from(v)).toList();
     }
+    return data;
+  }
+}
+
+class HomeDataRecipe {
+  String createTime;
+  String name;
+  int id;
+
+  HomeDataRecipe({this.createTime, this.name, this.id});
+
+  HomeDataRecipe.fromJson(Map<String, dynamic> json) {
+    createTime = json['create_time'];
+    name = json['name'];
+    id = json['id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['create_time'] = this.createTime;
+    data['name'] = this.name;
+    data['id'] = this.id;
     return data;
   }
 }

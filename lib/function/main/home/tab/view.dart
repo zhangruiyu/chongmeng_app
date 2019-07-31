@@ -15,7 +15,8 @@ Widget buildView(TabState state, Dispatch dispatch, ViewService viewService) {
         child: Row(
           children: state.tabData
               .sublist(0, 4)
-              .map<Widget>((itemMenu) => buildItem(itemMenu, viewService))
+              .map<Widget>(
+                  (itemMenu) => buildItem(state, itemMenu, viewService))
               .toList(),
         ),
       ),
@@ -25,7 +26,8 @@ Widget buildView(TabState state, Dispatch dispatch, ViewService viewService) {
           child: Row(
             children: state.tabData
                 .sublist(4, state.tabData.length)
-                .map<Widget>((itemMenu) => buildItem(itemMenu, viewService))
+                .map<Widget>(
+                    (itemMenu) => buildItem(state, itemMenu, viewService))
                 .toList(),
           ),
         ),
@@ -33,7 +35,7 @@ Widget buildView(TabState state, Dispatch dispatch, ViewService viewService) {
   );
 }
 
-buildItem(HomeDataTab itemMenu, viewService) {
+buildItem(TabState state, HomeDataTab itemMenu, viewService) {
   return Expanded(
     child: GestureDetector(
       onTap: () {
@@ -49,7 +51,8 @@ buildItem(HomeDataTab itemMenu, viewService) {
           Navigator.pushNamed(viewService.context, PageConstants.SearchPage,
               arguments: {'initChip': itemMenu.chips});
         } else if (itemMenu.title == "食谱") {
-          Navigator.pushNamed(viewService.context, PageConstants.RecipePage);
+          Navigator.pushNamed(viewService.context, PageConstants.RecipePage,
+              arguments: {'recipe': state.recipe});
         }
       },
       child: Column(

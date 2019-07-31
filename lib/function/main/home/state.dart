@@ -36,7 +36,9 @@ ConnOp<HomeState, BannerState> bannerConnector() {
 ConnOp<HomeState, TabState> tabConnector() {
   return ConnOp<HomeState, TabState>(
     get: (HomeState state) {
-      return TabState()..tabData = state.homeData?.tab;
+      return TabState()
+        ..tabData = state.homeData?.tab
+        ..recipe = state.homeData?.recipe;
     },
     set: (HomeState state, TabState subState) {
       throw Exception("不支持改变数据");
