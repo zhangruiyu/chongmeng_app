@@ -36,4 +36,6 @@ class PageConstants {
       "cm://ProductDetailsPage"; //淘宝推荐产品详情页
   static const String SearchPage = "cm://SearchPage"; //搜索页面
   static const String RecipePage = "cm://RecipePage"; //食谱页面
+  static const String AdoptionPage = "cm://AdoptionPage"; //领养列表
+  static const String AdoptionAddPage = "cm://AdoptionAddPage"; //添加领养
 }

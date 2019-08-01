@@ -41,7 +41,7 @@ dependencies:
   flutter_swiper: any
   device_info: any
   janalytics: any
-  jpush_flutter: any
+  jpush_flutter: 0.0.11
   webview_flutter: any
   jmessage_flutter: any
   material_design_icons_flutter: ^3.2.3695

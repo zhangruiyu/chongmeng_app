@@ -69,17 +69,20 @@ class NavigatorHelper {
       return null;
   }
 
-  static Future<List<File>> pushFileSelectPageFile(BuildContext context) async {
+  static Future<List<File>> pushFileSelectPageFile(BuildContext context,
+      {int maxSelected = 9}) async {
     List<AssetEntity> imgList = await PhotoPicker.pickAsset(
-        context: context, pickType: PickType.onlyImage);
+        context: context,
+        pickType: PickType.onlyImage,
+        maxSelected: maxSelected);
     return Future.wait(imgList.map((item) async {
       return (await item.file);
     }).toList());
   }
 
-  static Future<List<String>> pushFileSelectPageString(
-      BuildContext context) async {
-    return (await pushFileSelectPageFile(context))
+  static Future<List<String>> pushFileSelectPageString(BuildContext context,
+      {int maxSelected = 9}) async {
+    return (await pushFileSelectPageFile(context, maxSelected: maxSelected))
         .map<String>((File itemFile) => itemFile.path)
         .toList();
   }

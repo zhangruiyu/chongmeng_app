@@ -53,6 +53,8 @@ buildItem(TabState state, HomeDataTab itemMenu, viewService) {
         } else if (itemMenu.title == "食谱") {
           Navigator.pushNamed(viewService.context, PageConstants.RecipePage,
               arguments: {'recipe': state.recipe});
+        } else if (itemMenu.title == "领养") {
+          Navigator.pushNamed(viewService.context, PageConstants.AdoptionPage);
         }
       },
       child: Column(
