@@ -201,9 +201,10 @@ Widget buildView(
                     viewService: viewService),
                 ...buildItem("城市", "选择大致地址",
                     hasArrow: true,
-                    state: state,
-                    dispatch: dispatch,
-                    viewService: viewService),
+                    textEditingController: state.cityTextEditingController,
+                    onTap: () {
+                  dispatch(AdoptionAddActionCreator.onSelectType("cityCode"));
+                }, state: state, dispatch: dispatch, viewService: viewService),
               ],
             ),
           ),

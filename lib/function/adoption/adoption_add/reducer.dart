@@ -41,6 +41,10 @@ AdoptionAddState _onSetType(AdoptionAddState state, Action action) {
     newState
       ..isImmune = params['value']
       ..isImmuneTextEditingController.text = params['key'];
+  } else if (params['type'] == "cityCode") {
+    newState
+      ..cityCode = params['value']
+      ..cityTextEditingController.text = params['key'];
   }
 
   return newState;

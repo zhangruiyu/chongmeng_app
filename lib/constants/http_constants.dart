@@ -54,7 +54,8 @@ class HttpConstants {
       "app/store/common/integralOrderList"; //兑换订单
 
   static String get AliSearch => "app/ali/search"; //淘宝客搜索
-  static String get RecipeList => "app/recipe/list"; //淘宝客搜索
+  static String get RecipeList => "app/recipe/list"; //食谱
+  static String get AdoptionAdd => "/app/adoption/common/add"; //添加领养
 }
 
 class CosType {
@@ -63,4 +64,5 @@ class CosType {
   static const AVATAR_TYPE = 2;
   static const Pet_AVATAR_TYPE = 3;
   static const Tally_TYPE = 4;
+  static const Adoption_TYPE = 5;
 }

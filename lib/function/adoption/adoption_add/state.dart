@@ -43,6 +43,10 @@ class AdoptionAddState implements Cloneable<AdoptionAddState> {
   //送养人微信
   TextEditingController masterWechatTextEditingController;
 
+  //城市
+  String cityCode;
+  TextEditingController cityTextEditingController;
+
   @override
   AdoptionAddState clone() {
     return AdoptionAddState()
@@ -52,6 +56,7 @@ class AdoptionAddState implements Cloneable<AdoptionAddState> {
       ..isExpellingParasite = isExpellingParasite
       ..isSterilization = isSterilization
       ..isImmune = isImmune
+      ..cityCode = cityCode
       ..petTypeIdTextEditingController = petTypeIdTextEditingController
       ..sexTextEditingController = sexTextEditingController
       ..ageTextEditingController = ageTextEditingController
@@ -60,9 +65,11 @@ class AdoptionAddState implements Cloneable<AdoptionAddState> {
       ..isSterilizationTextEditingController =
           isSterilizationTextEditingController
       ..isImmuneTextEditingController = isImmuneTextEditingController
+      ..petNameTextEditingController = petNameTextEditingController
       ..requestTextEditingController = requestTextEditingController
       ..masterNameTextEditingController = masterNameTextEditingController
       ..masterWechatTextEditingController = masterWechatTextEditingController
+      ..cityTextEditingController = cityTextEditingController
       ..descriptionTextEditingController = descriptionTextEditingController;
   }
 }
@@ -73,10 +80,12 @@ AdoptionAddState initState(Map<String, dynamic> args) {
     ..isSterilizationTextEditingController = TextEditingController()
     ..isImmuneTextEditingController = TextEditingController()
     ..petTypeIdTextEditingController = TextEditingController()
+    ..petNameTextEditingController = TextEditingController()
     ..sexTextEditingController = TextEditingController()
     ..ageTextEditingController = TextEditingController()
     ..requestTextEditingController = TextEditingController()
     ..masterNameTextEditingController = TextEditingController()
     ..masterWechatTextEditingController = TextEditingController()
+    ..cityTextEditingController = TextEditingController()
     ..descriptionTextEditingController = TextEditingController();
 }
