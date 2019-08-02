@@ -136,6 +136,12 @@ Widget buildView(
                     Expanded(
                       child: TextField(
                         maxLines: 5,
+                        maxLength: 300,
+                        buildCounter: (BuildContext context,
+                                {int currentLength,
+                                int maxLength,
+                                bool isFocused}) =>
+                            null,
                         controller: state.descriptionTextEditingController,
                         decoration: InputDecoration(
                             hintText: "请填写宠物描述(300字以内)",
@@ -159,6 +165,10 @@ Widget buildView(
               child: TextField(
                 maxLines: 5,
                 controller: state.requestTextEditingController,
+                maxLength: 300,
+                buildCounter: (BuildContext context,
+                        {int currentLength, int maxLength, bool isFocused}) =>
+                    null,
                 decoration: InputDecoration(
                     hintText: "请填写领养要求(300字以内)", border: InputBorder.none),
               ),
