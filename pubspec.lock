@@ -126,7 +126,7 @@ packages:
       name: fish_redux
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.4"
+    version: "0.2.5"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -145,16 +145,16 @@ packages:
       name: flutter_cupertino_date_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.8"
+    version: "1.0.11"
   flutter_easyrefresh:
     dependency: "direct main"
     description:
       path: "."
       ref: v2
-      resolved-ref: "72393820af74458ba2d0c9e2ffead2a2ad84c8f0"
+      resolved-ref: "03192b531eaa58022abff8aa33eb78977614f0d9"
       url: "https://github.com/xuelongqy/flutter_easyrefresh.git"
     source: git
-    version: "2.0.0-dev"
+    version: "2.0.0"
   flutter_ijkplayer:
     dependency: "direct main"
     description:
@@ -222,7 +222,7 @@ packages:
       name: image_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.0+17"
+    version: "0.6.1"
   intl:
     dependency: transitive
     description:

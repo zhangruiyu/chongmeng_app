@@ -1,7 +1,13 @@
 import 'package:chongmeng/function/main/community/commit_media/model/upload_task.dart';
 import 'package:fish_redux/fish_redux.dart';
 
-enum AdoptionAddAction { ChangeSelectPic, ReselectPic }
+enum AdoptionAddAction {
+  ChangeSelectPic,
+  ReselectPic,
+  Commit,
+  SelectType,
+  SetType
+}
 
 class AdoptionAddActionCreator {
   static Action onChangeSelectPic(List<UploadTask> list) {
@@ -10,5 +16,17 @@ class AdoptionAddActionCreator {
 
   static Action onReselectPic() {
     return const Action(AdoptionAddAction.ReselectPic);
+  }
+
+  static Action onCommit() {
+    return const Action(AdoptionAddAction.Commit);
+  }
+
+  static Action onSelectType(String type) {
+    return Action(AdoptionAddAction.SelectType, payload: type);
+  }
+
+  static Action onSetType(Map<String, dynamic> petTypeId) {
+    return Action(AdoptionAddAction.SetType, payload: petTypeId);
   }
 }
