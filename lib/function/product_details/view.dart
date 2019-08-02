@@ -145,7 +145,7 @@ Widget buildView(
 
 SizedBox buildBanner(AliProductItem itemData, ThemeData of) {
   return SizedBox(
-    width: double.infinity,
+    width: WindowUtils.getScreenWidth(),
     height: WindowUtils.getScreenWidth(),
     child: new Swiper(
       itemBuilder: (BuildContext context, int index) {
@@ -153,6 +153,8 @@ SizedBox buildBanner(AliProductItem itemData, ThemeData of) {
         return new CachedNetworkImage(
           imageUrl: itemBanner,
           fit: BoxFit.fill,
+          width: WindowUtils.getScreenWidth(),
+          height: WindowUtils.getScreenWidth(),
           errorWidget: (b, c, e) {
             return new Container();
           },
