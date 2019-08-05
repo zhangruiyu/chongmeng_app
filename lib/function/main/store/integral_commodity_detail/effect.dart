@@ -1,5 +1,5 @@
 import 'package:chongmeng/constants/constants.dart';
-import 'package:chongmeng/constants/page_constants.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/function/integral/model/total_integral_entity.dart';
 import 'package:chongmeng/function/shipping_address/model/shipping_address_entity.dart';
 import 'package:chongmeng/function/shipping_address/state.dart';

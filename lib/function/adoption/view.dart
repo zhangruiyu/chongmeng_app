@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
-import 'package:chongmeng/constants/page_constants.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/function/adoption/model/adoption_entity.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/user_helper.dart';

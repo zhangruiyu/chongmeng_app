@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
-import 'package:chongmeng/constants/page_constants.dart';
 import 'package:chongmeng/helper/permission_helper.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:photo/photo.dart';

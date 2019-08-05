@@ -1,4 +1,4 @@
-import 'package:chongmeng/constants/page_constants.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/helper/permission_helper.dart';
 import 'package:chongmeng/helper/user_helper.dart';

@@ -1,5 +1,5 @@
 import 'package:chongmeng/constants/http_constants.dart';
-import 'package:chongmeng/constants/page_constants.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;

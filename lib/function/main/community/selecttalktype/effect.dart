@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:chongmeng/constants/page_constants.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:photo/photo.dart';
 import 'package:photo_manager/photo_manager.dart';

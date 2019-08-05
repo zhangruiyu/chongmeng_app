@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
-import 'package:chongmeng/constants/page_constants.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/function/main/home/action.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';

@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chongmeng/constants/page_constants.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/function/main/home/model/home_entity.dart';
 import 'package:chongmeng/helper/user_helper.dart';
 import 'package:fish_redux/fish_redux.dart';

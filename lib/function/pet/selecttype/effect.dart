@@ -1,5 +1,5 @@
 import 'package:chongmeng/constants/constants.dart';
-import 'package:chongmeng/constants/page_constants.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/function/pet/selectsubtype/model/pet_sub_type_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:fish_redux/fish_redux.dart';

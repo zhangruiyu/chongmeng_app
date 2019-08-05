@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:chongmeng/constants/http_constants.dart';
-import 'package:chongmeng/constants/page_constants.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/function/main/community/commit_media/state.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/network/entity/cos_entity.dart';

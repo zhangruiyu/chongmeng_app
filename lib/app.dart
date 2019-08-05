@@ -6,7 +6,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:oktoast/oktoast.dart';
 
 import 'constants/constants.dart';
-import 'constants/page_constants.dart';
 import 'global_store/store.dart';
 import 'helper/user_helper.dart';
 import 'localizetion/localizations_delegate.dart';
