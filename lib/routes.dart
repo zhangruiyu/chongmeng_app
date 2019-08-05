@@ -2,6 +2,7 @@ import 'package:chongmeng/function/signin/signinresult/page.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'function/adoption/adoption_add/page.dart';
+import 'function/adoption/details/page.dart';
 import 'function/adoption/page.dart';
 import 'function/auto/page.dart';
 import 'function/bindtel/page.dart';
@@ -106,6 +107,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.RecipePage: RecipePage(),
     PageConstants.AdoptionPage: AdoptionPage(),
     PageConstants.AdoptionAddPage: AdoptionAddPage(),
+    PageConstants.AdoptionDetailsPage: AdoptionDetailsPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

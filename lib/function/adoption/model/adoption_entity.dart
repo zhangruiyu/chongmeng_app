@@ -1,18 +1,14 @@
 class AdoptionEntity {
   String msg;
-  List<AdoptionData> data;
+  AdoptionData data;
   int status;
 
   AdoptionEntity({this.msg, this.data, this.status});
 
   AdoptionEntity.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
-    if (json['data'] != null) {
-      data = new List<AdoptionData>();
-      (json['data'] as List).forEach((v) {
-        data.add(new AdoptionData.fromJson(v));
-      });
-    }
+    data =
+        json['data'] != null ? new AdoptionData.fromJson(json['data']) : null;
     status = json['status'];
   }
 
@@ -20,7 +16,7 @@ class AdoptionEntity {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['msg'] = this.msg;
     if (this.data != null) {
-      data['data'] = this.data.map((v) => v.toJson()).toList();
+      data['data'] = this.data.toJson();
     }
     data['status'] = this.status;
     return data;
@@ -28,6 +24,32 @@ class AdoptionEntity {
 }
 
 class AdoptionData {
+  String image;
+  List<AdoptionDataAdoption> adoption;
+
+  AdoptionData({this.image, this.adoption});
+
+  AdoptionData.fromJson(Map<String, dynamic> json) {
+    image = json['image'];
+    if (json['adoption'] != null) {
+      adoption = new List<AdoptionDataAdoption>();
+      (json['adoption'] as List).forEach((v) {
+        adoption.add(new AdoptionDataAdoption.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['image'] = this.image;
+    if (this.adoption != null) {
+      data['adoption'] = this.adoption.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class AdoptionDataAdoption {
   int petTypeId;
   String request;
   String masterWechat;
@@ -49,7 +71,7 @@ class AdoptionData {
   String age;
   int status;
 
-  AdoptionData(
+  AdoptionDataAdoption(
       {this.petTypeId,
       this.request,
       this.masterWechat,
@@ -71,7 +93,7 @@ class AdoptionData {
       this.age,
       this.status});
 
-  AdoptionData.fromJson(Map<String, dynamic> json) {
+  AdoptionDataAdoption.fromJson(Map<String, dynamic> json) {
     petTypeId = json['pet_type_id'];
     request = json['request'];
     masterWechat = json['master_wechat'];

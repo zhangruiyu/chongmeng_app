@@ -46,12 +46,19 @@ Widget buildView(
       firstRefreshWidget: LoadingWidget(),
       firstRefresh: true,
       slivers: <Widget>[
+        if (state.data != null)
+          SliverToBoxAdapter(
+            child: CachedNetworkImage(
+              imageUrl: state.data.image,
+              fit: BoxFit.fitWidth,
+            ),
+          ),
         SliverList(
           delegate:
               SliverChildBuilderDelegate((BuildContext context, int index) {
-            var data = state.data[index];
+            var data = state.data.adoption[index];
             return buildItem(state, dispatch, viewService, data);
-          }, childCount: state.data?.length ?? 0),
+          }, childCount: state.data?.adoption?.length ?? 0),
         )
       ],
     ),
@@ -59,9 +66,8 @@ Widget buildView(
 }
 
 Widget buildItem(AdoptionState state, Dispatch dispatch,
-    ViewService viewService, AdoptionData data) {
+    ViewService viewService, AdoptionDataAdoption data) {
   var of = Theme.of(viewService.context);
-  var localUser = GlobalStore.store.getState().localUser;
   List<dynamic> chipShow = [];
   if (data.sex == 1) {
     chipShow.add({
@@ -86,87 +92,93 @@ Widget buildItem(AdoptionState state, Dispatch dispatch,
     "image": "assets/adoption_age.png",
     "text": data.age,
   });
-  return Padding(
-    padding: const EdgeInsets.only(left: 18.0, right: 18.0, top: 10.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Text(data.petName),
-                    if (data.isImmune)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: Image.asset(
-                          "assets/adoption_immune.png",
-                          width: 15.0,
-                        ),
-                      )
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5.0),
-                  child: Text(data.masterCityShow, style: of.textTheme.caption),
-                ),
-                SizedBox(
-                  height: 30.0,
-                  child: Row(
-                    children: chipShow.map((itemChip) {
-                      return Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15.0),
-                            ),
-                            color: itemChip['color']),
-                        margin: EdgeInsets.only(right: 10.0),
-                        padding: EdgeInsets.only(left: 5.0, right: 5.0),
-                        child: Row(
-                          children: <Widget>[
-                            Image.asset(
-                              itemChip['image'],
-                              width: 13.0,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 2.0),
-                              child: Text(
-                                itemChip['text'],
-                                style: TextStyle(
-                                    fontSize: 11.0, color: colorWhite),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }).toList(),
+  return InkWell(
+    onTap: () {
+      dispatch(AdoptionActionCreator.onSkipDetailsPage(data));
+    },
+    child: Padding(
+      padding: const EdgeInsets.only(left: 18.0, right: 18.0, top: 10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text(data.petName),
+                      if (data.isImmune)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: Image.asset(
+                            "assets/adoption_immune.png",
+                            width: 15.0,
+                          ),
+                        )
+                    ],
                   ),
-                ),
-              ],
-            ),
-            ClipOval(
-                child: CachedNetworkImage(
-              width: 70.0,
-              height: 70.0,
-              imageUrl: data.pic[0],
-              fit: BoxFit.cover,
-            )),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10.0, top: 5.0),
-          child: Text(
-            data.description,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child:
+                        Text(data.masterCityShow, style: of.textTheme.caption),
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                    child: Row(
+                      children: chipShow.map((itemChip) {
+                        return Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15.0),
+                              ),
+                              color: itemChip['color']),
+                          margin: EdgeInsets.only(right: 10.0),
+                          padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                          child: Row(
+                            children: <Widget>[
+                              Image.asset(
+                                itemChip['image'],
+                                width: 13.0,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 2.0),
+                                child: Text(
+                                  itemChip['text'],
+                                  style: TextStyle(
+                                      fontSize: 11.0, color: colorWhite),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ],
+              ),
+              ClipOval(
+                  child: CachedNetworkImage(
+                width: 70.0,
+                height: 70.0,
+                imageUrl: data.pic[0],
+                fit: BoxFit.cover,
+              )),
+            ],
           ),
-        ),
-        VerticalLine()
-      ],
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10.0, top: 5.0),
+            child: Text(
+              data.description,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          VerticalLine()
+        ],
+      ),
     ),
   );
 }
