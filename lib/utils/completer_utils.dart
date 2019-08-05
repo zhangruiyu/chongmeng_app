@@ -1,7 +1,15 @@
 import 'dart:async';
+
 import 'package:fish_redux/fish_redux.dart';
 
 class CompleterUtils {
+  static void complete(Action action) {
+    Map<String, dynamic> payload = action.payload;
+    if (payload.containsKey('completer')) {
+      payload['completer']();
+    }
+  }
+
   static Future<void> Function() produceCompleterAction(
       Dispatch dispatch, Action Function(Map<String, dynamic> map) actionFun,
       {void Function(Map<String, dynamic> p) params}) {

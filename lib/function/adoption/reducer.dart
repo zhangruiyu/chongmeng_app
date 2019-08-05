@@ -12,6 +12,6 @@ Reducer<AdoptionState> buildReducer() {
 }
 
 AdoptionState _onResetData(AdoptionState state, Action action) {
-  final AdoptionState newState = state.clone();
+  final AdoptionState newState = state.clone()..data = action.payload;
   return newState;
 }
