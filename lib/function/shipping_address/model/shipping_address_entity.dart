@@ -1,18 +1,15 @@
 class ShippingAddressEntity {
   String msg;
-  List<ShippingAddressData> data;
+  ShippingAddressData data;
   int status;
 
   ShippingAddressEntity({this.msg, this.data, this.status});
 
   ShippingAddressEntity.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
-    if (json['data'] != null) {
-      data = new List<ShippingAddressData>();
-      (json['data'] as List).forEach((v) {
-        data.add(new ShippingAddressData.fromJson(v));
-      });
-    }
+    data = json['data'] != null
+        ? new ShippingAddressData.fromJson(json['data'])
+        : null;
     status = json['status'];
   }
 
@@ -20,7 +17,7 @@ class ShippingAddressEntity {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['msg'] = this.msg;
     if (this.data != null) {
-      data['data'] = this.data.map((v) => v.toJson()).toList();
+      data['data'] = this.data.toJson();
     }
     data['status'] = this.status;
     return data;
@@ -28,29 +25,55 @@ class ShippingAddressEntity {
 }
 
 class ShippingAddressData {
+  List<ShippingAddressDataShopAddres> shopAddress;
+
+  ShippingAddressData({this.shopAddress});
+
+  ShippingAddressData.fromJson(Map<String, dynamic> json) {
+    if (json['shop_address'] != null) {
+      shopAddress = new List<ShippingAddressDataShopAddres>();
+      (json['shop_address'] as List).forEach((v) {
+        shopAddress.add(new ShippingAddressDataShopAddres.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.shopAddress != null) {
+      data['shop_address'] = this.shopAddress.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class ShippingAddressDataShopAddres {
   String address;
   String consignee;
   String createTime;
   String tel;
   String areaText;
-  ShippingAddressDataCitydata cityData;
+  String id;
+  ShippingAddressDataShopAddressCitydata cityData;
 
-  ShippingAddressData(
+  ShippingAddressDataShopAddres(
       {this.address,
       this.consignee,
       this.createTime,
       this.tel,
       this.areaText,
+      this.id,
       this.cityData});
 
-  ShippingAddressData.fromJson(Map<String, dynamic> json) {
+  ShippingAddressDataShopAddres.fromJson(Map<String, dynamic> json) {
     address = json['address'];
     consignee = json['consignee'];
     createTime = json['createTime'];
     tel = json['tel'];
     areaText = json['areaText'];
+    id = json['id'];
     cityData = json['cityData'] != null
-        ? new ShippingAddressDataCitydata.fromJson(json['cityData'])
+        ? new ShippingAddressDataShopAddressCitydata.fromJson(json['cityData'])
         : null;
   }
 
@@ -61,6 +84,7 @@ class ShippingAddressData {
     data['createTime'] = this.createTime;
     data['tel'] = this.tel;
     data['areaText'] = this.areaText;
+    data['id'] = this.id;
     if (this.cityData != null) {
       data['cityData'] = this.cityData.toJson();
     }
@@ -68,7 +92,7 @@ class ShippingAddressData {
   }
 }
 
-class ShippingAddressDataCitydata {
+class ShippingAddressDataShopAddressCitydata {
   String areaId;
   String cityName;
   String areaName;
@@ -76,7 +100,7 @@ class ShippingAddressDataCitydata {
   String provinceName;
   String provinceId;
 
-  ShippingAddressDataCitydata(
+  ShippingAddressDataShopAddressCitydata(
       {this.areaId,
       this.cityName,
       this.areaName,
@@ -84,7 +108,7 @@ class ShippingAddressDataCitydata {
       this.provinceName,
       this.provinceId});
 
-  ShippingAddressDataCitydata.fromJson(Map<String, dynamic> json) {
+  ShippingAddressDataShopAddressCitydata.fromJson(Map<String, dynamic> json) {
     areaId = json['areaId'];
     cityName = json['cityName'];
     areaName = json['areaName'];

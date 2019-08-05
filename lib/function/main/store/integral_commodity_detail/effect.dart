@@ -44,9 +44,10 @@ Future _onBuy(Action action, Context<IntegralCommodityDetailState> ctx) async {
     }
   }
 
-  ShippingAddressData selectAddress = await Navigator.pushNamed<dynamic>(
-      ctx.context, PageConstants.ShippingAddressPage,
-      arguments: {"type": ShippingAddressState.SELECT});
+  ShippingAddressDataShopAddres selectAddress =
+      await Navigator.pushNamed<dynamic>(
+          ctx.context, PageConstants.ShippingAddressPage,
+          arguments: {"type": ShippingAddressState.SELECT});
   if (selectAddress != null) {
     var code = await showAffirmDialog(ctx, selectAddress);
     if (code == 1) {
@@ -171,7 +172,7 @@ Future<int> showSuccessDialog(Context<IntegralCommodityDetailState> ctx) {
 }
 
 Future<int> showAffirmDialog(Context<IntegralCommodityDetailState> ctx,
-    ShippingAddressData selectAddress) {
+    ShippingAddressDataShopAddres selectAddress) {
   var of = Theme.of(ctx.context);
   return showDialog(
       context: ctx.context,
