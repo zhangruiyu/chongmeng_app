@@ -5,18 +5,18 @@ import 'reducer.dart';
 import 'state.dart';
 import 'view.dart';
 
-class SelectPetAvatarPage extends Page<SelectPetAvatarState, Map<String, dynamic>> {
-  SelectPetAvatarPage()
+class PetAddPage extends Page<PetAddState, Map<String, dynamic>> {
+  PetAddPage()
       : super(
             initState: initState,
             effect: buildEffect(),
             reducer: buildReducer(),
             view: buildView,
-            dependencies: Dependencies<SelectPetAvatarState>(
+            dependencies: Dependencies<PetAddState>(
                 adapter: null,
-                slots: <String, Dependent<SelectPetAvatarState>>{
+                slots: <String, Dependent<PetAddState>>{
                 }),
-            middleware: <Middleware<SelectPetAvatarState>>[
+            middleware: <Middleware<PetAddState>>[
             ],);
 
 }

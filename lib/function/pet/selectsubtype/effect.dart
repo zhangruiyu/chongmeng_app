@@ -12,6 +12,6 @@ Effect<SelectSubTypeState> buildEffect() {
 
 void _onSkipSelectPetAvatarPage(
     Action action, Context<SelectSubTypeState> ctx) {
-  Navigator.pushNamed(ctx.context, PageConstants.SelectPetAvatarPage,
-      arguments: action.payload);
+//  Navigator.pushNamed(ctx.context, PageConstants.SelectPetAvatarPage,
+//      arguments: action.payload);
 }

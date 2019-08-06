@@ -14,7 +14,7 @@ import 'function/main/community/selecttalktype/page.dart';
 import 'function/main/page.dart';
 import 'function/main/store/integral_commodity_detail/page.dart';
 import 'function/my_order/page.dart';
-import 'function/pet/selectpetavatar/page.dart';
+import 'function/my_pet/add/page.dart';
 import 'function/pet/selectsubtype/page.dart';
 import 'function/pet/selecttype/page.dart';
 import 'function/product_details/page.dart';
@@ -55,7 +55,7 @@ class PageConstants {
   static const String WebviewPage = "cm://WebviewPage"; //WebviewPage
   static const String SelectTypePage = "cm://SelectTypePage"; //选择宠物大类型
   static const String SelectSubTypePage = "cm://SelectSubTypePage"; //选择宠物子类型
-  static const String SelectPetAvatarPage = "cm://SelectPetAvatarPage"; //选择宠物头像
+  static const String PetAddPage = "cm://PetAddPage"; //选择宠物头像
   static const String MyPetPage = "cm://MyPetPage"; //我的宠物
   static const String TallyPage = "cm://TallyPage"; //
   static const String AddTallyPage = "cm://AddTallyPage"; //
@@ -92,7 +92,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.SelectTypePage: SelectTypePage(),
     PageConstants.CommitMediaPage: CommitMediaPage(),
     PageConstants.SelectSubTypePage: SelectSubTypePage(),
-    PageConstants.SelectPetAvatarPage: SelectPetAvatarPage(),
+    PageConstants.PetAddPage: PetAddPage(),
     PageConstants.TallyPage: TallyPage(),
     PageConstants.AddTallyPage: AddTallyPage(),
     PageConstants.SignInPage: SignInPage(),

@@ -26,10 +26,5 @@ Future _onRefresh(Action action, Context<MyPetState> ctx) async {
 }
 
 Future _onSkipAddPetPage(Action action, Context<MyPetState> ctx) async {
-  var petTypeEntity = await RequestClient.request<PetTypeEntity>(
-      ctx.context, HttpConstants.PetType);
-  if (petTypeEntity.hasSuccess) {
-    Navigator.pushNamed(ctx.context, PageConstants.SelectTypePage,
-        arguments: {'petTypeEntity': petTypeEntity.data.data});
-  }
+  Navigator.pushNamed(ctx.context, PageConstants.PetAddPage);
 }
