@@ -1,5 +1,5 @@
 import 'package:chongmeng/components/product/component.dart';
-import 'package:chongmeng/components/product/state.dart';
+import 'package:chongmeng/function/main/home/model/ali_product_item.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'reducer.dart';
@@ -23,9 +23,9 @@ class _HomeListConnector extends ConnOp<HomeListState, List<ItemBean>> {
       return <ItemBean>[];
     }
     return state.data
-        .map<ItemBean>((itemData) =>
-            ItemBean("product", AliItemProductState(itemData: itemData)))
-        .toList();
+        .map<ItemBean>(
+            (AliProductItem itemData) => ItemBean("product", itemData))
+        .toList(growable: true);
   }
 
   @override

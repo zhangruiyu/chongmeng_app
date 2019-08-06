@@ -184,11 +184,13 @@ Widget buildView(
             ),
           ),
         ),
-        new SizedBox(
+        new Container(
           width: WindowUtils.getScreenWidth(),
           height: bottomHeight,
           child: new RaisedButton(
-            child: new Center(
+            child: Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(viewService.context).padding.bottom),
               child: new Text(
                 '带Ta回家',
                 textAlign: TextAlign.center,

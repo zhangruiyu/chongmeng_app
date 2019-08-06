@@ -20,8 +20,7 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
     ),
     body: Column(
       children: <Widget>[
-        Flexible(
-          fit: FlexFit.loose,
+        Expanded(
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,15 +133,17 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
             ),
           ),
         ),
-        new SizedBox(
+        new Container(
           width: WindowUtils.getScreenWidth(),
           height: 50.0 + MediaQuery.of(viewService.context).padding.bottom,
-          child: new FlatButton(
-            child: new Center(
+          child: new RaisedButton(
+            child: Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(viewService.context).padding.bottom),
               child: new Text(
                 '${state.itemData.integralPrice}萌镚兑换',
                 textAlign: TextAlign.center,
-                style: new TextStyle(fontSize: 18.0),
+                style: new TextStyle(fontSize: 18.0, color: colorWhite),
               ),
             ),
             onPressed: () async {
@@ -150,7 +151,7 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
             },
             color: Theme.of(viewService.context).accentColor,
           ),
-        ),
+        )
       ],
     ),
   );

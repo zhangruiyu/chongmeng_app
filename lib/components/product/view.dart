@@ -1,15 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
+import 'package:chongmeng/function/main/home/model/ali_product_item.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 
 import 'action.dart';
-import 'state.dart';
 
 Widget buildView(
-    AliItemProductState state, Dispatch dispatch, ViewService viewService) {
+    AliProductItem state, Dispatch dispatch, ViewService viewService) {
   var themeData = Theme.of(viewService.context);
-  var itemData = state.itemData;
+  var itemData = state;
   return Container(
     decoration: BoxDecoration(
       border: Border(

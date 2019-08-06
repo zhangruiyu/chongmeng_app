@@ -14,7 +14,7 @@ class SearchPage extends Page<SearchState, Map<String, dynamic>> {
           reducer: buildReducer(),
           view: buildView,
           dependencies: Dependencies<SearchState>(
-              adapter: SearchListConnector() + SearchListAdapter(),
+              adapter: NoneConn<SearchState>() + SearchListAdapter(),
               slots: <String, Dependent<SearchState>>{}),
           middleware: <Middleware<SearchState>>[],
         );

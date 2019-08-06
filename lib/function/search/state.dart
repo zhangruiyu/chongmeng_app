@@ -1,8 +1,8 @@
+import 'dart:math';
+
 import 'package:chongmeng/function/main/home/model/ali_product_item.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
-import 'dart:math';
-import 'adapter/state.dart';
 
 class SearchState implements Cloneable<SearchState> {
   List<AliProductItem> data;
@@ -47,16 +47,4 @@ SearchState initState(Map<String, dynamic> args) {
     ..pageState = SearchState.INIT
     ..textEditingController =
         TextEditingController(text: keys[rng.nextInt(keys.length - 1)]);
-}
-
-class SearchListConnector extends ConnOp<SearchState, SearchListState> {
-  @override
-  void set(SearchState state, SearchListState subState) {
-//    super.set(state, subState);
-  }
-
-  @override
-  SearchListState get(SearchState state) {
-    return SearchListState()..data = state.data ?? [];
-  }
 }

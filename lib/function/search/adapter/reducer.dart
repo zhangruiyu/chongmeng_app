@@ -1,17 +1,17 @@
 import 'package:fish_redux/fish_redux.dart';
 
+import '../state.dart';
 import 'action.dart';
-import 'state.dart';
 
-Reducer<SearchListState> buildReducer() {
+Reducer<SearchState> buildReducer() {
   return asReducer(
-    <Object, Reducer<SearchListState>>{
+    <Object, Reducer<SearchState>>{
       SearchListAction.action: _onAction,
     },
   );
 }
 
-SearchListState _onAction(SearchListState state, Action action) {
-  final SearchListState newState = state.clone();
+SearchState _onAction(SearchState state, Action action) {
+  final SearchState newState = state.clone();
   return newState;
 }

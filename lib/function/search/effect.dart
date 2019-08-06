@@ -1,5 +1,6 @@
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/network/net_work.dart';
+import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/utils/keyboard_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
@@ -20,10 +21,7 @@ Future _onSearch(Action action, Context<SearchState> ctx) async {
 }
 
 Future _onRefresh(Action action, Context<SearchState> ctx) async {
-  var payloadMap = action.payload as Map<String, dynamic>;
-  if (payloadMap != null && payloadMap.containsKey("completer")) {
-    action.payload['completer']();
-  }
+  CompleterUtils.complete(action);
   var result = await RequestClient.request<SearchResultEntity>(
       ctx.context, HttpConstants.AliSearch, queryParameters: {
     "query": ctx.state.textEditingController.text,
@@ -42,9 +40,10 @@ Future _onLoadMore(Action action, Context<SearchState> ctx) async {
     "query": ctx.state.textEditingController.text,
     'index': index
   });
-  action.payload['completer']();
+  CompleterUtils.complete(action);
   if (result.hasSuccess) {
     KeyboardUtils.hideByContext(ctx.context);
-    ctx.dispatch(SearchActionCreator.onAddData(result.data.data, index));
+    if (result?.data?.data?.isNotEmpty == true)
+      ctx.dispatch(SearchActionCreator.onAddData(result.data.data, index));
   }
 }

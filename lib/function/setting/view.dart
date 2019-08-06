@@ -1,3 +1,4 @@
+import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/global_store/action.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/user_helper.dart';
@@ -22,97 +23,98 @@ Widget buildView(
       body: new Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          new Container(
-            padding: const EdgeInsets.only(top: 40.0),
-            color: const Color(0xffffffff),
-            child: new Column(children: <Widget>[
-              new Image.asset(
-                'assets/account_page_no_login.png',
-                width: 40.0,
-                height: 40.0,
-              ),
-              new Padding(
-                padding: edgeInsets,
-                child: new Text('版本号: v1.0.0'),
-              ),
-              new Padding(
-                padding: edgeInsets,
-                child: new Text('QQ服务群: 609487304'),
-              ),
-              new Padding(
-                padding: edgeInsets,
-                child: new Text('如有建议和问题,请加入群反馈'),
-              ),
-              new FlatButton(
-                  onPressed: () {
-                    /*SnackBarUtils.showSnackBar(
-                        scaffoldStateKey.currentState, '个人作品,欢迎加入');*/
-                  },
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 13.0, horizontal: 4.0),
-                  child: new Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        new Align(
-                          child: new Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: new Text(
-                              '关于我们',
-                              style: textStyle,
+          Expanded(
+            child: new Container(
+              padding: const EdgeInsets.only(top: 40.0),
+              color: const Color(0xffffffff),
+              child: new Column(children: <Widget>[
+                new Image.asset(
+                  'assets/account_page_no_login.png',
+                  width: 40.0,
+                  height: 40.0,
+                ),
+                new Padding(
+                  padding: edgeInsets,
+                  child: new Text('版本号: v1.0.0'),
+                ),
+                new Padding(
+                  padding: edgeInsets,
+                  child: new Text('QQ服务群: 609487304'),
+                ),
+                new Padding(
+                  padding: edgeInsets,
+                  child: new Text('如有建议和问题,请加入群反馈'),
+                ),
+                new FlatButton(
+                    onPressed: () {
+                      /*SnackBarUtils.showSnackBar(
+                          scaffoldStateKey.currentState, '个人作品,欢迎加入');*/
+                    },
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 13.0, horizontal: 4.0),
+                    child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          new Align(
+                            child: new Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20.0),
+                              child: new Text(
+                                '关于我们',
+                                style: textStyle,
+                              ),
                             ),
+                            alignment: Alignment.centerLeft,
                           ),
-                          alignment: Alignment.centerLeft,
-                        ),
-                        new Icon(Icons.arrow_right),
-                      ])),
-              new FlatButton(
-                  onPressed: () {},
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 13.0, horizontal: 4.0),
-                  child: new Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        new Align(
-                          child: new Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: new Text(
-                              '版本更新',
-                              style: textStyle,
+                          new Icon(Icons.arrow_right),
+                        ])),
+                new FlatButton(
+                    onPressed: () {},
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 13.0, horizontal: 4.0),
+                    child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          new Align(
+                            child: new Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20.0),
+                              child: new Text(
+                                '版本更新',
+                                style: textStyle,
+                              ),
                             ),
+                            alignment: Alignment.centerLeft,
                           ),
-                          alignment: Alignment.centerLeft,
-                        ),
-                        new Icon(Icons.arrow_right),
-                      ])),
-              // onSubmitted：当用户在键盘上点击完成编辑时调用
-            ]),
+                          new Icon(Icons.arrow_right),
+                        ])),
+                // onSubmitted：当用户在键盘上点击完成编辑时调用
+              ]),
+            ),
           ),
-          user == null
-              ? null
-              : new FlatButton(
-                  padding: new EdgeInsets.only(
+          if (user != null)
+            new Container(
+              width: WindowUtils.getScreenWidth(),
+              height: 50.0 + MediaQuery.of(viewService.context).padding.bottom,
+              child: new RaisedButton(
+                child: Padding(
+                  padding: EdgeInsets.only(
                       bottom:
                           MediaQuery.of(viewService.context).padding.bottom),
-                  child: new SizedBox(
-                      width: WindowUtils.getScreenWidth(),
-                      height: 45.0,
-                      child: new Center(
-                        child: new Text(
-                          '退出登录',
-                          textAlign: TextAlign.center,
-                          style: new TextStyle(fontSize: 18.0),
-                        ),
-                      )),
-                  onPressed: () async {
-                    UserHelper.logout(null);
-                    GlobalStore.store
-                        .dispatch(GlobalActionCreator.onLoginOut());
-                    Navigator.of(viewService.context).pop();
-                  },
-                  color: Theme.of(viewService.context).accentColor,
+                  child: new Text(
+                    '退出登录',
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(fontSize: 18.0, color: colorWhite),
+                  ),
                 ),
-        ].where((Object o) => o != null).toList(),
+                onPressed: () async {
+                  UserHelper.logout(null);
+                  GlobalStore.store.dispatch(GlobalActionCreator.onLoginOut());
+                  Navigator.of(viewService.context).pop();
+                },
+                color: Theme.of(viewService.context).accentColor,
+              ),
+            ),
+        ],
       ));
 }

@@ -79,7 +79,7 @@ Widget buildView(
                           ],
                         ),
                         Text(
-                          "+${itemData.integral}",
+                          "${itemData.integral}",
                           style: TextStyle(color: accentColor, fontSize: 20),
                         ),
                       ],

@@ -55,6 +55,8 @@ buildItem(TabState state, HomeDataTab itemMenu, viewService) {
               arguments: {'recipe': state.recipe});
         } else if (itemMenu.title == "领养") {
           Navigator.pushNamed(viewService.context, PageConstants.AdoptionPage);
+        } else {
+          showToast("此功能正在开发中");
         }
       },
       child: Column(

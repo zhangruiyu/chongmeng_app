@@ -1,9 +1,10 @@
+import 'package:chongmeng/function/search/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 
 import 'action.dart';
-import 'state.dart';
 
-Widget buildView(SearchListState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(
+    SearchState state, Dispatch dispatch, ViewService viewService) {
   return Container();
 }

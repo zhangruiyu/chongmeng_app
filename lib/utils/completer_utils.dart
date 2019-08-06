@@ -5,7 +5,7 @@ import 'package:fish_redux/fish_redux.dart';
 class CompleterUtils {
   static void complete(Action action) {
     Map<String, dynamic> payload = action.payload;
-    if (payload.containsKey('completer')) {
+    if (payload != null && payload.containsKey('completer')) {
       payload['completer']();
     }
   }
