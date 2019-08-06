@@ -30,12 +30,12 @@ class _SearchListConnector extends ConnOp<SearchState, List<ItemBean>> {
 
   @override
   void set(SearchState state, List<ItemBean> items) {
-    /*if (items?.isNotEmpty == true) {
-      state.data = List<ToDoState>.from(
-          toDos.map<ToDoState>((ItemBean bean) => bean.data).toList());
+    if (items?.isNotEmpty == true) {
+      state.data = List<AliProductItem>.from(
+          items.map<AliProductItem>((ItemBean bean) => bean.data).toList());
     } else {
-      state.toDos = <ToDoState>[];
-    }*/
+      state.data = <AliProductItem>[];
+    }
   }
 
   @override

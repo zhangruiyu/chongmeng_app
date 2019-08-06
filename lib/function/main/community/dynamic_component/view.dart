@@ -117,7 +117,7 @@ Widget buildFunCell(
             dotSecondaryColor: primaryColor,
           ),
           isLiked: data.liked
-              .contains(GlobalStore.store.getState().localUser.userId),
+              .contains(GlobalStore.store.getState()?.localUser?.userId),
           likeBuilder: (bool isLiked) {
             return Icon(
               isLiked ? Icons.favorite : Icons.favorite_border,

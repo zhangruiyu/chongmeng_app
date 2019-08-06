@@ -49,7 +49,7 @@ ConnOp<HomeState, TabState> tabConnector() {
 class HomeListConnector extends ConnOp<HomeState, HomeListState> {
   @override
   void set(HomeState state, HomeListState subState) {
-//    super.set(state, subState);
+    state.homeData?.recommendProduct = subState.data;
   }
 
   @override
