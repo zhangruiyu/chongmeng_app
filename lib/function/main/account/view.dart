@@ -105,14 +105,8 @@ Widget buildLoginView(
             Expanded(
               child: InkResponse(
                 onTap: () async {
-                  var petTypeEntity =
-                      await RequestClient.request<PetTypeEntity>(
-                          viewService.context, HttpConstants.PetType);
-                  if (petTypeEntity.hasSuccess) {
-                    Navigator.pushNamed(
-                        viewService.context, PageConstants.SelectTypePage,
-                        arguments: {'petTypeEntity': petTypeEntity.data.data});
-                  }
+                  Navigator.pushNamed(
+                      viewService.context, PageConstants.MyPetPage);
                 },
                 child: Column(
                   children: <Widget>[Text("1"), Text("宠物")],

@@ -1,3 +1,4 @@
+import 'package:chongmeng/function/my_pet/page.dart';
 import 'package:chongmeng/function/signin/signinresult/page.dart';
 import 'package:fish_redux/fish_redux.dart';
 
@@ -55,6 +56,7 @@ class PageConstants {
   static const String SelectTypePage = "cm://SelectTypePage"; //选择宠物大类型
   static const String SelectSubTypePage = "cm://SelectSubTypePage"; //选择宠物子类型
   static const String SelectPetAvatarPage = "cm://SelectPetAvatarPage"; //选择宠物头像
+  static const String MyPetPage = "cm://MyPetPage"; //我的宠物
   static const String TallyPage = "cm://TallyPage"; //
   static const String AddTallyPage = "cm://AddTallyPage"; //
   static const String SignInPage = "cm://SignInPage"; //签到
@@ -108,6 +110,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.AdoptionPage: AdoptionPage(),
     PageConstants.AdoptionAddPage: AdoptionAddPage(),
     PageConstants.AdoptionDetailsPage: AdoptionDetailsPage(),
+    PageConstants.MyPetPage: MyPetPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {
