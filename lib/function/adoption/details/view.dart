@@ -44,155 +44,159 @@ Widget buildView(
     appBar: Toolbar(
       title: Text("宠物详情"),
     ),
-    body: Stack(
-      alignment: AlignmentDirectional.bottomCenter,
+    body: Column(
       children: <Widget>[
-        SingleChildScrollView(
-          padding: EdgeInsets.only(
-            bottom: bottomHeight,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                  height: 194.0,
-                  child:
-                      /*(state?.bannerData?.banners?.length ?? 0) == 0
-                ? Container()
-                : */
-                      new Swiper(
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        height: 150.0,
-                        child: new CachedNetworkImage(
-                          imageUrl: state.data.pic[index],
-                          fit: BoxFit.cover,
-                          errorWidget: (b, c, e) {
-                            return new Container();
-                          },
-                        ),
-                      );
-                    },
-                    itemCount: state.data?.pic?.length,
-                    outer: false,
-                    autoplay: true,
-                    pagination: new SwiperPagination(
-                        builder: OvalSwiperPaginationBuilder(
-                            color: Color(0xffE1DEDE),
-                            activeColor: of.accentColor,
-                            activeSize: 20.0)),
-                  )),
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 18.0, right: 18.0, top: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Text(data.petName),
-                            if (data.isImmune)
-                              Padding(
-                                padding: const EdgeInsets.only(left: 5.0),
-                                child: Image.asset(
-                                  "assets/adoption_immune.png",
-                                  width: 15.0,
-                                ),
-                              )
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: Text(data.masterCityShow,
-                              style: of.textTheme.caption),
-                        ),
-                        SizedBox(
-                          height: 30.0,
-                          child: Row(
-                            children: chipShow.map((itemChip) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(15.0),
-                                    ),
-                                    color: itemChip['color']),
-                                margin: EdgeInsets.only(right: 10.0),
-                                padding: EdgeInsets.only(left: 5.0, right: 5.0),
-                                child: Row(
-                                  children: <Widget>[
-                                    Image.asset(
-                                      itemChip['image'],
-                                      width: 13.0,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 2.0),
-                                      child: Text(
-                                        itemChip['text'],
-                                        style: TextStyle(
-                                            fontSize: 11.0, color: colorWhite),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }).toList(),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(
+              bottom: bottomHeight,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                    height: 194.0,
+                    child:
+                        /*(state?.bannerData?.banners?.length ?? 0) == 0
+                  ? Container()
+                  : */
+                        new Swiper(
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          height: 150.0,
+                          child: new CachedNetworkImage(
+                            imageUrl: state.data.pic[index],
+                            fit: BoxFit.cover,
+                            errorWidget: (b, c, e) {
+                              return new Container();
+                            },
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        );
+                      },
+                      itemCount: state.data?.pic?.length,
+                      outer: false,
+                      autoplay: true,
+                      pagination: new SwiperPagination(
+                          builder: OvalSwiperPaginationBuilder(
+                              color: Color(0xffE1DEDE),
+                              activeColor: of.accentColor,
+                              activeSize: 20.0)),
+                    )),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 18.0, right: 18.0, top: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Text(data.petName),
+                              if (data.isImmune)
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5.0),
+                                  child: Image.asset(
+                                    "assets/adoption_immune.png",
+                                    width: 15.0,
+                                  ),
+                                )
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 5.0),
+                            child: Text(data.masterCityShow,
+                                style: of.textTheme.caption),
+                          ),
+                          SizedBox(
+                            height: 30.0,
+                            child: Row(
+                              children: chipShow.map((itemChip) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(15.0),
+                                      ),
+                                      color: itemChip['color']),
+                                  margin: EdgeInsets.only(right: 10.0),
+                                  padding:
+                                      EdgeInsets.only(left: 5.0, right: 5.0),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Image.asset(
+                                        itemChip['image'],
+                                        width: 13.0,
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 2.0),
+                                        child: Text(
+                                          itemChip['text'],
+                                          style: TextStyle(
+                                              fontSize: 11.0,
+                                              color: colorWhite),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              VerticalLine(),
-              Padding(
-                padding: const EdgeInsets.only(left: 18.0, top: 10.0),
-                child: Text(
-                  "宠物描述",
-                  style: of.textTheme.title,
+                VerticalLine(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 18.0, top: 10.0),
+                  child: Text(
+                    "宠物描述",
+                    style: of.textTheme.title,
+                  ),
                 ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 18.0, top: 3.0, bottom: 10.0),
-                child: Text(data.description),
-              ),
-              VerticalLine(),
-              Padding(
-                padding: const EdgeInsets.only(left: 18.0, top: 10.0),
-                child: Text(
-                  "领养要求",
-                  style: of.textTheme.title,
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 18.0, top: 3.0, bottom: 10.0),
+                  child: Text(data.description),
                 ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 18.0, top: 3.0, bottom: 10.0),
-                child: Text(data.request),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 18.0, top: 30.0),
-                child: Text(
-                    "如有发现收费领养、虚假信息、以空运费为由支付费用的，一定不要相信请立刻联系平台(加入QQ群:609487304),核实后我们会将其永久加入黑"),
-              ),
-            ],
+                VerticalLine(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 18.0, top: 10.0),
+                  child: Text(
+                    "领养要求",
+                    style: of.textTheme.title,
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 18.0, top: 3.0, bottom: 10.0),
+                  child: Text(data.request),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 18.0, top: 30.0),
+                  child: Text(
+                      "如有发现收费领养、虚假信息、以空运费为由支付费用的，一定不要相信请立刻联系平台(加入QQ群:609487304),核实后我们会将其永久加入黑"),
+                ),
+              ],
+            ),
           ),
         ),
         new SizedBox(
           width: WindowUtils.getScreenWidth(),
           height: bottomHeight,
-          child: new FlatButton(
+          child: new RaisedButton(
             child: new Center(
               child: new Text(
                 '带Ta回家',
                 textAlign: TextAlign.center,
-                style: new TextStyle(fontSize: 18.0),
+                style: new TextStyle(fontSize: 18.0, color: colorWhite),
               ),
             ),
             onPressed: () async {
-//              dispatch(IntegralCommodityDetailActionCreator.onBuy());
+              dispatch(AdoptionDetailsActionCreator.onShowAdoptionDialog());
             },
             color: Theme.of(viewService.context).accentColor,
           ),

@@ -1,10 +1,9 @@
 import 'package:fish_redux/fish_redux.dart';
 
-//TODO replace with your own action
-enum AdoptionDetailsAction { action }
+enum AdoptionDetailsAction { ShowAdoptionDialog }
 
 class AdoptionDetailsActionCreator {
-  static Action onAction() {
-    return const Action(AdoptionDetailsAction.action);
+  static Action onShowAdoptionDialog() {
+    return const Action(AdoptionDetailsAction.ShowAdoptionDialog);
   }
 }

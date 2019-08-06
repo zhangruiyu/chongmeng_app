@@ -6,7 +6,7 @@ import 'state.dart';
 Reducer<AdoptionDetailsState> buildReducer() {
   return asReducer(
     <Object, Reducer<AdoptionDetailsState>>{
-      AdoptionDetailsAction.action: _onAction,
+//      AdoptionDetailsAction.action: _onAction,
     },
   );
 }
