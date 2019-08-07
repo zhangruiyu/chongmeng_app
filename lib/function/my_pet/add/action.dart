@@ -1,6 +1,12 @@
 import 'package:fish_redux/fish_redux.dart';
 
-enum PetAddAction { SetAvatarPath, SelectPetAvatar, AddPet, SelectPetType }
+enum PetAddAction {
+  SetAvatarPath,
+  SelectPetAvatar,
+  AddPet,
+  SelectType,
+  SetType
+}
 
 class PetAddActionCreator {
   static Action onSetAvatarPath(image) {
@@ -15,7 +21,11 @@ class PetAddActionCreator {
     return Action(PetAddAction.AddPet);
   }
 
-  static Action onSelectPetType() {
-    return Action(PetAddAction.SelectPetType);
+  static Action onSelectType(type) {
+    return Action(PetAddAction.SelectType, payload: type);
+  }
+
+  static Action onSetType(selectResult) {
+    return Action(PetAddAction.SetType, payload: selectResult);
   }
 }

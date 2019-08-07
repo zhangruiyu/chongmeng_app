@@ -1,6 +1,5 @@
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/function/adoption/model/adoption_entity.dart';
-import 'package:chongmeng/function/pet/selecttype/model/pet_type_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/completer_utils.dart';

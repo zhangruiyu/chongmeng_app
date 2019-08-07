@@ -6,12 +6,10 @@ import 'state.dart';
 
 Effect<SelectSubTypeState> buildEffect() {
   return combineEffects(<Object, Effect<SelectSubTypeState>>{
-    SelectSubTypeAction.SkipSelectPetAvatarPage: _onSkipSelectPetAvatarPage,
+    SelectSubTypeAction.SelectSubType: _onSelectSubType,
   });
 }
 
-void _onSkipSelectPetAvatarPage(
-    Action action, Context<SelectSubTypeState> ctx) {
-//  Navigator.pushNamed(ctx.context, PageConstants.SelectPetAvatarPage,
-//      arguments: action.payload);
+void _onSelectSubType(Action action, Context<SelectSubTypeState> ctx) {
+  Navigator.pop(ctx.context, action.payload);
 }

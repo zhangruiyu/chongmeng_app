@@ -32,8 +32,10 @@ _buildListItem(
   var info = model as CityInfo;
   return ListTile(
     onTap: () {
-      dispatch(SelectSubTypeActionCreator.onSkipSelectPetAvatarPage(
-          {'subId': info.id, 'id': state.id}));
+      dispatch(SelectSubTypeActionCreator.onSelectSubType({
+        'key': info.name,
+        'value': {'pet_sub_type': info.id, 'pet_type_id': state.id}
+      }));
     },
     title: Text(info.name),
   );

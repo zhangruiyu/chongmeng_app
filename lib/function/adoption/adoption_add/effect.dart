@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/function/main/community/commit_media/model/upload_task.dart';
-import 'package:chongmeng/function/pet/selecttype/model/pet_type_entity.dart';
+import 'package:chongmeng/function/my_pet/selecttype/model/pet_type_entity.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/network/entity/cos_entity.dart';
 import 'package:chongmeng/network/entity/outermost_entity.dart';

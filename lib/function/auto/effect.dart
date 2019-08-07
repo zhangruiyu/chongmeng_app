@@ -1,6 +1,6 @@
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/function/my_pet/selecttype/model/pet_type_entity.dart';
 import 'package:chongmeng/routes.dart';
-import 'package:chongmeng/function/pet/selecttype/model/pet_type_entity.dart';
 import 'package:chongmeng/global_store/action.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/network/net_work.dart';
