@@ -37,7 +37,7 @@ Widget buildView(
                           ? null
                           : DecorationImage(
                               image: FileImage(state.petAvatar),
-                              fit: BoxFit.fill)),
+                              fit: BoxFit.cover)),
                 ),
               ),
             ),

@@ -102,14 +102,16 @@ Future _onAddPet(Action action, Context<PetAddState> ctx) async {
 }
 
 commit(Action action, Context<PetAddState> ctx, {String resourcePath}) async {
-  String dateTime = DateUtils.formatData(action.payload);
   var result = await RequestClient.request<OutermostEntity>(
       ctx.context, HttpConstants.AddPet,
       queryParameters: {
-//        'id': ctx.state.id,
-//        'subId': ctx.state.subId,
+        'petId': ctx.state.petType['pet_type_id'],
+        'subId': ctx.state.petType['pet_sub_type'],
         'avatar': resourcePath,
-        'birthday': dateTime,
+        'status': ctx.state.petStatus,
+        'birthday': ctx.state.birthday,
+        'sex': ctx.state.sex,
+        'nick': ctx.state.nickTextEditingController.text,
       },
       showLoadingIndicator: true);
   if (result.hasSuccess) {

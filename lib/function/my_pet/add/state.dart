@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 
 class PetAddState implements Cloneable<PetAddState> {
   File petAvatar;
-  String nick;
   TextEditingController nickTextEditingController;
   int sex;
   TextEditingController sexTextEditingController;
   String birthday;
   TextEditingController birthdayTextEditingController;
-  Map<String, int> petType;
+  Map<String, int>
+      petType; //'value': {'pet_sub_type': info.id, 'pet_type_id': state.id}
   TextEditingController petTypeTextEditingController;
   int petStatus;
   TextEditingController petStatusTextEditingController;
@@ -20,7 +20,6 @@ class PetAddState implements Cloneable<PetAddState> {
   PetAddState clone() {
     return PetAddState()
       ..petAvatar = petAvatar
-      ..nick = nick
       ..nickTextEditingController = nickTextEditingController
       ..sex = sex
       ..sexTextEditingController = sexTextEditingController

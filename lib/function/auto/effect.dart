@@ -82,14 +82,7 @@ Future _onLogin(Action action, Context<AutoState> ctx) async {
     if (result.data.data.hasPet) {
       Navigator.pop(ctx.context);
     } else {
-      var petTypeEntity = await RequestClient.request<PetTypeEntity>(
-          ctx.context, HttpConstants.PetType);
-      if (petTypeEntity.hasSuccess) {
-        Navigator.popAndPushNamed(ctx.context, PageConstants.SelectTypePage,
-            arguments: {'petTypeEntity': petTypeEntity.data.data});
-      } else {
-        Navigator.pop(ctx.context);
-      }
+      Navigator.popAndPushNamed(ctx.context, PageConstants.PetAddPage);
     }
   } else if (result.code == ErrorCode.BIND_TEL_ERROR_CODE) {
     //跳转到验证手机号,然后绑定手机号
