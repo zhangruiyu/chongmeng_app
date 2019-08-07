@@ -6,6 +6,7 @@ import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'action.dart';
+import 'model/pet_entity.dart';
 import 'state.dart';
 
 Effect<MyPetState> buildEffect() {
@@ -16,11 +17,11 @@ Effect<MyPetState> buildEffect() {
 }
 
 Future _onRefresh(Action action, Context<MyPetState> ctx) async {
-  var result = await RequestClient.request<AdoptionEntity>(
+  var result = await RequestClient.request<PetEntity>(
       ctx.context, HttpConstants.PetList);
   CompleterUtils.complete(action);
   if (result.hasSuccess) {
-//    ctx.dispatch(MyPetActionCreator.onResetData(result.data.data));
+    ctx.dispatch(MyPetActionCreator.onResetData(result.data.data));
   }
 }
 

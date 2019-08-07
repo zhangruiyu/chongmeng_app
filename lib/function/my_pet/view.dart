@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
@@ -17,7 +18,109 @@ Widget buildView(MyPetState state, Dispatch dispatch, ViewService viewService) {
       children: <Widget>[
         Expanded(
           child: EasyRefresh.custom(
-            slivers: [],
+            slivers: [
+              SliverList(
+                delegate: SliverChildBuilderDelegate((c, index) {
+                  var data = state.data[index];
+                  return Card(
+                    child: Container(
+                      height: 90.0,
+                      padding: EdgeInsets.symmetric(horizontal: 18.0),
+                      child: Row(
+                        children: <Widget>[
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(35),
+                            child: CachedNetworkImage(
+                              imageUrl: data.avatar,
+                              fit: BoxFit.cover,
+                              width: 70.0,
+                              height: 70.0,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 18.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(data.nick),
+                                Row(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 20.0,
+                                      alignment: Alignment.center,
+                                      margin: const EdgeInsets.only(right: 8.0),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.all(
+                                            (Radius.circular(70.0))),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 8.0, right: 8.0),
+                                        child: Text(
+                                          data.petTypeName,
+                                          style: TextStyle(
+                                              fontSize: 12.0,
+                                              color: Colors.grey),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 20.0,
+                                      alignment: Alignment.center,
+                                      margin: const EdgeInsets.only(right: 8.0),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.all(
+                                            (Radius.circular(70.0))),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 8.0, right: 8.0),
+                                        child: Text(
+                                          data.birthday,
+                                          style: TextStyle(
+                                              fontSize: 12.0,
+                                              color: Colors.grey),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 20.0,
+                                      alignment: Alignment.center,
+                                      margin: const EdgeInsets.only(right: 8.0),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.all(
+                                            (Radius.circular(70.0))),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 8.0, right: 8.0),
+                                        child: Text(
+                                          data.sex.toString(),
+                                          style: TextStyle(
+                                              fontSize: 12.0,
+                                              color: Colors.grey),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                }, childCount: state.data?.length ?? 0),
+              )
+            ],
             onRefresh: CompleterUtils.produceCompleterAction(
               dispatch,
               MyPetActionCreator.onRefresh,

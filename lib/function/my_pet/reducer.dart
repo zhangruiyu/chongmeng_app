@@ -12,6 +12,6 @@ Reducer<MyPetState> buildReducer() {
 }
 
 MyPetState _onResetData(MyPetState state, Action action) {
-  final MyPetState newState = state.clone();
+  final MyPetState newState = state.clone()..data = action.payload;
   return newState;
 }

@@ -1,10 +1,12 @@
 import 'package:fish_redux/fish_redux.dart';
 
+import 'model/pet_entity.dart';
+
 enum MyPetAction { ResetData, Refresh, SkipAddPetPage }
 
 class MyPetActionCreator {
-  static Action onResetData() {
-    return const Action(MyPetAction.ResetData);
+  static Action onResetData(List<PetData> data) {
+    return Action(MyPetAction.ResetData, payload: data);
   }
 
   static Action onRefresh(Map<String, dynamic> map) {
