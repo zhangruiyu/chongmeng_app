@@ -1,5 +1,6 @@
 import 'package:chongmeng/function/main/home/tab/state.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 import 'adapter/state.dart';
@@ -9,16 +10,19 @@ import 'model/home_entity.dart';
 class HomeState implements Cloneable<HomeState> {
   HomeData homeData;
   EasyRefreshController controller;
-
+  ScrollController scrollController;
   @override
   HomeState clone() {
     return HomeState()
       ..controller = controller
+      ..scrollController = scrollController
       ..homeData = homeData;
   }
 
   static HomeState initState(Map<String, dynamic> args) {
-    return HomeState()..controller = EasyRefreshController();
+    return HomeState()
+      ..controller = EasyRefreshController()
+      ..scrollController = ScrollController();
   }
 }
 

@@ -13,6 +13,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/services.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_easyrefresh/material_footer.dart';
+import 'package:flutter_easyrefresh/material_header.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'app.dart';
 import 'helper/permission_helper.dart';
@@ -29,4 +32,6 @@ Future main() async {
         SystemUiOverlayStyle(statusBarColor: Colors.transparent);
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
+  EasyRefresh.defaultHeader = MaterialHeader();
+  EasyRefresh.defaultFooter = MaterialFooter();
 }

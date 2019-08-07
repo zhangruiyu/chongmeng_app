@@ -19,7 +19,10 @@ class DynamicListAdapter extends DynamicFlowAdapter<DynamicListState> {
 class _DynamicListConnector extends ConnOp<DynamicListState, List<ItemBean>> {
   @override
   List<ItemBean> get(DynamicListState state) {
-    println("index  ${state.tabController.index.toString()}");
+    println("index  ${state.tabController?.index?.toString()}");
+    if (state.tabController == null) {
+      return <ItemBean>[];
+    }
     var data =
         state.data[state.data.keys.toList()[state.tabController.index]].data;
     if (data?.isNotEmpty == true) {
