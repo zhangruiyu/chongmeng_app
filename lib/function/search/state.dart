@@ -4,7 +4,7 @@ import 'package:chongmeng/function/main/home/model/ali_product_item.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'filtrate/state.dart';
+import 'filtrate/state.dart' as filtrate;
 
 class SearchState implements Cloneable<SearchState> {
   List<AliProductItem> data;
@@ -14,7 +14,7 @@ class SearchState implements Cloneable<SearchState> {
   List<List<String>> recommendChip;
 
   //搜索框的state
-  SearchFiltrateState searchFiltrateState;
+  filtrate.SearchFiltrateState searchFiltrateState;
 
   @override
   SearchState clone() {
@@ -48,7 +48,7 @@ SearchState initState(Map<String, dynamic> args) {
   });
   var rng = new Random();
   return searchState
-    ..searchFiltrateState = SearchFiltrateState()
+    ..searchFiltrateState = filtrate.initState(null)
     ..data = []
     ..index = 1
     ..pageState = SearchState.INIT
@@ -56,14 +56,14 @@ SearchState initState(Map<String, dynamic> args) {
         TextEditingController(text: keys[rng.nextInt(keys.length - 1)]);
 }
 
-ConnOp<SearchState, SearchFiltrateState> searchConnector() {
-  return ConnOp<SearchState, SearchFiltrateState>(
+ConnOp<SearchState, filtrate.SearchFiltrateState> searchConnector() {
+  return ConnOp<SearchState, filtrate.SearchFiltrateState>(
     get: (SearchState state) {
 //      return SearchFiltrateState()..bannerData = state.homeData?.banner;
-      return SearchFiltrateState();
+      return state.searchFiltrateState;
     },
-    set: (SearchState state, SearchFiltrateState subState) {
-      throw Exception("不支持改变数据");
+    set: (SearchState state, filtrate.SearchFiltrateState subState) {
+      state.searchFiltrateState = subState;
     },
   );
 }

@@ -1,10 +1,13 @@
 import 'package:fish_redux/fish_redux.dart';
 
-//TODO replace with your own action
-enum SearchFiltrateAction { action }
+enum SearchFiltrateAction { SetType, SetTypeAndSearch }
 
 class SearchFiltrateActionCreator {
-  static Action onAction() {
-    return const Action(SearchFiltrateAction.action);
+  static Action onSetType(int type) {
+    return Action(SearchFiltrateAction.SetType, payload: type);
+  }
+
+  static Action onSetTypeAndSearch(int type) {
+    return Action(SearchFiltrateAction.SetTypeAndSearch, payload: type);
   }
 }

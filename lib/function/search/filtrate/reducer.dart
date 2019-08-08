@@ -6,12 +6,12 @@ import 'state.dart';
 Reducer<SearchFiltrateState> buildReducer() {
   return asReducer(
     <Object, Reducer<SearchFiltrateState>>{
-      SearchFiltrateAction.action: _onAction,
+      SearchFiltrateAction.SetType: _onSetType,
     },
   );
 }
 
-SearchFiltrateState _onAction(SearchFiltrateState state, Action action) {
-  final SearchFiltrateState newState = state.clone();
+SearchFiltrateState _onSetType(SearchFiltrateState state, Action action) {
+  final SearchFiltrateState newState = state.clone()..type = action.payload;
   return newState;
 }
