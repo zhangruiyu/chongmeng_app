@@ -23,10 +23,12 @@ Future _onSearch(Action action, Context<SearchState> ctx) async {
 Future _onRefresh(Action action, Context<SearchState> ctx) async {
   ctx.dispatch(SearchActionCreator.onSetSearching(true));
   var result = await RequestClient.request<SearchResultEntity>(
-      ctx.context, HttpConstants.AliSearch, queryParameters: {
-    "query": ctx.state.textEditingController.text,
-    'index': 1
-  });
+      ctx.context, HttpConstants.AliSearch,
+      queryParameters: {
+        "query": ctx.state.textEditingController.text,
+        'index': 1,
+        'filtrateType': ctx.state.searchFiltrateState.type
+      });
   //修改刷新后动画
   ctx.dispatch(SearchActionCreator.onSetSearching(false));
   CompleterUtils.complete(action);
