@@ -1,6 +1,11 @@
 import 'package:fish_redux/fish_redux.dart';
 
-enum DynamicItemAction { RequestSetLiked, ResetLiked, SkipReviewPage }
+enum DynamicItemAction {
+  RequestSetLiked,
+  ResetLiked,
+  SkipReviewPage,
+  SkipDetailsPage
+}
 
 class DynamicItemActionCreator {
   static Action onRequestSetLiked(Map<String, dynamic> paramsMap) {
@@ -13,5 +18,9 @@ class DynamicItemActionCreator {
 
   static Action onSkipReviewPage(int index) {
     return Action(DynamicItemAction.SkipReviewPage, payload: index);
+  }
+
+  static Action onSkipDetailsPage() {
+    return Action(DynamicItemAction.SkipDetailsPage);
   }
 }

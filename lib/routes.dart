@@ -10,6 +10,7 @@ import 'function/bindtel/page.dart';
 import 'function/integral/record/page.dart';
 import 'function/main/community/commit_media/page.dart';
 import 'function/main/community/commit_text/page.dart';
+import 'function/main/community/details/page.dart';
 import 'function/main/community/selecttalktype/page.dart';
 import 'function/main/page.dart';
 import 'function/main/store/integral_commodity_detail/page.dart';
@@ -76,6 +77,7 @@ class PageConstants {
   static const String AdoptionPage = "cm://AdoptionPage"; //领养列表
   static const String AdoptionAddPage = "cm://AdoptionAddPage"; //添加领养
   static const String AdoptionDetailsPage = "cm://AdoptionDetailsPage"; //领养详情页
+  static const String DynamicDetailsPage = "cm://DynamicDetailsPage"; //动态详情
 }
 
 final AbstractRoutes routes = PageRoutes(
@@ -111,6 +113,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.AdoptionAddPage: AdoptionAddPage(),
     PageConstants.AdoptionDetailsPage: AdoptionDetailsPage(),
     PageConstants.MyPetPage: MyPetPage(),
+    PageConstants.DynamicDetailsPage: DynamicDetailsPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

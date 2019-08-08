@@ -13,6 +13,7 @@ Effect<DynamicItemState> buildEffect() {
   return combineEffects(<Object, Effect<DynamicItemState>>{
     DynamicItemAction.RequestSetLiked: _onRequestSetLiked,
     DynamicItemAction.SkipReviewPage: _onSkipReviewPage,
+    DynamicItemAction.SkipDetailsPage: _onSkipDetailsPage,
   });
 }
 
@@ -46,10 +47,16 @@ Future _onSkipReviewPage(Action action, Context<DynamicItemState> ctx) async {
   } else if (ctx.state.data.video != null) {
     Navigator.pushNamed(ctx.context, PageConstants.ReviewIVPage, arguments: {
       'canSkip': false,
-      'filePath': "http://mengchong-1253631018.picbj.myqcloud.com/" +
-          ctx.state.data.video.videoPath,
+      'filePath': ctx.state.data.video.videoPath,
       'type': "video",
       'videoThumbnail': ctx.state.data.video.videoThumbnailPath,
     });
   }
+}
+
+Future _onSkipDetailsPage(Action action, Context<DynamicItemState> ctx) async {
+  Navigator.pushNamed(ctx.context, PageConstants.DynamicDetailsPage,
+      arguments: {
+        'data': ctx.state.data,
+      });
 }

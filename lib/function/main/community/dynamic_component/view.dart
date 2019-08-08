@@ -92,13 +92,18 @@ Widget buildFunCell(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
-        /* IconButton(
-          onPressed: () {},
-          icon: Icon(
-            MdiIcons.messageOutline,
-            color: Colors.grey,
+        Padding(
+          padding: const EdgeInsets.only(right: 8.0),
+          child: IconButton(
+            onPressed: () {
+              dispatch(DynamicItemActionCreator.onSkipDetailsPage());
+            },
+            icon: Image.asset(
+              "assets/dynamic_message.png",
+              width: 25.0,
+            ),
           ),
-        ),*/
+        ),
         LikeButton(
           onTap: (isLiked) {
             final Completer<bool> completer = new Completer<bool>();
@@ -174,8 +179,7 @@ List<Widget> buildOnePicView(
                   fit: BoxFit.cover,
                   width: itemWidth * 1.2,
                   height: itemWidth,
-                  imageUrl: "http://mengchong-1253631018.picbj.myqcloud.com/" +
-                      itemImage,
+                  imageUrl: itemImage,
                 ),
               ),
             ),
@@ -219,9 +223,7 @@ List<Widget> buildTwoPicView(
                             fit: BoxFit.cover,
                             height: itemWidth,
                             width: double.infinity,
-                            imageUrl:
-                                "http://mengchong-1253631018.picbj.myqcloud.com/" +
-                                    itemImage,
+                            imageUrl: itemImage,
                           ),
                         ),
                       ),
@@ -281,9 +283,7 @@ List<Widget> buildThreePicView(
                               fit: BoxFit.cover,
                               width: itemWidth,
                               height: itemWidth,
-                              imageUrl:
-                                  "http://mengchong-1253631018.picbj.myqcloud.com/" +
-                                      itemImage,
+                              imageUrl: itemImage,
                             ),
                           ),
                         ),
@@ -333,8 +333,7 @@ List<Widget> buildVideoView(
             fit: BoxFit.cover,
             height: WindowUtils.getScreenWidth() * 0.45,
             width: double.infinity,
-            imageUrl: "http://mengchong-1253631018.picbj.myqcloud.com/" +
-                video.videoThumbnailPath,
+            imageUrl: video.videoThumbnailPath,
           ),
           IconButton(
             onPressed: () {

@@ -18,8 +18,7 @@ Widget buildView(
       builder: (BuildContext context, int index) {
         var imageData = state.images[index];
         return PhotoViewGalleryPageOptions(
-          imageProvider: CachedNetworkImageProvider(
-              "http://mengchong-1253631018.picbj.myqcloud.com/" + imageData),
+          imageProvider: CachedNetworkImageProvider(imageData),
           initialScale: PhotoViewComputedScale.contained * 0.8,
 //            heroTag: galleryItems[index].id,
         );
