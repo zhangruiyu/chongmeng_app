@@ -8,6 +8,7 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart'
     as extended;
 import 'action.dart';
+import 'filtrate/view.dart';
 import 'state.dart';
 
 Widget buildView(
@@ -21,9 +22,14 @@ Widget buildView(
           SliverAppBar(
             backgroundColor: of.accentColor,
             pinned: true,
+            snap: true,
             elevation: 0.0,
             floating: true,
             primary: true,
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(filtrateBarHeight),
+              child: viewService.buildComponent("searchFiltrate"),
+            ),
             leading: new IconButton(
                 padding: const EdgeInsets.all(0.0),
                 icon: Icon(Icons.arrow_back),

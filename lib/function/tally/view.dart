@@ -84,7 +84,11 @@ Widget buildView(TallyState state, Dispatch dispatch, ViewService viewService) {
                                           padding:
                                               const EdgeInsets.only(right: 4.0),
                                           child: Chip(
-                                            label: Text(itemTag),
+                                            label: Text(
+                                              itemTag,
+                                              style:
+                                                  TextStyle(color: colorWhite),
+                                            ),
                                             backgroundColor:
                                                 ColorUtils.randomColor((index +
                                                         itemData.tagNames
