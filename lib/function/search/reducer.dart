@@ -10,6 +10,7 @@ Reducer<SearchState> buildReducer() {
       SearchAction.ResetData: _onResetData,
       SearchAction.AddData: _onAddData,
       SearchAction.SetSearching: _onSetSearching,
+      SearchAction.SetPageState: _onSetPageState,
     },
   );
 }
@@ -33,5 +34,10 @@ SearchState _onAddData(SearchState state, Action action) {
 
 SearchState _onSetSearching(SearchState state, Action action) {
   final SearchState newState = state.clone()..isSearch = action.payload;
+  return newState;
+}
+
+SearchState _onSetPageState(SearchState state, Action action) {
+  final SearchState newState = state.clone()..pageState = action.payload;
   return newState;
 }

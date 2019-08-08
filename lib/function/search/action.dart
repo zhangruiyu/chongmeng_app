@@ -7,7 +7,8 @@ enum SearchAction {
   Search,
   Refresh,
   LoadMore,
-  SetSearching
+  SetSearching,
+  SetPageState
 }
 
 class SearchActionCreator {
@@ -34,5 +35,9 @@ class SearchActionCreator {
 
   static Action onSetSearching(bool isSearching) {
     return Action(SearchAction.SetSearching, payload: isSearching);
+  }
+
+  static Action onSetPageState(int pageState) {
+    return Action(SearchAction.SetPageState, payload: pageState);
   }
 }

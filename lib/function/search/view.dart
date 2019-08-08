@@ -45,7 +45,12 @@ Widget buildView(
                         ),
                   tooltip: MaterialLocalizations.of(context).backButtonTooltip,
                   onPressed: () {
-                    Navigator.maybePop(context);
+                    if (state.pageState == SearchState.HASDATA) {
+                      dispatch(
+                          SearchActionCreator.onSetPageState(SearchState.INIT));
+                    } else {
+                      Navigator.maybePop(context);
+                    }
                   }),
             ),
             actions: <Widget>[
