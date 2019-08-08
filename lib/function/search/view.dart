@@ -1,12 +1,11 @@
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
-import 'package:chongmeng/widget/back_button_arrows.dart';
-import 'package:chongmeng/widget/sliver_app_bar_delegate.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart'
     as extended;
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'action.dart';
 import 'filtrate/view.dart';
 import 'state.dart';
@@ -30,13 +29,25 @@ Widget buildView(
               preferredSize: Size.fromHeight(filtrateBarHeight),
               child: viewService.buildComponent("searchFiltrate"),
             ),
-            leading: new IconButton(
-                padding: const EdgeInsets.all(0.0),
-                icon: Icon(Icons.arrow_back),
-                tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-                onPressed: () {
-                  Navigator.maybePop(context);
-                }),
+            leading: AnimatedSwitcher(
+              transitionBuilder: (child, anim) {
+                return ScaleTransition(child: child, scale: anim);
+              },
+              duration: Duration(milliseconds: 300),
+              child: new IconButton(
+                  key: ValueKey(state.isSearch),
+                  padding: const EdgeInsets.all(0.0),
+                  icon: !state.isSearch
+                      ? Icon(Icons.arrow_back)
+                      : SpinKitFadingCircle(
+                          color: colorWhite,
+                          size: 15.0,
+                        ),
+                  tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+                  onPressed: () {
+                    Navigator.maybePop(context);
+                  }),
+            ),
             actions: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(right: 22.0),

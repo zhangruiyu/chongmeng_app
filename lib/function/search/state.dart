@@ -11,6 +11,8 @@ class SearchState implements Cloneable<SearchState> {
   TextEditingController textEditingController;
   var index;
   int pageState;
+  //是否正在搜索
+  bool isSearch;
   List<List<String>> recommendChip;
 
   //搜索框的state
@@ -19,6 +21,7 @@ class SearchState implements Cloneable<SearchState> {
   @override
   SearchState clone() {
     return SearchState()
+      ..isSearch = isSearch
       ..index = index
       ..pageState = pageState
       ..data = data
@@ -48,6 +51,7 @@ SearchState initState(Map<String, dynamic> args) {
   });
   var rng = new Random();
   return searchState
+    ..isSearch = false
     ..searchFiltrateState = filtrate.initState(null)
     ..data = []
     ..index = 1

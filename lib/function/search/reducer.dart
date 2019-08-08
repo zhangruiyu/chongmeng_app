@@ -9,6 +9,7 @@ Reducer<SearchState> buildReducer() {
     <Object, Reducer<SearchState>>{
       SearchAction.ResetData: _onResetData,
       SearchAction.AddData: _onAddData,
+      SearchAction.SetSearching: _onSetSearching,
     },
   );
 }
@@ -27,5 +28,10 @@ SearchState _onAddData(SearchState state, Action action) {
   final SearchState newState = state.clone()
     ..data.addAll(action.payload['data'])
     ..index = action.payload['index'];
+  return newState;
+}
+
+SearchState _onSetSearching(SearchState state, Action action) {
+  final SearchState newState = state.clone()..isSearch = action.payload;
   return newState;
 }
