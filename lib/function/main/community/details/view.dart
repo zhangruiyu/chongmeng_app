@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
@@ -11,36 +12,44 @@ import 'state.dart';
 Widget buildView(
     DynamicDetailsState state, Dispatch dispatch, ViewService viewService) {
   var data = state.data;
-  List<Widget> content;
+  Widget content;
   int crossAxisCount;
-  /*if (data.images != null && data.images.length > 0) {
+  if (data.images != null && data.images.length > 0) {
     if (data.images.length <= 3) {
       crossAxisCount = 1;
-    }
-    if (data.images.length == 4) {
+    } else if (data.images.length == 4) {
       crossAxisCount = 2;
     } else {
       crossAxisCount = 3;
     }
-    if (data.images.length >= 3) {
-      content = buildThreePicView(state, dispatch, viewService);
-    } else if (data.images.length == 1) {
-      content = buildOnePicView(state, dispatch, viewService);
-    } else if (data.images.length == 2) {
-      content = buildTwoPicView(state, dispatch, viewService);
+    if (data.images.length == 1) {
+      content = SliverToBoxAdapter(
+        child: buildItemPic(data.images[0]),
+      );
     } else {
-      content = [Container()];
+      content = SliverGrid.count(
+        mainAxisSpacing: 5.0,
+        crossAxisSpacing: 5.0,
+        crossAxisCount: crossAxisCount,
+        children: data.images.map((item) => buildItemPic(item)).toList(),
+      );
     }
   } else if (data.video != null) {
-    content = buildVideoView(state, dispatch, viewService);
+    content = SliverToBoxAdapter(
+        child: Column(
+      children: <Widget>[
+        buildVideoView(state, dispatch, viewService),
+        Padding(
+          padding: const EdgeInsets.only(top: 10.0, bottom: 5.0),
+          child: Text(data.content),
+        )
+      ],
+    ));
   } else {
-    content = [
-      Container(
-        padding: EdgeInsets.only(top: 10.0),
-        child: Text(data.content, maxLines: 5, overflow: TextOverflow.ellipsis),
-      )
-    ];
-  }*/
+    content = SliverToBoxAdapter(
+      child: Text(data.content),
+    );
+  }
   return Scaffold(
     appBar: Toolbar(
       actions: <Widget>[
@@ -58,23 +67,53 @@ Widget buildView(
         )
       ],
     ),
-    body: EasyRefresh.custom(
-      slivers: <Widget>[
-        SliverGrid.count(
-          crossAxisCount: crossAxisCount,
-          children: <Widget>[],
-        ),
-        SliverToBoxAdapter(
-          child: Column(
-            children: <Widget>[],
+    body: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      child: EasyRefresh.custom(
+        slivers: <Widget>[
+          SliverPadding(
+            padding: const EdgeInsets.only(top: 18.0, bottom: 10.0),
+            sliver: content,
           ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget buildVideoView(
+    DynamicDetailsState state, Dispatch dispatch, ViewService viewService) {
+  var data = state.data;
+  var video = data.video;
+  return Padding(
+    padding: const EdgeInsets.only(top: 10.0),
+    child: Stack(
+      alignment: AlignmentDirectional.center,
+      children: <Widget>[
+        Hero(
+          transitionOnUserGestures: true,
+          tag: video.videoThumbnailPath,
+          child: new CachedNetworkImage(
+            fit: BoxFit.cover,
+            height: WindowUtils.getScreenWidth() * 0.45,
+            width: double.infinity,
+            imageUrl: video.videoThumbnailPath,
+          ),
+        ),
+        IconButton(
+          onPressed: () {
+//              dispatch(DynamicItemActionCreator.onSkipReviewPage(0));
+          },
+          icon: Icon(Icons.play_circle_outline),
+          color: Theme.of(viewService.context).accentColor,
+          iconSize: 50.0,
         )
       ],
     ),
   );
 }
 
-buildItemPic(itemImage) {
+Widget buildItemPic(itemImage) {
   return GestureDetector(
     onTap: () {
 //      dispatch(DynamicItemActionCreator.onSkipReviewPage(

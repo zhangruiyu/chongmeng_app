@@ -329,11 +329,16 @@ List<Widget> buildVideoView(
       child: Stack(
         alignment: AlignmentDirectional.center,
         children: <Widget>[
-          new CachedNetworkImage(
-            fit: BoxFit.cover,
-            height: WindowUtils.getScreenWidth() * 0.45,
-            width: double.infinity,
-            imageUrl: video.videoThumbnailPath,
+          Hero(
+            transitionOnUserGestures: true,
+            key: Key(video.videoThumbnailPath),
+            tag: video.videoThumbnailPath,
+            child: new CachedNetworkImage(
+              fit: BoxFit.cover,
+              height: WindowUtils.getScreenWidth() * 0.45,
+              width: double.infinity,
+              imageUrl: video.videoThumbnailPath,
+            ),
           ),
           IconButton(
             onPressed: () {
