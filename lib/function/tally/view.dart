@@ -66,9 +66,7 @@ Widget buildView(TallyState state, Dispatch dispatch, ViewService viewService) {
                                 : CachedNetworkImage(
                                     width: 60.0,
                                     height: 60.0,
-                                    imageUrl:
-                                        "http://mengchong-1253631018.picbj.myqcloud.com/" +
-                                            itemData.image,
+                                    imageUrl: itemData.image,
                                     fit: BoxFit.cover,
                                   ),
                             Expanded(
