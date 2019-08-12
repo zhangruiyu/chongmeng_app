@@ -6,12 +6,13 @@ import 'state.dart';
 Reducer<DynamicDetailsState> buildReducer() {
   return asReducer(
     <Object, Reducer<DynamicDetailsState>>{
-      DynamicDetailsAction.action: _onAction,
+      DynamicDetailsAction.SetPic: _onSetPic,
     },
   );
 }
 
-DynamicDetailsState _onAction(DynamicDetailsState state, Action action) {
-  final DynamicDetailsState newState = state.clone();
+DynamicDetailsState _onSetPic(DynamicDetailsState state, Action action) {
+  final DynamicDetailsState newState = state.clone()
+    ..selectPic = action.payload;
   return newState;
 }

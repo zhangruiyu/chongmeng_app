@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/utils/window_utils.dart';
@@ -104,7 +106,7 @@ Widget buildView(
                   controller: state.commentEditingController,
                   textInputAction: TextInputAction.search,
                   onSubmitted: (str) {
-//                      dispatch(SearchActionCreator.onSearch());
+                    dispatch(DynamicDetailsActionCreator.onCommit());
                   },
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
@@ -112,6 +114,7 @@ Widget buildView(
                       hintText: "添加一条评论",
                       hintStyle: TextStyle(color: colorD1D0D0, fontSize: 12.0)),
                   autofocus: true,
+                  maxLines: 1,
                   style: TextStyle(fontSize: 14.0),
                 ),
                 decoration: BoxDecoration(
@@ -119,18 +122,36 @@ Widget buildView(
                     borderRadius: BorderRadius.all(Radius.circular(30.0))),
               ),
             ),
-            IconButton(
-              icon: Icon(
-                MdiIcons.cameraMeteringPartial,
-              ),
-              onPressed: () {},
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 22.0, left: 10.0),
-              child: InkResponse(
-                onTap: () {
-//                  dispatch(CommitTextActionCreator.onUploadCommit());
-                },
+            state.selectPic == null
+                ? IconButton(
+                    icon: Icon(
+                      MdiIcons.cameraMeteringPartial,
+                    ),
+                    onPressed: () {
+                      dispatch(DynamicDetailsActionCreator.onSelectPic());
+                    },
+                  )
+                : GestureDetector(
+                    onTap: () {
+                      dispatch(DynamicDetailsActionCreator.onSetPic(null));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 8.0, right: 8.0),
+                      width: 30.0,
+                      height: 30.0,
+                      child: Image.file(
+                        File(state.selectPic),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+            InkWell(
+              onTap: () {
+                dispatch(DynamicDetailsActionCreator.onCommit());
+              },
+              child: Container(
+                height: 50.0,
+                margin: const EdgeInsets.only(right: 22.0, left: 10.0),
                 child: Container(
                   alignment: Alignment.center,
                   child: Text("发送"),

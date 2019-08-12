@@ -1,10 +1,17 @@
 import 'package:fish_redux/fish_redux.dart';
 
-//TODO replace with your own action
-enum DynamicDetailsAction { action }
+enum DynamicDetailsAction { SetPic, SelectPic, Commit }
 
 class DynamicDetailsActionCreator {
-  static Action onAction() {
-    return const Action(DynamicDetailsAction.action);
+  static Action onSetPic(data) {
+    return Action(DynamicDetailsAction.SetPic, payload: data);
+  }
+
+  static Action onSelectPic() {
+    return const Action(DynamicDetailsAction.SelectPic);
+  }
+
+  static Action onCommit() {
+    return const Action(DynamicDetailsAction.Commit);
   }
 }

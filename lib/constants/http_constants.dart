@@ -15,6 +15,9 @@ class HttpConstants {
   static final String PetSubType = "app/pet/subType";
   static final String AddPet = "app/pet/common/addPet";
   static final String CommitDynamic = "app/dynamic/common/commitDynamic";
+
+  //发表评论
+  static final String CommitComment = "app/dynamic/common/commitComment";
   static final String DynamicLiked = "app/dynamic/common/dynamic/liked";
   static final String DynamicList = "app/dynamic/dynamic/list";
   static final String ThirdLoginAndRegister = "app/auth/thirdLoginAndRegister";

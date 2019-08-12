@@ -6,12 +6,16 @@ import 'adapter/state.dart';
 
 class DynamicDetailsState implements Cloneable<DynamicDetailsState> {
   DynamicListData data;
+  String selectPic;
+  //回复的评论id
+  int replyId;
   TextEditingController commentEditingController;
 
   @override
   DynamicDetailsState clone() {
     return DynamicDetailsState()
       ..data = data
+      ..selectPic = selectPic
       ..commentEditingController = commentEditingController;
   }
 }
