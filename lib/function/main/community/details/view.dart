@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:oktoast/oktoast.dart';
 
 import 'action.dart';
@@ -13,6 +16,7 @@ Widget buildView(
     DynamicDetailsState state, Dispatch dispatch, ViewService viewService) {
   var data = state.data;
   Widget content;
+  var buildAdapter = viewService.buildAdapter();
   int crossAxisCount;
   if (data.images != null && data.images.length > 0) {
     if (data.images.length <= 3) {
@@ -51,6 +55,7 @@ Widget buildView(
     );
   }
   return Scaffold(
+    backgroundColor: colorWhite,
     appBar: Toolbar(
       actions: <Widget>[
         Padding(
@@ -67,16 +72,74 @@ Widget buildView(
         )
       ],
     ),
-    body: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0),
-      child: EasyRefresh.custom(
-        slivers: <Widget>[
-          SliverPadding(
-            padding: const EdgeInsets.only(top: 18.0, bottom: 10.0),
-            sliver: content,
+    body: Column(
+      children: <Widget>[
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            child: EasyRefresh.custom(
+              slivers: <Widget>[
+                SliverPadding(
+                  padding: const EdgeInsets.only(top: 18.0, bottom: 10.0),
+                  sliver: content,
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(buildAdapter.itemBuilder,
+                      childCount: buildAdapter.itemCount),
+                )
+              ],
+            ),
           ),
-        ],
-      ),
+        ),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+                margin: EdgeInsets.only(
+                    left: 15.0, top: 10.0, bottom: 10.0, right: 15.0),
+                child: TextField(
+                  scrollPadding: const EdgeInsets.all(5.0),
+                  controller: state.commentEditingController,
+                  textInputAction: TextInputAction.search,
+                  onSubmitted: (str) {
+//                      dispatch(SearchActionCreator.onSearch());
+                  },
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.zero,
+                      border: InputBorder.none,
+                      hintText: "添加一条评论",
+                      hintStyle: TextStyle(color: colorD1D0D0, fontSize: 12.0)),
+                  autofocus: true,
+                  style: TextStyle(fontSize: 14.0),
+                ),
+                decoration: BoxDecoration(
+                    color: Color(0xfff7f7f7),
+                    borderRadius: BorderRadius.all(Radius.circular(30.0))),
+              ),
+            ),
+            IconButton(
+              icon: Icon(
+                MdiIcons.cameraMeteringPartial,
+              ),
+              onPressed: () {},
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 22.0, left: 10.0),
+              child: InkResponse(
+                onTap: () {
+//                  dispatch(CommitTextActionCreator.onUploadCommit());
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text("发送"),
+                ),
+              ),
+            )
+          ],
+        ),
+      ],
     ),
   );
 }
