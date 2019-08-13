@@ -11,9 +11,10 @@ class DynamicDetailsState implements Cloneable<DynamicDetailsState> {
   //评论
   List<CommentData> commentData;
   String selectPic;
+  FocusNode commentNode;
 
   //回复的评论id
-  int replyId;
+  ReplyInfo replyInfo;
   TextEditingController commentEditingController;
 
   @override
@@ -22,6 +23,8 @@ class DynamicDetailsState implements Cloneable<DynamicDetailsState> {
       ..data = data
       ..selectPic = selectPic
       ..commentData = commentData
+      ..replyInfo = replyInfo
+      ..commentNode = commentNode
       ..commentEditingController = commentEditingController;
   }
 }
@@ -29,6 +32,7 @@ class DynamicDetailsState implements Cloneable<DynamicDetailsState> {
 DynamicDetailsState initState(Map<String, dynamic> args) {
   return DynamicDetailsState()
     ..data = args['data']
+    ..commentNode = FocusNode()
     ..commentEditingController = TextEditingController();
 }
 
@@ -42,4 +46,11 @@ class ReplyListConnector extends ConnOp<DynamicDetailsState, ReplyListState> {
   ReplyListState get(DynamicDetailsState state) {
     return ReplyListState()..data = state.commentData;
   }
+}
+
+class ReplyInfo {
+  num replyId;
+  String userName;
+
+  ReplyInfo({this.replyId, this.userName});
 }

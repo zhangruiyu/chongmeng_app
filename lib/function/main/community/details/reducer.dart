@@ -8,6 +8,7 @@ Reducer<DynamicDetailsState> buildReducer() {
     <Object, Reducer<DynamicDetailsState>>{
       DynamicDetailsAction.SetPic: _onSetPic,
       DynamicDetailsAction.ResetData: _onResetData,
+      DynamicDetailsAction.SetReplyInfo: _onSetReplyInfo,
     },
   );
 }
@@ -21,5 +22,12 @@ DynamicDetailsState _onSetPic(DynamicDetailsState state, Action action) {
 DynamicDetailsState _onResetData(DynamicDetailsState state, Action action) {
   final DynamicDetailsState newState = state.clone()
     ..commentData = action.payload;
+  return newState;
+}
+
+DynamicDetailsState _onSetReplyInfo(DynamicDetailsState state, Action action) {
+  final DynamicDetailsState newState = state.clone()
+    ..replyInfo = action.payload;
+  newState.commentEditingController.text = "";
   return newState;
 }

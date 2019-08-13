@@ -60,6 +60,16 @@ Widget buildView(
   }
   return Scaffold(
     backgroundColor: colorWhite,
+    floatingActionButton: Padding(
+      padding: const EdgeInsets.only(bottom: 58.0),
+      child: FloatingActionButton(
+        child: Icon(Icons.reply),
+        onPressed: () {
+          dispatch(DynamicDetailsActionCreator.onSetReplyInfo(null));
+          dispatch(DynamicDetailsActionCreator.onRequestFocus());
+        },
+      ),
+    ),
     appBar: Toolbar(
       actions: <Widget>[
         Padding(
@@ -93,7 +103,7 @@ Widget buildView(
                   child: viewService.buildComponent('community_user_head'),
                 ),
                 SliverPadding(
-                  padding: const EdgeInsets.only(top: 18.0, bottom: 10.0),
+                  padding: const EdgeInsets.only(bottom: 10.0),
                   sliver: content,
                 ),
                 SliverList(
@@ -119,10 +129,13 @@ Widget buildView(
                   onSubmitted: (str) {
                     dispatch(DynamicDetailsActionCreator.onCommit());
                   },
+                  focusNode: state.commentNode,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       border: InputBorder.none,
-                      hintText: "添加一条评论",
+                      hintText: state.replyInfo == null
+                          ? "添加一条评论"
+                          : "回复 ${state.replyInfo.userName}:",
                       hintStyle: TextStyle(color: colorD1D0D0, fontSize: 12.0)),
 //                  autofocus: true,
                   maxLines: 1,

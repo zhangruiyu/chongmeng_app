@@ -6,6 +6,7 @@ import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/utils/keyboard_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'action.dart';
 import 'model/comment_entity.dart';
 import 'state.dart';
@@ -15,7 +16,12 @@ Effect<DynamicDetailsState> buildEffect() {
     DynamicDetailsAction.SelectPic: _onSelectPic,
     DynamicDetailsAction.Commit: _onCommit,
     DynamicDetailsAction.Refresh: _onRefresh,
+    DynamicDetailsAction.RequestFocus: _onRequestFocus,
   });
+}
+
+Future _onRequestFocus(Action action, Context<DynamicDetailsState> ctx) async {
+  FocusScope.of(ctx.context).requestFocus(ctx.state.commentNode);
 }
 
 Future _onSelectPic(Action action, Context<DynamicDetailsState> ctx) async {
@@ -64,10 +70,13 @@ commit(Action action, Context<DynamicDetailsState> ctx,
         'momentId': ctx.state.data.id,
         'content': ctx.state.commentEditingController.text,
         if (resourcePath != null) 'pic': resourcePath,
-        'replyId': 2,
+        'replyId': ctx.state.replyInfo?.replyId,
       },
       showLoadingIndicator: true);
   if (result.hasSuccess) {
     KeyboardUtils.hideByContext(ctx.context);
+    ctx.dispatch(DynamicDetailsActionCreator.onSetReplyInfo(null));
+    ctx.dispatch(DynamicDetailsActionCreator.onSetPic(null));
+    ctx.dispatch(DynamicDetailsActionCreator.onRefresh(null));
   }
 }

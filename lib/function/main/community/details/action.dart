@@ -1,6 +1,15 @@
+import 'package:chongmeng/function/main/community/details/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
-enum DynamicDetailsAction { SetPic, SelectPic, Commit, Refresh, ResetData }
+enum DynamicDetailsAction {
+  SetPic,
+  SelectPic,
+  Commit,
+  Refresh,
+  ResetData,
+  SetReplyInfo,
+  RequestFocus,
+}
 
 class DynamicDetailsActionCreator {
   static Action onSetPic(data) {
@@ -21,5 +30,13 @@ class DynamicDetailsActionCreator {
 
   static Action onResetData(data) {
     return Action(DynamicDetailsAction.ResetData, payload: data);
+  }
+
+  static Action onSetReplyInfo(ReplyInfo data) {
+    return Action(DynamicDetailsAction.SetReplyInfo, payload: data);
+  }
+
+  static Action onRequestFocus() {
+    return Action(DynamicDetailsAction.RequestFocus);
   }
 }
