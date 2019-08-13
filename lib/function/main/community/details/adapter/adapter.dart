@@ -1,4 +1,6 @@
+import 'package:chongmeng/function/main/community/details/model/comment_entity.dart';
 import 'package:chongmeng/function/main/community/details/reply_component/component.dart';
+import 'package:chongmeng/function/main/community/details/reply_component/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'reducer.dart';
@@ -16,15 +18,14 @@ class ReplyListAdapter extends DynamicFlowAdapter<ReplyListState> {
 class _ReplyListConnector extends ConnOp<ReplyListState, List<ItemBean>> {
   @override
   List<ItemBean> get(ReplyListState state) {
-    return <ItemBean>[
-      ItemBean('reply', null),
-      ItemBean('reply', null),
-      ItemBean('reply', null),
-      ItemBean('reply', null),
-      ItemBean('reply', null),
-      ItemBean('reply', null),
-      ItemBean('reply', null)
-    ];
+    if (state?.data?.isNotEmpty == true) {
+      return state.data
+          .map<ItemBean>(
+              (CommentData data) => ItemBean('reply', ReplyState(data: data)))
+          .toList(growable: true);
+    } else {
+      return <ItemBean>[];
+    }
   }
 
   @override
@@ -32,7 +33,6 @@ class _ReplyListConnector extends ConnOp<ReplyListState, List<ItemBean>> {
 
   @override
   subReducer(reducer) {
-    // TODO: implement subReducer
     return super.subReducer(reducer);
   }
 }

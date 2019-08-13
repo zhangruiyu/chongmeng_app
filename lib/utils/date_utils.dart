@@ -16,6 +16,10 @@ class DateUtils {
   static DateTime toDayDateTime() {
     return DateTime.parse(toDay());
   }
+
+  static DateTime string2dateTime(String date) {
+    return DateTime.parse(date);
+  }
 }
 
 class RelativeDateUtils {

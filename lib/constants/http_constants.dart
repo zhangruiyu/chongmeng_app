@@ -20,6 +20,7 @@ class HttpConstants {
   static final String CommitComment = "app/dynamic/common/commitComment";
   static final String DynamicLiked = "app/dynamic/common/dynamic/liked";
   static final String DynamicList = "app/dynamic/dynamic/list";
+  static final String CommentList = "app/dynamic/comment/list";
   static final String ThirdLoginAndRegister = "app/auth/thirdLoginAndRegister";
   static final String HomeIndex = "app/main/home/index";
   static final String AccountIndex = "app/main/common/account/index";

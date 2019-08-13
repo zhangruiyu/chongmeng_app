@@ -1,10 +1,12 @@
+import 'package:chongmeng/function/main/community/details/model/comment_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 class ReplyListState implements Cloneable<ReplyListState> {
+  List<CommentData> data;
 
   @override
   ReplyListState clone() {
-    return ReplyListState();
+    return ReplyListState()..data = data;
   }
 }
 

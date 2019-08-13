@@ -7,12 +7,14 @@ import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/utils/keyboard_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
+import 'model/comment_entity.dart';
 import 'state.dart';
 
 Effect<DynamicDetailsState> buildEffect() {
   return combineEffects(<Object, Effect<DynamicDetailsState>>{
     DynamicDetailsAction.SelectPic: _onSelectPic,
     DynamicDetailsAction.Commit: _onCommit,
+    DynamicDetailsAction.Refresh: _onRefresh,
   });
 }
 
@@ -22,6 +24,16 @@ Future _onSelectPic(Action action, Context<DynamicDetailsState> ctx) async {
       maxSelected: 1);
   if ((imgList?.length ?? 0) > 0) {
     ctx.dispatch(DynamicDetailsActionCreator.onSetPic(imgList.first));
+  }
+}
+
+Future _onRefresh(Action action, Context<DynamicDetailsState> ctx) async {
+  var result = await RequestClient.request<CommentEntity>(
+      ctx.context, HttpConstants.CommentList,
+      queryParameters: {'momentId': ctx.state.data.id});
+  CompleterUtils.complete(action);
+  if (result.hasSuccess) {
+    ctx.dispatch(DynamicDetailsActionCreator.onResetData(result.data.data));
   }
 }
 
