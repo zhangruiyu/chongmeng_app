@@ -45,11 +45,30 @@ Widget buildView(ReplyState state, Dispatch dispatch, ViewService viewService) {
             ),
           ),
         Padding(
-          padding: const EdgeInsets.only(left: 48.0, top: 5.0),
-          child: Text(
-            RelativeDateUtils.getTimestampString(
-                DateUtils.string2dateTime(data.createTime)),
-            style: TextStyle(fontSize: 12.0, color: color7E7E7E),
+          padding: const EdgeInsets.only(left: 48.0, top: 8.0),
+          child: Row(
+            children: <Widget>[
+              Text(
+                RelativeDateUtils.getTimestampString(
+                    DateUtils.string2dateTime(data.createTime)),
+                style: TextStyle(fontSize: 12.0, color: color7E7E7E),
+              ),
+              if (data.reply?.isNotEmpty == true)
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15.0),
+                    ),
+                    color: Colors.grey[300],
+                  ),
+                  padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                  margin: const EdgeInsets.only(left: 5.0, right: 5.0),
+                  child: Text(
+                    "${data.reply.length}条回复",
+                    style: TextStyle(fontSize: 12.0),
+                  ),
+                )
+            ],
           ),
         ),
       ],
