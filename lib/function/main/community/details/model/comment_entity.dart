@@ -182,4 +182,9 @@ class CommantDataReply {
     data['id'] = this.id;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'CommantDataReply{createTime: $createTime, atUserIds: $atUserIds, sex: $sex, pic: $pic, avatar: $avatar, content: $content, liked: $liked, momentId: $momentId, replyId: $replyId, userId: $userId, toUserId: $toUserId, nickName: $nickName, id: $id}';
+  }
 }

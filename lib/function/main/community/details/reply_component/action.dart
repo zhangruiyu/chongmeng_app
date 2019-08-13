@@ -1,10 +1,13 @@
 import 'package:fish_redux/fish_redux.dart';
 
-//TODO replace with your own action
-enum ReplyAction { action }
+enum ReplyAction { action, SkipReviewImagePage }
 
 class ReplyActionCreator {
   static Action onAction() {
     return const Action(ReplyAction.action);
+  }
+
+  static Action onSkipReviewImagePage(String image) {
+    return Action(ReplyAction.SkipReviewImagePage, payload: image);
   }
 }

@@ -47,10 +47,15 @@ Widget buildView(ReplyState state, Dispatch dispatch, ViewService viewService) {
           if (data.pic?.isNotEmpty == true)
             Padding(
               padding: const EdgeInsets.only(left: 48.0, top: 5.0),
-              child: CachedNetworkImage(
-                imageUrl: data.pic,
-                fit: BoxFit.cover,
-                height: 80.0,
+              child: GestureDetector(
+                onTap: () {
+                  dispatch(ReplyActionCreator.onSkipReviewImagePage(data.pic));
+                },
+                child: CachedNetworkImage(
+                  imageUrl: data.pic,
+                  fit: BoxFit.cover,
+                  height: 80.0,
+                ),
               ),
             ),
           Padding(
@@ -112,17 +117,18 @@ Widget buildView(ReplyState state, Dispatch dispatch, ViewService viewService) {
                                     text: "${itemReply.nickName}",
                                     style: TextStyle(color: Colors.blue[300])),
                                 //如果回复的id是当前大回复id,那么就不展示回复
-                                if (itemReply.replyId != data.id) ...[
+                                if (itemReply.replyId != data.id ||
+                                    itemReply.userId != data.userId) ...[
                                   TextSpan(
-                                    text: "回复",
-                                  ),
+                                      text: "回复",
+                                      style: TextStyle(color: color343434)),
                                   TextSpan(
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
                                           print("tapped");
                                         },
                                       text:
-                                          "${data.reply.firstWhere((item) => item.id == itemReply.replyId)}",
+                                          "${data.id == itemReply.replyId ? data.nickName : data.reply.firstWhere((item) => item.id == itemReply.replyId).toString()}",
                                       style:
                                           TextStyle(color: Colors.blue[300])),
                                 ],
@@ -149,10 +155,17 @@ Widget buildView(ReplyState state, Dispatch dispatch, ViewService viewService) {
                         if (itemReply.pic?.isNotEmpty == true)
                           Padding(
                             padding: const EdgeInsets.only(top: 5.0),
-                            child: CachedNetworkImage(
-                              imageUrl: itemReply.pic,
-                              fit: BoxFit.cover,
-                              height: 80.0,
+                            child: GestureDetector(
+                              onTap: () {
+                                dispatch(
+                                    ReplyActionCreator.onSkipReviewImagePage(
+                                        itemReply.pic));
+                              },
+                              child: CachedNetworkImage(
+                                imageUrl: itemReply.pic,
+                                fit: BoxFit.cover,
+                                height: 80.0,
+                              ),
                             ),
                           ),
                       ],

@@ -57,4 +57,9 @@ class ReplyInfo {
   String userName;
 
   ReplyInfo({this.replyId, this.userName});
+
+  @override
+  String toString() {
+    return 'ReplyInfo{replyId: $replyId, userName: $userName}';
+  }
 }
