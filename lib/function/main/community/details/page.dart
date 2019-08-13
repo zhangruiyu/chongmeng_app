@@ -1,3 +1,5 @@
+import 'package:chongmeng/components/community_user_head/component.dart';
+import 'package:chongmeng/components/community_user_head/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'adapter/adapter.dart';
@@ -16,7 +18,10 @@ class DynamicDetailsPage
           view: buildView,
           dependencies: Dependencies<DynamicDetailsState>(
               adapter: ReplyListConnector() + ReplyListAdapter(),
-              slots: <String, Dependent<DynamicDetailsState>>{}),
+              slots: <String, Dependent<DynamicDetailsState>>{
+                'community_user_head': CommunityDetailsUserHeadConnector() +
+                    CommunityUserHeadComponent()
+              }),
           middleware: <Middleware<DynamicDetailsState>>[],
         );
 }

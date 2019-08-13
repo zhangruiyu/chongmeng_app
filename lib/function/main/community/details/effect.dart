@@ -51,7 +51,7 @@ commit(Action action, Context<DynamicDetailsState> ctx,
       queryParameters: {
         'momentId': ctx.state.data.id,
         'content': ctx.state.commentEditingController.text,
-        'pic': resourcePath,
+        if (resourcePath != null) 'pic': resourcePath,
         'replyId': 2,
       },
       showLoadingIndicator: true);

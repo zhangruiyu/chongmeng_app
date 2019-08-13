@@ -45,32 +45,11 @@ Widget buildView(
     ];
   }
   return Container(
-    padding: EdgeInsets.only(top: 18.0, left: paddingLeft, right: paddingLeft),
+    padding: EdgeInsets.only(left: paddingLeft, right: paddingLeft),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Row(
-          children: <Widget>[
-            ClipOval(
-                child: CachedNetworkImage(
-              width: 40.0,
-              imageUrl: data.avatar,
-            )),
-            Padding(
-              padding: const EdgeInsets.only(left: 18.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(data.nickName),
-                  Text(
-                    "新车上路",
-                    style: TextStyle(fontSize: 12.0, color: color7E7E7E),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+        viewService.buildComponent('community_user_head'),
         ...content,
         buildFunCell(state, dispatch, viewService),
         Padding(

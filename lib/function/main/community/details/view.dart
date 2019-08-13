@@ -81,6 +81,9 @@ Widget buildView(
             padding: const EdgeInsets.symmetric(horizontal: 18.0),
             child: EasyRefresh.custom(
               slivers: <Widget>[
+                SliverToBoxAdapter(
+                  child: viewService.buildComponent('community_user_head'),
+                ),
                 SliverPadding(
                   padding: const EdgeInsets.only(top: 18.0, bottom: 10.0),
                   sliver: content,
@@ -113,7 +116,7 @@ Widget buildView(
                       border: InputBorder.none,
                       hintText: "添加一条评论",
                       hintStyle: TextStyle(color: colorD1D0D0, fontSize: 12.0)),
-                  autofocus: true,
+//                  autofocus: true,
                   maxLines: 1,
                   style: TextStyle(fontSize: 14.0),
                 ),
