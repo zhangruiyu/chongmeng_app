@@ -4,15 +4,18 @@ import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/network/entity/cos_entity.dart';
 import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/keyboard_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
+import 'package:flutter/scheduler.dart';
 import 'action.dart';
 import 'model/comment_entity.dart';
 import 'state.dart';
 
 Effect<DynamicDetailsState> buildEffect() {
   return combineEffects(<Object, Effect<DynamicDetailsState>>{
+    DynamicDetailsAction.SkipReviewPage: _onSkipReviewPage,
     DynamicDetailsAction.SelectPic: _onSelectPic,
     DynamicDetailsAction.Commit: _onCommit,
     DynamicDetailsAction.Refresh: _onRefresh,
@@ -20,7 +23,23 @@ Effect<DynamicDetailsState> buildEffect() {
   });
 }
 
+Future _onSkipReviewPage(
+    Action action, Context<DynamicDetailsState> ctx) async {
+  if (ctx.state.data.images != null && ctx.state.data.images.length > 0) {
+    Navigator.pushNamed(ctx.context, PageConstants.ReviewImagePage,
+        arguments: {"images": ctx.state.data.images, "index": action.payload});
+  } else if (ctx.state.data.video != null) {
+    Navigator.pushNamed(ctx.context, PageConstants.ReviewIVPage, arguments: {
+      'canSkip': false,
+      'filePath': ctx.state.data.video.videoPath,
+      'type': "video",
+      'videoThumbnail': ctx.state.data.video.videoThumbnailPath,
+    });
+  }
+}
+
 Future _onRequestFocus(Action action, Context<DynamicDetailsState> ctx) async {
+  KeyboardUtils.unfocus(ctx.context);
   FocusScope.of(ctx.context).requestFocus(ctx.state.commentNode);
 }
 
@@ -74,7 +93,7 @@ commit(Action action, Context<DynamicDetailsState> ctx,
       },
       showLoadingIndicator: true);
   if (result.hasSuccess) {
-    KeyboardUtils.hideByContext(ctx.context);
+    KeyboardUtils.unfocus(ctx.context);
     ctx.dispatch(DynamicDetailsActionCreator.onSetReplyInfo(null));
     ctx.dispatch(DynamicDetailsActionCreator.onSetPic(null));
     ctx.dispatch(DynamicDetailsActionCreator.onRefresh(null));

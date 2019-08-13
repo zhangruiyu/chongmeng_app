@@ -32,19 +32,23 @@ Widget buildView(
     }
     if (data.images.length == 1) {
       content = SliverToBoxAdapter(
-        child: buildItemPic(data.images[0]),
+        child: buildItemPic(data.images[0], dispatch, 0),
       );
     } else {
       content = SliverGrid.count(
         mainAxisSpacing: 5.0,
         crossAxisSpacing: 5.0,
         crossAxisCount: crossAxisCount,
-        children: data.images.map((item) => buildItemPic(item)).toList(),
+        children: data.images
+            .map((item) =>
+                buildItemPic(item, dispatch, data.images.indexOf(item)))
+            .toList(),
       );
     }
   } else if (data.video != null) {
     content = SliverToBoxAdapter(
         child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         buildVideoView(state, dispatch, viewService),
         Padding(
@@ -93,6 +97,7 @@ Widget buildView(
             padding: const EdgeInsets.symmetric(horizontal: 18.0),
             child: EasyRefresh.custom(
               firstRefresh: true,
+              controller: state.easyRefreshController,
               firstRefreshWidget: LoadingWidget(),
               onRefresh: CompleterUtils.produceCompleterAction(
                 dispatch,
@@ -210,7 +215,7 @@ Widget buildVideoView(
         ),
         IconButton(
           onPressed: () {
-//              dispatch(DynamicItemActionCreator.onSkipReviewPage(0));
+            dispatch(DynamicDetailsActionCreator.onSkipReviewPage(0));
           },
           icon: Icon(Icons.play_circle_outline),
           color: Theme.of(viewService.context).accentColor,
@@ -221,11 +226,10 @@ Widget buildVideoView(
   );
 }
 
-Widget buildItemPic(itemImage) {
+Widget buildItemPic(itemImage, Dispatch dispatch, index) {
   return GestureDetector(
     onTap: () {
-//      dispatch(DynamicItemActionCreator.onSkipReviewPage(
-//          index));
+      dispatch(DynamicDetailsActionCreator.onSkipReviewPage(index));
     },
     child: new CachedNetworkImage(
       fit: BoxFit.cover,

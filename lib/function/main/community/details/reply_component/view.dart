@@ -127,6 +127,9 @@ Widget buildView(ReplyState state, Dispatch dispatch, ViewService viewService) {
                                           TextStyle(color: Colors.blue[300])),
                                 ],
                                 TextSpan(
+                                    text: ": ",
+                                    style: TextStyle(color: Colors.blue[300])),
+                                TextSpan(
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
                                         dispatch(DynamicDetailsActionCreator

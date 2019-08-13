@@ -1,6 +1,7 @@
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 import 'adapter/state.dart';
 import 'model/comment_entity.dart';
@@ -16,6 +17,7 @@ class DynamicDetailsState implements Cloneable<DynamicDetailsState> {
   //回复的评论id
   ReplyInfo replyInfo;
   TextEditingController commentEditingController;
+  EasyRefreshController easyRefreshController;
 
   @override
   DynamicDetailsState clone() {
@@ -25,6 +27,7 @@ class DynamicDetailsState implements Cloneable<DynamicDetailsState> {
       ..commentData = commentData
       ..replyInfo = replyInfo
       ..commentNode = commentNode
+      ..easyRefreshController = easyRefreshController
       ..commentEditingController = commentEditingController;
   }
 }
@@ -33,6 +36,7 @@ DynamicDetailsState initState(Map<String, dynamic> args) {
   return DynamicDetailsState()
     ..data = args['data']
     ..commentNode = FocusNode()
+    ..easyRefreshController = EasyRefreshController()
     ..commentEditingController = TextEditingController();
 }
 

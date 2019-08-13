@@ -9,6 +9,7 @@ enum DynamicDetailsAction {
   ResetData,
   SetReplyInfo,
   RequestFocus,
+  SkipReviewPage,
 }
 
 class DynamicDetailsActionCreator {
@@ -38,5 +39,9 @@ class DynamicDetailsActionCreator {
 
   static Action onRequestFocus() {
     return Action(DynamicDetailsAction.RequestFocus);
+  }
+
+  static Action onSkipReviewPage(index) {
+    return Action(DynamicDetailsAction.SkipReviewPage, payload: index);
   }
 }

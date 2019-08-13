@@ -10,4 +10,8 @@ class KeyboardUtils {
   static void hideByContext(context) {
     FocusScope.of(context).requestFocus(FocusNode());
   }
+
+  static void unfocus(context) {
+    FocusScope.of(context).unfocus();
+  }
 }
