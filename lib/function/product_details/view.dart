@@ -4,8 +4,10 @@ import 'package:chongmeng/function/main/home/model/ali_product_item.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
+import 'package:chongmeng/widget/dotline_widget.dart';
 import 'package:chongmeng/widget/loadling_widget.dart';
 import 'package:chongmeng/widget/oval_swiper_pagination_builder.dart';
+import 'package:extended_text/extended_text.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,9 +46,34 @@ Widget buildView(
           Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(itemData.title),
-              ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: ExtendedText.rich(
+                    TextSpan(
+                      children: <InlineSpan>[
+                        WidgetSpan(
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 5.0),
+                            margin: EdgeInsets.only(right: 5.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5.0),
+                              ),
+                              border: Border.all(
+                                color: of.accentColor,
+                                width: 1.0,
+                              ),
+                            ),
+                            child: Text(
+                              "京东",
+                              style: TextStyle(
+                                  color: of.accentColor, fontSize: 12.0),
+                            ),
+                          ),
+                        ),
+                        TextSpan(text: itemData.title),
+                      ],
+                    ),
+                  )),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -89,16 +116,21 @@ Widget buildView(
 
               //券金额
               Container(
-                width: WindowUtils.getScreenWidth() - 38 * 2,
-                margin: const EdgeInsets.only(top: 5.0, left: 38, right: 38),
+                margin: const EdgeInsets.only(top: 15.0, left: 18, right: 18),
 //                padding: const EdgeInsets.only(top: 22.0, bottom: 22.0),
                 height: 70.0,
+                decoration: new BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [Colors.pink[300], of.accentColor]),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(5.0),
+                  ),
+                ),
                 alignment: Alignment.center,
-                child: RaisedButton(
-                  elevation: 0.0,
-                  color: of.accentColor,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(5.0)),
+                child: GestureDetector(
+                  onTap: () {
+                    launch(itemData.couponClickUrl);
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
@@ -126,13 +158,21 @@ Widget buildView(
                           )
                         ],
                       ),
-                      Text("立即领券"),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Dotline(
+                          height: 20.0,
+                          width: 1.5,
+                          dashHeight: 4.0,
+                          color: colorWhite,
+                        ),
+                      ),
+                      Text(
+                        "立即领券",
+                        style: TextStyle(color: colorWhite),
+                      ),
                     ],
                   ),
-                  textColor: colorWhite,
-                  onPressed: () {
-                    launch(itemData.couponClickUrl);
-                  },
                 ),
               )
             ],
