@@ -49,6 +49,7 @@ Future _onLogin(Action action, Context<BindTelState> ctx) async {
       ctx.context, HttpConstants.ThirdLoginAndRegister,
       queryParameters: queryParameters, showLoadingIndicator: true);
   if (result.hasSuccess) {
-    UserHelper.login(result, ctx.context);
+    UserHelper.loginNoPop(result, ctx.context);
+    NavigatorHelper.popToMain(ctx.context);
   }
 }

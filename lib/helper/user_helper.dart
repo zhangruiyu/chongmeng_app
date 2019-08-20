@@ -98,4 +98,9 @@ class UserHelper {
       Navigator.popAndPushNamed(context, PageConstants.PetAddPage);
     }
   }
+
+  static void loginNoPop(Result<LoginEntity> result, BuildContext context) {
+    GlobalStore.store
+        .dispatch(GlobalActionCreator.onUpdateLocalUser(result.data.data));
+  }
 }
