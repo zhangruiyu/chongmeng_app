@@ -24,144 +24,149 @@ Widget buildView(
 Widget buildLoginView(
     ThemeData theme, ViewService viewService, LocalUser user) {
   println(user.avatar);
-  return Column(
-    children: <Widget>[
-      Container(
-        color: theme.accentColor,
-        padding: EdgeInsets.only(left: 20.0, bottom: 30.0, top: 30.0),
-        child: SafeArea(
+  return DefaultTextStyle(
+    style: TextStyle(color: colorWhite),
+    child: Column(
+      children: <Widget>[
+        Container(
+          color: theme.accentColor,
+          padding: EdgeInsets.only(left: 20.0, bottom: 30.0, top: 30.0),
+          child: SafeArea(
+            child: Row(
+              children: <Widget>[
+                user.avatar?.isEmpty == false
+                    ? ClipOval(
+                        child: CachedNetworkImage(
+                        width: 50.0,
+                        imageUrl: user.avatar,
+                      ))
+                    : CircleAvatar(
+                        child: Image.asset(
+                          'assets/account_page_no_login.png',
+                          width: 50.0,
+                        ),
+                        backgroundColor: colorWhite,
+                      ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(
+                        viewService.context, PageConstants.AutoPage);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(
+                          user.nickName,
+                          style: theme.textTheme.subhead
+                              .merge(TextStyle(color: colorWhite)),
+                        ),
+                        Text(
+                          user.description?.isEmpty == true
+                              ? "这个人很懒,什么也没有留下~"
+                              : user.description,
+                          style: TextStyle(fontSize: 12.0),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        //关注 宠物
+        Container(
+          color: theme.accentColor,
+          padding: const EdgeInsets.only(bottom: 10.0),
           child: Row(
             children: <Widget>[
-              user.avatar?.isEmpty == false
-                  ? ClipOval(
-                      child: CachedNetworkImage(
-                      width: 50.0,
-                      imageUrl: user.avatar,
-                    ))
-                  : CircleAvatar(
-                      child: Image.asset(
-                        'assets/account_page_no_login.png',
-                        width: 50.0,
-                      ),
-                      backgroundColor: colorWhite,
-                    ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(
-                      viewService.context, PageConstants.AutoPage);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
+              Expanded(
+                child: Column(
+                  children: <Widget>[Text("0"), Text("关注")],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  children: <Widget>[Text("0"), Text("粉丝")],
+                ),
+              ),
+              Expanded(
+                child: InkResponse(
+                  onTap: () async {
+                    Navigator.pushNamed(
+                        viewService.context, PageConstants.IntegralRecordPage);
+                  },
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        user.nickName,
-                        style: theme.textTheme.subhead,
-                      ),
-                      Text(
-                        user.description?.isEmpty == true
-                            ? "这个人很懒,什么也没有留下~"
-                            : user.description,
-                        style: TextStyle(fontSize: 12.0, color: color343434),
-                      ),
-                    ],
+                    children: <Widget>[Text("100"), Text("萌镚")],
                   ),
                 ),
               ),
+              Expanded(
+                child: InkResponse(
+                  onTap: () async {
+                    Navigator.pushNamed(
+                        viewService.context, PageConstants.MyPetPage);
+                  },
+                  child: Column(
+                    children: <Widget>[Text("1"), Text("宠物")],
+                  ),
+                ),
+              )
             ],
           ),
         ),
-      ),
-      //关注 宠物
-      Container(
-        color: theme.accentColor,
-        padding: const EdgeInsets.only(bottom: 10.0),
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Column(
-                children: <Widget>[Text("0"), Text("关注")],
-              ),
-            ),
-            Expanded(
-              child: Column(
-                children: <Widget>[Text("0"), Text("粉丝")],
-              ),
-            ),
-            Expanded(
-              child: InkResponse(
-                onTap: () async {
-                  Navigator.pushNamed(
-                      viewService.context, PageConstants.IntegralRecordPage);
-                },
-                child: Column(
-                  children: <Widget>[Text("100"), Text("萌镚")],
-                ),
-              ),
-            ),
-            Expanded(
-              child: InkResponse(
-                onTap: () async {
-                  Navigator.pushNamed(
-                      viewService.context, PageConstants.MyPetPage);
-                },
-                child: Column(
-                  children: <Widget>[Text("1"), Text("宠物")],
-                ),
-              ),
-            )
-          ],
+        ListTile(
+          onTap: () {
+            UserHelper.loginCheck(viewService.context, () {
+              Navigator.pushNamed(
+                  viewService.context, PageConstants.ShippingAddressPage,
+                  arguments: {"type": ShippingAddressState.SEE});
+            });
+          },
+          title: Text("收货地址"),
+          trailing: new Icon(
+            Icons.keyboard_arrow_right,
+            size: 30.0,
+            color: const Color(0x40808080),
+          ),
         ),
-      ),
-      ListTile(
-        onTap: () {
-          UserHelper.loginCheck(viewService.context, () {
-            Navigator.pushNamed(
-                viewService.context, PageConstants.ShippingAddressPage,
-                arguments: {"type": ShippingAddressState.SEE});
-          });
-        },
-        title: Text("收货地址"),
-        trailing: new Icon(
-          Icons.keyboard_arrow_right,
-          size: 30.0,
-          color: const Color(0x40808080),
+        VerticalLine(),
+        ListTile(
+          onTap: () {
+            UserHelper.loginCheck(viewService.context, () {
+              Navigator.pushNamed(
+                viewService.context,
+                PageConstants.MyOrderPage,
+              );
+            });
+          },
+          title: Text("我的订单"),
+          trailing: new Icon(
+            Icons.keyboard_arrow_right,
+            size: 30.0,
+            color: const Color(0x40808080),
+          ),
         ),
-      ),
-      VerticalLine(),
-      ListTile(
-        onTap: () {
-          UserHelper.loginCheck(viewService.context, () {
-            Navigator.pushNamed(
-              viewService.context,
-              PageConstants.MyOrderPage,
-            );
-          });
-        },
-        title: Text("我的订单"),
-        trailing: new Icon(
-          Icons.keyboard_arrow_right,
-          size: 30.0,
-          color: const Color(0x40808080),
+        VerticalLine(),
+        ListTile(
+          onTap: () {
+            UserHelper.loginCheck(viewService.context, () {
+              Navigator.pushNamed(
+                  viewService.context, PageConstants.SettingPage);
+            });
+          },
+          title: Text("设置"),
+          trailing: new Icon(
+            Icons.keyboard_arrow_right,
+            size: 30.0,
+            color: const Color(0x40808080),
+          ),
         ),
-      ),
-      VerticalLine(),
-      ListTile(
-        onTap: () {
-          UserHelper.loginCheck(viewService.context, () {
-            Navigator.pushNamed(viewService.context, PageConstants.SettingPage);
-          });
-        },
-        title: Text("设置"),
-        trailing: new Icon(
-          Icons.keyboard_arrow_right,
-          size: 30.0,
-          color: const Color(0x40808080),
-        ),
-      ),
-    ],
+      ],
+    ),
   );
 }
 

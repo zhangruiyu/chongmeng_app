@@ -36,12 +36,10 @@ Widget buildView(
     children: <Widget>[
       Expanded(
         child: EasyRefresh.custom(
-          firstRefresh: true,
-          firstRefreshWidget: LoadingWidget(),
-          /* onRefresh: CompleterUtils.produceCompleterAction(
-  dispatch,
-  ProductDetailsActionCreator.onRefresh,
-    ),*/
+          onRefresh: CompleterUtils.produceCompleterAction(
+            dispatch,
+            ProductDetailsActionCreator.onRefresh,
+          ),
           slivers: <Widget>[
             SliverAppBar(
               pinned: true,
