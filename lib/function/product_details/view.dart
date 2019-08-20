@@ -32,182 +32,189 @@ Widget buildView(
   var of = Theme.of(viewService.context);
   var itemData = state.itemData;
   return Scaffold(
-      body: Column(
-    children: <Widget>[
-      Expanded(
-        child: EasyRefresh.custom(
-          onRefresh: CompleterUtils.produceCompleterAction(
-            dispatch,
-            ProductDetailsActionCreator.onRefresh,
-          ),
-          slivers: <Widget>[
-            SliverAppBar(
-              pinned: true,
-              elevation: 0.0,
-              brightness: Brightness.light,
-              leading: BackButton(
-                color: colorBack,
-              ),
-              backgroundColor: Colors.transparent,
-              expandedHeight: WindowUtils.getScreenWidth(),
-              flexibleSpace: FlexibleSpaceBar(
-                background: buildBanner(itemData, of),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ExtendedText.rich(
-                        TextSpan(
-                          children: <InlineSpan>[
-                            WidgetSpan(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 5.0),
-                                margin: EdgeInsets.only(right: 5.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5.0),
+      backgroundColor: colorWhite,
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: EasyRefresh.custom(
+                onRefresh: CompleterUtils.produceCompleterAction(
+                  dispatch,
+                  ProductDetailsActionCreator.onRefresh,
+                ),
+                slivers: <Widget>[
+                  SliverAppBar(
+                    pinned: true,
+                    elevation: 0.0,
+                    brightness: Brightness.light,
+                    leading: BackButton(
+                      color: colorBack,
+                    ),
+                    backgroundColor: Colors.transparent,
+                    expandedHeight: WindowUtils.getScreenWidth(),
+                    flexibleSpace: FlexibleSpaceBar(
+                      background: buildBanner(itemData, of),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ExtendedText.rich(
+                              TextSpan(
+                                children: <InlineSpan>[
+                                  WidgetSpan(
+                                    child: Container(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 5.0),
+                                      margin: EdgeInsets.only(right: 5.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0),
+                                        ),
+                                        border: Border.all(
+                                          color: of.accentColor,
+                                          width: 1.0,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        tagSource[state.itemData.type],
+                                        style: TextStyle(
+                                            color: of.accentColor,
+                                            fontSize: 12.0),
+                                      ),
+                                    ),
                                   ),
-                                  border: Border.all(
-                                    color: of.accentColor,
-                                    width: 1.0,
-                                  ),
-                                ),
-                                child: Text(
-                                  tagSource[state.itemData.type],
-                                  style: TextStyle(
-                                      color: of.accentColor, fontSize: 12.0),
+                                  TextSpan(text: itemData.title),
+                                ],
+                              ),
+                            )),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                        text: "券后价 ",
+                                        style: TextStyle(
+                                            fontSize: 12.0,
+                                            color: of.accentColor)),
+                                    TextSpan(
+                                        text: "¥${itemData.favourablePrice}",
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            color: of.accentColor)),
+                                  ],
                                 ),
                               ),
-                            ),
-                            TextSpan(text: itemData.title),
-                          ],
-                        ),
-                      )),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                  text: "券后价 ",
-                                  style: TextStyle(
-                                      fontSize: 12.0, color: of.accentColor)),
-                              TextSpan(
-                                  text: "¥${itemData.favourablePrice}",
-                                  style: TextStyle(
-                                      fontSize: 18.0, color: of.accentColor)),
+                              Text("已售 ${itemData.volume}件",
+                                  style: of.textTheme.caption
+                                      .merge(TextStyle(color: colorA4A4A4))),
                             ],
                           ),
                         ),
-                        Text("已售 ${itemData.volume}件",
-                            style: of.textTheme.caption
-                                .merge(TextStyle(color: colorA4A4A4))),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "原价 ¥${itemData.zkFinalPriceWap}",
-                          style: of.textTheme.caption
-                              .merge(TextStyle(color: colorA4A4A4)),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                "原价 ¥${itemData.zkFinalPriceWap}",
+                                style: of.textTheme.caption
+                                    .merge(TextStyle(color: colorA4A4A4)),
+                              ),
+                            ],
+                          ),
                         ),
+
+                        //券金额
+                        buildButton(of, itemData),
+                        ...buildDetailsWidget(state)
                       ],
                     ),
                   ),
-
-                  //券金额
-                  buildButton(of, itemData),
-                  ...buildDetailsWidget(state)
                 ],
               ),
             ),
+            //底部按钮
+            Row(
+              children: <Widget>[
+                InkResponse(
+                  onTap: () {
+                    showToast("下期开放");
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 4.0),
+                    child: Column(
+                      children: <Widget>[
+                        Icon(
+                          Icons.share,
+                          color: color7E7E7E,
+                          size: 23.0,
+                        ),
+                        Text(
+                          "分享",
+                          style: TextStyle(fontSize: 12.0, color: color7E7E7E),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                InkResponse(
+                  onTap: () {
+                    showToast("下期开放");
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 4.0),
+                    child: Column(
+                      children: <Widget>[
+                        Icon(
+                          Icons.star_border,
+                          color: color7E7E7E,
+                        ),
+                        Text(
+                          "收藏",
+                          style: TextStyle(fontSize: 12.0, color: color7E7E7E),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 18, right: 18),
+                    height: 40.0,
+                    decoration: new BoxDecoration(
+                      gradient: LinearGradient(
+                          colors: [Colors.pink[300], of.accentColor]),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5.0),
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    child: GestureDetector(
+                      onTap: () {
+                        launch(itemData.couponClickUrl);
+                      },
+                      child: Text(
+                        "领券购买",
+                        style: TextStyle(color: colorWhite),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            )
           ],
         ),
-      ),
-      //底部按钮
-      Row(
-        children: <Widget>[
-          InkResponse(
-            onTap: () {
-              showToast("下期开放");
-            },
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 4.0),
-              child: Column(
-                children: <Widget>[
-                  Icon(
-                    Icons.share,
-                    color: color7E7E7E,
-                    size: 23.0,
-                  ),
-                  Text(
-                    "分享",
-                    style: TextStyle(fontSize: 12.0, color: color7E7E7E),
-                  )
-                ],
-              ),
-            ),
-          ),
-          InkResponse(
-            onTap: () {
-              showToast("下期开放");
-            },
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 4.0),
-              child: Column(
-                children: <Widget>[
-                  Icon(
-                    Icons.star_border,
-                    color: color7E7E7E,
-                  ),
-                  Text(
-                    "收藏",
-                    style: TextStyle(fontSize: 12.0, color: color7E7E7E),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(left: 18, right: 18),
-              height: 40.0,
-              decoration: new BoxDecoration(
-                gradient:
-                    LinearGradient(colors: [Colors.pink[300], of.accentColor]),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(5.0),
-                ),
-              ),
-              alignment: Alignment.center,
-              child: GestureDetector(
-                onTap: () {
-                  launch(itemData.couponClickUrl);
-                },
-                child: Text(
-                  "领券购买",
-                  style: TextStyle(color: colorWhite),
-                ),
-              ),
-            ),
-          )
-        ],
-      )
-    ],
-  ));
+      ));
 }
 
 List<Widget> buildDetailsWidget(ProductDetailsState state) {
