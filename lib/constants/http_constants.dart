@@ -57,7 +57,9 @@ class HttpConstants {
   static String get IntegralOrderList =>
       "app/store/common/integralOrderList"; //兑换订单
 
-  static String get AliSearch => "app/ali/search"; //淘宝客搜索
+  static String get CoreSearch => "app/core/search"; //淘宝客搜索
+  static String get CoreProductDetailsPic =>
+      "app/core/productDetailsPic"; //淘宝客详情
   static String get RecipeList => "app/recipe/list"; //食谱
   static String get AdoptionAdd => "/app/adoption/common/add"; //添加领养
   static String get AdoptionList => "/app/adoption/list"; //领养列表

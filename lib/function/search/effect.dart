@@ -23,7 +23,7 @@ Future _onSearch(Action action, Context<SearchState> ctx) async {
 Future _onRefresh(Action action, Context<SearchState> ctx) async {
   ctx.dispatch(SearchActionCreator.onSetSearching(true));
   var result = await RequestClient.request<SearchResultEntity>(
-      ctx.context, HttpConstants.AliSearch,
+      ctx.context, HttpConstants.CoreSearch,
       queryParameters: {
         "query": ctx.state.textEditingController.text,
         'index': 1,
@@ -41,7 +41,7 @@ Future _onRefresh(Action action, Context<SearchState> ctx) async {
 Future _onLoadMore(Action action, Context<SearchState> ctx) async {
   var index = ctx.state.index + 1;
   var result = await RequestClient.request<SearchResultEntity>(
-      ctx.context, HttpConstants.AliSearch, queryParameters: {
+      ctx.context, HttpConstants.CoreSearch, queryParameters: {
     "query": ctx.state.textEditingController.text,
     'index': index
   });
