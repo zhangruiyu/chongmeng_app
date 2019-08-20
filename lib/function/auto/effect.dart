@@ -1,5 +1,6 @@
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/my_pet/selecttype/model/pet_type_entity.dart';
+import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/global_store/action.dart';
 import 'package:chongmeng/global_store/store.dart';
@@ -77,13 +78,7 @@ Future _onLogin(Action action, Context<AutoState> ctx) async {
   }
 
   if (result.hasSuccess) {
-    GlobalStore.store
-        .dispatch(GlobalActionCreator.onUpdateLocalUser(result.data.data));
-    if (result.data.data.hasPet) {
-      Navigator.pop(ctx.context);
-    } else {
-      Navigator.popAndPushNamed(ctx.context, PageConstants.PetAddPage);
-    }
+    UserHelper.login(result, ctx.context);
   } else if (result.code == ErrorCode.BIND_TEL_ERROR_CODE) {
     //跳转到验证手机号,然后绑定手机号
     Navigator.pushNamed(ctx.context, PageConstants.BindTelPage, arguments: {

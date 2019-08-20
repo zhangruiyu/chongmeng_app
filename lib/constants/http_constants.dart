@@ -11,6 +11,9 @@ class HttpConstants {
   static final String SendThirdLoginCode =
       "app/auth/sendThirdLoginCode"; //发送验证码
   static final String LoginAndRegister = "app/auth/loginAndRegister";
+
+  //一键登录
+  static final String Flashlogin = "app/auth/flashLogin";
   static final String PetType = "app/pet/type";
   static final String PetSubType = "app/pet/subType";
   static final String AddPet = "app/pet/common/addPet";

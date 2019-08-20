@@ -251,6 +251,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.11"
+  jverify:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "89364ade445ea9733e3c2640602f547b44077c90"
+      url: "https://github.com/zhangruiyu/jverify-flutter-plugin.git"
+    source: git
+    version: "0.0.4"
   like_button:
     dependency: "direct main"
     description:

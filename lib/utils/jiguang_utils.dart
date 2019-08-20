@@ -1,26 +1,36 @@
+import 'dart:async';
+import 'dart:ui';
+
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/utils/platform_utils.dart';
+import 'package:chongmeng/utils/window_utils.dart';
+import 'package:flutter/material.dart';
 import 'package:janalytics/janalytics.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
+import 'package:jverify/jverify.dart';
 
 JmessageFlutter JMessage = JmessageFlutter();
 
 class JiguangUtils {
   static Janalytics janalytics = new Janalytics();
   static JPush jpush = new JPush();
+  static Jverify jverify = new Jverify();
+  static String JpushKey = "5273001af03971f6b56827d1";
 
-  static init() {
+  static init() async {
+    var channel = await PlatformUtils.getChannel();
     janalytics.setup(
-      appKey: "5273001af03971f6b56827d1",
-      channel: "theChannel",
+      appKey: JpushKey,
+      channel: channel,
     );
     janalytics.setDebugMode(!isRelease);
     if (isRelease) {
       janalytics.initCrashHandler();
     }
     jpush.setup(
-      appKey: "5273001af03971f6b56827d1",
-      channel: "theChannel",
+      appKey: JpushKey,
+      channel: channel,
       production: isRelease,
       debug: !isRelease, // 设置是否打印 debug 日志
     );
@@ -41,5 +51,84 @@ class JiguangUtils {
     );
     jpush.applyPushAuthority(
         new NotificationSettingsIOS(sound: true, alert: true, badge: true));
+
+    jverify.setup(appKey: JpushKey, channel: channel);
+  }
+
+  static Future<String> getRegistrationID() async {
+    try {
+      var rid = await jpush.getRegistrationID();
+      debugPrint(rid);
+      return rid;
+    } catch (e) {
+      return "";
+    }
+  }
+
+  static Future<bool> checkVerifyEnable() async {
+    return (await jverify.checkVerifyEnable())["result"];
+  }
+
+  static Future<Map<dynamic, dynamic>> loginAuth() async {
+    Completer<Map<dynamic, dynamic>> controller =
+        Completer<Map<dynamic, dynamic>>();
+    final String text_widgetId = "jv_add_custom_text"; // 标识控件 id
+    JVCustomWidget textWidget =
+        JVCustomWidget(text_widgetId, JVCustomWidgetType.textView);
+    textWidget.title = "其他方式登录";
+//    textWidget.left = 20;
+    textWidget.top = 360;
+    textWidget.width = WindowUtils.getScreenWidth().toInt();
+    textWidget.height = 40;
+    textWidget.titleColor = Color(0xff648CEF).value;
+    textWidget.isShowUnderline = true;
+    textWidget.textAlignment = JVTextAlignmentType.center;
+    textWidget.isClickEnable = true;
+// 添加点击事件监听
+    jverify.addClikWidgetEventListener(text_widgetId, (eventId) {
+      print("receive listener - click widget event :$eventId");
+      if (text_widgetId == eventId) {
+        print("receive listener - 点击【新加 button】");
+        controller.complete({'code': 1011});
+      }
+    });
+    jverify.setCustomAuthViewAllWidgets(
+        JVUIConfig()
+//          ..logoImgPath = "shanyan_logo"
+          ..logoWidth = 100
+          ..logoHeight = 100
+          ..navColor = Colors.white.value
+          ..navText = ""
+          ..navTextColor = Colors.blue.value
+//          ..navReturnImgPath = "shanyan_close"
+//          ..checkedImgPath = "check_image"
+//          ..uncheckedImgPath = "uncheck_image"
+//          ..loginBtnNormalImage = "shanyan_bt_bg"
+//          ..loginBtnPressedImage = "shanyan_bt_bg"
+//          ..loginBtnUnableImage = "shanyan_bt_bg"
+          ..clauseBaseColor = Colors.red.value
+          ..clauseName = "服务及隐私政策"
+          ..clauseUrl = "https://app.dfq.mobi/protocal/privacy"
+          ..clauseNameTwo = "用户注册协议"
+          ..clauseUrlTwo = "https://app.dfq.mobi/protocal/register"
+          ..logBtnOffsetY = 300
+          ..logBtnText = "一键登录"
+          ..logBtnTextColor = Colors.white.value
+          ..numberColor = color343434.value
+          ..logoHidden = false
+          ..logoOffsetY = 60
+          ..numFieldOffsetY = 180
+          ..clauseColor = Colors.black.value
+          ..privacyOffsetY = 67
+          ..sloganOffsetY = 230
+          ..sloganTextColor = Colors.black.value
+          ..privacyState = true,
+        widgets: [textWidget]);
+    jverify.loginAuth(true).then((onValue) {
+      if (!controller.isCompleted) {
+        controller.complete(onValue);
+      }
+    });
+    return controller.future;
   }
 }

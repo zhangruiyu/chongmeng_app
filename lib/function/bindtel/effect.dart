@@ -3,6 +3,7 @@ import 'package:chongmeng/function/auto/model/login_entity.dart';
 import 'package:chongmeng/global_store/action.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
+import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -48,8 +49,6 @@ Future _onLogin(Action action, Context<BindTelState> ctx) async {
       ctx.context, HttpConstants.ThirdLoginAndRegister,
       queryParameters: queryParameters, showLoadingIndicator: true);
   if (result.hasSuccess) {
-    GlobalStore.store
-        .dispatch(GlobalActionCreator.onUpdateLocalUser(result.data.data));
-    NavigatorHelper.popToMain(ctx.context);
+    UserHelper.login(result, ctx.context);
   }
 }

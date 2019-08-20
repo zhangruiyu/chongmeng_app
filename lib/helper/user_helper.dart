@@ -2,6 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:chongmeng/function/auto/model/login_entity.dart';
+import 'package:chongmeng/global_store/action.dart';
+import 'package:chongmeng/global_store/store.dart';
+import 'package:chongmeng/network/net_work.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:path_provider/path_provider.dart';
@@ -83,5 +87,15 @@ class UserHelper {
   static Future<String> getUserTel() async {
     var sp = await initLocalUser();
     return sp.token;
+  }
+
+  static void login(Result<LoginEntity> result, BuildContext context) {
+    GlobalStore.store
+        .dispatch(GlobalActionCreator.onUpdateLocalUser(result.data.data));
+    if (result.data.data.hasPet) {
+      Navigator.pop(context);
+    } else {
+      Navigator.popAndPushNamed(context, PageConstants.PetAddPage);
+    }
   }
 }

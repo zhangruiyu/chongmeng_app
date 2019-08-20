@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/function/shipping_address/state.dart';
 import 'package:chongmeng/global_store/store.dart';
@@ -49,8 +50,7 @@ Widget buildLoginView(
                       ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(
-                        viewService.context, PageConstants.AutoPage);
+                    NavigatorHelper.pushPageLoginPage(viewService.context);
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 15.0),
@@ -183,7 +183,7 @@ Container buildNoLoginView(ThemeData theme, ViewService viewService) {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(viewService.context, PageConstants.AutoPage);
+              NavigatorHelper.pushPageLoginPage(viewService.context);
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 15.0),

@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/services.dart';
 
 class PlatformUtils {
-  static const MethodChannel _channel = const MethodChannel('id');
+  static const MethodChannel _channel = const MethodChannel('chongmeng');
 
   static Future<String> getChannel() async {
-    return await _channel.invokeMethod("getChannel");
+    return Platform.isAndroid
+        ? await _channel.invokeMethod("getChannel")
+        : Future.value("ios");
   }
 
   static Future<String> openGPS() async {
@@ -17,18 +21,9 @@ class PlatformUtils {
         "IM", {"appkey": appKey, "userName": userName, "userId": userId});
   }
 
-  static Future<String> getAddress(
-     double latitude, double longitude) async {
+  static Future<String> getAddress(double latitude, double longitude) async {
     return await _channel.invokeMethod(
         "getAddress", {"latitude": latitude, "longitude": longitude});
-  }
-
-  static Future<Map<dynamic, dynamic>> initShanYan(
-      String appId, String appKey) async {
-    return await _channel.invokeMethod("initShanYan", {
-      "appId": appId,
-      "appKey": appKey,
-    });
   }
 
   //安卓唯一标识

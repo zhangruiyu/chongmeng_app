@@ -1,8 +1,16 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/function/auto/model/login_entity.dart';
+import 'package:chongmeng/global_store/action.dart';
+import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/permission_helper.dart';
+import 'package:chongmeng/helper/user_helper.dart';
+import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
+import 'package:chongmeng/utils/jiguang_utils.dart';
+import 'package:chongmeng/utils/platform_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:photo/photo.dart';
@@ -87,7 +95,46 @@ class NavigatorHelper {
         .toList();
   }
 
-  static void pushPageLoginPage(BuildContext context) {
-    Navigator.pushNamed(context, PageConstants.AutoPage);
+  static Future pushPageLoginPage(BuildContext context) async {
+    var checkVerifyEnable = await JiguangUtils.checkVerifyEnable();
+    if (checkVerifyEnable) {
+      //支持
+      NavigatorHelper.showLoadingDialog(context, true);
+      Map<dynamic, dynamic> initAndOpenShanyanLogin =
+          await JiguangUtils.loginAuth();
+      print("initAndOpenShanyanLogin $initAndOpenShanyanLogin");
+      print(
+          "initAndOpenShanyanLogin ${initAndOpenShanyanLogin['code'] == 6001}");
+      NavigatorHelper.showLoadingDialog(context, false);
+      if (initAndOpenShanyanLogin['code'] == 6000) {
+        var registrationID = await JiguangUtils.getRegistrationID();
+        var queryParameters = {
+          "devToken": registrationID, //极光推送设备ID(选填)
+          "loginToken": Uri.encodeComponent(initAndOpenShanyanLogin['message']),
+          "channel": (await PlatformUtils.getChannel()),
+        };
+        var result = await RequestClient.request<LoginEntity>(
+            context, HttpConstants.Flashlogin,
+            queryParameters: queryParameters, showLoadingIndicator: true);
+        if (result.hasSuccess) {
+          UserHelper.login(result, context);
+          return Future.value();
+        } else {
+          return Navigator.pushNamed(context, PageConstants.AutoPage);
+        }
+      } else if (initAndOpenShanyanLogin['code'] == 1011) {
+        Navigator.pushNamed(context, PageConstants.AutoPage);
+      } else if (initAndOpenShanyanLogin['code'] == 6002) {
+        //取消一键登录
+      } else {
+        print("initAndOpenShanyanLogin 2222");
+        var result = Navigator.pushNamed(context, PageConstants.AutoPage);
+        return result;
+      }
+    } else {
+      var result = Navigator.pushNamed(context, PageConstants.AutoPage);
+      return result;
+    }
+    return null;
   }
 }
