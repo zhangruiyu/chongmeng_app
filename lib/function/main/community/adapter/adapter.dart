@@ -34,7 +34,12 @@ class _DynamicListConnector extends ConnOp<ItemBodyState, List<ItemBean>> {
   }
 
   @override
-  void set(ItemBodyState state, List<ItemBean> items) {}
+  void set(ItemBodyState state, List<ItemBean> items) {
+    state.itemPageData.data = items
+        .map<DynamicListData>(
+            (ItemBean item) => (item.data as DynamicItemState).data)
+        .toList();
+  }
 
   @override
   subReducer(reducer) {

@@ -22,6 +22,7 @@ double itemWidth =
 
 Widget buildView(
     DynamicItemState state, Dispatch dispatch, ViewService viewService) {
+  println("重新build,${state.data.content}");
   var data = state.data;
   List<Widget> content;
   if (data.images != null && data.images.length > 0) {

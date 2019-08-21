@@ -20,7 +20,9 @@ class CommunityUserHeadConnector
   }
 
   @override
-  void set(DynamicItemState state, CommunityUserHeadState subState) {}
+  void set(DynamicItemState state, CommunityUserHeadState subState) {
+    state.data = subState.data;
+  }
 
   @override
   subReducer(reducer) {
@@ -36,7 +38,9 @@ class CommunityDetailsUserHeadConnector
   }
 
   @override
-  void set(DynamicDetailsState state, CommunityUserHeadState subState) {}
+  void set(DynamicDetailsState state, CommunityUserHeadState subState) {
+    state.data = subState.data;
+  }
 
   @override
   subReducer(reducer) {

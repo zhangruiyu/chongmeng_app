@@ -8,7 +8,7 @@ class ItemBodyState implements Cloneable<ItemBodyState> {
 
   @override
   ItemBodyState clone() {
-    return ItemBodyState();
+    return ItemBodyState()..itemPageData = itemPageData;
   }
 }
 

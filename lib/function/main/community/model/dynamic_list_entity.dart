@@ -28,7 +28,7 @@ class DynamicListEntity {
 }
 
 class DynamicListData {
-  List<DynamicListDataPet> pets;
+  List<Null> pets;
   List<String> images;
   String createTime;
   int userId;
@@ -39,7 +39,7 @@ class DynamicListData {
   DynamicListDataVideo video;
   String avatar;
   String content;
-  List<Null> liked;
+  List<int> liked;
 
   DynamicListData(
       {this.pets,
@@ -57,10 +57,7 @@ class DynamicListData {
 
   DynamicListData.fromJson(Map<String, dynamic> json) {
     if (json['pets'] != null) {
-      pets = new List<DynamicListDataPet>();
-      (json['pets'] as List).forEach((v) {
-        pets.add(new DynamicListDataPet.fromJson(v));
-      });
+      pets = new List<Null>();
     }
     images = json['images']?.cast<String>();
     createTime = json['create_time'];
@@ -74,15 +71,13 @@ class DynamicListData {
         : null;
     avatar = json['avatar'];
     content = json['content'];
-    if (json['liked'] != null) {
-      liked = new List<Null>();
-    }
+    liked = json['liked']?.cast<int>();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.pets != null) {
-      data['pets'] = this.pets.map((v) => v.toJson()).toList();
+      data['pets'] = [];
     }
     data['images'] = this.images;
     data['create_time'] = this.createTime;
@@ -96,51 +91,13 @@ class DynamicListData {
     }
     data['avatar'] = this.avatar;
     data['content'] = this.content;
-    if (this.liked != null) {
-      data['liked'] = [];
-    }
+    data['liked'] = this.liked;
     return data;
   }
-}
 
-class DynamicListDataPet {
-  String nick;
-  String birthday;
-  int sex;
-  int petTypeId;
-  String avatar;
-  int petSubTypeId;
-  int status;
-
-  DynamicListDataPet(
-      {this.nick,
-      this.birthday,
-      this.sex,
-      this.petTypeId,
-      this.avatar,
-      this.petSubTypeId,
-      this.status});
-
-  DynamicListDataPet.fromJson(Map<String, dynamic> json) {
-    nick = json['nick'];
-    birthday = json['birthday'];
-    sex = json['sex'];
-    petTypeId = json['petTypeId'];
-    avatar = json['avatar'];
-    petSubTypeId = json['petSubTypeId'];
-    status = json['status'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['nick'] = this.nick;
-    data['birthday'] = this.birthday;
-    data['sex'] = this.sex;
-    data['petTypeId'] = this.petTypeId;
-    data['avatar'] = this.avatar;
-    data['petSubTypeId'] = this.petSubTypeId;
-    data['status'] = this.status;
-    return data;
+  @override
+  String toString() {
+    return 'DynamicListData{pets: $pets, images: $images, createTime: $createTime, userId: $userId, nickName: $nickName, sex: $sex, description: $description, id: $id, video: $video, avatar: $avatar, content: $content, liked: $liked}';
   }
 }
 

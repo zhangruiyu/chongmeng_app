@@ -13,6 +13,11 @@ class DynamicItemComponent extends Component<DynamicItemState> {
           effect: buildEffect(),
           reducer: buildReducer(),
           view: buildView,
+          shouldUpdate: (DynamicItemState old, DynamicItemState now) {
+            println("比较");
+            //判断是否刷新
+            return old.data.liked.toString() != now.data.toString();
+          },
           dependencies: Dependencies<DynamicItemState>(
               adapter: null,
               slots: <String, Dependent<DynamicItemState>>{

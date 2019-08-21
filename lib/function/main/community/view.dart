@@ -17,6 +17,7 @@ import 'state.dart';
 
 Widget buildView(
     CommunityState state, Dispatch dispatch, ViewService viewService) {
+  println("name ${state.pageData.values}");
   return Container(
     color: colorWhite,
     child: Column(

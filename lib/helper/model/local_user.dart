@@ -40,4 +40,9 @@ class LocalUser {
     data['avatar'] = this.avatar;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'LocalUser{createTime: $createTime, userId: $userId, nickName: $nickName, sex: $sex, description: $description, avatar: $avatar, tel: $tel, token: $token}';
+  }
 }
