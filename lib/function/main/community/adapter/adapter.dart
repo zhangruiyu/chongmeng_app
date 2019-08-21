@@ -1,13 +1,13 @@
 import 'package:chongmeng/function/main/community/dynamic_component/component.dart';
 import 'package:chongmeng/function/main/community/dynamic_component/state.dart';
+import 'package:chongmeng/function/main/community/item_body/state.dart';
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:oktoast/oktoast.dart';
 
 import 'reducer.dart';
-import 'state.dart';
 
-class DynamicListAdapter extends DynamicFlowAdapter<DynamicListState> {
+class DynamicListAdapter extends DynamicFlowAdapter<ItemBodyState> {
   DynamicListAdapter()
       : super(
           pool: <String, Component<Object>>{'dynamic': DynamicItemComponent()},
@@ -16,15 +16,13 @@ class DynamicListAdapter extends DynamicFlowAdapter<DynamicListState> {
         );
 }
 
-class _DynamicListConnector extends ConnOp<DynamicListState, List<ItemBean>> {
+class _DynamicListConnector extends ConnOp<ItemBodyState, List<ItemBean>> {
   @override
-  List<ItemBean> get(DynamicListState state) {
-    println("index  ${state.tabController?.index?.toString()}");
-    if (state.tabController == null) {
+  List<ItemBean> get(ItemBodyState state) {
+    if (state.itemPageData == null) {
       return <ItemBean>[];
     }
-    var data =
-        state.data[state.data.keys.toList()[state.tabController.index]].data;
+    var data = state.itemPageData.data;
     if (data?.isNotEmpty == true) {
       return data
           .map<ItemBean>((DynamicListData data) =>
@@ -36,7 +34,7 @@ class _DynamicListConnector extends ConnOp<DynamicListState, List<ItemBean>> {
   }
 
   @override
-  void set(DynamicListState state, List<ItemBean> items) {}
+  void set(ItemBodyState state, List<ItemBean> items) {}
 
   @override
   subReducer(reducer) {

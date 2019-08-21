@@ -1,12 +1,11 @@
+import 'package:chongmeng/function/main/community/item_body/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
-import 'state.dart';
 
-Effect<DynamicListState> buildEffect() {
-  return combineEffects(<Object, Effect<DynamicListState>>{
+Effect<ItemBodyState> buildEffect() {
+  return combineEffects(<Object, Effect<ItemBodyState>>{
     DynamicListAction.action: _onAction,
   });
 }
 
-void _onAction(Action action, Context<DynamicListState> ctx) {
-}
+void _onAction(Action action, Context<ItemBodyState> ctx) {}

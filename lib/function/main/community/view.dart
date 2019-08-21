@@ -3,6 +3,8 @@ import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
+import 'package:chongmeng/widget/keep_alive_widget.dart';
+import 'package:chongmeng/widget/loadling_widget.dart';
 import 'package:chongmeng/widget/refresh_widget.dart';
 import 'package:chongmeng/widget/vertical_line.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -15,7 +17,6 @@ import 'state.dart';
 
 Widget buildView(
     CommunityState state, Dispatch dispatch, ViewService viewService) {
-  var buildAdapter = viewService.buildAdapter();
   return Container(
     color: colorWhite,
     child: Column(
@@ -37,30 +38,24 @@ Widget buildView(
           child: TabBarView(
             controller: state.tabController,
             children: state.pageData.values.map<Widget>((page) {
-              return IndexInherited(
-                child: SafeArea(
-                  top: false,
-                  child: EasyRefresh.custom(
-                    onRefresh: CompleterUtils.produceCompleterAction(
-                        dispatch, CommunityActionCreator.onRefresh,
-                        params: (Map<String, dynamic> p) {
-                      p['filtrateType'] = page.filtrateType;
-                    }),
-                    onLoad: CompleterUtils.produceCompleterAction(
-                        dispatch, CommunityActionCreator.onLoadMore,
-                        params: (Map<String, dynamic> p) {
-                      p['filtrateType'] = page.filtrateType;
-                    }),
-                    slivers: <Widget>[
-                      SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                            buildAdapter.itemBuilder,
-                            childCount: buildAdapter.itemCount),
-                      )
-                    ],
-                  ),
+              return KeepAliveWidget(
+                child: EasyRefresh.custom(
+                  onRefresh: CompleterUtils.produceCompleterAction(
+                      dispatch, CommunityActionCreator.onRefresh,
+                      params: (Map<String, dynamic> p) {
+                    p['filtrateType'] = page.filtrateType;
+                  }),
+                  onLoad: CompleterUtils.produceCompleterAction(
+                      dispatch, CommunityActionCreator.onLoadMore,
+                      params: (Map<String, dynamic> p) {
+                    p['filtrateType'] = page.filtrateType;
+                  }),
+                  slivers: <Widget>[
+                    viewService.buildComponent(page.filtrateType)
+                  ],
+                  firstRefreshWidget: LoadingWidget(),
+                  firstRefresh: true,
                 ),
-                index: page.filtrateType,
               );
             }).toList(),
           ),

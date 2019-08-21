@@ -1,12 +1,12 @@
-import 'package:chongmeng/function/main/community/item_body/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'action.dart';
+import 'state.dart';
 
 Reducer<ItemBodyState> buildReducer() {
   return asReducer(
     <Object, Reducer<ItemBodyState>>{
-      DynamicListAction.action: _onAction,
+      ItemBodyAction.action: _onAction,
     },
   );
 }
