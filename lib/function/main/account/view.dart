@@ -31,30 +31,24 @@ Widget buildLoginView(
     style: TextStyle(color: colorWhite),
     child: Column(
       children: <Widget>[
-        Container(
-          color: theme.accentColor,
-          padding: EdgeInsets.only(left: 20.0, bottom: 30.0, top: 30.0),
-          child: SafeArea(
-            child: Row(
-              children: <Widget>[
-                user.avatar?.isEmpty == false
-                    ? ClipOval(
-                        child: CachedNetworkImage(
-                        width: 50.0,
-                        imageUrl: user.avatar,
-                      ))
-                    : CircleAvatar(
-                        child: Image.asset(
-                          'assets/account_page_no_login.png',
-                          width: 50.0,
-                        ),
-                        backgroundColor: colorWhite,
-                      ),
-                GestureDetector(
-                  onTap: () {
-                    NavigatorHelper.pushPageLoginPage(viewService.context);
-                  },
-                  child: Padding(
+        GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () {
+            Navigator.pushNamed(
+                viewService.context, PageConstants.UserDetailsPage);
+          },
+          child: Container(
+            color: theme.accentColor,
+            padding: EdgeInsets.only(left: 20.0, bottom: 30.0, top: 30.0),
+            child: SafeArea(
+              child: Row(
+                children: <Widget>[
+                  ClipOval(
+                      child: CachedNetworkImage(
+                    width: 50.0,
+                    imageUrl: user.avatar,
+                  )),
+                  Padding(
                     padding: const EdgeInsets.only(left: 15.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,8 +68,8 @@ Widget buildLoginView(
                       ],
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

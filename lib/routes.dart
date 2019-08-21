@@ -32,6 +32,7 @@ import 'function/signin/page.dart';
 import 'function/splash/page.dart';
 import 'function/tally/add/page.dart';
 import 'function/tally/page.dart';
+import 'function/user_details/page.dart';
 import 'function/webview/page.dart';
 import 'global_store/state.dart';
 import 'global_store/store.dart';
@@ -81,6 +82,7 @@ class PageConstants {
   static const String DynamicDetailsPage = "cm://DynamicDetailsPage";
 
   static String get AppInfoPage => "cm://AppInfoPage"; //信息
+  static String get UserDetailsPage => "cm://UserDetailsPage"; //用户详情
 }
 
 final AbstractRoutes routes = PageRoutes(
@@ -118,6 +120,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.MyPetPage: MyPetPage(),
     PageConstants.DynamicDetailsPage: DynamicDetailsPage(),
     PageConstants.AppInfoPage: AppInfoPage(),
+    PageConstants.UserDetailsPage: UserDetailsPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

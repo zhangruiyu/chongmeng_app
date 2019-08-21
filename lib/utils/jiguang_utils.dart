@@ -106,10 +106,10 @@ class JiguangUtils {
 //          ..loginBtnPressedImage = "shanyan_bt_bg"
 //          ..loginBtnUnableImage = "shanyan_bt_bg"
           ..clauseBaseColor = Colors.red.value
-          ..clauseName = "服务及隐私政策"
-          ..clauseUrl = "https://app.dfq.mobi/protocal/privacy"
-          ..clauseNameTwo = "用户注册协议"
-          ..clauseUrlTwo = "https://app.dfq.mobi/protocal/register"
+//          ..clauseName = "服务及隐私政策"
+//          ..clauseUrl = "https://app.dfq.mobi/protocal/privacy"
+//          ..clauseNameTwo = "用户注册协议"
+//          ..clauseUrlTwo = "https://app.dfq.mobi/protocal/register"
           ..logBtnOffsetY = 300
           ..logBtnText = "一键登录"
           ..logBtnTextColor = Colors.white.value
