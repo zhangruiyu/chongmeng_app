@@ -99,7 +99,7 @@ class JiguangUtils {
           ..navColor = Colors.white.value
           ..navText = ""
           ..navTextColor = Colors.blue.value
-//          ..navReturnImgPath = "shanyan_close"
+          ..navReturnImgPath = "shanyan_close"
 //          ..checkedImgPath = "check_image"
 //          ..uncheckedImgPath = "uncheck_image"
 //          ..loginBtnNormalImage = "shanyan_bt_bg"
