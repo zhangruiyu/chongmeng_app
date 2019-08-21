@@ -98,6 +98,18 @@ Widget buildView(
         Toolbar(
           elevation: 0.0,
           backgroundColor: Colors.transparent,
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.border_color,
+                  size: 17.0,
+                ),
+              ),
+            )
+          ],
         ),
       ],
     ),
