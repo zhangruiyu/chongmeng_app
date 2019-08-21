@@ -111,7 +111,7 @@ class NavigatorHelper {
         var queryParameters = {
           "devToken": registrationID, //极光推送设备ID(选填)
           "loginToken": Uri.encodeComponent(initAndOpenShanyanLogin['message']),
-          "channel": (await PlatformUtils.getChannel()),
+          "channel": GlobalStore.store.getState().channel,
         };
         var result = await RequestClient.request<LoginEntity>(
             context, HttpConstants.Flashlogin,

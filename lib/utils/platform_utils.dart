@@ -1,14 +1,22 @@
 import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PlatformUtils {
   static const MethodChannel _channel = const MethodChannel('chongmeng');
 
   static Future<String> getChannel() async {
-    return Platform.isAndroid
-        ? await _channel.invokeMethod("getChannel")
-        : Future.value("ios");
+    if (Platform.isIOS) return Future.value("ios");
+    var sp = await SharedPreferences.getInstance();
+    String channelName = (await _channel.invokeMethod("getChannel")).toString();
+    String spChannelName = sp.getString("channelName");
+    if (spChannelName == null) {
+      sp.setString("channelName", channelName);
+      return channelName;
+    } else {
+      return spChannelName;
+    }
   }
 
   static Future<String> openGPS() async {

@@ -11,12 +11,17 @@
 
 import 'dart:io';
 
+import 'package:chongmeng/global_store/store.dart';
+import 'package:chongmeng/helper/user_helper.dart';
+import 'package:chongmeng/utils/jiguang_utils.dart';
+import 'package:chongmeng/utils/platform_utils.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/services.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/material_footer.dart';
 import 'package:flutter_easyrefresh/material_header.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:package_info/package_info.dart';
 import 'app.dart';
 import 'helper/permission_helper.dart';
 
@@ -34,4 +39,13 @@ Future main() async {
   }
   EasyRefresh.defaultHeader = MaterialHeader();
   EasyRefresh.defaultFooter = MaterialFooter();
+  iniAsync();
+}
+
+void iniAsync() async {
+  String channel = await PlatformUtils.getChannel();
+  GlobalStore.store.getState()
+    ..packageInfo = await PackageInfo.fromPlatform()
+    ..channel = channel;
+  JiguangUtils.init(channel);
 }

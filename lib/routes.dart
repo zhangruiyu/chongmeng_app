@@ -1,3 +1,4 @@
+import 'package:chongmeng/function/app_info/page.dart';
 import 'package:chongmeng/function/my_pet/page.dart';
 import 'package:chongmeng/function/signin/signinresult/page.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -77,7 +78,9 @@ class PageConstants {
   static const String AdoptionPage = "cm://AdoptionPage"; //领养列表
   static const String AdoptionAddPage = "cm://AdoptionAddPage"; //添加领养
   static const String AdoptionDetailsPage = "cm://AdoptionDetailsPage"; //领养详情页
-  static const String DynamicDetailsPage = "cm://DynamicDetailsPage"; //动态详情
+  static const String DynamicDetailsPage = "cm://DynamicDetailsPage";
+
+  static String get AppInfoPage => "cm://AppInfoPage"; //信息
 }
 
 final AbstractRoutes routes = PageRoutes(
@@ -114,6 +117,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.AdoptionDetailsPage: AdoptionDetailsPage(),
     PageConstants.MyPetPage: MyPetPage(),
     PageConstants.DynamicDetailsPage: DynamicDetailsPage(),
+    PageConstants.AppInfoPage: AppInfoPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

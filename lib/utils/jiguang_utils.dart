@@ -18,8 +18,7 @@ class JiguangUtils {
   static Jverify jverify = new Jverify();
   static String JpushKey = "5273001af03971f6b56827d1";
 
-  static init() async {
-    var channel = await PlatformUtils.getChannel();
+  static init(String channel) async {
     janalytics.setup(
       appKey: JpushKey,
       channel: channel,

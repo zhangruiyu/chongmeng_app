@@ -12,7 +12,6 @@ import 'localizetion/localizations_delegate.dart';
 import 'widget/no_scale_text_widget.dart';
 
 Future<Widget> createApp() async {
-  configProject();
   //初始化用户数据
   GlobalStore.store.getState().localUser = await UserHelper.initLocalUser();
 
@@ -55,8 +54,4 @@ Future<Widget> createApp() async {
       },
     ),
   );
-}
-
-void configProject() {
-  JiguangUtils.init();
 }

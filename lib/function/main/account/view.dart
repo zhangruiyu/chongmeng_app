@@ -8,6 +8,8 @@ import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/model/local_user.dart';
 import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/network/net_work.dart';
+import 'package:chongmeng/utils/jiguang_utils.dart';
+import 'package:chongmeng/utils/platform_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 
@@ -165,6 +167,64 @@ Widget buildLoginView(
             color: const Color(0x40808080),
           ),
         ),
+
+        Expanded(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () async {
+                      Navigator.pushNamed(
+                          viewService.context, PageConstants.AppInfoPage,
+                          arguments: {
+                            "registrationID":
+                                await JiguangUtils.getRegistrationID(),
+                            "channel": GlobalStore.store.getState().channel,
+//                        "idfa": Platform.isAndroid
+//                            ? await yuanmengDeviceInfo.getImei
+//                            : (await yuanmengDeviceInfo.idfa),
+                          });
+                    },
+                    child: Container(
+                      height: 24.0,
+                      width: 100.0,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: colorF9F9F9,
+                          border: Border.all(color: color999999),
+                          borderRadius: BorderRadius.circular(12.0)),
+                      child: Text(
+                          "有米来花 v${GlobalStore.store.getState().packageInfo.version}",
+                          style: TextStyle(
+                            color: color999999,
+                            fontSize: 12.0,
+                          )),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+//                  await launch("tel:4006016868");
+                    },
+                    behavior: HitTestBehavior.opaque,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 18.0, bottom: 18.0),
+                      child: Text("QQ服务群：609487304",
+                          style: TextStyle(
+                            color: color999999,
+                            fontSize: 12.0,
+                          )),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        )
       ],
     ),
   );
