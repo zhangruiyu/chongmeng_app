@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/entity_factory.dart';
+import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/network/net_exception.dart';
@@ -88,6 +89,12 @@ class RequestClient {
     if (!isRelease) {
       dio.interceptors
           .add(LogInterceptor(requestBody: true, responseBody: true)); //开启请求日志
+    }
+    var commonParams = {"channel": GlobalStore.store.getState().channel};
+    if (queryParameters != null) {
+      queryParameters.addAll(commonParams);
+    } else {
+      queryParameters = commonParams;
     }
     Response response = await (isPost
         ? dio.post(requestUrl, data: queryParameters)
