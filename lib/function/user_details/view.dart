@@ -102,7 +102,10 @@ Widget buildView(
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(
+                      viewService.context, PageConstants.UserDetailsEditPage);
+                },
                 icon: Icon(
                   Icons.border_color,
                   size: 17.0,

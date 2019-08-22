@@ -1,4 +1,5 @@
 import 'package:chongmeng/function/app_info/page.dart';
+import 'package:chongmeng/function/edit_text/page.dart';
 import 'package:chongmeng/function/my_pet/page.dart';
 import 'package:chongmeng/function/signin/signinresult/page.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -32,6 +33,7 @@ import 'function/signin/page.dart';
 import 'function/splash/page.dart';
 import 'function/tally/add/page.dart';
 import 'function/tally/page.dart';
+import 'function/user_details/edit/page.dart';
 import 'function/user_details/page.dart';
 import 'function/webview/page.dart';
 import 'global_store/state.dart';
@@ -83,6 +85,9 @@ class PageConstants {
 
   static String get AppInfoPage => "cm://AppInfoPage"; //信息
   static String get UserDetailsPage => "cm://UserDetailsPage"; //用户详情
+  static String get EditTextPage => "cm://EditTextPage"; //修改文字
+  static String get UserDetailsEditPage =>
+      "cm://UserDetailsEditPage"; //用户信息修改页面
 }
 
 final AbstractRoutes routes = PageRoutes(
@@ -121,6 +126,8 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.DynamicDetailsPage: DynamicDetailsPage(),
     PageConstants.AppInfoPage: AppInfoPage(),
     PageConstants.UserDetailsPage: UserDetailsPage(),
+    PageConstants.UserDetailsEditPage: UserDetailsEditPage(),
+    PageConstants.EditTextPage: EditTextPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

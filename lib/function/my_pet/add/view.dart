@@ -149,6 +149,7 @@ List<Widget> buildItem(String title, String helperText,
                 padding: const EdgeInsets.only(right: 7.0),
                 child: Icon(
                   Icons.keyboard_arrow_right,
+                  color: Colors.grey,
                 ),
               )
           ],
