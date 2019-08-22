@@ -5,7 +5,7 @@ import 'data/abstract_locale_string.dart';
 import 'data/locale_string_en.dart';
 import 'data/locale_string_zh.dart';
 
-class DefaultLocalizations {
+class DefaultLocalizations extends DefaultCupertinoLocalizations {
   final Locale locale;
 
   DefaultLocalizations(this.locale);
@@ -22,4 +22,16 @@ class DefaultLocalizations {
     return Localizations.of<DefaultLocalizations>(context, DefaultLocalizations)
         .localeString;
   }
+
+  @override
+  String get cutButtonLabel => '剪裁';
+
+  @override
+  String get copyButtonLabel => '复制';
+
+  @override
+  String get pasteButtonLabel => '粘贴';
+
+  @override
+  String get selectAllButtonLabel => '全选';
 }
