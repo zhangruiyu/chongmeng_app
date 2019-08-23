@@ -20,7 +20,9 @@ Widget buildView(
     body: Column(
       children: <Widget>[
         InkWell(
-          onTap: () {},
+          onTap: () {
+            dispatch(UserDetailsEditActionCreator.onReselectAvatar());
+          },
           child: Padding(
             padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
             child: Row(
@@ -39,12 +41,19 @@ Widget buildView(
                       padding: const EdgeInsets.only(right: 18.0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(60),
-                        child: CachedNetworkImage(
-                          imageUrl: user.avatar,
-                          fit: BoxFit.fill,
-                          width: 60.0,
-                          height: 60.0,
-                        ),
+                        child: state.localAvatar == null
+                            ? CachedNetworkImage(
+                                imageUrl: user.avatar,
+                                fit: BoxFit.cover,
+                                width: 60.0,
+                                height: 60.0,
+                              )
+                            : Image.asset(
+                                state.localAvatar.path,
+                                fit: BoxFit.cover,
+                                width: 60.0,
+                                height: 60.0,
+                              ),
                       ),
                     ),
                     Padding(
@@ -70,17 +79,9 @@ Widget buildView(
         ...buildItem("性别",
             canEdit: false,
             hasArrow: true,
-            onTap: () {},
-            state: state,
-            dispatch: dispatch,
-            viewService: viewService),
-        ...buildItem("生日",
-            canEdit: false,
-            hasArrow: true,
-            onTap: () {},
-            state: state,
-            dispatch: dispatch,
-            viewService: viewService),
+            textEditingController: state.sexTextEditingController, onTap: () {
+          dispatch(UserDetailsEditActionCreator.onReselectSex());
+        }, state: state, dispatch: dispatch, viewService: viewService),
         ...buildItem("城市",
             canEdit: false,
             hasArrow: true,

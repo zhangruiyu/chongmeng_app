@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:chongmeng/global_store/store.dart';
+import 'package:chongmeng/widget/select_bottom.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
+import 'package:image_picker/image_picker.dart';
 import '../../../routes.dart';
 import 'action.dart';
 import 'state.dart';
@@ -8,6 +12,8 @@ import 'state.dart';
 Effect<UserDetailsEditState> buildEffect() {
   return combineEffects(<Object, Effect<UserDetailsEditState>>{
     UserDetailsEditAction.AmendText: _onAmendText,
+    UserDetailsEditAction.ReselectAvatar: _onReselectAvatar,
+    UserDetailsEditAction.ReselectSex: _onReselectSex,
   });
 }
 
@@ -36,4 +42,23 @@ Future _onAmendText(Action action, Context<UserDetailsEditState> ctx) async {
                 })) as String ??
             description;
   }
+}
+
+Future _onReselectAvatar(
+    Action action, Context<UserDetailsEditState> ctx) async {
+  File image = (await ImagePicker.pickImage(source: ImageSource.gallery));
+  ctx.dispatch(UserDetailsEditActionCreator.onSetLocalAvatar(image));
+}
+
+Future _onReselectSex(Action action, Context<UserDetailsEditState> ctx) async {
+  Map<String, dynamic> localSex = await showModalBottomSheet(
+      context: ctx.context,
+      builder: (c) {
+        return SelectBottom(
+          params: {'男': 1, '女': 0},
+        );
+      });
+  ctx.state
+    ..sexTextEditingController.text = localSex['key']
+    ..localSex = localSex['value'];
 }

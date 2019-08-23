@@ -6,12 +6,14 @@ import 'state.dart';
 Reducer<UserDetailsEditState> buildReducer() {
   return asReducer(
     <Object, Reducer<UserDetailsEditState>>{
-//      UserDetailsEditAction.action: _onAction,
+      UserDetailsEditAction.SetLocalAvatar: _onSetLocalAvatar,
     },
   );
 }
 
-UserDetailsEditState _onAction(UserDetailsEditState state, Action action) {
-  final UserDetailsEditState newState = state.clone();
+UserDetailsEditState _onSetLocalAvatar(
+    UserDetailsEditState state, Action action) {
+  final UserDetailsEditState newState = state.clone()
+    ..localAvatar = action.payload;
   return newState;
 }
