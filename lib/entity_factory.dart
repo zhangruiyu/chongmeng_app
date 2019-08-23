@@ -1,5 +1,6 @@
 import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:chongmeng/network/entity/cos_entity.dart';
+import 'package:chongmeng/function/user_details/model/user_details_entity.dart';
 import 'package:chongmeng/function/shipping_address/model/shipping_address_entity.dart';
 import 'package:chongmeng/function/auto/model/login_entity.dart';
 import 'package:chongmeng/function/recipe/model/recipe_entity.dart';
@@ -31,6 +32,8 @@ class EntityFactory {
       return OutermostEntity.fromJson(json) as T;
     } else if (T.toString() == "CosEntity") {
       return CosEntity.fromJson(json) as T;
+    } else if (T.toString() == "UserDetailsEntity") {
+      return UserDetailsEntity.fromJson(json) as T;
     } else if (T.toString() == "ShippingAddressEntity") {
       return ShippingAddressEntity.fromJson(json) as T;
     } else if (T.toString() == "LoginEntity") {

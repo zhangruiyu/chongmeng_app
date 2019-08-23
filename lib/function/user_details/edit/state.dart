@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:chongmeng/function/user_details/model/user_details_entity.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:city_pickers/modal/result.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -15,10 +16,12 @@ class UserDetailsEditState implements Cloneable<UserDetailsEditState> {
   int localSex;
 
   Result cityResult;
+  UserDetailsData data;
 
   @override
   UserDetailsEditState clone() {
     return UserDetailsEditState()
+      ..data = data
       ..localAvatar = localAvatar
       ..localSex = localSex
       ..sexTextEditingController = sexTextEditingController
@@ -30,14 +33,17 @@ class UserDetailsEditState implements Cloneable<UserDetailsEditState> {
 }
 
 UserDetailsEditState initState(Map<String, dynamic> args) {
-  var user = GlobalStore.store.getState().localUser;
+  println("userData ${args}");
+  var user = (args['userData'] as UserDetailsData);
   var nick = user.nickName;
   var description = user.description;
   return UserDetailsEditState()
     ..nickTextEditingController = TextEditingController(text: nick)
-    ..cityTextEditingController = TextEditingController(text: user.city)
+    ..cityTextEditingController = TextEditingController(
+        text: user.provincename + user.cityname + user.areaname)
     ..sexTextEditingController =
         TextEditingController(text: user.sex == 1 ? "男" : "女")
     ..descriptionTextEditingController =
-        TextEditingController(text: description);
+        TextEditingController(text: description)
+    ..data = args['userData'];
 }

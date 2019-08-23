@@ -1,10 +1,13 @@
 import 'package:fish_redux/fish_redux.dart';
 
+import 'model/user_details_entity.dart';
+
 class UserDetailsState implements Cloneable<UserDetailsState> {
+  UserDetailsData data;
 
   @override
   UserDetailsState clone() {
-    return UserDetailsState();
+    return UserDetailsState()..data = data;
   }
 }
 

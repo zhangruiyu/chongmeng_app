@@ -6,12 +6,12 @@ import 'state.dart';
 Reducer<UserDetailsState> buildReducer() {
   return asReducer(
     <Object, Reducer<UserDetailsState>>{
-      UserDetailsAction.action: _onAction,
+      UserDetailsAction.SetUserData: _onSetUserData,
     },
   );
 }
 
-UserDetailsState _onAction(UserDetailsState state, Action action) {
-  final UserDetailsState newState = state.clone();
+UserDetailsState _onSetUserData(UserDetailsState state, Action action) {
+  final UserDetailsState newState = state.clone()..data = action.payload;
   return newState;
 }

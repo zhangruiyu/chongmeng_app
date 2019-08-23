@@ -12,10 +12,23 @@ import 'state.dart';
 Widget buildView(
     UserDetailsEditState state, Dispatch dispatch, ViewService viewService) {
   var of = Theme.of(viewService.context);
-  var user = GlobalStore.store.getState().localUser;
   return Scaffold(
     appBar: Toolbar(
       title: Text("个人资料"),
+      actions: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(right: 22.0),
+          child: InkResponse(
+            onTap: () {
+              dispatch(UserDetailsEditActionCreator.onUpdateUserInfo());
+            },
+            child: Container(
+              alignment: Alignment.center,
+              child: Text(""),
+            ),
+          ),
+        )
+      ],
     ),
     body: Column(
       children: <Widget>[
@@ -43,7 +56,7 @@ Widget buildView(
                         borderRadius: BorderRadius.circular(60),
                         child: state.localAvatar == null
                             ? CachedNetworkImage(
-                                imageUrl: user.avatar,
+                                imageUrl: state.data.avatar,
                                 fit: BoxFit.cover,
                                 width: 60.0,
                                 height: 60.0,
