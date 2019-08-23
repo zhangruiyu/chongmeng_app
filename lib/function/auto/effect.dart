@@ -76,13 +76,16 @@ Future _onLogin(Action action, Context<AutoState> ctx) async {
         },
         showLoadingIndicator: true);
   }
-
-  if (result.hasSuccess) {
-    UserHelper.login(result, ctx.context);
-  } else if (result.code == ErrorCode.BIND_TEL_ERROR_CODE) {
-    //跳转到验证手机号,然后绑定手机号
-    Navigator.pushNamed(ctx.context, PageConstants.BindTelPage, arguments: {
-      'queryParameters': queryParameters,
+  result
+    ..yes((value) {
+      UserHelper.login(result, ctx.context);
+    })
+    ..no((err) {
+      if (err.code == ErrorCode.BIND_TEL_ERROR_CODE) {
+        //跳转到验证手机号,然后绑定手机号
+        Navigator.pushNamed(ctx.context, PageConstants.BindTelPage, arguments: {
+          'queryParameters': queryParameters,
+        });
+      }
     });
-  }
 }

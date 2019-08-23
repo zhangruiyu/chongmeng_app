@@ -47,14 +47,15 @@ class RequestClient {
           !ErrorCode.ignoreToastCode.contains(e.code)) {
         showToast('$e');
       }
-      return Future<Result<T>>.value(Result.iniFail(e.code));
+      return Future<Result<T>>.value(Result.iniFail(e));
     } catch (e) {
       if (context != null && !ignoreToast) {
         showToast('网络错误$e');
       }
       // 非具体类型
       print('Something really unknown: $e');
-      return Future<Result<T>>.value(Result.iniFail(ErrorCode.NormalError));
+      return Future<Result<T>>.value(
+          Result.iniFail(NetException(ErrorCode.NormalError, "网络请求失败")));
     } finally {
       if (showLoadingIndicator) {
         NavigatorHelper.showLoadingDialog(context, false);
@@ -143,20 +144,31 @@ class Result<T> {
   bool hasSuccess;
   T data;
 
-  //错误码
-  int code;
+  //错误
+  NetException error;
 
   Result.iniSuccess(
     this.data,
   )   : this.hasError = false,
         this.hasSuccess = true;
 
-  Result.iniFail(
-    this.code, {
-    this.data,
-  })  : this.hasError = true,
+  Result.iniFail(this.error)
+      : this.hasError = true,
         this.hasSuccess = false;
+
+  Result<T> yes(YesCallBack<T> value) {
+    value(data);
+    return this;
+  }
+
+  Result<T> no(NoCallBack err) {
+    err(error);
+    return this;
+  }
 }
+
+typedef void YesCallBack<T>(T result);
+typedef void NoCallBack(NetException err);
 
 class ErrorCode {
   static int NormalError = 500;
