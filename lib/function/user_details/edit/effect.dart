@@ -113,7 +113,7 @@ Future _onUpdateUserInfo(
           .uploadByData(cosEntity.data.data)
           .then((picUrl) async {
 //      NavigatorHelper.showLoadingDialog(ctx.context, false);
-        (await commit(ctx, picUrl)).yes((value){
+        (await commit(ctx, picUrl)).yes((value) {
           showToast("发布成功");
           Navigator.pop(ctx.context);
         });
