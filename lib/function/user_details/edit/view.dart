@@ -82,11 +82,11 @@ Widget buildView(
             textEditingController: state.sexTextEditingController, onTap: () {
           dispatch(UserDetailsEditActionCreator.onReselectSex());
         }, state: state, dispatch: dispatch, viewService: viewService),
-        ...buildItem("城市",
-            canEdit: false,
-            hasArrow: true,
-            onTap: () {},
+        ...buildItem("城市", canEdit: false, hasArrow: true, onTap: () {
+          dispatch(UserDetailsEditActionCreator.onReselectCity());
+        },
             state: state,
+            textEditingController: state.cityTextEditingController,
             dispatch: dispatch,
             viewService: viewService),
         ...buildItem("个性签名",

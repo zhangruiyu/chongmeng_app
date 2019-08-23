@@ -4,6 +4,7 @@ class LocalUser {
   String nickName;
   int sex;
   String description;
+  String city;
   String avatar;
   String tel;
   String token;
@@ -26,6 +27,7 @@ class LocalUser {
     description = json['description'];
     tel = json['tel'];
     token = json['token'];
+    city = json['city'];
   }
 
   Map<String, dynamic> toJson() {
@@ -38,6 +40,7 @@ class LocalUser {
     data['tel'] = this.tel;
     data['token'] = this.token;
     data['avatar'] = this.avatar;
+    data['city'] = this.city;
     return data;
   }
 

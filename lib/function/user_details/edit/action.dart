@@ -7,6 +7,7 @@ enum UserDetailsEditAction {
   ReselectAvatar,
   SetLocalAvatar,
   ReselectSex,
+  ReselectCity,
 }
 
 class UserDetailsEditActionCreator {
@@ -24,5 +25,9 @@ class UserDetailsEditActionCreator {
 
   static Action onSetLocalAvatar(File file) {
     return Action(UserDetailsEditAction.SetLocalAvatar, payload: file);
+  }
+
+  static Action onReselectCity() {
+    return Action(UserDetailsEditAction.ReselectCity);
   }
 }

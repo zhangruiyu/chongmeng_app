@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/widget/select_bottom.dart';
+import 'package:city_pickers/city_pickers.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:image_picker/image_picker.dart';
@@ -14,6 +15,7 @@ Effect<UserDetailsEditState> buildEffect() {
     UserDetailsEditAction.AmendText: _onAmendText,
     UserDetailsEditAction.ReselectAvatar: _onReselectAvatar,
     UserDetailsEditAction.ReselectSex: _onReselectSex,
+    UserDetailsEditAction.ReselectCity: _onReselectCity,
   });
 }
 
@@ -58,7 +60,20 @@ Future _onReselectSex(Action action, Context<UserDetailsEditState> ctx) async {
           params: {'男': 1, '女': 0},
         );
       });
-  ctx.state
-    ..sexTextEditingController.text = localSex['key']
-    ..localSex = localSex['value'];
+  if (localSex != null)
+    ctx.state
+      ..sexTextEditingController.text = localSex['key']
+      ..localSex = localSex['value'];
+}
+
+Future _onReselectCity(Action action, Context<UserDetailsEditState> ctx) async {
+  Result cityResult = (await CityPickers.showCityPicker(
+    context: ctx.context,
+  ));
+  if (cityResult != null) {
+    ctx.state
+      ..cityResult = cityResult
+      ..cityTextEditingController.text =
+          cityResult.provinceName + cityResult.cityName + cityResult.areaName;
+  }
 }
