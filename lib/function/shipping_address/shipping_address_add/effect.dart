@@ -41,8 +41,7 @@ Future _onCommitAddress(
         "tel": ctx.state.telTextEditingController.text,
         "address": ctx.state.addressTextEditingController.text,
         "consignee": ctx.state.consigneeTextEditingController.text,
-        "areaText": ctx.state.areaTextEditingController.text,
-        "cityData": ctx.state.result.toString(),
+        "areaId": ctx.state.result.areaId,
       },
       showLoadingIndicator: true);
   if (result.hasSuccess) {

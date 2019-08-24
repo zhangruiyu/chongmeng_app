@@ -103,9 +103,9 @@ class RequestClient {
 
     if (response.statusCode == HttpStatus.ok) {
       var data = response.data;
-      if (data['status'].toString() == '1003') {
-//        UserHelper.loginOut();
-        return new Future.value(EntityFactory.generateOBJ<T>(response.data));
+      if (data['status'].toString() == ErrorCode.Login.toString()) {
+        UserHelper.logout(context);
+        return new Future.error(new NetException(data['status'], data['msg']));
       } else if (data['status'].toString() == '0') {
         return new Future.value(EntityFactory.generateOBJ<T>(response.data));
       } else if (data['status'].toString() == '4') {
@@ -177,5 +177,6 @@ typedef void NoCallBack(NetException err);
 class ErrorCode {
   static int NormalError = 500;
   static int BIND_TEL_ERROR_CODE = 1002; // 第三方登录需要绑定手机号
+  static int Login = 1003; // 下线
   static List<int> ignoreToastCode = [BIND_TEL_ERROR_CODE];
 }

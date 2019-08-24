@@ -44,10 +44,9 @@ Future _onBuy(Action action, Context<IntegralCommodityDetailState> ctx) async {
     }
   }
 
-  ShippingAddressDataShopAddres selectAddress =
-      await Navigator.pushNamed<dynamic>(
-          ctx.context, PageConstants.ShippingAddressPage,
-          arguments: {"type": ShippingAddressState.SELECT});
+  ShippingAddressData selectAddress = await Navigator.pushNamed<dynamic>(
+      ctx.context, PageConstants.ShippingAddressPage,
+      arguments: {"type": ShippingAddressState.SELECT});
   if (selectAddress != null) {
     var code = await showAffirmDialog(ctx, selectAddress);
     if (code == 1) {
@@ -58,8 +57,9 @@ Future _onBuy(Action action, Context<IntegralCommodityDetailState> ctx) async {
             "buy_count": 1,
             "integral_commodity_id": ctx.state.itemData.id,
             "tel": selectAddress.tel,
-            "address": selectAddress.areaText + selectAddress.address,
-            "nick_name": selectAddress.consignee
+            "city_id": selectAddress.id,
+            "address_detail": selectAddress.addressDetails,
+            "consignee": selectAddress.consignee
           });
       if (result.hasSuccess) {
         showSuccessDialog(ctx);
@@ -172,7 +172,7 @@ Future<int> showSuccessDialog(Context<IntegralCommodityDetailState> ctx) {
 }
 
 Future<int> showAffirmDialog(Context<IntegralCommodityDetailState> ctx,
-    ShippingAddressDataShopAddres selectAddress) {
+    ShippingAddressData selectAddress) {
   var of = Theme.of(ctx.context);
   return showDialog(
       context: ctx.context,
@@ -232,7 +232,10 @@ Future<int> showAffirmDialog(Context<IntegralCommodityDetailState> ctx,
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                          selectAddress.areaText + selectAddress.address,
+                          selectAddress.provincename +
+                              selectAddress.cityname +
+                              selectAddress.areaname +
+                              selectAddress.addressDetails,
                           style: TextStyle(
                               fontSize: 15.0, fontWeight: FontWeight.bold)),
                     ),

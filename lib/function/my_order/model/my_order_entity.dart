@@ -28,57 +28,69 @@ class MyOrderEntity {
 }
 
 class MyOrderData {
-  String address;
   String createTime;
-  int integral;
-  String nickName;
+  String areaname;
+  String consigneeName;
+  String cityname;
   int count;
+  List<String> pic;
+  String remake;
+  String addressDetail;
+  String provincename;
+  int integral;
   String name;
   String tel;
   int id;
-  List<String> pic;
-  String remake;
   int status;
 
   MyOrderData(
-      {this.address,
-      this.createTime,
-      this.integral,
-      this.nickName,
+      {this.createTime,
+      this.areaname,
+      this.consigneeName,
+      this.cityname,
       this.count,
+      this.pic,
+      this.remake,
+      this.addressDetail,
+      this.provincename,
+      this.integral,
       this.name,
       this.tel,
       this.id,
-      this.pic,
-      this.remake,
       this.status});
 
   MyOrderData.fromJson(Map<String, dynamic> json) {
-    address = json['address'];
     createTime = json['create_time'];
-    integral = json['integral'];
-    nickName = json['nick_name'];
+    areaname = json['areaname'];
+    consigneeName = json['consignee_name'];
+    cityname = json['cityname'];
     count = json['count'];
+    pic = json['pic']?.cast<String>();
+    remake = json['remake'];
+    addressDetail = json['address_detail'];
+    provincename = json['provincename'];
+    integral = json['integral'];
     name = json['name'];
     tel = json['tel'];
     id = json['id'];
-    pic = json['pic']?.cast<String>();
-    remake = json['remake'];
     status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['address'] = this.address;
     data['create_time'] = this.createTime;
-    data['integral'] = this.integral;
-    data['nick_name'] = this.nickName;
+    data['areaname'] = this.areaname;
+    data['consignee_name'] = this.consigneeName;
+    data['cityname'] = this.cityname;
     data['count'] = this.count;
+    data['pic'] = this.pic;
+    data['remake'] = this.remake;
+    data['address_detail'] = this.addressDetail;
+    data['provincename'] = this.provincename;
+    data['integral'] = this.integral;
     data['name'] = this.name;
     data['tel'] = this.tel;
     data['id'] = this.id;
-    data['pic'] = this.pic;
-    data['remake'] = this.remake;
     data['status'] = this.status;
     return data;
   }

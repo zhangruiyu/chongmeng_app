@@ -37,9 +37,9 @@ Widget buildView(
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                    return buildItem(of, state.data.shopAddress[index],
-                        viewService.context, state);
-                  }, childCount: state.data?.shopAddress?.length ?? 0),
+                    return buildItem(
+                        of, state.data[index], viewService.context, state);
+                  }, childCount: state.data?.length ?? 0),
                 )
               ],
             ),
@@ -67,8 +67,8 @@ Widget buildView(
   );
 }
 
-Widget buildItem(ThemeData of, ShippingAddressDataShopAddres data,
-    BuildContext context, ShippingAddressState state) {
+Widget buildItem(ThemeData of, ShippingAddressData data, BuildContext context,
+    ShippingAddressState state) {
   return InkWell(
     onTap: state.type == ShippingAddressState.SEE
         ? null
@@ -92,12 +92,12 @@ Widget buildItem(ThemeData of, ShippingAddressDataShopAddres data,
               Padding(
                 padding: const EdgeInsets.only(top: 5.0),
                 child: Text(
-                  data.areaText,
+                  data.provincename + data.cityname + data.areaname,
                   style: of.textTheme.caption,
                 ),
               ),
               Text(
-                data.address,
+                data.addressDetails,
                 style: of.textTheme.caption,
               ),
               Padding(
