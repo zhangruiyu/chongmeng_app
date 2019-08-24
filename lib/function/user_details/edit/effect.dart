@@ -129,7 +129,7 @@ Future _onUpdateUserInfo(
           .then((picUrl) async {
 //      NavigatorHelper.showLoadingDialog(ctx.context, false);
         (await commit(ctx, picUrl)).yes((value) {
-          showToast("发布成功");
+          showToast("修改成功");
           Navigator.pop(ctx.context, value.data);
         });
       }).catchError((onError) {
@@ -137,7 +137,7 @@ Future _onUpdateUserInfo(
       });
     } else {
       (await commit(ctx, null)).yes((value) {
-        showToast("发布成功");
+        showToast("修改成功");
         Navigator.pop(ctx.context, value.data);
       });
     }

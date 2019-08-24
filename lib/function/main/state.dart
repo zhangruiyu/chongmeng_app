@@ -51,7 +51,7 @@ MainState initState(Map<String, dynamic> args) {
 ConnOp<MainState, AccountState> accountConnector() {
   return ConnOp<MainState, AccountState>(
     get: (MainState state) {
-      return state.accountState.clone();
+      return state.accountState.clone()..localUser = state.localUser;
     },
     set: (MainState state, AccountState subState) {
       state.accountState = subState.clone();

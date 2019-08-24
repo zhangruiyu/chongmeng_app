@@ -1,10 +1,8 @@
 import 'dart:ui';
 
-import 'package:chongmeng/function/auto/model/login_entity.dart';
 import 'package:chongmeng/helper/model/local_user.dart';
 import 'package:chongmeng/helper/user_helper.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart' hide Action;
 
 import 'action.dart';
 import 'state.dart';
@@ -24,9 +22,13 @@ GlobalState _onChangeLanguage(GlobalState state, Action action) {
 }
 
 GlobalState _onUpdateLocalUser(GlobalState state, Action action) {
-  LoginData loginData = action.payload;
+  var cloneState = state.clone();
+  LocalUser loginData = action.payload;
   UserHelper.setLogin(loginData);
-  return state.clone()..localUser = LocalUser.fromJson(loginData.toJson());
+  if (cloneState.localUser == null) {
+    return cloneState..localUser = loginData;
+  }
+  return cloneState..localUser = cloneState.localUser.merge(loginData);
 }
 
 GlobalState _onLoginOut(GlobalState state, Action action) {

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:chongmeng/function/auto/model/login_entity.dart';
+import 'package:chongmeng/function/user_details/model/user_details_entity.dart';
 import 'package:chongmeng/global_store/action.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/network/net_work.dart';
@@ -26,20 +27,21 @@ class UserHelper {
     return null;
   }
 
-  static Future<bool> isLogin() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String user = prefs.getString("user");
-    debugPrint(user.toString());
-    return user != null;
+  static bool isLogin() {
+    return GlobalStore.store.getState().localUser != null;
   }
 
-  static setLogin(LoginData autoEntity) async {
+  static LocalUser getOnlineUser() {
+    return GlobalStore.store.getState().localUser;
+  }
+
+  static setLogin(LocalUser autoEntity) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("user", json.encode(autoEntity.toJson()));
   }
 
-  static loginCheck(BuildContext context, VoidCallback block) async {
-    var loginStatus = await isLogin();
+  static loginCheck(BuildContext context, VoidCallback block) {
+    var loginStatus = isLogin();
     //可能为null
     if (loginStatus) {
       block();
@@ -65,43 +67,27 @@ class UserHelper {
     }
   }
 
-  static Future<String> saveUserId(String userId) async {
-    var sp = await SharedPreferences.getInstance();
-    sp.setString("userId", userId);
-    return userId;
+  static String getUserToken() {
+    return getOnlineUser()?.token ?? "";
   }
 
-  static Future<String> getUserId() async {
-    var sp = await SharedPreferences.getInstance();
-    return sp.getString("userId") ?? "0";
-  }
-
-  static Future<String> getUserToken() async {
-    if (await isLogin()) {
-      var sp = await initLocalUser();
-      return sp.token ?? "";
-    } else {
-      return null;
-    }
-  }
-
-  static Future<String> getUserTel() async {
-    var sp = await initLocalUser();
-    return sp.token;
-  }
-
-  static void login(Result<LoginEntity> result, BuildContext context) {
-    GlobalStore.store
-        .dispatch(GlobalActionCreator.onUpdateLocalUser(result.data.data));
-    if (result.data.data.hasPet) {
+  static void login(LoginData result, BuildContext context) {
+    var user = LocalUser.fromJson(result.toJson());
+    GlobalStore.store.dispatch(GlobalActionCreator.onUpdateLocalUser(user));
+    if (result.hasPet) {
       Navigator.pop(context);
     } else {
       Navigator.popAndPushNamed(context, PageConstants.PetAddPage);
     }
   }
 
-  static void loginNoPop(Result<LoginEntity> result, BuildContext context) {
-    GlobalStore.store
-        .dispatch(GlobalActionCreator.onUpdateLocalUser(result.data.data));
+  static void loginNoPop(LoginData result, BuildContext context) {
+    var user = LocalUser.fromJson(result.toJson());
+    GlobalStore.store.dispatch(GlobalActionCreator.onUpdateLocalUser(user));
+  }
+
+  static void updateUserInfo(UserDetailsData data) {
+    var user = LocalUser.fromJson(data.toJson());
+    GlobalStore.store.dispatch(GlobalActionCreator.onUpdateLocalUser(user));
   }
 }

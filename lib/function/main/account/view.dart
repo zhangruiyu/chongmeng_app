@@ -18,10 +18,9 @@ import 'state.dart';
 Widget buildView(
     AccountState state, Dispatch dispatch, ViewService viewService) {
   var theme = Theme.of(viewService.context);
-  var user = GlobalStore.store.getState().localUser;
-  return user == null
+  return state.localUser == null
       ? buildNoLoginView(theme, viewService)
-      : buildLoginView(theme, viewService, user);
+      : buildLoginView(theme, viewService, state.localUser);
 }
 
 Widget buildLoginView(
@@ -46,7 +45,9 @@ Widget buildLoginView(
                   ClipOval(
                       child: CachedNetworkImage(
                     width: 50.0,
+                    height: 50.0,
                     imageUrl: user.avatar,
+                    fit: BoxFit.cover,
                   )),
                   Padding(
                     padding: const EdgeInsets.only(left: 15.0),

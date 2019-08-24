@@ -1,51 +1,74 @@
 class LocalUser {
-  String createTime;
   int userId;
   String nickName;
   int sex;
   String description;
-  String city;
   String avatar;
-  String tel;
   String token;
 
-  LocalUser(
-      {this.createTime,
-      this.userId,
-      this.nickName,
-      this.sex,
-      this.description,
-      this.tel,
-      this.token});
+  LocalUser({
+    this.userId,
+    this.nickName,
+    this.sex,
+    this.description,
+    this.avatar,
+    this.token,
+  });
 
   LocalUser.fromJson(Map<String, dynamic> json) {
-    createTime = json['create_time'];
     userId = json['user_id'];
     nickName = json['nick_name'];
     sex = json['sex'];
     avatar = json['avatar'];
     description = json['description'];
-    tel = json['tel'];
     token = json['token'];
-    city = json['city'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['create_time'] = this.createTime;
     data['user_id'] = this.userId;
     data['nick_name'] = this.nickName;
     data['sex'] = this.sex;
     data['description'] = this.description;
-    data['tel'] = this.tel;
     data['token'] = this.token;
     data['avatar'] = this.avatar;
-    data['city'] = this.city;
     return data;
+  }
+
+  LocalUser copyWith({
+    int userId,
+    String nickName,
+    int sex,
+    String description,
+    String city,
+    String avatar,
+    String token,
+  }) {
+    return LocalUser(
+      userId: userId ?? this.userId,
+      nickName: nickName ?? this.nickName,
+      sex: sex ?? this.sex,
+      description: description ?? this.description,
+      avatar: avatar ?? this.avatar,
+      token: token ?? this.token,
+    );
+  }
+
+  LocalUser merge(LocalUser other) {
+    if (other == null) return this;
+
+    return copyWith(
+      userId: other.userId,
+      nickName: other.nickName,
+      sex: other.sex,
+      description: other.description,
+      avatar: other.avatar,
+      token: other.token,
+    );
   }
 
   @override
   String toString() {
-    return 'LocalUser{createTime: $createTime, userId: $userId, nickName: $nickName, sex: $sex, description: $description, avatar: $avatar, tel: $tel, token: $token}';
+    return 'LocalUser{ userId: $userId, nickName: $nickName, sex: $sex, description: $description, avatar: $avatar,  token: $token}';
   }
 }

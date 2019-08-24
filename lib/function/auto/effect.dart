@@ -78,7 +78,7 @@ Future _onLogin(Action action, Context<AutoState> ctx) async {
   }
   result
     ..yes((value) {
-      UserHelper.login(result, ctx.context);
+      UserHelper.login(result.data.data, ctx.context);
     })
     ..no((err) {
       if (err.code == ErrorCode.BIND_TEL_ERROR_CODE) {

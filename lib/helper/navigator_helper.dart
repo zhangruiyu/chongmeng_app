@@ -117,7 +117,7 @@ class NavigatorHelper {
             context, HttpConstants.Flashlogin,
             queryParameters: queryParameters, showLoadingIndicator: true);
         if (result.hasSuccess) {
-          UserHelper.loginNoPop(result, context);
+          UserHelper.loginNoPop(result.data.data, context);
           return Future.value();
         } else {
           return Navigator.pushNamed(context, PageConstants.AutoPage);
