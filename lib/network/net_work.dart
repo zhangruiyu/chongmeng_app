@@ -48,12 +48,12 @@ class RequestClient {
         showToast('$e');
       }
       return Future<Result<T>>.value(Result.iniFail(e));
-    } catch (e) {
+    } on DioError catch (e) {
       if (context != null && !ignoreToast) {
         showToast('网络错误$e');
       }
       // 非具体类型
-      print('Something really unknown: $e');
+      print('Something really unknown: ${e.message}');
       return Future<Result<T>>.value(
           Result.iniFail(NetException(ErrorCode.NormalError, "网络请求失败")));
     } finally {

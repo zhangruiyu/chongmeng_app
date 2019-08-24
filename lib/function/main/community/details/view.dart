@@ -45,17 +45,8 @@ Widget buildView(
       );
     }
   } else if (data.video != null) {
-    content = SliverToBoxAdapter(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        buildVideoView(state, dispatch, viewService),
-        Padding(
-          padding: const EdgeInsets.only(top: 10.0, bottom: 5.0),
-          child: Text(data.content),
-        )
-      ],
-    ));
+    content =
+        SliverToBoxAdapter(child: buildVideoView(state, dispatch, viewService));
   } else {
     content = SliverToBoxAdapter(
       child: Text(data.content),
@@ -109,6 +100,12 @@ Widget buildView(
                 SliverPadding(
                   padding: const EdgeInsets.only(bottom: 10.0),
                   sliver: content,
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
+                    child: Text(data.content),
+                  ),
                 ),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(buildAdapter.itemBuilder,

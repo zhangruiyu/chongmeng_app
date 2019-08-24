@@ -15,6 +15,8 @@ Widget buildView(
         ClipOval(
             child: CachedNetworkImage(
           width: 40.0,
+          height: 40.0,
+          fit: BoxFit.cover,
           imageUrl: state.data.avatar,
         )),
         Padding(
