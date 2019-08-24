@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/function/main/community/commit_media/model/upload_task.dart';
+import 'package:chongmeng/function/user_details/model/user_details_entity.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/network/entity/cos_entity.dart';
@@ -91,6 +92,20 @@ Future _onReselectCity(Action action, Context<UserDetailsEditState> ctx) async {
 Future _onUpdateUserInfo(
     Action action, Context<UserDetailsEditState> ctx) async {
   var state = ctx.state;
+  int changeCount = 0;
+  var netData = ctx.state.data;
+  if (state.nickTextEditingController.text != netData.nickName) changeCount++;
+  if (state.descriptionTextEditingController.text != netData.description)
+    changeCount++;
+  if (state.sexTextEditingController.text != (netData.sex == 1 ? "男" : "女"))
+    changeCount++;
+  if (state.cityResult != null) changeCount++;
+  if (state.localAvatar != null) changeCount++;
+
+  if (changeCount == 0) {
+    showToast("最少修改一项");
+    return;
+  }
   if (state.nickTextEditingController.text?.isEmpty == true) {
     showToast("请输入昵称");
     return;
@@ -115,21 +130,24 @@ Future _onUpdateUserInfo(
 //      NavigatorHelper.showLoadingDialog(ctx.context, false);
         (await commit(ctx, picUrl)).yes((value) {
           showToast("发布成功");
-          Navigator.pop(ctx.context);
+          Navigator.pop(ctx.context, value.data);
         });
       }).catchError((onError) {
         NavigatorHelper.showLoadingDialog(ctx.context, false);
       });
     } else {
-      commit(ctx, null);
+      (await commit(ctx, null)).yes((value) {
+        showToast("发布成功");
+        Navigator.pop(ctx.context, value.data);
+      });
     }
   }
 }
 
-Future<netWork.Result<OutermostEntity>> commit(
+Future<netWork.Result<UserDetailsEntity>> commit(
     Context<UserDetailsEditState> ctx, String avatar) async {
   var state = ctx.state;
-  return netWork.RequestClient.request<OutermostEntity>(
+  return netWork.RequestClient.request<UserDetailsEntity>(
       ctx.context, HttpConstants.UserUpdateProfile,
       showLoadingIndicator: true,
       queryParameters: {

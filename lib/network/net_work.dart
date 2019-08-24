@@ -157,12 +157,16 @@ class Result<T> {
         this.hasSuccess = false;
 
   Result<T> yes(YesCallBack<T> value) {
-    value(data);
+    if (hasSuccess) {
+      value(data);
+    }
     return this;
   }
 
   Result<T> no(NoCallBack err) {
-    err(error);
+    if (hasError) {
+      err(error);
+    }
     return this;
   }
 }

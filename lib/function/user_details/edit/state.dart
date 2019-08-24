@@ -33,7 +33,6 @@ class UserDetailsEditState implements Cloneable<UserDetailsEditState> {
 }
 
 UserDetailsEditState initState(Map<String, dynamic> args) {
-  println("userData ${args}");
   var user = (args['userData'] as UserDetailsData);
   var nick = user.nickName;
   var description = user.description;

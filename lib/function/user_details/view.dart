@@ -114,9 +114,8 @@ Widget buildView(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.pushNamed(viewService.context,
-                              PageConstants.UserDetailsEditPage,
-                              arguments: {'userData': state.data});
+                          dispatch(
+                              UserDetailsActionCreator.onSkipEditUserPage());
                         },
                         icon: Icon(
                           Icons.border_color,
