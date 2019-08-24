@@ -106,7 +106,10 @@ Widget buildView(
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 5.0),
-                            child: Text(data.masterCityShow,
+                            child: Text(
+                                data.provincename +
+                                    data.cityname +
+                                    data.areaname,
                                 style: of.textTheme.caption),
                           ),
                           SizedBox(

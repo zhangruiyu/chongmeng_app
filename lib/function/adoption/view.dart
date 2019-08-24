@@ -122,8 +122,9 @@ Widget buildItem(AdoptionState state, Dispatch dispatch,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5.0),
-                    child:
-                        Text(data.masterCityShow, style: of.textTheme.caption),
+                    child: Text(
+                        data.provincename + data.cityname + data.areaname,
+                        style: of.textTheme.caption),
                   ),
                   SizedBox(
                     height: 30.0,

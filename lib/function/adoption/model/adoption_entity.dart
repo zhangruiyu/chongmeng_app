@@ -54,17 +54,18 @@ class AdoptionDataAdoption {
   String request;
   String masterWechat;
   String createTime;
+  String areaname;
   int sex;
+  String cityname;
   String description;
   bool isSterilization;
-  String masterCityShow;
   List<String> pic;
   String petTypeName;
   String masterName;
   bool isImmune;
   String petName;
-  String masterCityCode;
   int userId;
+  String provincename;
   dynamic subTypeId;
   bool isExpellingParasite;
   int id;
@@ -76,17 +77,18 @@ class AdoptionDataAdoption {
       this.request,
       this.masterWechat,
       this.createTime,
+      this.areaname,
       this.sex,
+      this.cityname,
       this.description,
       this.isSterilization,
-      this.masterCityShow,
       this.pic,
       this.petTypeName,
       this.masterName,
       this.isImmune,
       this.petName,
-      this.masterCityCode,
       this.userId,
+      this.provincename,
       this.subTypeId,
       this.isExpellingParasite,
       this.id,
@@ -98,17 +100,18 @@ class AdoptionDataAdoption {
     request = json['request'];
     masterWechat = json['master_wechat'];
     createTime = json['create_time'];
+    areaname = json['areaname'];
     sex = json['sex'];
+    cityname = json['cityname'];
     description = json['description'];
     isSterilization = json['is_sterilization'];
-    masterCityShow = json['master_city_show'];
     pic = json['pic']?.cast<String>();
     petTypeName = json['pet_type_name'];
     masterName = json['master_name'];
     isImmune = json['is_immune'];
     petName = json['pet_name'];
-    masterCityCode = json['master_city_code'];
     userId = json['user_id'];
+    provincename = json['provincename'];
     subTypeId = json['sub_type_id'];
     isExpellingParasite = json['is_expelling_parasite'];
     id = json['id'];
@@ -122,17 +125,18 @@ class AdoptionDataAdoption {
     data['request'] = this.request;
     data['master_wechat'] = this.masterWechat;
     data['create_time'] = this.createTime;
+    data['areaname'] = this.areaname;
     data['sex'] = this.sex;
+    data['cityname'] = this.cityname;
     data['description'] = this.description;
     data['is_sterilization'] = this.isSterilization;
-    data['master_city_show'] = this.masterCityShow;
     data['pic'] = this.pic;
     data['pet_type_name'] = this.petTypeName;
     data['master_name'] = this.masterName;
     data['is_immune'] = this.isImmune;
     data['pet_name'] = this.petName;
-    data['master_city_code'] = this.masterCityCode;
     data['user_id'] = this.userId;
+    data['provincename'] = this.provincename;
     data['sub_type_id'] = this.subTypeId;
     data['is_expelling_parasite'] = this.isExpellingParasite;
     data['id'] = this.id;

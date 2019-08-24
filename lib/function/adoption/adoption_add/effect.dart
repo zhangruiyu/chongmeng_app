@@ -35,7 +35,7 @@ void _onSelectType(Action action, Context<AdoptionAddState> ctx) async {
     selectResult = {
       'key':
           cityResult.provinceName + cityResult.cityName + cityResult.areaName,
-      'value': cityResult.toString()
+      'value': cityResult
     };
   } else {
     Map<String, dynamic> params;
@@ -168,8 +168,9 @@ Future<netWork.Result<OutermostEntity>> commit(
         'request': state.requestTextEditingController.text,
         'masterName': state.masterNameTextEditingController.text,
         'masterWechat': state.masterWechatTextEditingController.text,
-        'cityCode': state.cityCode,
-        'cityShow': state.cityTextEditingController.text,
+        'provinceId': state.city.provinceId,
+        'cityId': state.city.cityId,
+        'areaId': state.city.areaId,
       });
 }
 

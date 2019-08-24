@@ -1,4 +1,5 @@
 import 'package:chongmeng/function/main/community/commit_media/model/upload_task.dart';
+import 'package:city_pickers/city_pickers.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -44,7 +45,7 @@ class AdoptionAddState implements Cloneable<AdoptionAddState> {
   TextEditingController masterWechatTextEditingController;
 
   //城市
-  String cityCode;
+  Result city;
   TextEditingController cityTextEditingController;
 
   @override
@@ -56,7 +57,7 @@ class AdoptionAddState implements Cloneable<AdoptionAddState> {
       ..isExpellingParasite = isExpellingParasite
       ..isSterilization = isSterilization
       ..isImmune = isImmune
-      ..cityCode = cityCode
+      ..city = city
       ..petTypeIdTextEditingController = petTypeIdTextEditingController
       ..sexTextEditingController = sexTextEditingController
       ..ageTextEditingController = ageTextEditingController
