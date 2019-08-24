@@ -8,6 +8,7 @@ import 'package:chongmeng/widget/loadling_widget.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:oktoast/oktoast.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -92,7 +93,14 @@ Widget buildView(
                               horizontal: 18.0, vertical: 8.0),
                           child: Text("查看收件信息"),
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          showToast(
+                              "收件人:${itemData.consigneeName},手机号:${itemData.tel},详细地址:" +
+                                  itemData.provincename +
+                                  itemData.cityname +
+                                  itemData.areaname +
+                                  itemData.addressDetail);
+                        },
                       ),
                     ],
                   ),
