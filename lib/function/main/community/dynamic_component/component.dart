@@ -14,8 +14,6 @@ class DynamicItemComponent extends Component<DynamicItemState> {
           reducer: buildReducer(),
           view: buildView,
           shouldUpdate: (DynamicItemState old, DynamicItemState now) {
-            println("比较");
-            //判断是否刷新
             return old.data.liked.toString() != now.data.toString();
           },
           dependencies: Dependencies<DynamicItemState>(

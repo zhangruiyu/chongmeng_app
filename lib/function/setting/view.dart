@@ -16,6 +16,7 @@ Widget buildView(
   var user = GlobalStore.store.getState().localUser;
   var edgeInsets = new EdgeInsets.only(top: 10.0);
   const textStyle = const TextStyle();
+  var packageInfo = GlobalStore.store.getState().packageInfo;
   return new Scaffold(
       appBar: new Toolbar(
         title: new Text('关于'),
@@ -28,14 +29,17 @@ Widget buildView(
               padding: const EdgeInsets.only(top: 40.0),
               color: const Color(0xffffffff),
               child: new Column(children: <Widget>[
-                new Image.asset(
-                  'assets/account_page_no_login.png',
-                  width: 40.0,
-                  height: 40.0,
+                ClipOval(
+                  child: new Image.asset(
+                    'assets/logo.png',
+                    width: 60.0,
+                    height: 60.0,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 new Padding(
                   padding: edgeInsets,
-                  child: new Text('版本号: v1.0.0'),
+                  child: new Text('版本号: v${packageInfo.version}'),
                 ),
                 new Padding(
                   padding: edgeInsets,
