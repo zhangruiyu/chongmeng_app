@@ -9,6 +9,7 @@ import 'package:janalytics/janalytics.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
 import 'package:jverify/jverify.dart';
+import 'package:jmessage_flutter/jmessage_flutter.dart';
 
 JmessageFlutter JMessage = JmessageFlutter();
 
@@ -52,6 +53,10 @@ class JiguangUtils {
         new NotificationSettingsIOS(sound: true, alert: true, badge: true));
 
     jverify.setup(appKey: JpushKey, channel: channel);
+
+    JMessage.init(
+        isProduction: isRelease, isOpenMessageRoaming: true, appkey: JpushKey);
+    JMessage.setDebugMode(enable: isRelease);
   }
 
   static Future<String> getRegistrationID() async {
