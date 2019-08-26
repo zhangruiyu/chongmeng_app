@@ -111,29 +111,30 @@ class _CMBottomAppBarState extends State<CMBottomAppBar> {
           onTap: () {
             widget.onTap(index);
           },
-          child: new ConstrainedBox(
-            constraints: const BoxConstraints(minWidth: 48.0, minHeight: 48.0),
-            child: new Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Image.asset(
-                  widget.currentIndex == index
-                      ? item.selectIcon
-                      : item.normalIcon,
-                  height: 21.5,
-                  width: 21.5,
-                ),
-                new Text(
-                  item.title,
-                  style: Theme.of(context).textTheme.body2.merge(new TextStyle(
-                        color: widget.currentIndex == index
-                            ? Theme.of(context).accentColor
-                            : Colors.black45,
-                      )),
-                )
-              ],
-            ),
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              IndexedStack(
+                index: widget.currentIndex == index ? 1 : 0,
+                children: <Widget>[
+                  Image.asset(
+                    item.normalIcon,
+                  ),
+                  Image.asset(
+                    item.selectIcon,
+                  ),
+                ],
+              ),
+              new Text(
+                item.title,
+                style: TextStyle(
+                    color: widget.currentIndex == index
+                        ? Theme.of(context).accentColor
+                        : color333333,
+                    fontSize: 10.0),
+              )
+            ],
           ),
         ),
       ),
@@ -156,7 +157,7 @@ class _CMBottomAppBarState extends State<CMBottomAppBar> {
     return BottomAppBar(
       color: widget.color,
       child: SizedBox(
-        height: 60.0,
+        height: 49.0,
         child: Row(children: rowContents),
       ),
       shape: widget.shape,
