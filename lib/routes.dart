@@ -1,4 +1,5 @@
 import 'package:chongmeng/function/app_info/page.dart';
+import 'package:chongmeng/function/conversation/page.dart';
 import 'package:chongmeng/function/edit_text/page.dart';
 import 'package:chongmeng/function/my_pet/page.dart';
 import 'package:chongmeng/function/signin/signinresult/page.dart';
@@ -9,6 +10,7 @@ import 'function/adoption/details/page.dart';
 import 'function/adoption/page.dart';
 import 'function/auto/page.dart';
 import 'function/bindtel/page.dart';
+import 'function/conversation/item/page.dart';
 import 'function/integral/record/page.dart';
 import 'function/main/community/commit_media/page.dart';
 import 'function/main/community/commit_text/page.dart';
@@ -86,6 +88,8 @@ class PageConstants {
   static String get AppInfoPage => "cm://AppInfoPage"; //信息
   static String get UserDetailsPage => "cm://UserDetailsPage"; //用户详情
   static String get EditTextPage => "cm://EditTextPage"; //修改文字
+  static String get ConversationPage => "cm://ConversationPage"; //所有会话界面
+  static String get ConversationItemPage => "cm://ConversationItemPage"; //单个会话
   static String get UserDetailsEditPage =>
       "cm://UserDetailsEditPage"; //用户信息修改页面
 }
@@ -128,6 +132,8 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.UserDetailsPage: UserDetailsPage(),
     PageConstants.UserDetailsEditPage: UserDetailsEditPage(),
     PageConstants.EditTextPage: EditTextPage(),
+    PageConstants.ConversationPage: ConversationPage(),
+    PageConstants.ConversationItemPage: ConversationItemPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

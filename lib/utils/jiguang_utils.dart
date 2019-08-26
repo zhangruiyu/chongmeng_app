@@ -11,7 +11,7 @@ import 'package:jmessage_flutter/jmessage_flutter.dart';
 import 'package:jverify/jverify.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
 
-JmessageFlutter JMessage = JmessageFlutter();
+JmessageFlutter jmessage = JmessageFlutter();
 
 class JiguangUtils {
   static Janalytics janalytics = new Janalytics();
@@ -54,9 +54,9 @@ class JiguangUtils {
 
     jverify.setup(appKey: JpushKey, channel: channel);
 
-    JMessage.init(
+    jmessage.init(
         isProduction: isRelease, isOpenMessageRoaming: true, appkey: JpushKey);
-    JMessage.setDebugMode(enable: isRelease);
+    jmessage.setDebugMode(enable: isRelease);
   }
 
   static Future<String> getRegistrationID() async {

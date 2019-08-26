@@ -20,6 +20,16 @@ class DateUtils {
   static DateTime string2dateTime(String date) {
     return DateTime.parse(date);
   }
+
+  /// timestamp 单位毫秒
+  static DateTime int2dateTime(int timestamp) {
+    return new DateTime.fromMicrosecondsSinceEpoch(timestamp * 1000);
+  }
+
+  static String int2string(int timestamp) {
+    print(timestamp.toString());
+    return RelativeDateUtils.getTimestampString(int2dateTime(timestamp));
+  }
 }
 
 class RelativeDateUtils {
