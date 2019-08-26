@@ -1,3 +1,4 @@
+import 'package:chongmeng/constants/colors.dart';
 import 'package:flutter/material.dart' hide Action;
 
 import 'back_button_arrows.dart';
@@ -5,7 +6,9 @@ import 'back_button_arrows.dart';
 class Toolbar extends AppBar {
   Toolbar({
     Key key,
-    Widget leading: const BackButtonArrows(),
+    Widget leading: const BackButtonArrows(
+      color: colorWhite,
+    ),
     bool automaticallyImplyLeading: true,
     Widget title,
     List<Widget> actions,
@@ -25,7 +28,10 @@ class Toolbar extends AppBar {
             key: key,
             leading: leading,
             automaticallyImplyLeading: automaticallyImplyLeading,
-            title: title,
+            title: DefaultTextStyle(
+              child: title ?? Container(),
+              style: TextStyle(color: colorWhite, fontSize: 18.0),
+            ),
             actions: actions,
             flexibleSpace: flexibleSpace,
             bottom: bottom,

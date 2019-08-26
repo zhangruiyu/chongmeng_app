@@ -4,7 +4,9 @@ import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
+import 'package:sliver_animated_list/sliver_animated_list.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -24,7 +26,7 @@ Widget buildView(
         Expanded(
           child: AnimatedList(
             key: state.listKey,
-            controller: state.controller,
+                controller: state.controller,
             itemBuilder:
                 (BuildContext context, int index, Animation animation) {
               var message = state.messages[index];
