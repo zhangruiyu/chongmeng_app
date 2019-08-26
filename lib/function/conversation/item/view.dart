@@ -26,7 +26,7 @@ Widget buildView(
         Expanded(
           child: AnimatedList(
             key: state.listKey,
-                controller: state.controller,
+            controller: state.controller,
             itemBuilder:
                 (BuildContext context, int index, Animation animation) {
               var message = state.messages[index];
