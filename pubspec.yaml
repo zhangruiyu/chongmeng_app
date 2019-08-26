@@ -84,4 +84,12 @@ flutter:
     - assets/signin_page_sign_success.png
     - assets/home_page_icon_gonggao.png
     - assets/logo.png
+    - assets/main_community_normal.png
+    - assets/main_community_select.png
+    - assets/main_home_normal.png
+    - assets/main_home_select.png
+    - assets/main_my_normal.png
+    - assets/main_my_select.png
+    - assets/main_store_normal.png
+    - assets/main_store_select.png
 

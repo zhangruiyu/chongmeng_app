@@ -37,8 +37,8 @@ Future<Widget> createApp() async {
 //    theme: themeProvide.themeData,
       theme: ThemeData(
           platform: TargetPlatform.iOS,
-          primaryColor: Color(0xffEB0E0E),
-          accentColor: Color(0xffEB0E0E),
+          primaryColor: Color(0xffFFC000),
+          accentColor: Color(0xffFFC000),
           dividerColor: colorE4E4E4),
       home: routes.buildPage(PageConstants.SplashPage, null),
       onGenerateRoute: (RouteSettings settings) {

@@ -23,8 +23,7 @@ void _initState(Action action, Context<ConversationItemState> ctx) {
     ctx.dispatch(ConversationItemActionCreator.onAddMessage(msg));
     //防止应用被手动杀死导致消息已读 但没返回页面清空未读消息
     resetUnreadMessageCount(ctx);
-    ctx.state.listKey.currentState
-        .insertItem(0, duration: Duration(seconds: 2));
+    ctx.state.listKey.currentState.insertItem(0);
   };
   //进入会话
   jmessage.enterConversation(

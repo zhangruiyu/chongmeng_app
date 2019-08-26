@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -11,8 +12,12 @@ import 'state.dart';
 Widget buildView(
     ConversationItemState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
+    backgroundColor: colorf3f3f3,
     appBar: Toolbar(
-      title: Text(state.conversationInfo.target.nickname),
+      title: Text(
+        state.conversationInfo.target.nickname,
+        style: TextStyle(color: colorWhite),
+      ),
     ),
     body: Column(
       children: <Widget>[
@@ -37,34 +42,36 @@ Widget buildView(
                 widgets.add(Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(message.text),
+                    if (!message.isSend)
+                      Text(
+                        message.from.nickname,
+                        style: TextStyle(fontSize: 12.0),
+                      ),
+                    Container(
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: Text(message.text),
+                    ),
                   ],
                 ));
               }
 
-              if (message is JMTextMessage) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                      top: 8.0, bottom: 8.0, left: 10.0, right: 10.0),
-                  child: Row(
-                    mainAxisAlignment: message.isSend
-                        ? MainAxisAlignment.end
-                        : MainAxisAlignment.start,
-                    children:
-                        message.isSend ? widgets.reversed.toList() : widgets,
-                  ),
-                );
-              }
-              return SizeTransition(
-                child: index % 2 == 0
-                    ? Row(
-                        children: <Widget>[],
-                      )
-                    : Row(
-                        children: <Widget>[],
+              return message is JMTextMessage
+                  ? SizeTransition(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 8.0, bottom: 8.0, left: 10.0, right: 10.0),
+                        child: Row(
+                          mainAxisAlignment: message.isSend
+                              ? MainAxisAlignment.end
+                              : MainAxisAlignment.start,
+                          children: message.isSend
+                              ? widgets.reversed.toList()
+                              : widgets,
+                        ),
                       ),
-                sizeFactor: animation,
-              );
+                      sizeFactor: animation,
+                    )
+                  : null;
             },
             reverse: true,
             initialItemCount: state.messages?.length ?? 0,

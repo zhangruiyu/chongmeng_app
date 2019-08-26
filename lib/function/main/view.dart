@@ -52,19 +52,23 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
         },
         items: <BottomNavigationBarItemData>[
           BottomNavigationBarItemData(
-            icon: Icons.home,
+            selectIcon: "assets/main_home_select.png",
+            normalIcon: "assets/main_home_normal.png",
             title: '首页',
           ),
           BottomNavigationBarItemData(
-            icon: Icons.cloud_queue,
+            selectIcon: "assets/main_community_select.png",
+            normalIcon: "assets/main_community_normal.png",
             title: '云吸',
           ),
           BottomNavigationBarItemData(
-            icon: Icons.school,
+            selectIcon: "assets/main_store_select.png",
+            normalIcon: "assets/main_store_normal.png",
             title: '商城',
           ),
           BottomNavigationBarItemData(
-            icon: Icons.account_balance,
+            selectIcon: "assets/main_my_select.png",
+            normalIcon: "assets/main_my_normal.png",
             title: DefaultLocalizations.of(viewService.context).me,
           ),
         ]),
@@ -113,11 +117,12 @@ class _CMBottomAppBarState extends State<CMBottomAppBar> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Icon(
-                  item.icon,
-                  color: widget.currentIndex == index
-                      ? Theme.of(context).accentColor
-                      : Colors.black45,
+                Image.asset(
+                  widget.currentIndex == index
+                      ? item.selectIcon
+                      : item.normalIcon,
+                  height: 21.5,
+                  width: 21.5,
                 ),
                 new Text(
                   item.title,
@@ -160,14 +165,9 @@ class _CMBottomAppBarState extends State<CMBottomAppBar> {
 }
 
 class BottomNavigationBarItemData {
-  const BottomNavigationBarItemData({
-    this.icon,
-    this.title,
-  });
-
-  final IconData icon;
+  final String normalIcon;
+  final String selectIcon;
   final String title;
 
-  @override
-  String toString() => '$runtimeType("$title")';
+  BottomNavigationBarItemData({this.normalIcon, this.selectIcon, this.title});
 }
