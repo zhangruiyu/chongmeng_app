@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
+import 'package:chongmeng/utils/jmessage_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:jmessage_flutter/jmessage_flutter.dart';
@@ -28,10 +31,13 @@ Future _onSkipConversationItemPage(
         .map((item) {
       return item as JMNormalMessage;
     }).toList();
-    Navigator.pushNamed(ctx.context, PageConstants.ConversationItemPage,
+    await Navigator.pushNamed(ctx.context, PageConstants.ConversationItemPage,
         arguments: {
           'messages': messages,
           "conversationInfo": jmConversationInfo
         });
+    //设置已读
+    await JMessageUtils.resetUnreadMessageCount(jmConversationInfo.target);
+    _initState(action, ctx);
   }
 }

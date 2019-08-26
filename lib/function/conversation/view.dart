@@ -28,25 +28,22 @@ Widget buildView(
               password: "chongmeng" + "123",
               nickname: UserHelper.getOnlineUser().nickName.toString());
         } catch (e) {}
-
-        JMUserInfo jmUserInfo = await jmessage.login(
+        println("chongmeng" + UserHelper.getOnlineUser().userId.toString());
+        await jmessage.login(
             username:
                 "chongmeng" + UserHelper.getOnlineUser().userId.toString(),
             password: "chongmeng" + "123");
-        var list = await jmessage.getHistoryMessages(
-            type: JMSingle.fromJson({
-              'username': "chongmeng" + "28",
+        var message = await jmessage.createMessage(
+            type: JMMessageType.text,
+            targetType: JMSingle.fromJson({
+              'username': "chongmeng" + "24",
               'appKey': JiguangUtils.JpushKey
             }),
-            from: 0,
-            limit: 10,
-            isDescend: false);
-
-        println("记录${list}");
-//        await JMessage.updateMyAvatar( imgPath: 'img_local_path' );
-        Navigator.pushNamed(
-            viewService.context, PageConstants.ConversationItemPage,
-            arguments: {'jmUserInfo': jmUserInfo});
+            text: "我发的zmle",
+            extras: {"key1": "value1"});
+        JMTextMessage msg = await jmessage.sendMessage(
+          message: message,
+        );
       },
     ),
     body: ListView.builder(
@@ -80,21 +77,23 @@ Widget buildView(
                       CircleAvatar(
                         backgroundImage: CachedNetworkImageProvider(avatar),
                       ),
-                      Container(
-                        alignment: Alignment.center,
-                        width: 13.0,
-                        height: 13.0,
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(13.0),
+                      if (conversation.unreadCount > 0)
+                        Container(
+                          alignment: Alignment.center,
+                          width: 13.0,
+                          height: 13.0,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(13.0),
+                            ),
                           ),
-                        ),
-                        child: Text(
-                          conversation.unreadCount.toString(),
-                          style: TextStyle(color: Colors.white, fontSize: 7.0),
-                        ),
-                      )
+                          child: Text(
+                            conversation.unreadCount.toString(),
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 7.0),
+                          ),
+                        )
                     ],
                   ),
                 ),

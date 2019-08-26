@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
+import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
@@ -10,10 +11,14 @@ import 'state.dart';
 Widget buildView(
     ConversationItemState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
+    appBar: Toolbar(
+      title: Text(state.conversationInfo.target.nickname),
+    ),
     body: Column(
       children: <Widget>[
         Expanded(
           child: AnimatedList(
+            key: state.listKey,
             controller: state.controller,
             itemBuilder:
                 (BuildContext context, int index, Animation animation) {

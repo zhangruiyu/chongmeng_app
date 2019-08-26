@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
 
 class ConversationItemState implements Cloneable<ConversationItemState> {
+  GlobalKey<AnimatedListState> listKey = new GlobalKey<AnimatedListState>();
   ScrollController controller;
   JMMessageEventListener messageEventListener;
   List<JMNormalMessage> messages;
@@ -12,6 +13,7 @@ class ConversationItemState implements Cloneable<ConversationItemState> {
   ConversationItemState clone() {
     return ConversationItemState()
       ..messages = messages
+      ..listKey = listKey
       ..conversationInfo = conversationInfo
       ..messageEventListener = messageEventListener
       ..controller = controller;

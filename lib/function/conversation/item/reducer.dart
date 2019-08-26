@@ -6,12 +6,15 @@ import 'state.dart';
 Reducer<ConversationItemState> buildReducer() {
   return asReducer(
     <Object, Reducer<ConversationItemState>>{
-      ConversationItemAction.action: _onAction,
+      ConversationItemAction.AddMessage: _onAddMessage,
     },
   );
 }
 
-ConversationItemState _onAction(ConversationItemState state, Action action) {
+ConversationItemState _onAddMessage(
+    ConversationItemState state, Action action) {
   final ConversationItemState newState = state.clone();
+  newState
+    ..messages = (List.from(newState.messages)..insert(0, action.payload));
   return newState;
 }
