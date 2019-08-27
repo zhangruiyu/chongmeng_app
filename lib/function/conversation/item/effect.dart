@@ -52,7 +52,8 @@ Future _onRefresh(Action action, Context<ConversationItemState> ctx) async {
   println("localIndex ${ctx.state.localIndex}");
   List<JMNormalMessage> messages = (await jmessage.getHistoryMessages(
           type: ctx.state.conversationInfo.target.targetType,
-          from: ctx.state.localIndex * ConversationItemPage.LocalMessagePageSize,
+          from:
+              ctx.state.localIndex * ConversationItemPage.LocalMessagePageSize,
           limit: ConversationItemPage.LocalMessagePageSize,
           isDescend: true))
       .map((item) {
