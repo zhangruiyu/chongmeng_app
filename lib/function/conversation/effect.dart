@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/utils/jmessage_utils.dart';
@@ -24,20 +25,9 @@ Future _initState(Action action, Context<ConversationState> ctx) async {
 Future _onSkipConversationItemPage(
     Action action, Context<ConversationState> ctx) async {
   JMConversationInfo jmConversationInfo = action.payload;
-  if (jmConversationInfo.target is JMUserInfo) {
-    var targetType = jmConversationInfo.target.targetType;
-    List<JMNormalMessage> messages = (await jmessage.getHistoryMessages(
-            type: targetType, from: 0, limit: 20, isDescend: true))
-        .map((item) {
-      return item as JMNormalMessage;
-    }).toList();
-    await Navigator.pushNamed(ctx.context, PageConstants.ConversationItemPage,
-        arguments: {
-          'messages': messages,
-          "conversationInfo": jmConversationInfo
-        });
-    //设置已读
-    await JMessageUtils.resetUnreadMessageCount(jmConversationInfo.target);
-    _initState(action, ctx);
-  }
+  await NavigatorHelper.skipConversationItemPage(
+      ctx.context, jmConversationInfo);
+  //设置已读
+  await JMessageUtils.resetUnreadMessageCount(jmConversationInfo.target);
+  _initState(action, ctx);
 }

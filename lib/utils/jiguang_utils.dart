@@ -24,6 +24,7 @@ class JiguangUtils {
   static JPush jpush = new JPush();
   static Jverify jverify = new Jverify();
   static String JpushKey = "5273001af03971f6b56827d1";
+  static String imUserNamePrefix = "chongmeng_";
 
   static init(String channel) async {
     janalytics.setup(

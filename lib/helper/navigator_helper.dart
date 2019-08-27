@@ -175,17 +175,19 @@ class NavigatorHelper {
   }
 
   static Future skipConversationItemPage(
-      BuildContext context, jmConversationInfo) async {
-    var targetType = jmConversationInfo.target.targetType;
-    List<JMNormalMessage> messages = (await jmessage.getHistoryMessages(
-            type: targetType, from: 0, limit: 20, isDescend: true))
-        .map((item) {
-      return item as JMNormalMessage;
-    }).toList();
-    return Navigator.pushNamed(context, PageConstants.ConversationItemPage,
-        arguments: {
-          'messages': messages,
-          "conversationInfo": jmConversationInfo
-        });
+      BuildContext context, JMConversationInfo jmConversationInfo) async {
+    if (jmConversationInfo is JMUserInfo) {
+      var targetType = jmConversationInfo.target.targetType;
+      List<JMNormalMessage> messages = (await jmessage.getHistoryMessages(
+              type: targetType, from: 0, limit: 20, isDescend: true))
+          .map((item) {
+        return item as JMNormalMessage;
+      }).toList();
+      return Navigator.pushNamed(context, PageConstants.ConversationItemPage,
+          arguments: {
+            'messages': messages,
+            "conversationInfo": jmConversationInfo
+          });
+    }
   }
 }
