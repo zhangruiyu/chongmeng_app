@@ -14,12 +14,25 @@ Effect<ConversationState> buildEffect() {
   return combineEffects(<Object, Effect<ConversationState>>{
     ConversationAction.SkipConversationItemPage: _onSkipConversationItemPage,
     Lifecycle.initState: _initState,
+    Lifecycle.dispose: _dispose,
   });
 }
 
 Future _initState(Action action, Context<ConversationState> ctx) async {
   List<JMConversationInfo> conversations = await jmessage.getConversations();
   ctx.dispatch(ConversationActionCreator.onReSetConversations(conversations));
+
+  //message 和 retractedMessage 可能是 JMTextMessage | JMVoiceMessage | JMImageMessage | JMFileMessage | JMEventMessage | JMCustomMessage;
+  ctx.state.messageEventListener = (msg) async {
+    List<JMConversationInfo> conversations = await jmessage.getConversations();
+    ctx.dispatch(ConversationActionCreator.onReSetConversations(conversations));
+  };
+  jmessage.addReceiveMessageListener(ctx.state.messageEventListener);
+}
+
+Future _dispose(Action action, Context<ConversationState> ctx) async {
+  //移除监听
+  jmessage.removeReceiveMessageListener(ctx.state.messageEventListener);
 }
 
 Future _onSkipConversationItemPage(

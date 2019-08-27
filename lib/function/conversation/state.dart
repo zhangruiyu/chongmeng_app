@@ -4,9 +4,13 @@ import 'package:jmessage_flutter/jmessage_flutter.dart';
 class ConversationState implements Cloneable<ConversationState> {
   List<JMConversationInfo> conversations;
 
+  JMMessageEventListener messageEventListener;
+
   @override
   ConversationState clone() {
-    return ConversationState()..conversations = conversations;
+    return ConversationState()
+      ..conversations = conversations
+      ..messageEventListener = messageEventListener;
   }
 }
 
