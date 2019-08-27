@@ -23,6 +23,6 @@ void _onSkipSelectTalkTypePage(Action action, Context<MainState> ctx) {
 
 Future _initState(Action action, Context<MainState> ctx) async {
   //加速一键登录预取号
-  JiguangUtils.jverify.preLogin(timeOut: 10000);
+  jverify.preLogin(timeOut: 10000);
 //  NavigatorHelper.pusRecordPage(ctx.context);
 }

@@ -2,31 +2,26 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:chongmeng/constants/constants.dart';
-import 'package:chongmeng/global_store/store.dart';
-import 'package:chongmeng/network/net_work.dart';
-import 'package:chongmeng/routes.dart';
-import 'package:chongmeng/utils/platform_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
-import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:janalytics/janalytics.dart';
+import 'package:jmessage_flutter/jmessage_flutter.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
-import 'package:jmessage_flutter/jmessage_flutter.dart';
 import 'package:jverify/jverify.dart';
-import 'package:jmessage_flutter/jmessage_flutter.dart';
-
-import 'model/jiguang_entity.dart';
 
 JmessageFlutter jmessage = JmessageFlutter();
+Janalytics janalytics = new Janalytics();
+JPush jpush = new JPush();
+Jverify jverify = new Jverify();
 
 class JiguangUtils {
-  static Janalytics janalytics = new Janalytics();
-  static JPush jpush = new JPush();
-  static Jverify jverify = new Jverify();
   static String JpushKey = "5273001af03971f6b56827d1";
   static String imUserNamePrefix = "chongmeng_";
 
   static init(String channel) async {
+    if (isRelease) {
+      janalytics.initCrashHandler();
+    }
     janalytics.setup(
       appKey: JpushKey,
       channel: channel,
@@ -63,7 +58,7 @@ class JiguangUtils {
 
     jmessage.init(
         isProduction: isRelease, isOpenMessageRoaming: true, appkey: JpushKey);
-    jmessage.setDebugMode(enable: isRelease);
+    jmessage.setDebugMode(enable: !isRelease);
   }
 
   static Future<String> getRegistrationID() async {

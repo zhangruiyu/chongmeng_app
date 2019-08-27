@@ -48,6 +48,7 @@ Future<Widget> createApp() async {
             },
             settings: RouteSettings(name: settings.name));
       },
+      navigatorObservers: [kgNavigatorObserver],
       builder: (context, widget) {
         return NoScaleTextWidget(
           child: widget,
@@ -55,4 +56,22 @@ Future<Widget> createApp() async {
       },
     ),
   );
+}
+
+KgNavigatorObserver kgNavigatorObserver = new KgNavigatorObserver();
+
+class KgNavigatorObserver extends NavigatorObserver {
+  void didPush(Route<dynamic> route, Route<dynamic> previousRoute) {
+    if (route is MaterialPageRoute) {
+      //Jigunag统计页面
+      janalytics.onPageStart(route.settings.name);
+    }
+  }
+
+  void didPop(Route<dynamic> route, Route<dynamic> previousRoute) {
+    if (route is MaterialPageRoute) {
+      //Jigunag统计页面
+      janalytics.onPageEnd(route.settings.name);
+    }
+  }
 }
