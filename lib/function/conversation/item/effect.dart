@@ -50,18 +50,19 @@ void _dispose(Action action, Context<ConversationItemState> ctx) {
 
 Future _onRefresh(Action action, Context<ConversationItemState> ctx) async {
   println("localIndex ${ctx.state.localIndex}");
+  var currentIndex = ctx.state.localIndex;
   List<JMNormalMessage> messages = (await jmessage.getHistoryMessages(
           type: ctx.state.conversationInfo.target.targetType,
-          from:
-              ctx.state.localIndex * ConversationItemPage.LocalMessagePageSize +
-                  ctx.state.sendMessages.length,
+          from: currentIndex * ConversationItemPage.LocalMessagePageSize +
+              ctx.state.sendMessages.length,
           limit: ConversationItemPage.LocalMessagePageSize,
           isDescend: true))
       .map((item) {
     return item as JMNormalMessage;
   }).toList();
   CompleterUtils.complete(action);
-  if (messages.length > 0) {
+  //防止重复刷新数据
+  if (messages.length > 0 && currentIndex == ctx.state.localIndex) {
     println(
         "加载更多 ${messages.map((itemMessage) => (itemMessage as JMTextMessage).text).toString()}");
     ctx.dispatch(ConversationItemActionCreator.onAddAllMessage(messages));
@@ -82,6 +83,9 @@ Future _onSendTextMessage(
   JMTextMessage msg = await jmessage.sendMessage(
     message: message,
   );
+  ctx.state.messagesTextEditingController.clear();
+  //想滑动到底部 但没实现
+//  ctx.state.controller.jumpTo(ctx.state.controller.position.maxScrollExtent);
   ctx.dispatch(ConversationItemActionCreator.onAddSendMessage(msg));
   ctx.state.listKey.currentState.insertItem(0);
 }
