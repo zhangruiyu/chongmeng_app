@@ -91,35 +91,29 @@ Widget buildView(
 
 Widget buildBottom(
     ConversationItemState state, Dispatch dispatch, ViewService viewService) {
-  return Row(
-    children: <Widget>[
-      Expanded(
-        child: TextField(
-          controller: state.messagesTextEditingController,
-          maxLines: 1,
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.only(
-                left: 20.0, right: 20.0, top: 20.0, bottom: 20.0),
-            labelText: "想跟TA说点什么呢",
+  return Container(
+    color: colorWhite,
+    child: Row(
+      children: <Widget>[
+        Expanded(
+          child: TextField(
+            controller: state.messagesTextEditingController,
+            maxLines: 1,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(
+                  left: 20.0, right: 20.0, top: 13.0, bottom: 13.0),
+              hintText: "想跟TA说点什么呢",
+            ),
           ),
         ),
-      ),
-      IconButton(
-        onPressed: () async {
-          var message = await jmessage.createMessage(
-              type: JMMessageType.text,
-              targetType: state.conversationInfo.target.targetType,
-              text: state.messagecount.toString(),
-              extras: {"key1": "value1"});
-          JMTextMessage msg = await jmessage.sendMessage(
-            message: message,
-          );
-          dispatch(ConversationItemActionCreator.onAddMessage(msg));
-          state.messagecount++;
-        },
-        icon: Icon(Icons.send),
-      )
-    ],
+        IconButton(
+          onPressed: () async {
+            dispatch(ConversationItemActionCreator.onSendTextMessage());
+          },
+          icon: Icon(Icons.send),
+        )
+      ],
+    ),
   );
 }

@@ -1,4 +1,5 @@
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/function/conversation/item/page.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/utils/jmessage_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -12,6 +13,7 @@ Effect<ConversationItemState> buildEffect() {
     Lifecycle.initState: _initState,
     Lifecycle.dispose: _dispose,
     ConversationItemAction.Refresh: _onRefresh,
+    ConversationItemAction.SendTextMessage: _onSendTextMessage,
   });
 }
 
@@ -47,10 +49,11 @@ void _dispose(Action action, Context<ConversationItemState> ctx) {
 }
 
 Future _onRefresh(Action action, Context<ConversationItemState> ctx) async {
+  println("localIndex ${ctx.state.localIndex}");
   List<JMNormalMessage> messages = (await jmessage.getHistoryMessages(
           type: ctx.state.conversationInfo.target.targetType,
-          from: ctx.state.localIndex,
-          limit: 20,
+          from: ctx.state.localIndex * ConversationItemPage.LocalMessagePageSize,
+          limit: ConversationItemPage.LocalMessagePageSize,
           isDescend: true))
       .map((item) {
     return item as JMNormalMessage;
@@ -58,11 +61,28 @@ Future _onRefresh(Action action, Context<ConversationItemState> ctx) async {
   CompleterUtils.complete(action);
   if (messages.length > 0) {
     println(
-        "加载更多 ${messages.map((itemMessage) => itemMessage.toJson()).toString()}");
+        "加载更多 ${messages.map((itemMessage) => (itemMessage as JMTextMessage).text).toString()}");
     ctx.dispatch(ConversationItemActionCreator.onAddAllMessage(messages));
-    ctx.state.listKey.currentState
-        .insertItem(ctx.state.messages.length - messages.length - 1);
+    for (int offset = 0; offset < messages.length; offset++) {
+      ctx.state.listKey.currentState
+          .insertItem(ctx.state.messages.length - messages.length + offset);
+    }
   }
+}
+
+Future _onSendTextMessage(
+    Action action, Context<ConversationItemState> ctx) async {
+  var message = await jmessage.createMessage(
+      type: JMMessageType.text,
+      targetType: ctx.state.conversationInfo.target.targetType,
+      text: ctx.state.localIndex.toString(),
+      extras: {"key1": "value1"});
+  JMTextMessage msg = await jmessage.sendMessage(
+    message: message,
+  );
+  ctx.dispatch(ConversationItemActionCreator.onAddMessage(msg));
+  ctx.state.listKey.currentState.insertItem(0);
+  ctx.state.localIndex = ctx.state.localIndex + 1;
 }
 
 ////设置已读

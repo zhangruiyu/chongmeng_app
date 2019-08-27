@@ -62,7 +62,8 @@ class UserHelper {
             }), (route) {
       return null == route;
     });*/
-    if (context != null) {
+    if (context != null &&
+        ModalRoute.of(context).settings.name != PageConstants.AutoPage) {
       NavigatorHelper.pushPageLoginPage(context);
     }
   }

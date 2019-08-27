@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/auto/model/login_entity.dart';
+import 'package:chongmeng/function/conversation/item/page.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/permission_helper.dart';
 import 'package:chongmeng/helper/user_helper.dart';
@@ -123,21 +124,25 @@ class NavigatorHelper {
           UserHelper.loginNoPop(result.data.data, context);
           returnResult = Future.value();
         } else {
-          returnResult = Navigator.pushNamed(context, PageConstants.AutoPage);
+          returnResult =
+              await Navigator.pushNamed(context, PageConstants.AutoPage);
         }
       } else if (initAndOpenShanyanLogin['code'] == 1011) {
-        Navigator.pushNamed(context, PageConstants.AutoPage);
+        await Navigator.pushNamed(context, PageConstants.AutoPage);
       } else if (initAndOpenShanyanLogin['code'] == 6002) {
         //取消一键登录
       } else {
         print("initAndOpenShanyanLogin 2222");
-        returnResult = Navigator.pushNamed(context, PageConstants.AutoPage);
+        returnResult =
+            await Navigator.pushNamed(context, PageConstants.AutoPage);
       }
     } else {
-      returnResult = Navigator.pushNamed(context, PageConstants.AutoPage);
+      returnResult = await Navigator.pushNamed(context, PageConstants.AutoPage);
     }
-    //注册登录im
-    loginIM(context);
+    if (UserHelper.isLogin()) {
+      //注册登录im
+      loginIM(context);
+    }
     return returnResult;
   }
 
@@ -180,13 +185,18 @@ class NavigatorHelper {
   ///跳转到单个会话页面
   static Future skipConversationItemPage(
       BuildContext context, JMConversationInfo jmConversationInfo) async {
-    if (jmConversationInfo is JMUserInfo) {
+    if (jmConversationInfo.target is JMUserInfo) {
       var targetType = jmConversationInfo.target.targetType;
       List<JMNormalMessage> messages = (await jmessage.getHistoryMessages(
-              type: targetType, from: 0, limit: 20, isDescend: true))
+              type: targetType,
+              from: 0 * ConversationItemPage.LocalMessagePageSize,
+              limit: ConversationItemPage.LocalMessagePageSize,
+              isDescend: true))
           .map((item) {
         return item as JMNormalMessage;
       }).toList();
+      println(
+          "初始化 ${messages.map((itemMessage) => (itemMessage as JMTextMessage).text).toString()}");
       return Navigator.pushNamed(context, PageConstants.ConversationItemPage,
           arguments: {
             'messages': messages,

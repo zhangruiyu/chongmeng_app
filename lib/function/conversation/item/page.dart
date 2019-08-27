@@ -21,4 +21,5 @@ class ConversationItemPage
               }),
           middleware: <Middleware<ConversationItemState>>[],
         );
+  static const int LocalMessagePageSize = 20;
 }

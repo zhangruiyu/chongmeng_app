@@ -1,7 +1,12 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
 
-enum ConversationItemAction { AddAllMessage, AddMessage, Refresh }
+enum ConversationItemAction {
+  AddAllMessage,
+  AddMessage,
+  Refresh,
+  SendTextMessage
+}
 
 class ConversationItemActionCreator {
   static Action onAddAllMessage(List<JMNormalMessage> s) {
@@ -14,5 +19,9 @@ class ConversationItemActionCreator {
 
   static Action onAddMessage(message) {
     return Action(ConversationItemAction.AddMessage, payload: message);
+  }
+
+  static Action onSendTextMessage() {
+    return Action(ConversationItemAction.SendTextMessage);
   }
 }

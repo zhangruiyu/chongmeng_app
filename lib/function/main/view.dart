@@ -34,6 +34,7 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
       index: state.mainPageIndex,
     ),
     floatingActionButton: FloatingActionButton(
+      elevation: 0.0,
       onPressed: () {
 //        dispatch(MainActionCreator.onSkipSelectTalkTypePage());
         NavigatorHelper.pushConversationPage(viewService.context);
