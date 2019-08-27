@@ -79,7 +79,7 @@ class RequestClient {
         headers: {
           'os': Platform.operatingSystem,
 //          'v': packageInfo.version,
-          'token': await UserHelper.getUserToken(),
+          'token': UserHelper.getUserToken(),
         });
 
     if (isPost) {

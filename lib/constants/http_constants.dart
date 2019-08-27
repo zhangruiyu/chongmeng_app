@@ -16,6 +16,7 @@ class HttpConstants {
   static final String UserProfile = "app/auth/common/user/profile"; //当前用户信息
   static final String UserUpdateProfile =
       "app/auth/common/user/updateProfile"; //修改用户信息
+  static final String ImLogin = "app/auth/common/user/imLogin"; //极光im登录
 
   //一键登录
   static final String Flashlogin = "app/auth/flashLogin";

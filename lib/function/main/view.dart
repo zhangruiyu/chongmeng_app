@@ -1,4 +1,5 @@
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/keep_alive_widget.dart';
@@ -35,8 +36,7 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
     floatingActionButton: FloatingActionButton(
       onPressed: () {
 //        dispatch(MainActionCreator.onSkipSelectTalkTypePage());
-        Navigator.pushNamed(
-            viewService.context, PageConstants.ConversationPage);
+        NavigatorHelper.pushConversationPage(viewService.context);
       },
       child: Icon(Icons.add, semanticLabel: 'Action'),
       backgroundColor: Theme.of(viewService.context).accentColor,

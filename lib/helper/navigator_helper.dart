@@ -3,16 +3,18 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/auto/model/login_entity.dart';
-import 'package:chongmeng/global_store/action.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/permission_helper.dart';
 import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
-import 'package:chongmeng/utils/platform_utils.dart';
+import 'package:chongmeng/utils/model/jiguang_entity.dart';
+import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Action;
+import 'package:jmessage_flutter/jmessage_flutter.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:photo/photo.dart';
 import 'package:photo_manager/photo_manager.dart';
 
@@ -136,5 +138,54 @@ class NavigatorHelper {
       return result;
     }
     return null;
+  }
+
+  static Future pushConversationPage(BuildContext context) async {
+    var user = loginIM(context);
+    if (user != null) {
+      Navigator.pushNamed(context, PageConstants.ConversationPage);
+    } else {
+      showToast("请检查您的网络");
+    }
+  }
+
+  static Future<JMUserInfo> loginIM(BuildContext context) async {
+    await RequestClient.request(context, HttpConstants.ImLogin);
+    JMUserInfo user = await jmessage.getMyInfo();
+    if (user == null) {
+      var result = await RequestClient.request<JiguangEntity>(
+          context, HttpConstants.ImLogin,
+          showLoadingIndicator: true);
+      if (result.hasSuccess) {
+        try {
+          var localUser = GlobalStore.store.getState().localUser;
+          await jmessage.userRegister(
+              username: result.data.data.userName,
+              password: result.data.data.password,
+              nickname: localUser.nickName);
+        } catch (e) {
+          println("已经注册");
+        }
+      }
+      user = await jmessage.login(
+          username: result.data.data.userName,
+          password: result.data.data.password);
+    }
+    return user;
+  }
+
+  static Future skipConversationItemPage(
+      BuildContext context, jmConversationInfo) async {
+    var targetType = jmConversationInfo.target.targetType;
+    List<JMNormalMessage> messages = (await jmessage.getHistoryMessages(
+            type: targetType, from: 0, limit: 20, isDescend: true))
+        .map((item) {
+      return item as JMNormalMessage;
+    }).toList();
+    return Navigator.pushNamed(context, PageConstants.ConversationItemPage,
+        arguments: {
+          'messages': messages,
+          "conversationInfo": jmConversationInfo
+        });
   }
 }

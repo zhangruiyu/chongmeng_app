@@ -21,7 +21,7 @@ Widget buildView(
     ),
     floatingActionButton: FloatingActionButton(
       onPressed: () async {
-        try {
+        /*try {
           await jmessage.userRegister(
               username:
                   "chongmeng" + UserHelper.getOnlineUser().userId.toString(),
@@ -43,7 +43,8 @@ Widget buildView(
             extras: {"key1": "value1"});
         JMTextMessage msg = await jmessage.sendMessage(
           message: message,
-        );
+        );*/
+//        JiguangUtils.loginIM(viewService.context);
       },
     ),
     body: ListView.builder(

@@ -2,14 +2,20 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/global_store/store.dart';
+import 'package:chongmeng/network/net_work.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/platform_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
+import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:janalytics/janalytics.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
 import 'package:jverify/jverify.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
+
+import 'model/jiguang_entity.dart';
 
 JmessageFlutter jmessage = JmessageFlutter();
 
