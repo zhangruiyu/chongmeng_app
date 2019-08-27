@@ -83,27 +83,43 @@ Widget buildView(
             initialItemCount: state.messages?.length ?? 0,
           ),
         ),
-        Row(
-          children: <Widget>[
-            RaisedButton(
-              onPressed: () async {
-                var message = await jmessage.createMessage(
-                    type: JMMessageType.text,
-                    targetType: JMSingle.fromJson({
-                      'username': "chongmeng" + "28",
-                      'appKey': JiguangUtils.JpushKey
-                    }),
-                    text: "我发的",
-                    extras: {"key1": "value1"});
-                JMTextMessage msg = await jmessage.sendMessage(
-                  message: message,
-                );
-              },
-              child: Text("发送"),
-            )
-          ],
-        )
+        buildBottom(state, dispatch, viewService)
       ],
     ),
+  );
+}
+
+Widget buildBottom(
+    ConversationItemState state, Dispatch dispatch, ViewService viewService) {
+  return Row(
+    children: <Widget>[
+      Expanded(
+        child: TextField(
+          controller: state.messagesTextEditingController,
+          maxLines: 1,
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            contentPadding: EdgeInsets.only(
+                left: 20.0, right: 20.0, top: 20.0, bottom: 20.0),
+            labelText: "想跟TA说点什么呢",
+          ),
+        ),
+      ),
+      IconButton(
+        onPressed: () async {
+          var message = await jmessage.createMessage(
+              type: JMMessageType.text,
+              targetType: state.conversationInfo.target.targetType,
+              text: state.messagecount.toString(),
+              extras: {"key1": "value1"});
+          JMTextMessage msg = await jmessage.sendMessage(
+            message: message,
+          );
+          dispatch(ConversationItemActionCreator.onAddMessage(msg));
+          state.messagecount++;
+        },
+        icon: Icon(Icons.send),
+      )
+    ],
   );
 }

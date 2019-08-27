@@ -98,6 +98,7 @@ class NavigatorHelper {
   }
 
   static Future pushPageLoginPage(BuildContext context) async {
+    var returnResult;
     var checkVerifyEnable = await JiguangUtils.checkVerifyEnable();
     if (checkVerifyEnable) {
       //支持
@@ -120,9 +121,9 @@ class NavigatorHelper {
             queryParameters: queryParameters, showLoadingIndicator: true);
         if (result.hasSuccess) {
           UserHelper.loginNoPop(result.data.data, context);
-          return Future.value();
+          returnResult = Future.value();
         } else {
-          return Navigator.pushNamed(context, PageConstants.AutoPage);
+          returnResult = Navigator.pushNamed(context, PageConstants.AutoPage);
         }
       } else if (initAndOpenShanyanLogin['code'] == 1011) {
         Navigator.pushNamed(context, PageConstants.AutoPage);
@@ -130,16 +131,17 @@ class NavigatorHelper {
         //取消一键登录
       } else {
         print("initAndOpenShanyanLogin 2222");
-        var result = Navigator.pushNamed(context, PageConstants.AutoPage);
-        return result;
+        returnResult = Navigator.pushNamed(context, PageConstants.AutoPage);
       }
     } else {
-      var result = Navigator.pushNamed(context, PageConstants.AutoPage);
-      return result;
+      returnResult = Navigator.pushNamed(context, PageConstants.AutoPage);
     }
-    return null;
+    //注册登录im
+    loginIM(context);
+    return returnResult;
   }
 
+  ///跳转到所有会话页面
   static Future pushConversationPage(BuildContext context) async {
     var user = loginIM(context);
     if (user != null) {
@@ -149,6 +151,7 @@ class NavigatorHelper {
     }
   }
 
+  ///登录im
   static Future<JMUserInfo> loginIM(BuildContext context) async {
     await RequestClient.request(context, HttpConstants.ImLogin);
     JMUserInfo user = await jmessage.getMyInfo();
@@ -174,6 +177,7 @@ class NavigatorHelper {
     return user;
   }
 
+  ///跳转到单个会话页面
   static Future skipConversationItemPage(
       BuildContext context, JMConversationInfo jmConversationInfo) async {
     if (jmConversationInfo is JMUserInfo) {
