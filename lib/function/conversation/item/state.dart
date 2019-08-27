@@ -8,10 +8,12 @@ class ConversationItemState implements Cloneable<ConversationItemState> {
   JMMessageEventListener messageEventListener;
   List<JMNormalMessage> messages;
   JMConversationInfo conversationInfo;
+  int localIndex;
 
   @override
   ConversationItemState clone() {
     return ConversationItemState()
+      ..localIndex = localIndex
       ..messages = messages
       ..listKey = listKey
       ..conversationInfo = conversationInfo
@@ -22,6 +24,7 @@ class ConversationItemState implements Cloneable<ConversationItemState> {
 
 ConversationItemState initState(Map<String, dynamic> args) {
   return ConversationItemState()
+    ..localIndex = 1
     ..controller = ScrollController()
     ..conversationInfo = args['conversationInfo']
     ..messages = args['messages'];

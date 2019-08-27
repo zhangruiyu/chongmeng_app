@@ -65,6 +65,10 @@ Widget buildView(
             dispatch(ConversationActionCreator.onSkipConversationItemPage(
                 conversation));
           },
+          onLongPress: () async {
+            await jmessage.deleteConversation(
+                target: conversation.target.targetType);
+          },
           child: Padding(
             padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 10.0),
             child: Row(

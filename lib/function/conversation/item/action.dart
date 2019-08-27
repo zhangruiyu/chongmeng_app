@@ -1,11 +1,15 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:jmessage_flutter/jmessage_flutter.dart';
 
-//TODO replace with your own action
-enum ConversationItemAction { action, AddMessage }
+enum ConversationItemAction { AddAllMessage, AddMessage, Refresh }
 
 class ConversationItemActionCreator {
-  static Action onAction() {
-    return const Action(ConversationItemAction.action);
+  static Action onAddAllMessage(List<JMNormalMessage> s) {
+    return Action(ConversationItemAction.AddAllMessage, payload: s);
+  }
+
+  static Action onRefresh(Map<String, dynamic> data) {
+    return Action(ConversationItemAction.Refresh, payload: data);
   }
 
   static Action onAddMessage(message) {

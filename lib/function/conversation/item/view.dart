@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
+import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -29,6 +30,9 @@ Widget buildView(
             controller: state.controller,
             itemBuilder:
                 (BuildContext context, int index, Animation animation) {
+              /*  if (index == state.messages.length - 1) {
+                dispatch(ConversationItemActionCreator.onRefresh(null));
+              }*/
               var message = state.messages[index];
               List<Widget> widgets = [];
               widgets.addAll([

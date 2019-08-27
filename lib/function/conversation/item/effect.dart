@@ -1,3 +1,4 @@
+import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/utils/jmessage_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -10,13 +11,19 @@ Effect<ConversationItemState> buildEffect() {
   return combineEffects(<Object, Effect<ConversationItemState>>{
     Lifecycle.initState: _initState,
     Lifecycle.dispose: _dispose,
-    ConversationItemAction.action: _onAction,
+    ConversationItemAction.Refresh: _onRefresh,
   });
 }
 
-void _onAction(Action action, Context<ConversationItemState> ctx) {}
-
 void _initState(Action action, Context<ConversationItemState> ctx) {
+  ctx.state.controller.addListener(() {
+    if (ctx.state.controller.position.pixels ==
+        ctx.state.controller.position.maxScrollExtent) {
+      ///load more when the listView attached the bottom
+      _onRefresh(action, ctx);
+    }
+  });
+
   //message 和 retractedMessage 可能是 JMTextMessage | JMVoiceMessage | JMImageMessage | JMFileMessage | JMEventMessage | JMCustomMessage;
   ctx.state.messageEventListener = (msg) {
     print('listener receive event - message ： ${msg.toJson()}');
@@ -37,6 +44,25 @@ void _dispose(Action action, Context<ConversationItemState> ctx) {
       target: ctx.state.conversationInfo.target.targetType);
   jmessage.removeReceiveMessageListener(ctx.state.messageEventListener);
   resetUnreadMessageCount(ctx);
+}
+
+Future _onRefresh(Action action, Context<ConversationItemState> ctx) async {
+  List<JMNormalMessage> messages = (await jmessage.getHistoryMessages(
+          type: ctx.state.conversationInfo.target.targetType,
+          from: ctx.state.localIndex,
+          limit: 20,
+          isDescend: true))
+      .map((item) {
+    return item as JMNormalMessage;
+  }).toList();
+  CompleterUtils.complete(action);
+  if (messages.length > 0) {
+    println(
+        "加载更多 ${messages.map((itemMessage) => itemMessage.toJson()).toString()}");
+    ctx.dispatch(ConversationItemActionCreator.onAddAllMessage(messages));
+    ctx.state.listKey.currentState
+        .insertItem(ctx.state.messages.length - messages.length - 1);
+  }
 }
 
 ////设置已读

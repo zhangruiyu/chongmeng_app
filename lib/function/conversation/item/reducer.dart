@@ -7,6 +7,7 @@ Reducer<ConversationItemState> buildReducer() {
   return asReducer(
     <Object, Reducer<ConversationItemState>>{
       ConversationItemAction.AddMessage: _onAddMessage,
+      ConversationItemAction.AddAllMessage: _onAddAllMessage,
     },
   );
 }
@@ -16,5 +17,15 @@ ConversationItemState _onAddMessage(
   final ConversationItemState newState = state.clone();
   newState
     ..messages = (List.from(newState.messages)..insert(0, action.payload));
+  return newState;
+}
+
+ConversationItemState _onAddAllMessage(
+    ConversationItemState state, Action action) {
+  final ConversationItemState newState = state.clone();
+  newState
+    ..messages = (List.from(newState.messages)
+      ..insertAll(newState.messages.length, action.payload));
+  newState.localIndex = newState.localIndex + 1;
   return newState;
 }

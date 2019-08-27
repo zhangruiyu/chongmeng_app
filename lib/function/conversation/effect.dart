@@ -27,7 +27,7 @@ Future _onSkipConversationItemPage(
   if (jmConversationInfo.target is JMUserInfo) {
     var targetType = jmConversationInfo.target.targetType;
     List<JMNormalMessage> messages = (await jmessage.getHistoryMessages(
-            type: targetType, from: 0, limit: 10, isDescend: true))
+            type: targetType, from: 0, limit: 20, isDescend: true))
         .map((item) {
       return item as JMNormalMessage;
     }).toList();
