@@ -13,6 +13,7 @@ import 'state.dart';
 Effect<ConversationState> buildEffect() {
   return combineEffects(<Object, Effect<ConversationState>>{
     ConversationAction.SkipConversationItemPage: _onSkipConversationItemPage,
+    ConversationAction.AllRead: _onAllRead,
     Lifecycle.initState: _initState,
     Lifecycle.dispose: _dispose,
   });
@@ -43,4 +44,13 @@ Future _onSkipConversationItemPage(
   //设置已读
   await JMessageUtils.resetUnreadMessageCount(jmConversationInfo.target);
   _initState(action, ctx);
+}
+
+Future _onAllRead(Action action, Context<ConversationState> ctx) async {
+  List<JMConversationInfo> messages = await jmessage.getConversations();
+  await Future.wait(messages.map((item) {
+    return jmessage.resetUnreadMessageCount(target: item.target.targetType);
+  }).toList());
+  //刷新页面数据
+  ctx.state.messageEventListener(null);
 }

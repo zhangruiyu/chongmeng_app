@@ -8,7 +8,9 @@ import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -20,31 +22,11 @@ Widget buildView(
       title: Text("所有聊天"),
     ),
     floatingActionButton: FloatingActionButton(
+      child: Icon(
+        MdiIcons.read,
+      ),
       onPressed: () async {
-        /*try {
-          await jmessage.userRegister(
-              username:
-                  "chongmeng" + UserHelper.getOnlineUser().userId.toString(),
-              password: "chongmeng" + "123",
-              nickname: UserHelper.getOnlineUser().nickName.toString());
-        } catch (e) {}
-        println("chongmeng" + UserHelper.getOnlineUser().userId.toString());
-        await jmessage.login(
-            username:
-                "chongmeng" + UserHelper.getOnlineUser().userId.toString(),
-            password: "chongmeng" + "123");
-        var message = await jmessage.createMessage(
-            type: JMMessageType.text,
-            targetType: JMSingle.fromJson({
-              'username': "chongmeng" + "24",
-              'appKey': JiguangUtils.JpushKey
-            }),
-            text: "我发的zmle",
-            extras: {"key1": "value1"});
-        JMTextMessage msg = await jmessage.sendMessage(
-          message: message,
-        );*/
-//        JiguangUtils.loginIM(viewService.context);
+        dispatch(ConversationActionCreator.onAllRead());
       },
     ),
     body: ListView.builder(
@@ -105,7 +87,10 @@ Widget buildView(
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(conversation.title),
+                    Text(
+                      conversation.title,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     if (lastMessage?.isNotEmpty == true) Text(lastMessage),
                     if (conversation.latestMessage != null)
                       Text(

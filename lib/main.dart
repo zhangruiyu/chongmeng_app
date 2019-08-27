@@ -26,7 +26,7 @@ import 'app.dart';
 import 'helper/permission_helper.dart';
 
 Future main() async {
-  var isAgree = await PermissionHelper.checkPhonePermission();
+  var isAgree = await PermissionHelper.checkStartAppPermission();
   if (isAgree) {
 //    await initializeDateFormatting("zh");
     runApp((await createApp()));

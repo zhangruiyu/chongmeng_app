@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
 import 'package:chongmeng/constants/constants.dart';
@@ -11,11 +12,15 @@ import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/utils/model/jiguang_entity.dart';
+import 'package:dio/dio.dart';
+import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Action;
+import 'package:image_picker_saver/image_picker_saver.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:photo/photo.dart';
 import 'package:photo_manager/photo_manager.dart';
 
@@ -179,6 +184,30 @@ class NavigatorHelper {
           username: result.data.data.userName,
           password: result.data.data.password);
     }
+    if (user != null && user.avatarThumbPath?.isEmpty == true) {
+      var response = await Dio().get(
+          "https://ss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=a62e824376d98d1069d40a31113eb807/838ba61ea8d3fd1fc9c7b6853a4e251f94ca5f46.jpg",
+          options: Options(responseType: ResponseType.bytes));
+
+      debugPrint(response.statusCode.toString());
+
+      String filePath = await ImagePickerSaver.saveFile(
+          fileData: Uint8List.fromList(response.data));
+      await jmessage.updateMyAvatar(imgPath: filePath);
+      await jmessage.updateMyInfo(
+          nickname: UserHelper.getOnlineUser().nickName);
+    }
+    var response = await Dio().get(
+        "https://ss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=a62e824376d98d1069d40a31113eb807/838ba61ea8d3fd1fc9c7b6853a4e251f94ca5f46.jpg",
+        options: Options(responseType: ResponseType.bytes));
+    var path = await File(
+            (await DownloadsPathProvider.downloadsDirectory).path +
+                "/${DateTime.now()}.png")
+        .writeAsBytes(Uint8List.fromList(response.data));
+    await jmessage.updateMyAvatar(imgPath: path.path);
+    user = await jmessage.getMyInfo();
+    println("nicknamenicknamenickname:" + user.avatarThumbPath);
+
     return user;
   }
 
@@ -195,8 +224,8 @@ class NavigatorHelper {
           .map((item) {
         return item as JMNormalMessage;
       }).toList();
-      println(
-          "初始化 ${messages.map((itemMessage) => (itemMessage as JMTextMessage).text).toString()}");
+//      println(
+//          "初始化 ${messages.map((itemMessage) => (itemMessage as JMTextMessage).text).toString()}");
       return Navigator.pushNamed(context, PageConstants.ConversationItemPage,
           arguments: {
             'messages': messages,

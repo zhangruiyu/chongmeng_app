@@ -36,6 +36,8 @@ Widget buildView(
                 dispatch(ConversationItemActionCreator.onRefresh(null));
               }*/
               var message = state.messages[index];
+              println(
+                  "message.from.avatarThumbPath 4{${message.from.avatarThumbPath}");
               List<Widget> widgets = [];
               widgets.addAll([
                 Padding(
@@ -51,9 +53,12 @@ Widget buildView(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     if (!message.isSend)
-                      Text(
-                        message.from.nickname,
-                        style: TextStyle(fontSize: 12.0),
+                      Container(
+                        padding: EdgeInsets.only(bottom: 10.0),
+                        child: Text(
+                          message.from.nickname,
+                          style: TextStyle(fontSize: 12.0),
+                        ),
                       ),
                     LimitedBox(
                       maxWidth: WindowUtils.getScreenWidth() * 0.6,

@@ -53,11 +53,6 @@ class PermissionHelper {
 
   //检测麦克风.摄像头,存储
   static Future<bool> checkStorageCameraMicrophonePermission() async {
-    var result = await PermissionHandler().requestPermissions([
-      PermissionGroup.storage,
-      PermissionGroup.camera,
-      PermissionGroup.microphone,
-    ]);
     var isAgree = (await PermissionHandler().requestPermissions([
       if (Platform.isAndroid) PermissionGroup.storage,
       PermissionGroup.camera,
@@ -89,6 +84,21 @@ class PermissionHelper {
         (await PermissionHandler().requestPermissions([PermissionGroup.phone]))
             .values
             .every((item) => item == PermissionStatus.granted);
+    if (!isAgree) {
+      PermissionHandler().openAppSettings();
+    }
+    return isAgree;
+  }
+
+  //开启app需要的权限 必须给
+  static Future<bool> checkStartAppPermission() async {
+    if (Platform.isIOS) return true;
+    var isAgree = (await PermissionHandler().requestPermissions([
+      PermissionGroup.phone,
+      if (Platform.isAndroid) PermissionGroup.storage,
+    ]))
+        .values
+        .every((item) => item == PermissionStatus.granted);
     if (!isAgree) {
       PermissionHandler().openAppSettings();
     }
