@@ -53,7 +53,8 @@ Future _onRefresh(Action action, Context<ConversationItemState> ctx) async {
   List<JMNormalMessage> messages = (await jmessage.getHistoryMessages(
           type: ctx.state.conversationInfo.target.targetType,
           from:
-              ctx.state.localIndex * ConversationItemPage.LocalMessagePageSize,
+              ctx.state.localIndex * ConversationItemPage.LocalMessagePageSize +
+                  ctx.state.sendMessages.length,
           limit: ConversationItemPage.LocalMessagePageSize,
           isDescend: true))
       .map((item) {
@@ -76,14 +77,13 @@ Future _onSendTextMessage(
   var message = await jmessage.createMessage(
       type: JMMessageType.text,
       targetType: ctx.state.conversationInfo.target.targetType,
-      text: ctx.state.localIndex.toString(),
+      text: ctx.state.messagesTextEditingController.text,
       extras: {"key1": "value1"});
   JMTextMessage msg = await jmessage.sendMessage(
     message: message,
   );
-  ctx.dispatch(ConversationItemActionCreator.onAddMessage(msg));
+  ctx.dispatch(ConversationItemActionCreator.onAddSendMessage(msg));
   ctx.state.listKey.currentState.insertItem(0);
-  ctx.state.localIndex = ctx.state.localIndex + 1;
 }
 
 ////设置已读

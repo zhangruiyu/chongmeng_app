@@ -5,7 +5,8 @@ enum ConversationItemAction {
   AddAllMessage,
   AddMessage,
   Refresh,
-  SendTextMessage
+  SendTextMessage,
+  AddSendMessage //发送的新数据 要单独记录 防止查找本地数据出现角标问题,
 }
 
 class ConversationItemActionCreator {
@@ -19,6 +20,10 @@ class ConversationItemActionCreator {
 
   static Action onAddMessage(message) {
     return Action(ConversationItemAction.AddMessage, payload: message);
+  }
+
+  static Action onAddSendMessage(message) {
+    return Action(ConversationItemAction.AddSendMessage, payload: message);
   }
 
   static Action onSendTextMessage() {

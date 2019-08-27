@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
+import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import 'state.dart';
 
 Widget buildView(
     ConversationItemState state, Dispatch dispatch, ViewService viewService) {
+  var of = Theme.of(viewService.context);
   return Scaffold(
     backgroundColor: colorf3f3f3,
     appBar: Toolbar(
@@ -37,7 +39,7 @@ Widget buildView(
               List<Widget> widgets = [];
               widgets.addAll([
                 Padding(
-                  padding: const EdgeInsets.only(right: 13.0),
+                  padding: const EdgeInsets.only(right: 10.0, left: 10.0),
                   child: CircleAvatar(
                     backgroundImage: CachedNetworkImageProvider(
                         message.from.avatarThumbPath),
@@ -53,9 +55,22 @@ Widget buildView(
                         message.from.nickname,
                         style: TextStyle(fontSize: 12.0),
                       ),
-                    Container(
-                      decoration: BoxDecoration(color: Colors.white),
-                      child: Text(message.text),
+                    LimitedBox(
+                      maxWidth: WindowUtils.getScreenWidth() * 0.6,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 10.0),
+                        decoration: BoxDecoration(
+                          color: of.accentColor,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7.0),
+                          ),
+                        ),
+                        child: Text(
+                          message.text,
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
                     ),
                   ],
                 ));
@@ -67,6 +82,7 @@ Widget buildView(
                         padding: const EdgeInsets.only(
                             top: 8.0, bottom: 8.0, left: 10.0, right: 10.0),
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: message.isSend
                               ? MainAxisAlignment.end
                               : MainAxisAlignment.start,

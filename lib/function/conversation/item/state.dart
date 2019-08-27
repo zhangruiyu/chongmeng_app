@@ -8,15 +8,17 @@ class ConversationItemState implements Cloneable<ConversationItemState> {
   TextEditingController messagesTextEditingController;
   JMMessageEventListener messageEventListener;
   List<JMNormalMessage> messages;
+  //自己发送的messgae
+  List<JMNormalMessage> sendMessages;
   JMConversationInfo conversationInfo;
-  int localIndex;
 
-  var messagecount = 1;
+  //本地消息行数
+  int localIndex;
 
   @override
   ConversationItemState clone() {
     return ConversationItemState()
-      ..messagecount = messagecount
+      ..sendMessages = sendMessages
       ..localIndex = localIndex
       ..messagesTextEditingController = messagesTextEditingController
       ..messages = messages
@@ -30,6 +32,7 @@ class ConversationItemState implements Cloneable<ConversationItemState> {
 ConversationItemState initState(Map<String, dynamic> args) {
   return ConversationItemState()
     ..localIndex = 1
+    ..sendMessages = []
     ..messagesTextEditingController = TextEditingController()
     ..controller = ScrollController()
     ..conversationInfo = args['conversationInfo']
