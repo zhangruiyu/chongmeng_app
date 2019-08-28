@@ -92,4 +92,8 @@ flutter:
     - assets/main_my_select.png
     - assets/main_store_normal.png
     - assets/main_store_select.png
+    - assets/qq.png
+    - assets/qq_zone.png
+    - assets/wechat.png
+    - assets/wechat_time_line.png
 

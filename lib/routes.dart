@@ -29,6 +29,7 @@ import 'function/record/review/page.dart';
 import 'function/review_image/page.dart';
 import 'function/search/page.dart';
 import 'function/setting/page.dart';
+import 'function/share/page.dart';
 import 'function/shipping_address/page.dart';
 import 'function/shipping_address/shipping_address_add/page.dart';
 import 'function/signin/page.dart';
@@ -92,6 +93,7 @@ class PageConstants {
   static String get ConversationItemPage => "cm://ConversationItemPage"; //单个会话
   static String get UserDetailsEditPage =>
       "cm://UserDetailsEditPage"; //用户信息修改页面
+  static String get SharePage => "cm://SharePage"; //分享弹框
 }
 
 final AbstractRoutes routes = PageRoutes(
@@ -134,6 +136,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.EditTextPage: EditTextPage(),
     PageConstants.ConversationPage: ConversationPage(),
     PageConstants.ConversationItemPage: ConversationItemPage(),
+    PageConstants.SharePage: SharePage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

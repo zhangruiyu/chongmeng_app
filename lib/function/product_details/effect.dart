@@ -1,9 +1,9 @@
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/function/share/state.dart';
 import 'package:chongmeng/network/net_work.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:flutter/material.dart' as prefix0;
-import 'package:umengshare/umengshare.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'action.dart';
 import 'model/details_entity.dart';
@@ -43,18 +43,11 @@ Future _onShare(Action action, Context<ProductDetailsState> ctx) async {
     showModalBottomSheet(
         context: ctx.context,
         builder: (BuildContext context) {
-          return Row(
-            children: <Widget>[
-              prefix0.IconButton(
-                icon: prefix0.Icon(Icons.markunread_mailbox),
-                onPressed: () {
-                  UMengShare.shareText(UMSharePlatform.WechatSession,
-                      """${ctx.state.itemData.title}\n【在售价】${ctx.state.itemData.zkFinalPriceWap}元\n【券后价】${ctx.state.itemData.couponValue}元\n【下单链接】${result.data.data.clickUrl} \n----------------- \n复制这条信息，${result.data.data.tpwd}，到【手机淘宝】即可查看
-                      """);
-                },
-              )
-            ],
-          );
+          return routes.buildPage(PageConstants.SharePage, {
+            "type": ShareState.text,
+            "content":
+                """${ctx.state.itemData.title}\n【在售价】${ctx.state.itemData.zkFinalPriceWap}元\n【券后价】${ctx.state.itemData.couponValue}元\n【下单链接】${result.data.data.clickUrl} \n----------------- \n复制这条信息，${result.data.data.tpwd}，到【手机淘宝】即可查看"""
+          });
         });
   }
 }
