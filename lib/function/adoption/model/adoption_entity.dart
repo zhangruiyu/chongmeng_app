@@ -52,7 +52,6 @@ class AdoptionData {
 class AdoptionDataAdoption {
   int petTypeId;
   String request;
-  String masterWechat;
   String createTime;
   String areaname;
   int sex;
@@ -75,7 +74,6 @@ class AdoptionDataAdoption {
   AdoptionDataAdoption(
       {this.petTypeId,
       this.request,
-      this.masterWechat,
       this.createTime,
       this.areaname,
       this.sex,
@@ -98,7 +96,6 @@ class AdoptionDataAdoption {
   AdoptionDataAdoption.fromJson(Map<String, dynamic> json) {
     petTypeId = json['pet_type_id'];
     request = json['request'];
-    masterWechat = json['master_wechat'];
     createTime = json['create_time'];
     areaname = json['areaname'];
     sex = json['sex'];
@@ -123,7 +120,6 @@ class AdoptionDataAdoption {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['pet_type_id'] = this.petTypeId;
     data['request'] = this.request;
-    data['master_wechat'] = this.masterWechat;
     data['create_time'] = this.createTime;
     data['areaname'] = this.areaname;
     data['sex'] = this.sex;

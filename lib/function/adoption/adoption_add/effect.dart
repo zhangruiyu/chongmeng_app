@@ -113,10 +113,6 @@ Future _onCommit(Action action, Context<AdoptionAddState> ctx) async {
     showToast("请填写宠物送养人姓名");
     return;
   }
-  if (state.masterWechatTextEditingController.text?.isEmpty == true) {
-    showToast("请填写宠物送养人微信");
-    return;
-  }
   if (ctx.state.selectPicList.length <= 0) {
     showToast("图片必须上传一张");
     return;
@@ -167,7 +163,6 @@ Future<netWork.Result<OutermostEntity>> commit(
         'description': state.descriptionTextEditingController.text,
         'request': state.requestTextEditingController.text,
         'masterName': state.masterNameTextEditingController.text,
-        'masterWechat': state.masterWechatTextEditingController.text,
         'provinceId': state.city.provinceId,
         'cityId': state.city.cityId,
         'areaId': state.city.areaId,

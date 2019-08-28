@@ -41,9 +41,6 @@ class AdoptionAddState implements Cloneable<AdoptionAddState> {
   //送养人名字
   TextEditingController masterNameTextEditingController;
 
-  //送养人微信
-  TextEditingController masterWechatTextEditingController;
-
   //城市
   Result city;
   TextEditingController cityTextEditingController;
@@ -69,7 +66,6 @@ class AdoptionAddState implements Cloneable<AdoptionAddState> {
       ..petNameTextEditingController = petNameTextEditingController
       ..requestTextEditingController = requestTextEditingController
       ..masterNameTextEditingController = masterNameTextEditingController
-      ..masterWechatTextEditingController = masterWechatTextEditingController
       ..cityTextEditingController = cityTextEditingController
       ..descriptionTextEditingController = descriptionTextEditingController;
   }
@@ -86,7 +82,6 @@ AdoptionAddState initState(Map<String, dynamic> args) {
     ..ageTextEditingController = TextEditingController()
     ..requestTextEditingController = TextEditingController()
     ..masterNameTextEditingController = TextEditingController()
-    ..masterWechatTextEditingController = TextEditingController()
     ..cityTextEditingController = TextEditingController()
     ..descriptionTextEditingController = TextEditingController();
 }
