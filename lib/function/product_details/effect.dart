@@ -4,6 +4,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/material.dart' as prefix0;
 import 'package:umengshare/umengshare.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'action.dart';
 import 'model/details_entity.dart';
 import 'model/share_product_entity.dart';
@@ -14,6 +15,7 @@ Effect<ProductDetailsState> buildEffect() {
     Lifecycle.initState: _initState,
     ProductDetailsAction.Refresh: _onRefresh,
     ProductDetailsAction.Share: _onShare,
+    ProductDetailsAction.SkipBuyPage: _onSkipBuyPage,
   });
 }
 
@@ -55,6 +57,10 @@ Future _onShare(Action action, Context<ProductDetailsState> ctx) async {
           );
         });
   }
+}
+
+Future _onSkipBuyPage(Action action, Context<ProductDetailsState> ctx) async {
+  launch(ctx.state.itemData.couponClickUrl);
 }
 
 Future _initState(Action action, Context<ProductDetailsState> ctx) async {

@@ -75,6 +75,9 @@ Future _onRefresh(Action action, Context<ConversationItemState> ctx) async {
 
 Future _onSendTextMessage(
     Action action, Context<ConversationItemState> ctx) async {
+  if (ctx.state.messagesTextEditingController.text?.isEmpty == true) {
+    return;
+  }
   var message = await jmessage.createMessage(
       type: JMMessageType.text,
       targetType: ctx.state.conversationInfo.target.targetType,

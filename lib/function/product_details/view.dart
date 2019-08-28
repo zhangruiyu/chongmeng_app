@@ -133,7 +133,7 @@ Widget buildView(
                         ),
 
                         //券金额
-                        buildButton(of, itemData),
+                        buildButton(of, itemData, dispatch),
                         ...buildDetailsWidget(state)
                       ],
                     ),
@@ -201,7 +201,7 @@ Widget buildView(
                     alignment: Alignment.center,
                     child: GestureDetector(
                       onTap: () {
-                        launch(itemData.couponClickUrl);
+                        dispatch(ProductDetailsActionCreator.onSkipBuyPage());
                       },
                       child: Text(
                         "领券购买",
@@ -229,7 +229,8 @@ List<Widget> buildDetailsWidget(ProductDetailsState state) {
   }
 }
 
-Container buildButton(ThemeData of, AliProductItem itemData) {
+Container buildButton(
+    ThemeData of, AliProductItem itemData, Dispatch dispatch) {
   return Container(
     margin: const EdgeInsets.only(top: 15.0, left: 18, right: 18, bottom: 30.0),
     height: 70.0,
@@ -242,7 +243,7 @@ Container buildButton(ThemeData of, AliProductItem itemData) {
     alignment: Alignment.center,
     child: GestureDetector(
       onTap: () {
-        launch(itemData.couponClickUrl);
+        dispatch(ProductDetailsActionCreator.onSkipBuyPage());
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
