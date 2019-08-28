@@ -146,7 +146,7 @@ Widget buildView(
               children: <Widget>[
                 InkResponse(
                   onTap: () {
-                    showToast("下期开放");
+                    dispatch(ProductDetailsActionCreator.onShare());
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(

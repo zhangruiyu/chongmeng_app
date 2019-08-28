@@ -15,6 +15,7 @@ import 'package:chongmeng/function/signin/model/sign_list_entity.dart';
 import 'package:chongmeng/function/my_pet/selecttype/model/pet_type_entity.dart';
 import 'package:chongmeng/function/my_pet/selectsubtype/model/pet_sub_type_entity.dart';
 import 'package:chongmeng/function/my_pet/model/pet_entity.dart';
+import 'package:chongmeng/function/product_details/model/share_product_entity.dart';
 import 'package:chongmeng/function/product_details/model/details_entity.dart';
 import 'package:chongmeng/function/main/home/model/home_entity.dart';
 import 'package:chongmeng/function/main/community/details/model/comment_entity.dart';
@@ -63,6 +64,8 @@ class EntityFactory {
       return PetSubTypeEntity.fromJson(json) as T;
     } else if (T.toString() == "PetEntity") {
       return PetEntity.fromJson(json) as T;
+    } else if (T.toString() == "ShareProductEntity") {
+      return ShareProductEntity.fromJson(json) as T;
     } else if (T.toString() == "DetailsEntity") {
       return DetailsEntity.fromJson(json) as T;
     } else if (T.toString() == "HomeEntity") {

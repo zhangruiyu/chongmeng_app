@@ -69,6 +69,7 @@ class HttpConstants {
   static String get CoreSearch => "app/core/search"; //淘宝客搜索
   static String get CoreProductDetailsPic =>
       "app/core/productDetailsPic"; //淘宝客详情
+  static String get CoreProductConvert => "app/core/productConvert"; //淘宝客转链
   static String get RecipeList => "app/recipe/list"; //食谱
   static String get AdoptionAdd => "/app/adoption/common/add"; //添加领养
   static String get AdoptionList => "/app/adoption/list"; //领养列表
