@@ -111,7 +111,7 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
                 Padding(
                   padding: const EdgeInsets.only(left: 18.0, right: 18.0),
                   child: Text(
-                    "使用手机的用户,请打开宠萌APP,进入账户页-收货地址-去设置您的收货地址",
+                    "使用手机的用户,请打开宠窝APP,进入账户页-收货地址-去设置您的收货地址",
                     style: of.textTheme.caption,
                   ),
                 ),

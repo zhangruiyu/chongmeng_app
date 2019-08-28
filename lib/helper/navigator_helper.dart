@@ -163,7 +163,6 @@ class NavigatorHelper {
 
   ///登录im
   static Future<JMUserInfo> loginIM(BuildContext context) async {
-    await RequestClient.request(context, HttpConstants.ImLogin);
     JMUserInfo user = await jmessage.getMyInfo();
     if (user == null) {
       var result = await RequestClient.request<JiguangEntity>(
@@ -185,26 +184,23 @@ class NavigatorHelper {
           password: result.data.data.password);
     }
     if (user != null && user.avatarThumbPath?.isEmpty == true) {
-      var response = await Dio().get(
-          "https://ss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=a62e824376d98d1069d40a31113eb807/838ba61ea8d3fd1fc9c7b6853a4e251f94ca5f46.jpg",
+      var response = await Dio().get(UserHelper.getOnlineUser().avatar,
           options: Options(responseType: ResponseType.bytes));
 
       debugPrint(response.statusCode.toString());
 
-      String filePath = await ImagePickerSaver.saveFile(
-          fileData: Uint8List.fromList(response.data));
-      await jmessage.updateMyAvatar(imgPath: filePath);
+      File path = await File(
+              (await DownloadsPathProvider.downloadsDirectory).path +
+                  "/${DateTime.now().millisecondsSinceEpoch}.png")
+          .writeAsBytes(Uint8List.fromList(response.data));
+      await jmessage.updateMyAvatar(imgPath: path.path);
+      path.delete();
+    }
+    //昵称修改
+    if (user != null && user.nickname != UserHelper.getOnlineUser().nickName) {
       await jmessage.updateMyInfo(
           nickname: UserHelper.getOnlineUser().nickName);
     }
-    var response = await Dio().get(
-        "https://ss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=a62e824376d98d1069d40a31113eb807/838ba61ea8d3fd1fc9c7b6853a4e251f94ca5f46.jpg",
-        options: Options(responseType: ResponseType.bytes));
-    var path = await File(
-            (await DownloadsPathProvider.downloadsDirectory).path +
-                "/${DateTime.now()}.png")
-        .writeAsBytes(Uint8List.fromList(response.data));
-    await jmessage.updateMyAvatar(imgPath: path.path);
     user = await jmessage.getMyInfo();
     println("nicknamenicknamenickname:" + user.avatarThumbPath);
 
