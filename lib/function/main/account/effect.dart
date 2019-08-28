@@ -1,4 +1,5 @@
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'action.dart';
@@ -13,5 +14,7 @@ Effect<AccountState> buildEffect() {
 
 void _onAction(Action action, Context<AccountState> ctx) {}
 void _initState(Action action, Context<AccountState> ctx) {
-  RequestClient.request(ctx.context, HttpConstants.AccountIndex);
+  if (UserHelper.isLogin()) {
+    RequestClient.request(ctx.context, HttpConstants.AccountIndex);
+  }
 }

@@ -36,8 +36,8 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
     floatingActionButton: FloatingActionButton(
       elevation: 0.0,
       onPressed: () {
-//        dispatch(MainActionCreator.onSkipSelectTalkTypePage());
-        NavigatorHelper.pushConversationPage(viewService.context);
+        dispatch(MainActionCreator.onSkipSelectTalkTypePage());
+//        NavigatorHelper.pushConversationPage(viewService.context);
       },
       child: Icon(Icons.add, semanticLabel: 'Action'),
       backgroundColor: Theme.of(viewService.context).accentColor,

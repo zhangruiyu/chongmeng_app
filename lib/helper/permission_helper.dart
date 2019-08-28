@@ -95,7 +95,7 @@ class PermissionHelper {
     if (Platform.isIOS) return true;
     var isAgree = (await PermissionHandler().requestPermissions([
       PermissionGroup.phone,
-      if (Platform.isAndroid) PermissionGroup.storage,
+      PermissionGroup.storage,
     ]))
         .values
         .every((item) => item == PermissionStatus.granted);

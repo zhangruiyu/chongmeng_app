@@ -1,5 +1,6 @@
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
+import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -15,7 +16,7 @@ import 'widget/no_scale_text_widget.dart';
 Future<Widget> createApp() async {
   //初始化用户数据
   GlobalStore.store.getState().localUser = await UserHelper.initLocalUser();
-
+  println("localUser ${GlobalStore.store.getState().localUser}");
   return OKToast(
     child: MaterialApp(
       debugShowCheckedModeBanner: false,

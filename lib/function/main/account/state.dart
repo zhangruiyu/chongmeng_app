@@ -5,9 +5,15 @@ import 'package:chongmeng/helper/model/local_user.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 class AccountState implements GlobalBaseState<AccountState> {
+  //影响内容显示
+  int count = 0;
+
   @override
   AccountState clone() {
-    return AccountState();
+    return AccountState()
+      ..count = count
+      ..localUser = localUser
+      ..locale = locale;
   }
 
   @override

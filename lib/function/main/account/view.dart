@@ -10,6 +10,7 @@ import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/utils/platform_utils.dart';
+import 'package:chongmeng/utils/window_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 
@@ -20,12 +21,12 @@ Widget buildView(
   var theme = Theme.of(viewService.context);
   return state.localUser == null
       ? buildNoLoginView(theme, viewService)
-      : buildLoginView(theme, viewService, state.localUser);
+      : buildLoginView(theme, viewService, state);
 }
 
 Widget buildLoginView(
-    ThemeData theme, ViewService viewService, LocalUser user) {
-  println(user.avatar);
+    ThemeData theme, ViewService viewService, AccountState state) {
+  var user = state.localUser;
   return DefaultTextStyle(
     style: TextStyle(color: colorWhite),
     child: Column(
@@ -162,62 +163,75 @@ Widget buildLoginView(
             color: const Color(0x40808080),
           ),
         ),
-
+        VerticalLine(
+          height: 10.0,
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+          child: CachedNetworkImage(
+            width: WindowUtils.getScreenWidth(),
+            fit: BoxFit.cover,
+            height: WindowUtils.getScreenHeight() * 0.17,
+            imageUrl:
+                "https://img.alicdn.com/tfscom/i4/2246956324/O1CN01NYCDli1waRH6UqMg0_!!0-item_pic.jpg",
+          ),
+        ),
         Expanded(
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () async {
-                      Navigator.pushNamed(
-                          viewService.context, PageConstants.AppInfoPage,
-                          arguments: {
-                            "registrationID":
-                                await JiguangUtils.getRegistrationID(),
-                            "channel": GlobalStore.store.getState().channel,
+          child: Container(),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 18.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              GestureDetector(
+                onTap: () async {
+                  state.count++;
+                  if (state.count > 25) {
+                    Navigator.pushNamed(
+                        viewService.context, PageConstants.AppInfoPage,
+                        arguments: {
+                          "registrationID":
+                              await JiguangUtils.getRegistrationID(),
+                          "channel": GlobalStore.store.getState().channel,
 //                        "idfa": Platform.isAndroid
 //                            ? await yuanmengDeviceInfo.getImei
 //                            : (await yuanmengDeviceInfo.idfa),
-                          });
-                    },
-                    child: Container(
-                      height: 24.0,
-                      width: 100.0,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: colorF9F9F9,
-                          border: Border.all(color: color999999),
-                          borderRadius: BorderRadius.circular(12.0)),
-                      child: Text(
-                          "有米来花 v${GlobalStore.store.getState().packageInfo.version}",
-                          style: TextStyle(
-                            color: color999999,
-                            fontSize: 12.0,
-                          )),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-//                  await launch("tel:4006016868");
-                    },
-                    behavior: HitTestBehavior.opaque,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 18.0, bottom: 18.0),
-                      child: Text("QQ服务群：609487304",
-                          style: TextStyle(
-                            color: color999999,
-                            fontSize: 12.0,
-                          )),
-                    ),
-                  ),
-                ],
+                        });
+                  }
+                },
+                child: Container(
+                  height: 24.0,
+                  width: 100.0,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: colorF9F9F9,
+                      border: Border.all(color: color999999),
+                      borderRadius: BorderRadius.circular(12.0)),
+                  child: Text(
+                      "${GlobalStore.store.getState().packageInfo.appName} v${GlobalStore.store.getState().packageInfo.version}",
+                      style: TextStyle(
+                        color: color999999,
+                        fontSize: 12.0,
+                      )),
+                ),
               ),
-            ),
+              GestureDetector(
+                onTap: () async {
+//                  await launch("tel:4006016868");
+                },
+                behavior: HitTestBehavior.opaque,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 18.0, bottom: 18.0),
+                  child: Text("QQ服务群：609487304",
+                      style: TextStyle(
+                        color: color999999,
+                        fontSize: 12.0,
+                      )),
+                ),
+              ),
+            ],
           ),
         )
       ],
