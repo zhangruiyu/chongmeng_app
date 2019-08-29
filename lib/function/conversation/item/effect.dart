@@ -3,8 +3,10 @@ import 'package:chongmeng/function/conversation/item/page.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/utils/jmessage_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/services.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
+import 'package:oktoast/oktoast.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -83,14 +85,20 @@ Future _onSendTextMessage(
       targetType: ctx.state.conversationInfo.target.targetType,
       text: ctx.state.messagesTextEditingController.text,
       extras: {"key1": "value1"});
-  JMTextMessage msg = await jmessage.sendMessage(
-    message: message,
-  );
-  ctx.state.messagesTextEditingController.clear();
-  //想滑动到底部 但没实现
+  try {
+    JMTextMessage msg = await jmessage.sendMessage(
+      message: message,
+    );
+    ctx.state.messagesTextEditingController.clear();
+    //想滑动到底部 但没实现
 //  ctx.state.controller.jumpTo(ctx.state.controller.position.maxScrollExtent);
-  ctx.dispatch(ConversationItemActionCreator.onAddSendMessage(msg));
-  ctx.state.listKey.currentState.insertItem(0);
+    ctx.dispatch(ConversationItemActionCreator.onAddSendMessage(msg));
+    ctx.state.listKey.currentState.insertItem(0);
+  } on PlatformException catch (e) {
+    if (e.code == "898002") {
+      showToast("该用户未注册聊天功能");
+    }
+  }
 }
 
 ////设置已读

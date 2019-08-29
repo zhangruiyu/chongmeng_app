@@ -26,7 +26,10 @@ Widget buildView(
             },
             child: Container(
               alignment: Alignment.center,
-              child: Text("完成"),
+              child: Text(
+                "完成",
+                style: TextStyle(color: colorWhite),
+              ),
             ),
           ),
         )

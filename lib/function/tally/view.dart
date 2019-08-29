@@ -25,7 +25,10 @@ Widget buildView(TallyState state, Dispatch dispatch, ViewService viewService) {
             },
             child: Container(
               alignment: Alignment.center,
-              child: Text("添加"),
+              child: Text(
+                "添加",
+                style: TextStyle(color: colorWhite),
+              ),
             ),
           ),
         )
