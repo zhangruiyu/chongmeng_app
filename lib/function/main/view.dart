@@ -1,4 +1,6 @@
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/function/main/account/action.dart';
+import 'package:chongmeng/function/main/store/action.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
@@ -8,6 +10,7 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/widgets.dart';
 
 import 'action.dart';
+import 'home/action.dart';
 import 'state.dart';
 
 Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
@@ -50,6 +53,13 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
         shape: CircularNotchedRectangle(),
         onTap: (int index) {
           dispatch(MainActionCreator.onChangeNewPage(index));
+          if (index == 0) {
+            dispatch(HomeActionCreator.onRefresh(null));
+          } else if (index == 2) {
+            dispatch(StoreActionCreator.onRefresh(null));
+          } else if (index == 3) {
+            dispatch(AccountActionCreator.onRefresh(null));
+          }
         },
         items: <BottomNavigationBarItemData>[
           BottomNavigationBarItemData(

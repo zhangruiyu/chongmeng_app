@@ -1,7 +1,8 @@
+import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/scheduler.dart';
+
 import 'action.dart';
 import 'model/home_entity.dart';
 import 'state.dart';
@@ -16,7 +17,7 @@ Effect<HomeState> buildEffect() {
 Future _onRefresh(Action action, Context<HomeState> ctx) async {
   var homeData = await RequestClient.request<HomeEntity>(
       ctx.context, HttpConstants.HomeIndex);
-  action.payload['completer']();
+  CompleterUtils.complete(action);
   if (homeData.hasSuccess) {
     ctx.dispatch(HomeActionCreator.onSetHomeData(homeData.data.data));
   }

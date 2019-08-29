@@ -183,7 +183,7 @@ Widget buildView(
             color: colorWhite,
             child: Column(
               children: <Widget>[
-                ...buildItem("送养人", "请填写送养人信息",
+                ...buildItem("送养人", "请填写送养人姓名,例如:赵先生",
                     hasArrow: false,
                     canEdit: true,
                     textEditingController:

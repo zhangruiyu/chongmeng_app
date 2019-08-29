@@ -32,7 +32,10 @@ Widget buildView(
             },
             child: Container(
               alignment: Alignment.center,
-              child: Text("发布更多"),
+              child: Text(
+                "发布更多",
+                style: TextStyle(color: colorWhite),
+              ),
             ),
           ),
         )

@@ -70,6 +70,41 @@ Widget buildLoginView(
                       ],
                     ),
                   ),
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(right: 20.0),
+                      alignment: Alignment.centerRight,
+                      child: Stack(
+                        children: <Widget>[
+                          IconButton(
+                            onPressed: () {
+                              NavigatorHelper.pushConversationPage(
+                                  viewService.context);
+                            },
+                            icon: Icon(
+                              Icons.message,
+                              color: colorWhite,
+                            ),
+                          ),
+                          Positioned(
+                            right: 10.0,
+                            top: 7.0,
+                            child: Container(
+                              alignment: Alignment.center,
+                              width: 10.0,
+                              height: 10.0,
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10.0),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
@@ -167,13 +202,16 @@ Widget buildLoginView(
           height: 10.0,
         ),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-          child: CachedNetworkImage(
-            width: WindowUtils.getScreenWidth(),
-            fit: BoxFit.cover,
-            height: WindowUtils.getScreenHeight() * 0.17,
-            imageUrl:
-                "https://img.alicdn.com/tfscom/i4/2246956324/O1CN01NYCDli1waRH6UqMg0_!!0-item_pic.jpg",
+          margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: CachedNetworkImage(
+              width: WindowUtils.getScreenWidth(),
+              fit: BoxFit.cover,
+              height: WindowUtils.getScreenHeight() * 0.17,
+              imageUrl:
+                  "https://img.alicdn.com/tfscom/i4/2246956324/O1CN01NYCDli1waRH6UqMg0_!!0-item_pic.jpg",
+            ),
           ),
         ),
         Expanded(

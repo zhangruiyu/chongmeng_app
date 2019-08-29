@@ -8,13 +8,16 @@ import 'state.dart';
 Effect<AccountState> buildEffect() {
   return combineEffects(<Object, Effect<AccountState>>{
     Lifecycle.initState: _initState,
-    AccountAction.action: _onAction,
+    AccountAction.Refresh: _onRefresh,
   });
 }
 
-void _onAction(Action action, Context<AccountState> ctx) {}
-void _initState(Action action, Context<AccountState> ctx) {
+void _onRefresh(Action action, Context<AccountState> ctx) {
   if (UserHelper.isLogin()) {
     RequestClient.request(ctx.context, HttpConstants.AccountIndex);
   }
+}
+
+void _initState(Action action, Context<AccountState> ctx) {
+  _onRefresh(action, ctx);
 }

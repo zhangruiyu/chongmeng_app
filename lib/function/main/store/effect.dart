@@ -1,6 +1,7 @@
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:fish_redux/fish_redux.dart';
+import '../action.dart';
 import 'action.dart';
 import 'model/integral_commodity_entity.dart';
 import 'state.dart';
