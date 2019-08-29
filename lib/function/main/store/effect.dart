@@ -1,3 +1,4 @@
+import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -15,7 +16,7 @@ Effect<StoreState> buildEffect() {
 Future _onRefresh(Action action, Context<StoreState> ctx) async {
   var result = await RequestClient.request<IntegralCommodityEntity>(
       ctx.context, HttpConstants.IntegralCommodityList);
-  action.payload['completer']();
+  CompleterUtils.complete(action);
   if (result.hasSuccess) {
     ctx.dispatch(StoreActionCreator.onResetPageData(result.data.data));
   }

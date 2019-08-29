@@ -14,23 +14,23 @@ import 'home/action.dart';
 import 'state.dart';
 
 Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
-  if (state.views == null) {
-    state.views = [
-      viewService.buildComponent('home'),
-      Container(),
-      Container(),
-      Container()
-    ];
-  }
-  if (state.mainPageIndex == 1 && state.views[1] is Container) {
-    state.views.replaceRange(1, 2, [viewService.buildComponent('community')]);
-  }
-  if (state.mainPageIndex == 2 && state.views[2] is Container) {
-    state.views.replaceRange(2, 3, [viewService.buildComponent('store')]);
-  }
-  if (state.mainPageIndex == 3 && state.views[3] is Container) {
-    state.views.replaceRange(3, 4, [viewService.buildComponent('account')]);
-  }
+//  if (state.views == null) {
+  state.views = [
+    viewService.buildComponent('home'),
+    viewService.buildComponent('community'),
+    viewService.buildComponent('store'),
+    viewService.buildComponent('account')
+  ];
+//  }
+//  if (state.mainPageIndex == 1 && state.views[1] is Container) {
+//    state.views.replaceRange(1, 2, [viewService.buildComponent('community')]);
+//  }
+//  if (state.mainPageIndex == 2 && state.views[2] is Container) {
+//    state.views.replaceRange(2, 3, [viewService.buildComponent('store')]);
+//  }
+//  if (state.mainPageIndex == 3 && state.views[3] is Container) {
+//    state.views.replaceRange(3, 4, [viewService.buildComponent('account')]);
+//  }
   return Scaffold(
     body: IndexedStack(
       children: state.views,
