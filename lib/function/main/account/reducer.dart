@@ -6,12 +6,12 @@ import 'state.dart';
 Reducer<AccountState> buildReducer() {
   return asReducer(
     <Object, Reducer<AccountState>>{
-      AccountAction.action: _onAction,
+      AccountAction.ResetUnreadCount: _onResetUnreadCount,
     },
   );
 }
 
-AccountState _onAction(AccountState state, Action action) {
-  final AccountState newState = state.clone();
+AccountState _onResetUnreadCount(AccountState state, Action action) {
+  final AccountState newState = state.clone()..allUnreadCount = action.payload;
   return newState;
 }

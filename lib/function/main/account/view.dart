@@ -86,21 +86,22 @@ Widget buildLoginView(
                               color: colorWhite,
                             ),
                           ),
-                          Positioned(
-                            right: 10.0,
-                            top: 7.0,
-                            child: Container(
-                              alignment: Alignment.center,
-                              width: 10.0,
-                              height: 10.0,
-                              decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10.0),
+                          if (state.allUnreadCount > 0)
+                            Positioned(
+                              right: 10.0,
+                              top: 7.0,
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: 10.0,
+                                height: 10.0,
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10.0),
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
+                            )
                         ],
                       ),
                     ),

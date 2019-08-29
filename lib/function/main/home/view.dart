@@ -92,7 +92,9 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
                   child: Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(left: 20.0, right: 5.0),
+                        padding: const EdgeInsets.only(
+                          left: 20.0,
+                        ),
                         child: Image.asset(
                           "assets/home_page_icon_gonggao.png",
                         ),

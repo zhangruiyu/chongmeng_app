@@ -7,10 +7,12 @@ import 'package:fish_redux/fish_redux.dart';
 class AccountState implements GlobalBaseState<AccountState> {
   //影响内容显示
   int count = 0;
+  int allUnreadCount;
 
   @override
   AccountState clone() {
     return AccountState()
+      ..allUnreadCount = allUnreadCount
       ..count = count
       ..localUser = localUser
       ..locale = locale;
@@ -23,6 +25,6 @@ class AccountState implements GlobalBaseState<AccountState> {
   Locale locale;
 
   static AccountState initState(Map<String, dynamic> args) {
-    return AccountState();
+    return AccountState()..allUnreadCount = 0;
   }
 }

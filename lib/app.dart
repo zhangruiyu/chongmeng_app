@@ -40,7 +40,7 @@ Future<Widget> createApp() async {
           platform: TargetPlatform.iOS,
           primaryColor: Color(0xffFFC000),
           accentColor: Color(0xffFFC000),
-          dividerColor: colorE4E4E4),
+          dividerColor: colorf3f3f3),
       home: routes.buildPage(PageConstants.SplashPage, null),
       onGenerateRoute: (RouteSettings settings) {
         return MaterialPageRoute<Object>(
