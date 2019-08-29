@@ -128,11 +128,18 @@ Widget buildBottom(
             ),
           ),
         ),
-        IconButton(
-          onPressed: () async {
-            dispatch(ConversationItemActionCreator.onSendTextMessage());
+        AnimatedSwitcher(
+          transitionBuilder: (child, anim) {
+            return ScaleTransition(child: child, scale: anim);
           },
-          icon: Icon(Icons.send),
+          duration: Duration(milliseconds: 300),
+          child: new IconButton(
+              key: ValueKey(state.textIsEmpty),
+              padding: const EdgeInsets.all(0.0),
+              icon: state.textIsEmpty ? Icon(Icons.send) : Icon(Icons.add),
+              onPressed: () {
+                dispatch(ConversationItemActionCreator.onActionButton());
+              }),
         )
       ],
     ),

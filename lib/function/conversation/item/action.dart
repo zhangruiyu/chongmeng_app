@@ -5,8 +5,9 @@ enum ConversationItemAction {
   AddAllMessage,
   AddMessage,
   Refresh,
-  SendTextMessage,
-  AddSendMessage //发送的新数据 要单独记录 防止查找本地数据出现角标问题,
+  ActionButton, //功能按钮 发送消息或者弹起功能菜单
+  AddSendMessage, //发送的新数据 要单独记录 防止查找本地数据出现角标问题,
+  SetTextIsEmpty
 }
 
 class ConversationItemActionCreator {
@@ -26,7 +27,11 @@ class ConversationItemActionCreator {
     return Action(ConversationItemAction.AddSendMessage, payload: message);
   }
 
-  static Action onSendTextMessage() {
-    return Action(ConversationItemAction.SendTextMessage);
+  static Action onActionButton() {
+    return Action(ConversationItemAction.ActionButton);
+  }
+
+  static Action onSetTextIsEmpty(bool textIsEmpty) {
+    return Action(ConversationItemAction.SetTextIsEmpty, payload: textIsEmpty);
   }
 }

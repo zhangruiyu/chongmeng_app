@@ -15,11 +15,18 @@ Effect<ConversationItemState> buildEffect() {
     Lifecycle.initState: _initState,
     Lifecycle.dispose: _dispose,
     ConversationItemAction.Refresh: _onRefresh,
-    ConversationItemAction.SendTextMessage: _onSendTextMessage,
+    ConversationItemAction.ActionButton: _onActionButton,
   });
 }
 
 void _initState(Action action, Context<ConversationItemState> ctx) {
+  ctx.state.messagesTextEditingController.addListener(() {
+    var textIsEmpty =
+        ctx.state.messagesTextEditingController.text?.isEmpty == true;
+    if (ctx.state.textIsEmpty != textIsEmpty) {
+      ctx.dispatch(ConversationItemActionCreator.onSetTextIsEmpty(textIsEmpty));
+    }
+  });
   ctx.state.controller.addListener(() {
     if (ctx.state.controller.position.pixels ==
         ctx.state.controller.position.maxScrollExtent) {
@@ -75,28 +82,31 @@ Future _onRefresh(Action action, Context<ConversationItemState> ctx) async {
   }
 }
 
-Future _onSendTextMessage(
+Future _onActionButton(
     Action action, Context<ConversationItemState> ctx) async {
-  if (ctx.state.messagesTextEditingController.text?.isEmpty == true) {
-    return;
-  }
-  var message = await jmessage.createMessage(
-      type: JMMessageType.text,
-      targetType: ctx.state.conversationInfo.target.targetType,
-      text: ctx.state.messagesTextEditingController.text,
-      extras: {"key1": "value1"});
-  try {
-    JMTextMessage msg = await jmessage.sendMessage(
-      message: message,
-    );
-    ctx.state.messagesTextEditingController.clear();
-    //想滑动到底部 但没实现
+  if (ctx.state.textIsEmpty) {
+  } else {
+    if (ctx.state.messagesTextEditingController.text?.isEmpty == true) {
+      return;
+    }
+    var message = await jmessage.createMessage(
+        type: JMMessageType.text,
+        targetType: ctx.state.conversationInfo.target.targetType,
+        text: ctx.state.messagesTextEditingController.text,
+        extras: {"key1": "value1"});
+    try {
+      JMTextMessage msg = await jmessage.sendMessage(
+        message: message,
+      );
+      ctx.state.messagesTextEditingController.clear();
+      //想滑动到底部 但没实现
 //  ctx.state.controller.jumpTo(ctx.state.controller.position.maxScrollExtent);
-    ctx.dispatch(ConversationItemActionCreator.onAddSendMessage(msg));
-    ctx.state.listKey.currentState.insertItem(0);
-  } on PlatformException catch (e) {
-    if (e.code == "898002") {
-      showToast("该用户未注册聊天功能");
+      ctx.dispatch(ConversationItemActionCreator.onAddSendMessage(msg));
+      ctx.state.listKey.currentState.insertItem(0);
+    } on PlatformException catch (e) {
+      if (e.code == "898002") {
+        showToast("该用户未注册聊天功能");
+      }
     }
   }
 }

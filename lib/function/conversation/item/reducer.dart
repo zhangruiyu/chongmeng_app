@@ -9,6 +9,7 @@ Reducer<ConversationItemState> buildReducer() {
       ConversationItemAction.AddMessage: _onAddMessage,
       ConversationItemAction.AddAllMessage: _onAddAllMessage,
       ConversationItemAction.AddSendMessage: _onAddSendMessage,
+      ConversationItemAction.SetTextIsEmpty: _onSetTextIsEmpty,
     },
   );
 }
@@ -38,5 +39,12 @@ ConversationItemState _onAddAllMessage(
     ..messages = (List.from(newState.messages)
       ..insertAll(newState.messages.length, action.payload));
   newState.localIndex = newState.localIndex + 1;
+  return newState;
+}
+
+ConversationItemState _onSetTextIsEmpty(
+    ConversationItemState state, Action action) {
+  final ConversationItemState newState = state.clone()
+    ..textIsEmpty = action.payload;
   return newState;
 }
