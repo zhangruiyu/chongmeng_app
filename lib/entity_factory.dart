@@ -18,6 +18,7 @@ import 'package:chongmeng/function/my_pet/model/pet_entity.dart';
 import 'package:chongmeng/function/product_details/model/share_product_entity.dart';
 import 'package:chongmeng/function/product_details/model/details_entity.dart';
 import 'package:chongmeng/function/main/home/model/home_entity.dart';
+import 'package:chongmeng/function/main/account/model/account_entity.dart';
 import 'package:chongmeng/function/main/community/details/model/comment_entity.dart';
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
 import 'package:chongmeng/function/main/community/dynamic_component/model/dynamic_liked_entity.dart';
@@ -70,6 +71,8 @@ class EntityFactory {
       return DetailsEntity.fromJson(json) as T;
     } else if (T.toString() == "HomeEntity") {
       return HomeEntity.fromJson(json) as T;
+    } else if (T.toString() == "AccountEntity") {
+      return AccountEntity.fromJson(json) as T;
     } else if (T.toString() == "CommentEntity") {
       return CommentEntity.fromJson(json) as T;
     } else if (T.toString() == "DynamicListEntity") {

@@ -119,12 +119,18 @@ Widget buildLoginView(
             children: <Widget>[
               Expanded(
                 child: Column(
-                  children: <Widget>[Text("0"), Text("关注")],
+                  children: <Widget>[
+                    Text(state.data?.subscribersCount?.toString() ?? "*"),
+                    Text("关注")
+                  ],
                 ),
               ),
               Expanded(
                 child: Column(
-                  children: <Widget>[Text("0"), Text("粉丝")],
+                  children: <Widget>[
+                    Text(state.data?.fans?.toString() ?? "*"),
+                    Text("粉丝")
+                  ],
                 ),
               ),
               Expanded(
@@ -134,7 +140,10 @@ Widget buildLoginView(
                         viewService.context, PageConstants.IntegralRecordPage);
                   },
                   child: Column(
-                    children: <Widget>[Text("100"), Text("萌镚")],
+                    children: <Widget>[
+                      Text(state.data?.totalIntegral?.toString() ?? "*"),
+                      Text("萌镚")
+                    ],
                   ),
                 ),
               ),
@@ -145,7 +154,10 @@ Widget buildLoginView(
                         viewService.context, PageConstants.MyPetPage);
                   },
                   child: Column(
-                    children: <Widget>[Text("1"), Text("宠物")],
+                    children: <Widget>[
+                      Text(state.data?.petCount?.toString() ?? "*"),
+                      Text("宠物")
+                    ],
                   ),
                 ),
               )

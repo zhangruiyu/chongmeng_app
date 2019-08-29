@@ -32,12 +32,16 @@ class UserDetailsData {
   String avatar;
   int cityid;
   int provinceid;
+  int fans;
   int areaid;
   int userId;
   bool hasPet;
   String provincename;
   String nickName;
   String tel;
+  int subscribersCount;
+  int totalIntegral;
+  int petCount;
 
   UserDetailsData(
       {this.areaname,
@@ -47,12 +51,16 @@ class UserDetailsData {
       this.avatar,
       this.cityid,
       this.provinceid,
+      this.fans,
       this.areaid,
       this.userId,
       this.hasPet,
       this.provincename,
       this.nickName,
-      this.tel});
+      this.tel,
+      this.subscribersCount,
+      this.totalIntegral,
+      this.petCount});
 
   UserDetailsData.fromJson(Map<String, dynamic> json) {
     areaname = json['areaname'];
@@ -62,12 +70,16 @@ class UserDetailsData {
     avatar = json['avatar'];
     cityid = json['cityid'];
     provinceid = json['provinceid'];
+    fans = json['fans'];
     areaid = json['areaid'];
     userId = json['user_id'];
     hasPet = json['has_pet'];
     provincename = json['provincename'];
     nickName = json['nick_name'];
     tel = json['tel'];
+    subscribersCount = json['subscribers_count'];
+    totalIntegral = json['totalIntegral'];
+    petCount = json['petCount'];
   }
 
   Map<String, dynamic> toJson() {
@@ -79,12 +91,16 @@ class UserDetailsData {
     data['avatar'] = this.avatar;
     data['cityid'] = this.cityid;
     data['provinceid'] = this.provinceid;
+    data['fans'] = this.fans;
     data['areaid'] = this.areaid;
     data['user_id'] = this.userId;
     data['has_pet'] = this.hasPet;
     data['provincename'] = this.provincename;
     data['nick_name'] = this.nickName;
     data['tel'] = this.tel;
+    data['subscribers_count'] = this.subscribersCount;
+    data['totalIntegral'] = this.totalIntegral;
+    data['petCount'] = this.petCount;
     return data;
   }
 }
