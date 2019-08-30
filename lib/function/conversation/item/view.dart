@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
@@ -43,8 +45,8 @@ Widget buildView(
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0, left: 10.0),
                   child: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(
-                        message.from.avatarThumbPath),
+                    backgroundImage:
+                        FileImage(File(message.from.avatarThumbPath)),
                   ),
                 ),
               ]);
@@ -79,34 +81,86 @@ Widget buildView(
                     ),
                   ],
                 ));
-              }
-
-              return message is JMTextMessage
-                  ? SizeTransition(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            top: 8.0, bottom: 8.0, left: 10.0, right: 10.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: message.isSend
-                              ? MainAxisAlignment.end
-                              : MainAxisAlignment.start,
-                          children: message.isSend
-                              ? widgets.reversed.toList()
-                              : widgets,
+              } else if (message is JMImageMessage) {
+                widgets.add(Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    if (!message.isSend)
+                      Container(
+                        padding: EdgeInsets.only(bottom: 10.0),
+                        child: Text(
+                          message.from.nickname,
+                          style: TextStyle(fontSize: 12.0),
                         ),
                       ),
-                      sizeFactor: animation,
-                    )
-                  : null;
+                    LimitedBox(
+                      maxWidth: WindowUtils.getScreenWidth() * 0.3,
+                      child: Container(
+                        /*padding: EdgeInsets.symmetric(
+                            vertical: 5.0, horizontal: 5.0),*/
+                        decoration: BoxDecoration(
+                          color: of.accentColor,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7.0),
+                          ),
+                        ),
+                        child: Image.asset(
+                          message.thumbPath,
+                        ),
+                      ),
+                    ),
+                  ],
+                ));
+              }
+
+              return SizeTransition(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      top: 8.0, bottom: 8.0, left: 10.0, right: 10.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: message.isSend
+                        ? MainAxisAlignment.end
+                        : MainAxisAlignment.start,
+                    children:
+                        message.isSend ? widgets.reversed.toList() : widgets,
+                  ),
+                ),
+                sizeFactor: animation,
+              );
             },
             reverse: true,
             initialItemCount: state.messages?.length ?? 0,
           ),
         ),
-        buildBottom(state, dispatch, viewService)
+        buildBottom(state, dispatch, viewService),
+        AnimatedContainer(
+          height: state.isOpenActionPanel ? 60.0 : 0.0,
+          child: buildBottomAction(state, dispatch, viewService),
+          duration: Duration(milliseconds: 300),
+        )
       ],
     ),
+  );
+}
+
+Widget buildBottomAction(
+    ConversationItemState state, Dispatch dispatch, ViewService viewService) {
+  return Row(
+    children: <Widget>[
+      RaisedButton(
+        child: Text("拍照"),
+        onPressed: () {
+          dispatch(ConversationItemActionCreator.onSendImageMessage("camera"));
+        },
+      ),
+      RaisedButton(
+        child: Text("相册选择"),
+        onPressed: () {
+          dispatch(ConversationItemActionCreator.onSendImageMessage("gallery"));
+        },
+      ),
+    ],
   );
 }
 
@@ -136,7 +190,12 @@ Widget buildBottom(
           child: new IconButton(
               key: ValueKey(state.textIsEmpty),
               padding: const EdgeInsets.all(0.0),
-              icon: state.textIsEmpty ? Icon(Icons.send) : Icon(Icons.add),
+              icon: state.textIsEmpty
+                  ? Icon(Icons.add)
+                  : Icon(
+                      Icons.send,
+                      color: Theme.of(viewService.context).accentColor,
+                    ),
               onPressed: () {
                 dispatch(ConversationItemActionCreator.onActionButton());
               }),

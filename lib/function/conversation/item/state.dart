@@ -12,12 +12,14 @@ class ConversationItemState implements Cloneable<ConversationItemState> {
   List<JMNormalMessage> sendMessages;
   JMConversationInfo conversationInfo;
   bool textIsEmpty;
+  bool isOpenActionPanel;
   //本地消息行数
   int localIndex;
 
   @override
   ConversationItemState clone() {
     return ConversationItemState()
+      ..isOpenActionPanel = isOpenActionPanel
       ..textIsEmpty = textIsEmpty
       ..sendMessages = sendMessages
       ..localIndex = localIndex
@@ -32,6 +34,7 @@ class ConversationItemState implements Cloneable<ConversationItemState> {
 
 ConversationItemState initState(Map<String, dynamic> args) {
   return ConversationItemState()
+    ..isOpenActionPanel = false
     ..textIsEmpty = true
     ..localIndex = 1
     ..sendMessages = []

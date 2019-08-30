@@ -6,20 +6,12 @@ import 'state.dart';
 Reducer<ConversationItemState> buildReducer() {
   return asReducer(
     <Object, Reducer<ConversationItemState>>{
-      ConversationItemAction.AddMessage: _onAddMessage,
       ConversationItemAction.AddAllMessage: _onAddAllMessage,
       ConversationItemAction.AddSendMessage: _onAddSendMessage,
       ConversationItemAction.SetTextIsEmpty: _onSetTextIsEmpty,
+      ConversationItemAction.IsOpenActionPanel: _onIsOpenActionPanel,
     },
   );
-}
-
-ConversationItemState _onAddMessage(
-    ConversationItemState state, Action action) {
-  final ConversationItemState newState = state.clone();
-  newState
-    ..messages = (List.from(newState.messages)..insert(0, action.payload));
-  return newState;
 }
 
 ConversationItemState _onAddSendMessage(
@@ -46,5 +38,12 @@ ConversationItemState _onSetTextIsEmpty(
     ConversationItemState state, Action action) {
   final ConversationItemState newState = state.clone()
     ..textIsEmpty = action.payload;
+  return newState;
+}
+
+ConversationItemState _onIsOpenActionPanel(
+    ConversationItemState state, Action action) {
+  final ConversationItemState newState = state.clone()
+    ..isOpenActionPanel = action.payload;
   return newState;
 }

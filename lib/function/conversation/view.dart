@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/function/conversation/item/page.dart';
@@ -62,7 +64,7 @@ Widget buildView(
                     alignment: AlignmentDirectional.topEnd,
                     children: <Widget>[
                       CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(avatar),
+                        backgroundImage: FileImage(File(avatar)),
                       ),
                       if (conversation.unreadCount > 0)
                         Container(

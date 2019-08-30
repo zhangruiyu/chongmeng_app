@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/conversation/item/page.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/utils/jmessage_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
 import 'package:oktoast/oktoast.dart';
@@ -16,6 +19,7 @@ Effect<ConversationItemState> buildEffect() {
     Lifecycle.dispose: _dispose,
     ConversationItemAction.Refresh: _onRefresh,
     ConversationItemAction.ActionButton: _onActionButton,
+    ConversationItemAction.SendImageMessage: _onSendImageMessage,
   });
 }
 
@@ -82,10 +86,29 @@ Future _onRefresh(Action action, Context<ConversationItemState> ctx) async {
   }
 }
 
+void _onSendImageMessage(
+    Action action, Context<ConversationItemState> ctx) async {
+  File image;
+  if (action.payload == "camera")
+    image = await ImagePicker.pickImage(source: ImageSource.camera);
+  else
+    image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+  var message = await jmessage.createMessage(
+      type: JMMessageType.image,
+      targetType: ctx.state.conversationInfo.target.targetType,
+      path: image.path,
+      extras: {"key1": "value1"});
+  sendMessage(message, ctx);
+}
+
 Future _onActionButton(
     Action action, Context<ConversationItemState> ctx) async {
   if (ctx.state.textIsEmpty) {
+    ctx.dispatch(ConversationItemActionCreator.onIsOpenActionPanel(
+        !ctx.state.isOpenActionPanel));
   } else {
+    //发送文字消息
     if (ctx.state.messagesTextEditingController.text?.isEmpty == true) {
       return;
     }
@@ -94,24 +117,29 @@ Future _onActionButton(
         targetType: ctx.state.conversationInfo.target.targetType,
         text: ctx.state.messagesTextEditingController.text,
         extras: {"key1": "value1"});
-    try {
-      JMTextMessage msg = await jmessage.sendMessage(
-        message: message,
-      );
-      ctx.state.messagesTextEditingController.clear();
-      //想滑动到底部 但没实现
-//  ctx.state.controller.jumpTo(ctx.state.controller.position.maxScrollExtent);
-      ctx.dispatch(ConversationItemActionCreator.onAddSendMessage(msg));
-      ctx.state.listKey.currentState.insertItem(0);
-    } on PlatformException catch (e) {
-      if (e.code == "898002") {
-        showToast("该用户未注册聊天功能");
-      }
-    }
+    sendMessage(message, ctx);
+    ctx.state.messagesTextEditingController.clear();
   }
 }
 
 ////设置已读
 void resetUnreadMessageCount(Context<ConversationItemState> ctx) {
   JMessageUtils.resetUnreadMessageCount(ctx.state.conversationInfo.target);
+}
+
+Future sendMessage(message, Context<ConversationItemState> ctx) async {
+  try {
+    JMNormalMessage msg = await jmessage.sendMessage(
+      message: message,
+    );
+    //想滑动到底部 但没实现
+    println(msg);
+//  ctx.state.controller.jumpTo(ctx.state.controller.position.maxScrollExtent);
+    ctx.dispatch(ConversationItemActionCreator.onAddSendMessage(msg));
+    ctx.state.listKey.currentState.insertItem(0);
+  } on PlatformException catch (e) {
+    if (e.code == "898002") {
+      showToast("该用户未注册聊天功能");
+    }
+  }
 }

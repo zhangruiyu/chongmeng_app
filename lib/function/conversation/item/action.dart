@@ -7,7 +7,9 @@ enum ConversationItemAction {
   Refresh,
   ActionButton, //功能按钮 发送消息或者弹起功能菜单
   AddSendMessage, //发送的新数据 要单独记录 防止查找本地数据出现角标问题,
-  SetTextIsEmpty
+  SetTextIsEmpty,
+  IsOpenActionPanel, //是否开启功能面板
+  SendImageMessage,
 }
 
 class ConversationItemActionCreator {
@@ -33,5 +35,14 @@ class ConversationItemActionCreator {
 
   static Action onSetTextIsEmpty(bool textIsEmpty) {
     return Action(ConversationItemAction.SetTextIsEmpty, payload: textIsEmpty);
+  }
+
+  static Action onIsOpenActionPanel(bool isOpenActionPanel) {
+    return Action(ConversationItemAction.IsOpenActionPanel,
+        payload: isOpenActionPanel);
+  }
+
+  static Action onSendImageMessage(String type) {
+    return Action(ConversationItemAction.SendImageMessage, payload: type);
   }
 }

@@ -220,8 +220,8 @@ class NavigatorHelper {
           .map((item) {
         return item as JMNormalMessage;
       }).toList();
-//      println(
-//          "初始化 ${messages.map((itemMessage) => (itemMessage as JMTextMessage).text).toString()}");
+      println(
+          "初始化 ${messages.map((itemMessage) => (itemMessage).toJson()).toString()}");
       return Navigator.pushNamed(context, PageConstants.ConversationItemPage,
           arguments: {
             'messages': messages,
