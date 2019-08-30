@@ -173,6 +173,18 @@ Widget buildBottomAction(
           numRecommended: 10,
           onEmojiSelected: (emoji, category) {
             print(emoji);
+            var end = state.messagesTextEditingController.selection.end;
+            if (state.messagesTextEditingController?.text?.isEmpty == true) {
+              state.messagesTextEditingController.text = emoji.emoji;
+            } else {
+              var text = state.messagesTextEditingController.text;
+              String startText = text.substring(0, end);
+              String endText = text.substring(end, text.length);
+              state.messagesTextEditingController.text =
+                  startText + emoji.emoji + endText;
+            }
+            state.messagesTextEditingController.selection =
+                TextSelection.collapsed(offset: end + emoji.emoji.length);
           },
         )
       : state.bottomAction == ConversationItemState.normal
