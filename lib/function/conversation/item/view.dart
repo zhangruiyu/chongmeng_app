@@ -110,8 +110,15 @@ Widget buildView(
                               Radius.circular(7.0),
                             ),
                           ),
-                          child: Image.asset(
-                            message.thumbPath,
+                          child: GestureDetector(
+                            onTap: () {
+                              dispatch(
+                                  ConversationItemActionCreator.onReviewPic(
+                                      message));
+                            },
+                            child: Image.asset(
+                              message.thumbPath,
+                            ),
                           ),
                         ),
                       ),

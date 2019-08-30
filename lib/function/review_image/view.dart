@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
@@ -18,7 +20,9 @@ Widget buildView(
       builder: (BuildContext context, int index) {
         var imageData = state.images[index];
         return PhotoViewGalleryPageOptions(
-          imageProvider: CachedNetworkImageProvider(imageData),
+          imageProvider: imageData.startsWith("http")
+              ? CachedNetworkImageProvider(imageData)
+              : FileImage(File(imageData)),
           initialScale: PhotoViewComputedScale.contained * 0.8,
 //            heroTag: galleryItems[index].id,
         );

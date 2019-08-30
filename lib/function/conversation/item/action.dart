@@ -10,6 +10,7 @@ enum ConversationItemAction {
   SetTextIsEmpty,
   SetBottomAction, //功能面板类型 null为不展示
   SendImageMessage,
+  ReviewPic,
 }
 
 class ConversationItemActionCreator {
@@ -44,5 +45,9 @@ class ConversationItemActionCreator {
 
   static Action onSendImageMessage(String type) {
     return Action(ConversationItemAction.SendImageMessage, payload: type);
+  }
+
+  static Action onReviewPic(JMImageMessage messageId) {
+    return Action(ConversationItemAction.ReviewPic, payload: messageId);
   }
 }

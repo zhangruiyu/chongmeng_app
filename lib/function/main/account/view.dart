@@ -173,7 +173,7 @@ Widget buildLoginView(
               );
             });
           },
-          title: Text("我的发布领养"),
+          title: Text("我发布的领养"),
           trailing: new Icon(
             Icons.keyboard_arrow_right,
             size: 30.0,
