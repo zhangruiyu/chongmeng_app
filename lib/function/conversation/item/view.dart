@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
 import 'package:sliver_animated_list/sliver_animated_list.dart';
-
+import 'dart:math';
 import 'action.dart';
 import 'state.dart';
 
@@ -94,7 +94,7 @@ Widget buildView(
                         ),
                       ),
                     LimitedBox(
-                      maxWidth: WindowUtils.getScreenWidth() * 0.3,
+                      maxWidth: max(100.0, WindowUtils.getScreenWidth() * 0.3),
                       child: Container(
                         /*padding: EdgeInsets.symmetric(
                             vertical: 5.0, horizontal: 5.0),*/
