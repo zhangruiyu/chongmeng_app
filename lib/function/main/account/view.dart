@@ -168,6 +168,23 @@ Widget buildLoginView(
           onTap: () {
             UserHelper.loginCheck(viewService.context, () {
               Navigator.pushNamed(
+                viewService.context,
+                PageConstants.MyAdoptionPage,
+              );
+            });
+          },
+          title: Text("我的发布领养"),
+          trailing: new Icon(
+            Icons.keyboard_arrow_right,
+            size: 30.0,
+            color: const Color(0x40808080),
+          ),
+        ),
+        VerticalLine(),
+        ListTile(
+          onTap: () {
+            UserHelper.loginCheck(viewService.context, () {
+              Navigator.pushNamed(
                   viewService.context, PageConstants.ShippingAddressPage,
                   arguments: {"type": ShippingAddressState.SEE});
             });
@@ -214,7 +231,7 @@ Widget buildLoginView(
         VerticalLine(
           height: 10.0,
         ),
-        Container(
+        /* Container(
           margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
@@ -226,7 +243,7 @@ Widget buildLoginView(
                   "https://img.alicdn.com/tfscom/i4/2246956324/O1CN01NYCDli1waRH6UqMg0_!!0-item_pic.jpg",
             ),
           ),
-        ),
+        ),*/
         Expanded(
           child: Container(),
         ),

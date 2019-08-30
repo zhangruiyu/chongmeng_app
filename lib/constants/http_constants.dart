@@ -73,6 +73,10 @@ class HttpConstants {
   static String get RecipeList => "app/recipe/list"; //食谱
   static String get AdoptionAdd => "/app/adoption/common/add"; //添加领养
   static String get AdoptionList => "/app/adoption/list"; //领养列表
+  static String get MyAdoptionList =>
+      "/app/adoption/common/myAdoption"; //我的发布领养列表
+  static String get UpdateAdoptionState =>
+      "/app/adoption/common/updateAdoptionState"; //更改领养状态
   static String get PetList => "/app/pet/common/petList"; //当前用户宠物列表
 }
 

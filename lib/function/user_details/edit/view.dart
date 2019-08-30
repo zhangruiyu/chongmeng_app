@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
@@ -24,7 +25,10 @@ Widget buildView(
             },
             child: Container(
               alignment: Alignment.center,
-              child: Text("修改"),
+              child: Text(
+                "修改",
+                style: TextStyle(color: colorWhite),
+              ),
             ),
           ),
         )

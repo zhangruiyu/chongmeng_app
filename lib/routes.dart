@@ -1,3 +1,4 @@
+import 'package:chongmeng/function/adoption/my_adoption/page.dart';
 import 'package:chongmeng/function/app_info/page.dart';
 import 'package:chongmeng/function/conversation/page.dart';
 import 'package:chongmeng/function/edit_text/page.dart';
@@ -94,6 +95,7 @@ class PageConstants {
   static String get UserDetailsEditPage =>
       "cm://UserDetailsEditPage"; //用户信息修改页面
   static String get SharePage => "cm://SharePage"; //分享弹框
+  static String get MyAdoptionPage => "cm://MyAdoption"; //我发布的领养宠物
 }
 
 final AbstractRoutes routes = PageRoutes(
@@ -137,6 +139,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.ConversationPage: ConversationPage(),
     PageConstants.ConversationItemPage: ConversationItemPage(),
     PageConstants.SharePage: SharePage(),
+    PageConstants.MyAdoptionPage: MyAdoptionPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

@@ -6,6 +6,7 @@ import 'package:chongmeng/function/shipping_address/model/shipping_address_entit
 import 'package:chongmeng/function/auto/model/login_entity.dart';
 import 'package:chongmeng/function/recipe/model/recipe_entity.dart';
 import 'package:chongmeng/function/my_order/model/my_order_entity.dart';
+import 'package:chongmeng/function/adoption/my_adoption/model/my_adoption_entity.dart';
 import 'package:chongmeng/function/adoption/model/adoption_entity.dart';
 import 'package:chongmeng/function/search/model/search_result_entity.dart';
 import 'package:chongmeng/function/tally/entity/current_user_tally_entity.dart';
@@ -47,6 +48,8 @@ class EntityFactory {
       return RecipeEntity.fromJson(json) as T;
     } else if (T.toString() == "MyOrderEntity") {
       return MyOrderEntity.fromJson(json) as T;
+    } else if (T.toString() == "MyAdoptionEntity") {
+      return MyAdoptionEntity.fromJson(json) as T;
     } else if (T.toString() == "AdoptionEntity") {
       return AdoptionEntity.fromJson(json) as T;
     } else if (T.toString() == "SearchResultEntity") {
