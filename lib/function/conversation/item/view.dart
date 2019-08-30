@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
+import 'package:chongmeng/utils/keyboard_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:emoji_picker/emoji_picker.dart';
@@ -172,19 +173,8 @@ Widget buildBottomAction(
           ],
           numRecommended: 10,
           onEmojiSelected: (emoji, category) {
-            print(emoji);
-            var end = state.messagesTextEditingController.selection.end;
-            if (state.messagesTextEditingController?.text?.isEmpty == true) {
-              state.messagesTextEditingController.text = emoji.emoji;
-            } else {
-              var text = state.messagesTextEditingController.text;
-              String startText = text.substring(0, end);
-              String endText = text.substring(end, text.length);
-              state.messagesTextEditingController.text =
-                  startText + emoji.emoji + endText;
-            }
-            state.messagesTextEditingController.selection =
-                TextSelection.collapsed(offset: end + emoji.emoji.length);
+            KeyboardUtils.insertText(
+                state.messagesTextEditingController, emoji.emoji);
           },
         )
       : state.bottomAction == ConversationItemState.normal
@@ -230,6 +220,7 @@ Widget buildBottom(
           hoverColor: colorWhite,
           icon: Icon(MdiIcons.stickerEmoji),
           onPressed: () {
+            KeyboardUtils.hide();
             dispatch(ConversationItemActionCreator.onSetBottomAction(
                 state.bottomAction == ConversationItemState.emoji
                     ? ConversationItemState.normal
