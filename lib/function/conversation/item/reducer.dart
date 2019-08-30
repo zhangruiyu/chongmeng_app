@@ -9,7 +9,7 @@ Reducer<ConversationItemState> buildReducer() {
       ConversationItemAction.AddAllMessage: _onAddAllMessage,
       ConversationItemAction.AddSendMessage: _onAddSendMessage,
       ConversationItemAction.SetTextIsEmpty: _onSetTextIsEmpty,
-      ConversationItemAction.IsOpenActionPanel: _onIsOpenActionPanel,
+      ConversationItemAction.SetBottomAction: _onSetBottomAction,
     },
   );
 }
@@ -41,9 +41,9 @@ ConversationItemState _onSetTextIsEmpty(
   return newState;
 }
 
-ConversationItemState _onIsOpenActionPanel(
+ConversationItemState _onSetBottomAction(
     ConversationItemState state, Action action) {
   final ConversationItemState newState = state.clone()
-    ..isOpenActionPanel = action.payload;
+    ..bottomAction = action.payload;
   return newState;
 }

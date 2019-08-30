@@ -6,10 +6,12 @@ import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
+import 'package:emoji_picker/emoji_picker.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sliver_animated_list/sliver_animated_list.dart';
 import 'dart:math';
 import 'action.dart';
@@ -19,7 +21,7 @@ Widget buildView(
     ConversationItemState state, Dispatch dispatch, ViewService viewService) {
   var of = Theme.of(viewService.context);
   return Scaffold(
-    backgroundColor: colorf3f3f3,
+    backgroundColor: colorWhite,
     appBar: Toolbar(
       title: Text(
         state.conversationInfo.target.nickname,
@@ -29,113 +31,124 @@ Widget buildView(
     body: Column(
       children: <Widget>[
         Expanded(
-          child: AnimatedList(
-            key: state.listKey,
-            controller: state.controller,
-            itemBuilder:
-                (BuildContext context, int index, Animation animation) {
-              /*  if (index == state.messages.length - 1) {
-                dispatch(ConversationItemActionCreator.onRefresh(null));
-              }*/
-              var message = state.messages[index];
-              println(
-                  "message.from.avatarThumbPath 4{${message.from.avatarThumbPath}");
-              List<Widget> widgets = [];
-              widgets.addAll([
-                Padding(
-                  padding: const EdgeInsets.only(right: 10.0, left: 10.0),
-                  child: CircleAvatar(
-                    backgroundImage:
-                        FileImage(File(message.from.avatarThumbPath)),
+          child: Container(
+            color: colorf3f3f3,
+            child: AnimatedList(
+              key: state.listKey,
+              controller: state.controller,
+              itemBuilder:
+                  (BuildContext context, int index, Animation animation) {
+                /*  if (index == state.messages.length - 1) {
+                  dispatch(ConversationItemActionCreator.onRefresh(null));
+                }*/
+                var message = state.messages[index];
+                println(
+                    "message.from.avatarThumbPath 4{${message.from.avatarThumbPath}");
+                List<Widget> widgets = [];
+                widgets.addAll([
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0, left: 10.0),
+                    child: CircleAvatar(
+                      backgroundImage:
+                          FileImage(File(message.from.avatarThumbPath)),
+                    ),
                   ),
-                ),
-              ]);
-              if (message is JMTextMessage) {
-                widgets.add(Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    if (!message.isSend)
-                      Container(
-                        padding: EdgeInsets.only(bottom: 10.0),
-                        child: Text(
-                          message.from.nickname,
-                          style: TextStyle(fontSize: 12.0),
-                        ),
-                      ),
-                    LimitedBox(
-                      maxWidth: WindowUtils.getScreenWidth() * 0.6,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 8.0, horizontal: 10.0),
-                        decoration: BoxDecoration(
-                          color: of.accentColor,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(7.0),
-                          ),
-                        ),
-                        child: Text(
-                          message.text,
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                    ),
-                  ],
-                ));
-              } else if (message is JMImageMessage) {
-                widgets.add(Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    if (!message.isSend)
-                      Container(
-                        padding: EdgeInsets.only(bottom: 10.0),
-                        child: Text(
-                          message.from.nickname,
-                          style: TextStyle(fontSize: 12.0),
-                        ),
-                      ),
-                    LimitedBox(
-                      maxWidth: max(100.0, WindowUtils.getScreenWidth() * 0.3),
-                      child: Container(
-                        /*padding: EdgeInsets.symmetric(
-                            vertical: 5.0, horizontal: 5.0),*/
-                        decoration: BoxDecoration(
-                          color: of.accentColor,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(7.0),
-                          ),
-                        ),
-                        child: Image.asset(
-                          message.thumbPath,
-                        ),
-                      ),
-                    ),
-                  ],
-                ));
-              }
-
-              return SizeTransition(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      top: 8.0, bottom: 8.0, left: 10.0, right: 10.0),
-                  child: Row(
+                ]);
+                if (message is JMTextMessage) {
+                  widgets.add(Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: message.isSend
-                        ? MainAxisAlignment.end
-                        : MainAxisAlignment.start,
-                    children:
-                        message.isSend ? widgets.reversed.toList() : widgets,
+                    children: <Widget>[
+                      if (!message.isSend)
+                        Container(
+                          padding: EdgeInsets.only(bottom: 10.0),
+                          child: Text(
+                            message.from.nickname,
+                            style: TextStyle(fontSize: 12.0),
+                          ),
+                        ),
+                      LimitedBox(
+                        maxWidth: WindowUtils.getScreenWidth() * 0.6,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 10.0),
+                          decoration: BoxDecoration(
+                            color: of.accentColor,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(7.0),
+                            ),
+                          ),
+                          child: Text(
+                            message.text,
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ));
+                } else if (message is JMImageMessage) {
+                  widgets.add(Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      if (!message.isSend)
+                        Container(
+                          padding: EdgeInsets.only(bottom: 10.0),
+                          child: Text(
+                            message.from.nickname,
+                            style: TextStyle(fontSize: 12.0),
+                          ),
+                        ),
+                      LimitedBox(
+                        maxWidth:
+                            max(100.0, WindowUtils.getScreenWidth() * 0.3),
+                        child: Container(
+                          /*padding: EdgeInsets.symmetric(
+                              vertical: 5.0, horizontal: 5.0),*/
+                          decoration: BoxDecoration(
+                            color: of.accentColor,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(7.0),
+                            ),
+                          ),
+                          child: Image.asset(
+                            message.thumbPath,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ));
+                }
+
+                return SizeTransition(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 8.0, bottom: 8.0, left: 10.0, right: 10.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: message.isSend
+                          ? MainAxisAlignment.end
+                          : MainAxisAlignment.start,
+                      children:
+                          message.isSend ? widgets.reversed.toList() : widgets,
+                    ),
                   ),
-                ),
-                sizeFactor: animation,
-              );
-            },
-            reverse: true,
-            initialItemCount: state.messages?.length ?? 0,
+                  sizeFactor: animation,
+                );
+              },
+              reverse: true,
+              initialItemCount: state.messages?.length ?? 0,
+            ),
           ),
         ),
         buildBottom(state, dispatch, viewService),
+        VerticalLine(
+          height: 1.0,
+        ),
         AnimatedContainer(
-          height: state.isOpenActionPanel ? 60.0 : 0.0,
+          height: state.bottomAction != ConversationItemState.normal
+              ? state.bottomAction == ConversationItemState.action
+                  ? 60.0
+                  : 211.0
+              : 0.0,
           child: buildBottomAction(state, dispatch, viewService),
           duration: Duration(milliseconds: 300),
         )
@@ -146,28 +159,47 @@ Widget buildView(
 
 Widget buildBottomAction(
     ConversationItemState state, Dispatch dispatch, ViewService viewService) {
-  return Row(
-    children: <Widget>[
-      RaisedButton(
-        child: Text("拍照"),
-        onPressed: () {
-          dispatch(ConversationItemActionCreator.onSendImageMessage("camera"));
-        },
-      ),
-      RaisedButton(
-        child: Text("相册选择"),
-        onPressed: () {
-          dispatch(ConversationItemActionCreator.onSendImageMessage("gallery"));
-        },
-      ),
-    ],
-  );
+  return state.bottomAction == ConversationItemState.emoji
+      ? EmojiPicker(
+          bgColor: colorWhite,
+          rows: 3,
+          columns: 7,
+          recommendKeywords: [
+            'Grinning Face',
+            'Grinning Face With Big Eyes',
+            'Grinning Face With Smiling Eyes',
+            'Beaming Face With Smiling Eyes',
+          ],
+          numRecommended: 10,
+          onEmojiSelected: (emoji, category) {
+            print(emoji);
+          },
+        )
+      : state.bottomAction == ConversationItemState.normal
+          ? null
+          : Row(
+              children: <Widget>[
+                RaisedButton(
+                  child: Text("拍照"),
+                  onPressed: () {
+                    dispatch(ConversationItemActionCreator.onSendImageMessage(
+                        "camera"));
+                  },
+                ),
+                RaisedButton(
+                  child: Text("相册选择"),
+                  onPressed: () {
+                    dispatch(ConversationItemActionCreator.onSendImageMessage(
+                        "gallery"));
+                  },
+                ),
+              ],
+            );
 }
 
 Widget buildBottom(
     ConversationItemState state, Dispatch dispatch, ViewService viewService) {
   return Container(
-    color: colorWhite,
     child: Row(
       children: <Widget>[
         Expanded(
@@ -181,6 +213,16 @@ Widget buildBottom(
               hintText: "想跟TA说点什么呢",
             ),
           ),
+        ),
+        IconButton(
+          hoverColor: colorWhite,
+          icon: Icon(MdiIcons.stickerEmoji),
+          onPressed: () {
+            dispatch(ConversationItemActionCreator.onSetBottomAction(
+                state.bottomAction == ConversationItemState.emoji
+                    ? ConversationItemState.normal
+                    : ConversationItemState.emoji));
+          },
         ),
         AnimatedSwitcher(
           transitionBuilder: (child, anim) {

@@ -105,8 +105,17 @@ void _onSendImageMessage(
 Future _onActionButton(
     Action action, Context<ConversationItemState> ctx) async {
   if (ctx.state.textIsEmpty) {
-    ctx.dispatch(ConversationItemActionCreator.onIsOpenActionPanel(
-        !ctx.state.isOpenActionPanel));
+    println(ConversationItemState.action);
+    if (ctx.state.bottomAction == ConversationItemState.normal) {
+      ctx.dispatch(ConversationItemActionCreator.onSetBottomAction(
+          ConversationItemState.action));
+    } else if (ctx.state.bottomAction == ConversationItemState.action) {
+      ctx.dispatch(ConversationItemActionCreator.onSetBottomAction(
+          ConversationItemState.normal));
+    } else if (ctx.state.bottomAction == ConversationItemState.emoji) {
+      ctx.dispatch(ConversationItemActionCreator.onSetBottomAction(
+          ConversationItemState.action));
+    }
   } else {
     //发送文字消息
     if (ctx.state.messagesTextEditingController.text?.isEmpty == true) {
