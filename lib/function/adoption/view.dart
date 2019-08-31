@@ -180,7 +180,68 @@ Widget buildItem(AdoptionState state, Dispatch dispatch,
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          VerticalLine()
+          Row(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15.0),
+                    ),
+                    color: of.accentColor),
+                margin: EdgeInsets.only(right: 10.0),
+                padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 2.0),
+                  child: Text(
+                    data.adoptionType == 0
+                        ? "无偿"
+                        : data.adoptionType == 1
+                            ? "押金领养"
+                            : data.adoptionType == 2 ? "有偿领养" : "",
+                    style: TextStyle(fontSize: 11.0, color: colorWhite),
+                  ),
+                ),
+              ),
+              if (data.adoptionType != 0)
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15.0),
+                      ),
+                      color: of.accentColor),
+                  margin: EdgeInsets.only(right: 10.0),
+                  padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 2.0),
+                    child: Text(
+                      data.money.toString() + "元",
+                      style: TextStyle(fontSize: 11.0, color: colorWhite),
+                    ),
+                  ),
+                ),
+              if (data.adoptionType == 1)
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15.0),
+                      ),
+                      color: of.accentColor),
+                  margin: EdgeInsets.only(right: 10.0),
+                  padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 2.0),
+                    child: Text(
+                      data.cashPledgeDeadline + "内归还押金",
+                      style: TextStyle(fontSize: 11.0, color: colorWhite),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 15.0),
+            child: VerticalLine(),
+          )
         ],
       ),
     ),
