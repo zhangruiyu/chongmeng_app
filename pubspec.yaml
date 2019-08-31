@@ -53,7 +53,7 @@ dependencies:
   dragablegridview_flutter: any
   photo_view: ^0.4.2
   oktoast: ^2.2.0
-#  extended_text_field: any
+  #  extended_text_field: any
   tencent_cos:
     path: ./plugins/tencent_cos
   umengshare:
@@ -65,7 +65,7 @@ dependencies:
   flutter_cupertino_date_picker: ^1.0.4
   table_calendar: ^1.2.3
   like_button: ^0.1.7
-#  nautilus: ^0.0.7
+  #  nautilus: ^0.0.7
   flutter_vertical_marquee:
     git:
       url: https://github.com/zhangruiyu/flutter_vertical_marquee.git
@@ -96,4 +96,6 @@ flutter:
     - assets/qq_zone.png
     - assets/wechat.png
     - assets/wechat_time_line.png
+    - assets/update_page_bg.png
+    - assets/update_page_cancle.png
 

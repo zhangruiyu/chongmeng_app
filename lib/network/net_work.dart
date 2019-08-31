@@ -72,13 +72,14 @@ class RequestClient {
     String contentType = "application/x-www-form-urlencoded",
     bool ignoreToast = false,
   }) async {
+    var globalState = GlobalStore.store.getState();
     BaseOptions baseOptions = new BaseOptions(
         baseUrl: HttpConstants.BaseUrl,
         connectTimeout: 10000,
         receiveTimeout: 10000,
         headers: {
           'os': Platform.operatingSystem,
-//          'v': packageInfo.version,
+          'version': globalState.packageInfo.version,
           'token': UserHelper.getUserToken(),
         });
 
@@ -91,7 +92,7 @@ class RequestClient {
       dio.interceptors
           .add(LogInterceptor(requestBody: true, responseBody: true)); //开启请求日志
     }
-    var commonParams = {"channel": GlobalStore.store.getState().channel};
+    var commonParams = {"channel": globalState.channel};
     if (queryParameters != null) {
       queryParameters.addAll(commonParams);
     } else {

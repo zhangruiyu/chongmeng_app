@@ -37,6 +37,7 @@ import 'function/signin/page.dart';
 import 'function/splash/page.dart';
 import 'function/tally/add/page.dart';
 import 'function/tally/page.dart';
+import 'function/update/page.dart';
 import 'function/user_details/edit/page.dart';
 import 'function/user_details/page.dart';
 import 'function/webview/page.dart';
@@ -140,6 +141,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.ConversationItemPage: ConversationItemPage(),
     PageConstants.SharePage: SharePage(),
     PageConstants.MyAdoptionPage: MyAdoptionPage(),
+    PageConstants.UpdatePage: UpdatePage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

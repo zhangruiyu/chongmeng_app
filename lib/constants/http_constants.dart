@@ -32,6 +32,7 @@ class HttpConstants {
   static final String CommentList = "app/dynamic/comment/list";
   static final String ThirdLoginAndRegister = "app/auth/thirdLoginAndRegister";
   static final String HomeIndex = "app/main/home/index";
+  static final String Update = "app/main/update";
   static final String AccountIndex = "app/main/common/account/index";
   static final String PeriodEffectiveSign =
       "app/cos/common/periodEffectiveSign";

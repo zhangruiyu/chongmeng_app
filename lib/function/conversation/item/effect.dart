@@ -6,7 +6,7 @@ import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/utils/jmessage_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart' as prefix0;
+import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
@@ -140,11 +140,10 @@ Future _onReviewPic(Action action, Context<ConversationItemState> ctx) async {
     target: jmImageMessage.target.targetType,
     messageId: jmImageMessage.serverMessageId,
   );
-  prefix0.Navigator.pushNamed(ctx.context, PageConstants.ReviewImagePage,
-      arguments: {
-        "images": <String>[result['filePath'].toString()],
-        "index": 0
-      });
+  Navigator.pushNamed(ctx.context, PageConstants.ReviewImagePage, arguments: {
+    "images": <String>[result['filePath'].toString()],
+    "index": 0
+  });
 }
 
 ////设置已读

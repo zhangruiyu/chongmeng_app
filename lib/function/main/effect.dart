@@ -1,3 +1,6 @@
+import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/function/update/model/update_entity.dart';
+import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/helper/permission_helper.dart';
@@ -24,5 +27,15 @@ void _onSkipSelectTalkTypePage(Action action, Context<MainState> ctx) {
 Future _initState(Action action, Context<MainState> ctx) async {
   //加速一键登录预取号
   jverify.preLogin(timeOut: 10000);
+  (await RequestClient.request<UpdateEntity>(ctx.context, HttpConstants.Update))
+      .yes((value) {
+    showDialog(
+        context: ctx.context,
+        builder: (context) {
+          return routes
+              .buildPage(PageConstants.UpdatePage, {"data": value.data});
+        });
+  });
+
 //  NavigatorHelper.pusRecordPage(ctx.context);
 }
