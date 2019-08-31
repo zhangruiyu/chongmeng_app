@@ -50,7 +50,6 @@ class AdoptionData {
 }
 
 class AdoptionDataAdoption {
-  int petTypeId;
   String request;
   String createTime;
   String areaname;
@@ -59,21 +58,23 @@ class AdoptionDataAdoption {
   String description;
   bool isSterilization;
   List<String> pic;
+  String cashPledgeDeadline;
+  int adoptionType;
   String petTypeName;
   String masterName;
   bool isImmune;
   String petName;
+  int money;
   int userId;
   String provincename;
-  dynamic subTypeId;
+  int subTypeId;
   bool isExpellingParasite;
   int id;
   String age;
   int status;
 
   AdoptionDataAdoption(
-      {this.petTypeId,
-      this.request,
+      {this.request,
       this.createTime,
       this.areaname,
       this.sex,
@@ -81,10 +82,13 @@ class AdoptionDataAdoption {
       this.description,
       this.isSterilization,
       this.pic,
+      this.cashPledgeDeadline,
+      this.adoptionType,
       this.petTypeName,
       this.masterName,
       this.isImmune,
       this.petName,
+      this.money,
       this.userId,
       this.provincename,
       this.subTypeId,
@@ -94,7 +98,6 @@ class AdoptionDataAdoption {
       this.status});
 
   AdoptionDataAdoption.fromJson(Map<String, dynamic> json) {
-    petTypeId = json['pet_type_id'];
     request = json['request'];
     createTime = json['create_time'];
     areaname = json['areaname'];
@@ -103,10 +106,13 @@ class AdoptionDataAdoption {
     description = json['description'];
     isSterilization = json['is_sterilization'];
     pic = json['pic']?.cast<String>();
+    cashPledgeDeadline = json['cash_pledge_deadline'];
+    adoptionType = json['adoption_type'];
     petTypeName = json['pet_type_name'];
     masterName = json['master_name'];
     isImmune = json['is_immune'];
     petName = json['pet_name'];
+    money = json['money'];
     userId = json['user_id'];
     provincename = json['provincename'];
     subTypeId = json['sub_type_id'];
@@ -118,7 +124,6 @@ class AdoptionDataAdoption {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['pet_type_id'] = this.petTypeId;
     data['request'] = this.request;
     data['create_time'] = this.createTime;
     data['areaname'] = this.areaname;
@@ -127,10 +132,13 @@ class AdoptionDataAdoption {
     data['description'] = this.description;
     data['is_sterilization'] = this.isSterilization;
     data['pic'] = this.pic;
+    data['cash_pledge_deadline'] = this.cashPledgeDeadline;
+    data['adoption_type'] = this.adoptionType;
     data['pet_type_name'] = this.petTypeName;
     data['master_name'] = this.masterName;
     data['is_immune'] = this.isImmune;
     data['pet_name'] = this.petName;
+    data['money'] = this.money;
     data['user_id'] = this.userId;
     data['provincename'] = this.provincename;
     data['sub_type_id'] = this.subTypeId;
