@@ -6,8 +6,10 @@ import 'package:flutter/cupertino.dart';
 class AdoptionAddState implements Cloneable<AdoptionAddState> {
   List<UploadTask> selectPicList;
 
-  //宠物类型id
+  //宠物大类型id
   int petTypeId;
+  //宠物子类型子
+  int petSubTypeId;
   TextEditingController petTypeIdTextEditingController;
 
   //性别
@@ -45,9 +47,23 @@ class AdoptionAddState implements Cloneable<AdoptionAddState> {
   Result city;
   TextEditingController cityTextEditingController;
 
+  //0 无偿 1 押金 2有偿
+  int adoptionType;
+
+  //押金
+  TextEditingController cashPledgeTextEditingController;
+
+  //押金退还期限
+  TextEditingController cashPledgeDeadlineTextEditingController;
+
+  //有偿
+  TextEditingController moneyPledgeTextEditingController;
+
   @override
   AdoptionAddState clone() {
     return AdoptionAddState()
+      ..petSubTypeId = petSubTypeId
+      ..adoptionType = adoptionType
       ..selectPicList = selectPicList
       ..petTypeId = petTypeId
       ..sex = sex
@@ -55,6 +71,10 @@ class AdoptionAddState implements Cloneable<AdoptionAddState> {
       ..isSterilization = isSterilization
       ..isImmune = isImmune
       ..city = city
+      ..cashPledgeDeadlineTextEditingController =
+          cashPledgeDeadlineTextEditingController
+      ..moneyPledgeTextEditingController = moneyPledgeTextEditingController
+      ..cashPledgeTextEditingController = cashPledgeTextEditingController
       ..petTypeIdTextEditingController = petTypeIdTextEditingController
       ..sexTextEditingController = sexTextEditingController
       ..ageTextEditingController = ageTextEditingController
@@ -73,6 +93,10 @@ class AdoptionAddState implements Cloneable<AdoptionAddState> {
 
 AdoptionAddState initState(Map<String, dynamic> args) {
   return AdoptionAddState()
+    ..adoptionType = 0
+    ..cashPledgeDeadlineTextEditingController = TextEditingController()
+    ..moneyPledgeTextEditingController = TextEditingController()
+    ..cashPledgeTextEditingController = TextEditingController()
     ..isExpellingParasiteTextEditingController = TextEditingController()
     ..isSterilizationTextEditingController = TextEditingController()
     ..isImmuneTextEditingController = TextEditingController()

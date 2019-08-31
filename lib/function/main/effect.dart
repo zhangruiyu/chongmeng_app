@@ -29,12 +29,16 @@ Future _initState(Action action, Context<MainState> ctx) async {
   jverify.preLogin(timeOut: 10000);
   (await RequestClient.request<UpdateEntity>(ctx.context, HttpConstants.Update))
       .yes((value) {
-    showDialog(
-        context: ctx.context,
-        builder: (context) {
-          return routes
-              .buildPage(PageConstants.UpdatePage, {"data": value.data});
-        });
+//    value.data.needUpdate = true;
+    //需要更新
+    if (value.data.needUpdate) {
+      showDialog(
+          context: ctx.context,
+          builder: (context) {
+            return routes
+                .buildPage(PageConstants.UpdatePage, {"data": value.data});
+          });
+    }
   });
 
 //  NavigatorHelper.pusRecordPage(ctx.context);

@@ -8,6 +8,7 @@ Reducer<AdoptionAddState> buildReducer() {
     <Object, Reducer<AdoptionAddState>>{
       AdoptionAddAction.ChangeSelectPic: _onChangeSelectPic,
       AdoptionAddAction.SetType: _onSetType,
+      AdoptionAddAction.SetMoneyType: _onSetMoneyType,
     },
   );
 }
@@ -23,7 +24,8 @@ AdoptionAddState _onSetType(AdoptionAddState state, Action action) {
   Map<String, dynamic> params = action.payload;
   if (params['type'] == "petTypeId") {
     newState
-      ..petTypeId = params['value']
+      ..petTypeId = params['value']['pet_type_id']
+      ..petSubTypeId = params['value']['pet_sub_type']
       ..petTypeIdTextEditingController.text = params['key'];
   } else if (params['type'] == "sex") {
     newState
@@ -46,6 +48,13 @@ AdoptionAddState _onSetType(AdoptionAddState state, Action action) {
       ..city = params['value']
       ..cityTextEditingController.text = params['key'];
   }
+
+  return newState;
+}
+
+AdoptionAddState _onSetMoneyType(AdoptionAddState state, Action action) {
+  final AdoptionAddState newState = state.clone()
+    ..adoptionType = action.payload;
 
   return newState;
 }

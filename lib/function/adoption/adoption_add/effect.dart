@@ -8,6 +8,7 @@ import 'package:chongmeng/network/entity/cos_entity.dart';
 import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/network/net_work.dart' as netWork;
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/widget/select_bottom.dart';
 import 'package:city_pickers/city_pickers.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -43,11 +44,26 @@ void _onSelectType(Action action, Context<AdoptionAddState> ctx) async {
       var result = await RequestClient.request<PetTypeEntity>(
           ctx.context, HttpConstants.PetType);
       if (result.hasSuccess) {
-        params = {}
+        /*params = {}
           ..addEntries(result.data.data.map<MapEntry<String, dynamic>>((item) {
             return MapEntry(item.name, item.id);
           }));
+*/
+        var petTypeEntity = await RequestClient.request<PetTypeEntity>(
+            ctx.context, HttpConstants.PetType);
+        if (petTypeEntity.hasSuccess) {
+          Map<String, dynamic> result = (await Navigator.pushNamed(
+                  ctx.context, PageConstants.SelectTypePage,
+                  arguments: {'petTypeEntity': petTypeEntity.data.data}))
+              as Map<String, dynamic>;
+          if (result != null) {
+            result['type'] = type;
+            ctx.dispatch(AdoptionAddActionCreator.onSetType(result));
+          }
+        }
       }
+      //品种选择自行处理,不继续往下走
+      return;
     } else if (type == "sex") {
       params = {"公": 1, "母": 0};
     } else if (type == "isExpellingParasite") {
@@ -101,9 +117,27 @@ Future _onCommit(Action action, Context<AdoptionAddState> ctx) async {
     showToast("请填写描述信息");
     return;
   }
-  if (state.ageTextEditingController.text?.isEmpty == true) {
-    showToast("请填写宠物年龄");
+  if (int.tryParse(state.ageTextEditingController.text) == null) {
+    showToast("请填写正确的宠物月份");
     return;
+  }
+  if (state.adoptionType == 1) {
+    //说明是押金领养
+    if (int.tryParse(state.cashPledgeTextEditingController.text) == null) {
+      showToast("请填写正确的押金金额");
+      return;
+    } else if (int.tryParse(
+            state.cashPledgeDeadlineTextEditingController.text) ==
+        null) {
+      showToast("请填写正确的押金规范期限");
+      return;
+    }
+  } else if (state.adoptionType == 2) {
+    //说明是收费领养
+    if (int.tryParse(state.moneyPledgeTextEditingController.text) == null) {
+      showToast("请填写正确的收费金额");
+      return;
+    }
   }
   if (state.requestTextEditingController.text?.isEmpty == true) {
     showToast("请填写宠物领养要求");
@@ -117,6 +151,7 @@ Future _onCommit(Action action, Context<AdoptionAddState> ctx) async {
     showToast("图片必须上传一张");
     return;
   }
+
   var cosEntity = await RequestClient.request<CosEntity>(
       ctx.context, HttpConstants.PeriodEffectiveSign,
       queryParameters: {'type': CosType.Adoption_TYPE});
@@ -146,11 +181,21 @@ Future _onCommit(Action action, Context<AdoptionAddState> ctx) async {
 Future<netWork.Result<OutermostEntity>> commit(
     Context<AdoptionAddState> ctx, String picJson) async {
   var state = ctx.state;
+  //动态参数
+  var otherParams = Map<String, dynamic>();
+  if (ctx.state.adoptionType == 1) {
+    otherParams["money"] = ctx.state.cashPledgeTextEditingController.text;
+    otherParams["deadLine"] =
+        ctx.state.cashPledgeDeadlineTextEditingController.text;
+  } else if (ctx.state.adoptionType == 2) {
+    otherParams["money"] = ctx.state.moneyPledgeTextEditingController.text;
+  }
   return RequestClient.request<OutermostEntity>(
       ctx.context, HttpConstants.AdoptionAdd,
       showLoadingIndicator: true,
       queryParameters: {
         'petTypeId': state.petTypeId,
+        'petSubTypeId': state.petSubTypeId,
         'petName': state.petNameTextEditingController.text,
         'sex': state.sex,
         'age': state.ageTextEditingController.text,
@@ -166,6 +211,8 @@ Future<netWork.Result<OutermostEntity>> commit(
         'provinceId': state.city.provinceId,
         'cityId': state.city.cityId,
         'areaId': state.city.areaId,
+        'adoptionType': state.adoptionType,
+        ...otherParams
       });
 }
 

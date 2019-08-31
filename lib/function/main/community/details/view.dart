@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
+import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
@@ -74,7 +75,10 @@ Widget buildView(
             },
             child: Container(
               alignment: Alignment.center,
-              child: Text("举报"),
+              child: Text(
+                "举报",
+                style: TextStyle(color: colorWhite),
+              ),
             ),
           ),
         )
@@ -83,36 +87,47 @@ Widget buildView(
     body: Column(
       children: <Widget>[
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0),
-            child: EasyRefresh.custom(
-              firstRefresh: true,
-              controller: state.easyRefreshController,
-              firstRefreshWidget: LoadingWidget(),
-              onRefresh: CompleterUtils.produceCompleterAction(
-                dispatch,
-                DynamicDetailsActionCreator.onRefresh,
-              ),
-              slivers: <Widget>[
-                SliverToBoxAdapter(
+          child: EasyRefresh.custom(
+            firstRefresh: true,
+            controller: state.easyRefreshController,
+            firstRefreshWidget: LoadingWidget(),
+            onRefresh: CompleterUtils.produceCompleterAction(
+              dispatch,
+              DynamicDetailsActionCreator.onRefresh,
+            ),
+            slivers: <Widget>[
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                sliver: SliverToBoxAdapter(
                   child: viewService.buildComponent('community_user_head'),
                 ),
-                SliverPadding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
-                  sliver: content,
+              ),
+              SliverPadding(
+                padding: const EdgeInsets.only(
+                    left: 18.0, right: 18.0, top: 10.0, bottom: 15.0),
+                sliver: SliverToBoxAdapter(
+                  child: Text(data.content),
                 ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
-                    child: Text(data.content),
-                  ),
+              ),
+              SliverPadding(
+                padding: const EdgeInsets.only(
+                    bottom: 10.0, left: 18.0, right: 18.0),
+                sliver: content,
+              ),
+              SliverToBoxAdapter(
+                child: VerticalLine(
+                  height: 5.0,
                 ),
-                SliverList(
+              ),
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 18.0, vertical: 10.0),
+                sliver: SliverList(
                   delegate: SliverChildBuilderDelegate(buildAdapter.itemBuilder,
                       childCount: buildAdapter.itemCount),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
         ),
         Row(

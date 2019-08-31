@@ -6,7 +6,8 @@ enum AdoptionAddAction {
   ReselectPic,
   Commit,
   SelectType,
-  SetType
+  SetType,
+  SetMoneyType
 }
 
 class AdoptionAddActionCreator {
@@ -28,5 +29,9 @@ class AdoptionAddActionCreator {
 
   static Action onSetType(Map<String, dynamic> petTypeId) {
     return Action(AdoptionAddAction.SetType, payload: petTypeId);
+  }
+
+  static Action onSetMoneyType(moneyType) {
+    return Action(AdoptionAddAction.SetMoneyType, payload: moneyType);
   }
 }

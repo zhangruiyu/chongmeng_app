@@ -11,9 +11,9 @@ Widget buildView(
     SelectTypeState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
     appBar: Toolbar(
-      title: Text("添加宠物"),
+      title: Text("宠物类型选择"),
       actions: <Widget>[
-        Padding(
+        /* Padding(
           padding: const EdgeInsets.only(right: 22.0),
           child: InkResponse(
             onTap: () {
@@ -24,14 +24,14 @@ Widget buildView(
               child: Text("跳过"),
             ),
           ),
-        )
+        )*/
       ],
     ),
     body: Column(
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(top: 38.0),
-          child: Text("添加宠物后,您可获得更精准的服务哦"),
+          child: Text("选择宠物类型后,您可获得更精准的服务哦"),
         ),
         Expanded(
           child: GridView.builder(
