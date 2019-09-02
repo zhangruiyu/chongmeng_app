@@ -8,6 +8,7 @@ import 'state.dart';
 
 Widget buildView(
     SafeCenterState state, Dispatch dispatch, ViewService viewService) {
+  var of = Theme.of(viewService.context);
   return Scaffold(
     appBar: Toolbar(
       title: Text("安全中心"),
@@ -27,8 +28,23 @@ Widget buildView(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Image.asset('assets/qq.png'),
-              Switch(value: true, onChanged: (bool value) {})
+              Row(
+                children: <Widget>[
+                  Image.asset('assets/qq.png'),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 18.0),
+                    child: Text(
+                      "QQ一键登录",
+                      style: of.textTheme.caption,
+                    ),
+                  )
+                ],
+              ),
+              Switch(
+                  value: state.qqBind,
+                  onChanged: (bool value) {
+                    dispatch(SafeCenterActionCreator.onQQBindBackend(value));
+                  })
             ],
           ),
         ),
@@ -40,8 +56,23 @@ Widget buildView(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Image.asset('assets/wechat.png'),
-              Switch(value: false, onChanged: (bool value) {})
+              Row(
+                children: <Widget>[
+                  Image.asset('assets/wechat.png'),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 18.0),
+                    child: Text(
+                      "微信一键登录",
+                      style: of.textTheme.caption,
+                    ),
+                  )
+                ],
+              ),
+              Switch(
+                  value: state.wxBind,
+                  onChanged: (bool value) {
+                    dispatch(SafeCenterActionCreator.onWXBindBackend(value));
+                  })
             ],
           ),
         ),
