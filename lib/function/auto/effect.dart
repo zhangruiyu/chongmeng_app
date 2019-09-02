@@ -62,7 +62,7 @@ Future _onLogin(Action action, Context<AutoState> ctx) async {
           ..['type'] = action.payload;
     result = await RequestClient.request<LoginEntity>(
         ctx.context, HttpConstants.LoginAndRegister,
-        queryParameters: queryParameters);
+        queryParameters: queryParameters, showLoadingIndicator: true);
   } else if (action.payload == "wechat") {
     //微信需要开发者资质认证
     var result = await UMengShare.login(UMPlatform.Wechat);

@@ -158,17 +158,27 @@ Widget buildView(AutoState state, Dispatch dispatch, ViewService viewService) {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    FlatButton(
-                      child: Text("QQ"),
-                      onPressed: () {
-                        dispatch(AutoActionCreator.onLogin('qq'));
-                      },
+                    Column(
+                      children: <Widget>[
+                        IconButton(
+                          onPressed: () {
+                            dispatch(AutoActionCreator.onLogin('qq'));
+                          },
+                          icon: Image.asset("assets/qq.png"),
+                        ),
+                        Text("QQ")
+                      ],
                     ),
-                    FlatButton(
-                      child: Text("微信登录"),
-                      onPressed: () {
-                        dispatch(AutoActionCreator.onLogin('wechat'));
-                      },
+                    Column(
+                      children: <Widget>[
+                        IconButton(
+                          onPressed: () {
+                            dispatch(AutoActionCreator.onLogin('wechat'));
+                          },
+                          icon: Image.asset("assets/wechat.png"),
+                        ),
+                        Text("微信")
+                      ],
                     ),
                   ],
                 ),

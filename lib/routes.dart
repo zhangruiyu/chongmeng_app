@@ -97,6 +97,7 @@ class PageConstants {
       "cm://UserDetailsEditPage"; //用户信息修改页面
   static String get SharePage => "cm://SharePage"; //分享弹框
   static String get MyAdoptionPage => "cm://MyAdoption"; //我发布的领养宠物
+  static String get SafeCenterPage => "cm://SafeCenterPage"; //安全中心
 }
 
 final AbstractRoutes routes = PageRoutes(

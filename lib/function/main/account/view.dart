@@ -218,6 +218,23 @@ Widget buildLoginView(
           onTap: () {
             UserHelper.loginCheck(viewService.context, () {
               Navigator.pushNamed(
+                viewService.context,
+                PageConstants.SafeCenterPage,
+              );
+            });
+          },
+          title: Text("安全中心"),
+          trailing: new Icon(
+            Icons.keyboard_arrow_right,
+            size: 30.0,
+            color: const Color(0x40808080),
+          ),
+        ),
+        VerticalLine(),
+        ListTile(
+          onTap: () {
+            UserHelper.loginCheck(viewService.context, () {
+              Navigator.pushNamed(
                   viewService.context, PageConstants.SettingPage);
             });
           },
