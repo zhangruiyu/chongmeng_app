@@ -28,6 +28,7 @@ import 'function/recipe/page.dart';
 import 'function/record/page.dart';
 import 'function/record/review/page.dart';
 import 'function/review_image/page.dart';
+import 'function/safe_center/page.dart';
 import 'function/search/page.dart';
 import 'function/setting/page.dart';
 import 'function/share/page.dart';
@@ -143,6 +144,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.SharePage: SharePage(),
     PageConstants.MyAdoptionPage: MyAdoptionPage(),
     PageConstants.UpdatePage: UpdatePage(),
+    PageConstants.SafeCenterPage: SafeCenterPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {
