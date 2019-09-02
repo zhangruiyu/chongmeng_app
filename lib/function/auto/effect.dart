@@ -50,6 +50,7 @@ Future _onLogin(Action action, Context<AutoState> ctx) async {
 //{msg: , ret: 0, unionid: , gender: 男, is_yellow_vip: 0, city: 朝阳, level: 0, openid: 050DE67E9DF84FDA37DCF08F94D6FF2F, profile_image_url: http://thirdqq.qlogo.cn/g?b=oidb&k=3OPDOC5fkyMSpudJ2Hvdmw&s=100, accessToken: D9F5599646F6B19E59FA13D022433405, access_token: D9F5599646F6B19E59FA13D022433405, uid: 050DE67E9DF84FDA37DCF08F94D6FF2F, is_yellow_year_vip: 0, province: 北京, screen_name: 牛顿, name: 牛顿, iconurl: http://thirdqq.qlogo.cn/g?b=oidb&k=3OPDOC5fkyMSpudJ2Hvdmw&s=100, yellow_vip_level: 0, expiration: 1568907416357, vip: 0, expires_in: 1568907416357, um_status: SUCCESS}
     var qqResult = await UMengShare.login(UMPlatform.QQ);
     if (qqResult['um_status'] != "SUCCESS") {
+      println(qqResult);
       return;
     }
     //后台处理结果
