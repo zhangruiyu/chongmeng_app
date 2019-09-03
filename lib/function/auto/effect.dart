@@ -46,27 +46,24 @@ Future _onLogin(Action action, Context<AutoState> ctx) async {
   Result<LoginEntity> result;
   //第三方登录的参数
   Map<String, dynamic> queryParameters;
-  if (action.payload == "qq") {
+  if (action.payload == "qq" || action.payload == "wechat") {
 //{msg: , ret: 0, unionid: , gender: 男, is_yellow_vip: 0, city: 朝阳, level: 0, openid: 050DE67E9DF84FDA37DCF08F94D6FF2F, profile_image_url: http://thirdqq.qlogo.cn/g?b=oidb&k=3OPDOC5fkyMSpudJ2Hvdmw&s=100, accessToken: D9F5599646F6B19E59FA13D022433405, access_token: D9F5599646F6B19E59FA13D022433405, uid: 050DE67E9DF84FDA37DCF08F94D6FF2F, is_yellow_year_vip: 0, province: 北京, screen_name: 牛顿, name: 牛顿, iconurl: http://thirdqq.qlogo.cn/g?b=oidb&k=3OPDOC5fkyMSpudJ2Hvdmw&s=100, yellow_vip_level: 0, expiration: 1568907416357, vip: 0, expires_in: 1568907416357, um_status: SUCCESS}
-    var qqResult = await UMengShare.login(UMPlatform.QQ);
+    //{country: 贝宁, unionid: o6_BWwoe6r-tWl8Qhvp93u4Fnb7o, gender: 男, city: , openid: oPW1e1OuJCrflSz8D_W5S1HtB984, language: zh_CN, profile_image_url: http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqgc4cglcmCSl3OVxOUtVoibtPlicSicaKnyDufoYHqz1iaw7PfyS4QfKqicBmqlPaLzRy0wsSSyJ06IFQ/132, accessToken: 25_Fe0vmgYZ0-k966E8Hlh1h1uKtk4ehspyUBYRhGyPcpfv7eYC-z0kI6Vf1weBPRbI1XMgIB0jsBnSERk1cEaX1QoGdI4eUQxQyG9yrR8Doyo, access_token: 25_Fe0vmgYZ0-k966E8Hlh1h1uKtk4ehspyUBYRhGyPcpfv7eYC-z0kI6Vf1weBPRbI1XMgIB0jsBnSERk1cEaX1QoGdI4eUQxQyG9yrR8Doyo, uid: o6_BWwoe6r-tWl8Qhvp93u4Fnb7o, province: , screen_name: 得得得, name: 得得得, iconurl: http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqgc4cglcmCSl3OVxOUtVoibtPlicSicaKnyDufoYHqz1iaw7PfyS4QfKqicBmqlPaLzRy0wsSSyJ06IFQ/132, expiration: 1567492973975, expires_in: 1567492973975, um_status: SUCCESS, refreshToken: 25_motTKBEgAtWryycCw7Ssl6kR6uPC9EqTxo0ab3bSmq3xELbXNoFQCQOyrO40qvxP_P23R-l2L8tIpLQPiZk1nSmZXA71oZU2OdI7oe7NhAE}
+    var qqResult = await UMengShare.login(
+        action.payload == "qq" ? UMPlatform.QQ : UMPlatform.Wechat);
     if (qqResult['um_status'] != "SUCCESS") {
       println(qqResult);
       return;
     }
     //后台处理结果
-    queryParameters = ((await UMengShare.login(UMPlatform.QQ))
-            as Map<dynamic, dynamic>)
-        .map((key, value) {
-      return MapEntry(key.toString(), value);
-    })
-          ..['type'] = action.payload;
     result = await RequestClient.request<LoginEntity>(
         ctx.context, HttpConstants.LoginAndRegister,
-        queryParameters: queryParameters, showLoadingIndicator: true);
-  } else if (action.payload == "wechat") {
-    //微信需要开发者资质认证
-    var result = await UMengShare.login(UMPlatform.Wechat);
-    println("result $result");
+        queryParameters: queryParameters =
+            (qqResult as Map<dynamic, dynamic>).map((key, value) {
+          return MapEntry(key.toString(), value);
+        })
+              ..['type'] = action.payload,
+        showLoadingIndicator: true);
   } else {
     result = await RequestClient.request<LoginEntity>(
         ctx.context, HttpConstants.LoginAndRegister,

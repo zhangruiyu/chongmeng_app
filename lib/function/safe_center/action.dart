@@ -1,6 +1,13 @@
 import 'package:fish_redux/fish_redux.dart';
 
-enum SafeCenterAction { QQBind, QQBindBackend, WXBind, WXBindBackend }
+enum SafeCenterAction {
+  QQBind,
+  QQBindBackend,
+  WXBind,
+  WXBindBackend,
+  Refresh,
+  ResetData
+}
 
 class SafeCenterActionCreator {
   static Action onQQBind(bool isBind) {
@@ -17,5 +24,13 @@ class SafeCenterActionCreator {
 
   static Action onWXBindBackend(bool isBind) {
     return Action(SafeCenterAction.WXBindBackend, payload: isBind);
+  }
+
+  static Action onRefresh(Map<String, dynamic> map) {
+    return Action(SafeCenterAction.Refresh, payload: map);
+  }
+
+  static Action onResetData(map) {
+    return Action(SafeCenterAction.ResetData, payload: map);
   }
 }

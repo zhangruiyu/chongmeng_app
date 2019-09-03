@@ -1,19 +1,16 @@
 import 'package:fish_redux/fish_redux.dart';
 
+import 'model/safe_entity.dart';
+
 class SafeCenterState implements Cloneable<SafeCenterState> {
-  bool qqBind;
-  bool wxBind;
+  SafeData data;
 
   @override
   SafeCenterState clone() {
-    return SafeCenterState()
-      ..qqBind = qqBind
-      ..wxBind = wxBind;
+    return SafeCenterState()..data = data;
   }
 }
 
 SafeCenterState initState(Map<String, dynamic> args) {
-  return SafeCenterState()
-    ..qqBind = false
-    ..wxBind = false;
+  return SafeCenterState();
 }
