@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "GeneratedPluginRegistrant.h"
+#import "JPUSHService.h"
 
 @implementation AppDelegate
 
@@ -10,4 +11,8 @@
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
+- (void)application:(UIApplication *)applicationdidRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    [JPUSHService registerDeviceToken:deviceToken];
+}
 @end
