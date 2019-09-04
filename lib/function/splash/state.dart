@@ -4,7 +4,7 @@ import 'package:chongmeng/constants/constants.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 class SplashState implements Cloneable<SplashState> {
-  int n = isRelease ? 3 : 1;
+  int n = isRelease ? 3 : 3;
 
   Timer timer;
 
