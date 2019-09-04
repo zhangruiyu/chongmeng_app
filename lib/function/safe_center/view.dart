@@ -56,8 +56,8 @@ Widget buildView(
                         Switch(
                             value: state.data.isBindQq,
                             onChanged: (bool value) {
-                              dispatch(SafeCenterActionCreator.onQQBindBackend(
-                                  value));
+                              dispatch(SafeCenterActionCreator.onBindAndUnBind(
+                                  "qq"));
                             })
                       ],
                     ),
@@ -86,8 +86,8 @@ Widget buildView(
                         Switch(
                             value: state.data.isBindWechat,
                             onChanged: (bool value) {
-                              dispatch(SafeCenterActionCreator.onWXBindBackend(
-                                  value));
+                              dispatch(SafeCenterActionCreator.onBindAndUnBind(
+                                  "wechat"));
                             })
                       ],
                     ),

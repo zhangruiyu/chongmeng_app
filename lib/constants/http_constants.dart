@@ -6,7 +6,7 @@ class HttpConstants {
 //  static final String BaseStaticUrl = "https://app.mustbe.xyz/";
 //上线 为家里 测试为公司
   static final String BaseUrl =
-      isOnline ? "http://192.168.6.211:8080/" : "http://192.168.1.8:8080/";
+      isOnline ? "http://192.168.6.211:8080/" : "http://192.168.1.7:8080/";
 
   static final String SendCode = "app/auth/sendLoginCode"; //发送验证码
   static final String SendThirdLoginCode =
@@ -18,6 +18,8 @@ class HttpConstants {
       "app/auth/common/user/updateProfile"; //修改用户信息
   static final String ImLogin = "app/auth/common/user/imLogin"; //极光im登录
   static final String SafeState = "app/auth/common/user/safeState"; //安全中心
+  static final String BindQqOrWechat =
+      "app/auth/common/user/bindQqOrWechat"; //解绑或者绑定微信qq
 
   //一键登录
   static final String Flashlogin = "app/auth/flashLogin";
