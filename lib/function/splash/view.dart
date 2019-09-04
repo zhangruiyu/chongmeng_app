@@ -45,7 +45,7 @@ Widget buildView(
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 40.0),
+                padding: EdgeInsets.only(top: 30.0),
                 child: Image.asset(
                   'assets/splash_text.png',
                   height: 40.0,
@@ -56,8 +56,9 @@ Widget buildView(
           Positioned(
             bottom: 40.0,
             child: Text(
-              "- 以宠为本 -",
-              style: TextStyle(color: color333333, fontSize: 20.0),
+              "— 以宠为本 —",
+              style: TextStyle(
+                  color: color333333, fontSize: 14.0, letterSpacing: 10.0),
             ),
           )
         ],

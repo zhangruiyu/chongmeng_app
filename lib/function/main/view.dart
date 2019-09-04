@@ -70,7 +70,7 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
           BottomNavigationBarItemData(
             selectIcon: "assets/main_community_select.png",
             normalIcon: "assets/main_community_normal.png",
-            title: '云吸',
+            title: '社区',
           ),
           BottomNavigationBarItemData(
             selectIcon: "assets/main_store_select.png",

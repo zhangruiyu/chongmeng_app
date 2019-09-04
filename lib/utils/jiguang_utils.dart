@@ -86,7 +86,7 @@ class JiguangUtils {
     textWidget.top = 360;
     textWidget.width = WindowUtils.getScreenWidth().toInt();
     textWidget.height = 40;
-    textWidget.titleColor = Color(0xff648CEF).value;
+    textWidget.titleColor = Color(0xffFFC000).value;
     textWidget.isShowUnderline = true;
     textWidget.textAlignment = JVTextAlignmentType.center;
     textWidget.isClickEnable = true;
@@ -112,7 +112,7 @@ class JiguangUtils {
 //          ..loginBtnNormalImage = "shanyan_bt_bg"
 //          ..loginBtnPressedImage = "shanyan_bt_bg"
 //          ..loginBtnUnableImage = "shanyan_bt_bg"
-          ..clauseBaseColor = Colors.red.value
+          ..clauseBaseColor = Color(0xffFFC000).value
 //          ..clauseName = "服务及隐私政策"
 //          ..clauseUrl = "https://app.dfq.mobi/protocal/privacy"
 //          ..clauseNameTwo = "用户注册协议"
