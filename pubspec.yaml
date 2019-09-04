@@ -48,7 +48,7 @@ dependencies:
   camera: any
   photo: any
   percent_indicator: "^2.1.0"
-  flutter_ijkplayer: "^0.3.0"
+  flutter_ijkplayer: "^0.3.3"
   city_pickers: ^0.1.22
   dragablegridview_flutter: any
   photo_view: ^0.4.2

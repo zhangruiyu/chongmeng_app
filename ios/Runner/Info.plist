@@ -44,7 +44,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>qq</string>
+			<string>tencent</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>tencent101656167</string>
@@ -54,7 +54,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>qqzone</string>
+			<string>QQ</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>QQ060F2667</string>

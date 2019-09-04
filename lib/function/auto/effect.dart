@@ -8,6 +8,7 @@ import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
+import 'package:oktoast/oktoast.dart';
 import 'package:umengshare/umengshare.dart';
 import 'action.dart';
 import 'model/login_entity.dart';
@@ -51,8 +52,8 @@ Future _onLogin(Action action, Context<AutoState> ctx) async {
     //{country: 贝宁, unionid: o6_BWwoe6r-tWl8Qhvp93u4Fnb7o, gender: 男, city: , openid: oPW1e1OuJCrflSz8D_W5S1HtB984, language: zh_CN, profile_image_url: http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqgc4cglcmCSl3OVxOUtVoibtPlicSicaKnyDufoYHqz1iaw7PfyS4QfKqicBmqlPaLzRy0wsSSyJ06IFQ/132, accessToken: 25_Fe0vmgYZ0-k966E8Hlh1h1uKtk4ehspyUBYRhGyPcpfv7eYC-z0kI6Vf1weBPRbI1XMgIB0jsBnSERk1cEaX1QoGdI4eUQxQyG9yrR8Doyo, access_token: 25_Fe0vmgYZ0-k966E8Hlh1h1uKtk4ehspyUBYRhGyPcpfv7eYC-z0kI6Vf1weBPRbI1XMgIB0jsBnSERk1cEaX1QoGdI4eUQxQyG9yrR8Doyo, uid: o6_BWwoe6r-tWl8Qhvp93u4Fnb7o, province: , screen_name: 得得得, name: 得得得, iconurl: http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqgc4cglcmCSl3OVxOUtVoibtPlicSicaKnyDufoYHqz1iaw7PfyS4QfKqicBmqlPaLzRy0wsSSyJ06IFQ/132, expiration: 1567492973975, expires_in: 1567492973975, um_status: SUCCESS, refreshToken: 25_motTKBEgAtWryycCw7Ssl6kR6uPC9EqTxo0ab3bSmq3xELbXNoFQCQOyrO40qvxP_P23R-l2L8tIpLQPiZk1nSmZXA71oZU2OdI7oe7NhAE}
     var qqResult = await UMengShare.login(
         action.payload == "qq" ? UMPlatform.QQ : UMPlatform.Wechat);
+    println(qqResult);
     if (qqResult['um_status'] != "SUCCESS") {
-      println(qqResult);
       return;
     }
     //后台处理结果

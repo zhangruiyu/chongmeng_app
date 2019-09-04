@@ -40,7 +40,7 @@ Widget buildView(AutoState state, Dispatch dispatch, ViewService viewService) {
               Padding(
                 padding: const EdgeInsets.only(left: 38.0, right: 38.0),
                 child: TextField(
-                    autofocus: true,
+//                    autofocus: true,
                     keyboardType: TextInputType.phone,
                     controller: state.telTextEditingController,
                     decoration: InputDecoration(
@@ -131,7 +131,7 @@ Widget buildView(AutoState state, Dispatch dispatch, ViewService viewService) {
                 fit: BoxFit.fitWidth,
                 width: double.infinity,
               ),
-              Padding(
+              /*Padding(
                 padding: const EdgeInsets.only(bottom: 68.0),
                 child: RichText(
                   text: TextSpan(
@@ -152,7 +152,7 @@ Widget buildView(AutoState state, Dispatch dispatch, ViewService viewService) {
                     style: TextStyle(fontSize: 12.0, color: color343434),
                   ),
                 ),
-              ),
+              ),*/
               Padding(
                 padding: const EdgeInsets.only(bottom: 138.0),
                 child: Row(
