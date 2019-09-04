@@ -109,9 +109,11 @@ class JiguangUtils {
           ..navReturnImgPath = "shanyan_close"
 //          ..checkedImgPath = "check_image"
 //          ..uncheckedImgPath = "uncheck_image"
-//          ..loginBtnNormalImage = "shanyan_bt_bg"
-//          ..loginBtnPressedImage = "shanyan_bt_bg"
-//          ..loginBtnUnableImage = "shanyan_bt_bg"
+          ..loginBtnNormalImage = "login_bt"
+          ..loginBtnPressedImage = "login_bt"
+          ..loginBtnUnableImage = "login_bt"
+          ..logBtnBackgroundPath = "login_bt" //android
+          ..logoImgPath = "logo"
           ..clauseBaseColor = Color(0xffFFC000).value
 //          ..clauseName = "服务及隐私政策"
 //          ..clauseUrl = "https://app.dfq.mobi/protocal/privacy"
