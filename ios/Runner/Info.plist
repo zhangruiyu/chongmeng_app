@@ -114,6 +114,21 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSContactsUsageDescription</key>
+    <string>为了发送朋友圈好友查询，请先开启访问权限;</string>
+    <key>NSCalendarsUsageDescription</key>
+    <string>为了制定疫苗计划，请先开启访问权限;</string>
+    <key>NSMotionUsageDescription</key>
+    <string>为了制定疫苗计划，请先开启访问权限;</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>为了获取遛狗路线，请先开启访问权限;</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>为了发送朋友圈或者领养信息，请先开启访问权限;</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>为了获取遛狗路线，请先开启访问权限;</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>为了获取遛狗路线，请先开启访问权限;</string>
+
 	<key>NSCameraUsageDescription</key>
 	<string>为了发送朋友圈或者领养信息，请先开启访问权限;</string>
 	<key>NSMicrophoneUsageDescription</key>
