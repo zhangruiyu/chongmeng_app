@@ -35,7 +35,7 @@
     }else if([@"login" isEqualToString:call.method]){
         int platformType=((NSNumber*)call.arguments[@"platform"]).intValue;
         [self login:[self getPlatform:platformType] result:result];
-    }else if([@"login" isEqualToString:call.method]){
+    }else if([@"shareMiniApp" isEqualToString:call.method]){
         NSString *username=call.arguments[@"username"];
         NSString *thumb=call.arguments[@"thumb"];
         NSString *title=call.arguments[@"title"];
