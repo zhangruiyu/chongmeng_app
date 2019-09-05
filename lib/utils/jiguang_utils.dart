@@ -115,8 +115,8 @@ class JiguangUtils {
           ..logBtnBackgroundPath = "login_bt" //android
           ..logoImgPath = "logo"
           ..clauseBaseColor = Color(0xffFFC000).value
-//          ..clauseName = "服务及隐私政策"
-//          ..clauseUrl = "https://app.dfq.mobi/protocal/privacy"
+          ..clauseName = "服务及隐私服务协议"
+          ..clauseUrl = HttpConstants.BaseUrl + "assets/protocol.html"
 //          ..clauseNameTwo = "用户注册协议"
 //          ..clauseUrlTwo = "https://app.dfq.mobi/protocal/register"
           ..logBtnOffsetY = 300

@@ -295,7 +295,7 @@ Widget buildLoginView(
                       border: Border.all(color: color999999),
                       borderRadius: BorderRadius.circular(12.0)),
                   child: Text(
-                      "${GlobalStore.store.getState().packageInfo.appName} v${GlobalStore.store.getState().packageInfo.version}",
+                      "${GlobalStore.store.getState().packageInfo.appName ?? "宠窝"} v${GlobalStore.store.getState().packageInfo.version}",
                       style: TextStyle(
                         color: color999999,
                         fontSize: 12.0,

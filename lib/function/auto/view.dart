@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:chongmeng/constants/colors.dart';
+import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/utils/keyboard_utils.dart';
@@ -131,7 +132,7 @@ Widget buildView(AutoState state, Dispatch dispatch, ViewService viewService) {
                 fit: BoxFit.fitWidth,
                 width: double.infinity,
               ),
-              /*Padding(
+              Padding(
                 padding: const EdgeInsets.only(bottom: 68.0),
                 child: RichText(
                   text: TextSpan(
@@ -144,7 +145,7 @@ Widget buildView(AutoState state, Dispatch dispatch, ViewService viewService) {
                             NavigatorHelper.pushWebPage(
                                 viewService.context,
                                 "服务及隐私服务协议",
-                                "https://app.dfq.mobi/protocal/privacy");
+                                HttpConstants.BaseUrl + "assets/protocol.html");
                           },
                         style: TextStyle(fontSize: 12.0, color: colorFF6000),
                       ),
@@ -152,7 +153,7 @@ Widget buildView(AutoState state, Dispatch dispatch, ViewService viewService) {
                     style: TextStyle(fontSize: 12.0, color: color343434),
                   ),
                 ),
-              ),*/
+              ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 138.0),
                 child: Row(
