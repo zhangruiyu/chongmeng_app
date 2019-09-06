@@ -130,7 +130,7 @@ Widget buildView(
               Image.asset(
                 'assets/auto_page_bg.png',
                 fit: BoxFit.fitWidth,
-                width: double.infinity,
+                width: WindowUtils.getScreenWidth(),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 68.0),

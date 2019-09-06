@@ -258,7 +258,7 @@
                 }
             } else {
                 UMSocialUserInfoResponse *resp = data;
-                NSDictionary *ret = @{@"um_status":@"SUCCESS",@"uid": resp.uid, @"openid": resp.openid, @"accessToken": resp.accessToken, @"expiration": [NSString stringWithFormat:@"%@",resp.expiration], @"name": resp.name, @"iconurl": resp.iconurl, @"gender": resp.gender, @"originalResponse": resp.originalResponse};
+                NSDictionary *ret = @{@"um_status":@"SUCCESS",@"uid": resp.uid, @"openid": resp.openid, @"access_token": resp.accessToken, @"expiration": [NSString stringWithFormat:@"%@",resp.expiration], @"name": resp.name, @"iconurl": resp.iconurl, @"gender": resp.gender, @"originalResponse": resp.originalResponse};
                 result(ret);
             }
         }];
