@@ -155,7 +155,7 @@ Widget buildView(
                     padding: const EdgeInsets.only(
                         left: 20.0, right: 20.0, bottom: 20.0, top: 10.0),
                     child: LinearProgressIndicator(
-                        value: state.data.multiple / 500.0,
+                        value: state.data.multiple / 20.0,
                         valueColor: new AlwaysStoppedAnimation<Color>(bgColor),
                         backgroundColor:
                             Theme.of(viewService.context).accentColor),
