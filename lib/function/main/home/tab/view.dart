@@ -39,21 +39,21 @@ buildItem(TabState state, HomeDataTab itemMenu, viewService) {
   return Expanded(
     child: GestureDetector(
       onTap: () {
-        if (itemMenu.title == "记一笔") {
+        if (itemMenu.action == "write") {
           UserHelper.loginCheck(viewService.context, () {
             Navigator.pushNamed(viewService.context, PageConstants.TallyPage);
           });
-        } else if (itemMenu.title == "签到") {
+        } else if (itemMenu.action == "signin") {
           UserHelper.loginCheck(viewService.context, () {
             Navigator.pushNamed(viewService.context, PageConstants.SignInPage);
           });
-        } else if (itemMenu.title == "猫猫" || itemMenu.title == "狗狗") {
+        } else if (itemMenu.action == "cat" || itemMenu.action == "dog") {
           Navigator.pushNamed(viewService.context, PageConstants.SearchPage,
               arguments: {'initChip': itemMenu.chips});
-        } else if (itemMenu.title == "食谱") {
+        } else if (itemMenu.action == "recipe") {
           Navigator.pushNamed(viewService.context, PageConstants.RecipePage,
               arguments: {'recipe': state.recipe});
-        } else if (itemMenu.title == "领养") {
+        } else if (itemMenu.action == "adopt") {
           Navigator.pushNamed(viewService.context, PageConstants.AdoptionPage);
         } else {
           showToast("此功能正在开发中");

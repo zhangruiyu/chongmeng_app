@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
+import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/main/home/model/ali_product_item.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
@@ -134,7 +135,10 @@ Widget buildView(
 
                         //券金额
                         buildButton(of, itemData, dispatch),
-                        ...buildDetailsWidget(state)
+                        if (state.detailsEntity?.data?.storeInfo != null)
+                          ...buildShopDetailsWidget(state),
+                        if (state.detailsEntity?.data?.pics?.isNotEmpty == true)
+                          ...buildDetailsWidget(state)
                       ],
                     ),
                   ),
@@ -217,16 +221,113 @@ Widget buildView(
       ));
 }
 
+List<Widget> buildShopDetailsWidget(ProductDetailsState state) {
+  var storeInfo = state.detailsEntity.data.storeInfo;
+  return [
+    VerticalLine(
+      height: 5.0,
+    ),
+    Container(
+      margin: const EdgeInsets.only(left: 18.0, right: 18.0, top: 10.0),
+      height: 50.0,
+      child: Row(
+        children: <Widget>[
+          CachedNetworkImage(
+            imageUrl: storeInfo.picPath,
+            fit: BoxFit.fitHeight,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(storeInfo.title),
+          ),
+        ],
+      ),
+    ),
+    Padding(
+      padding: const EdgeInsets.only(top: 8.0, bottom: 10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Text(
+                "宝贝描述: ${storeInfo.shopScore.itemScore}",
+                style: TextStyle(color: color333333, fontSize: 13.0),
+              ),
+              Container(
+                width: 20.0,
+                alignment: Alignment.center,
+                height: 20.0,
+                margin: EdgeInsets.only(left: 3.0),
+                color: Colors.red,
+                child: Text(
+                  "高",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: colorWhite, fontSize: 13.0),
+                ),
+              )
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "卖家服务: ${storeInfo.shopScore.serviceScore}",
+                style: TextStyle(color: color333333, fontSize: 13.0),
+              ),
+              Container(
+                width: 20.0,
+                alignment: Alignment.center,
+                height: 20.0,
+                margin: EdgeInsets.only(left: 3.0),
+                color: Colors.red,
+                child: Text(
+                  "高",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: colorWhite, fontSize: 13.0),
+                ),
+              )
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "物流服务: ${storeInfo.shopScore.deliveryScore}",
+                style: TextStyle(color: color333333, fontSize: 13.0),
+              ),
+              Container(
+                width: 20.0,
+                alignment: Alignment.center,
+                height: 20.0,
+                margin: EdgeInsets.only(left: 3.0),
+                color: Colors.red,
+                child: Text(
+                  "高",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: colorWhite, fontSize: 13.0),
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    ),
+    VerticalLine(
+      height: 5.0,
+    ),
+  ];
+}
+
 List<Widget> buildDetailsWidget(ProductDetailsState state) {
-  if (state.detailsEntity?.data?.isNotEmpty == true) {
-    return state.detailsEntity.data
-        .map((item) => CachedNetworkImage(
-              imageUrl: item,
-            ))
-        .toList();
-  } else {
-    return [];
-  }
+  return [
+    Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Text("宝贝详情"),
+    )
+  ]..addAll(state.detailsEntity.data.pics
+      .map((item) => CachedNetworkImage(
+            imageUrl: item,
+          ))
+      .toList());
 }
 
 Container buildButton(

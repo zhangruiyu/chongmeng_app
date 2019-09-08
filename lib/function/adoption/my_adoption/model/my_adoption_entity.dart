@@ -68,7 +68,7 @@ class MyAdoptionDataAdoption {
   dynamic subTypeId;
   bool isExpellingParasite;
   int id;
-  String age;
+  int age;
   int status;
 
   MyAdoptionDataAdoption(

@@ -84,6 +84,7 @@ class HomeDataTab {
   bool isH5;
   String imageUrl;
   String title;
+  String action;
   dynamic skipUrl;
   List<List<String>> chips;
 
@@ -94,6 +95,7 @@ class HomeDataTab {
     imageUrl = json['imageUrl'];
     title = json['title'];
     skipUrl = json['skipUrl'];
+    action = json['action'];
     if (json['chips'] != null) {
       chips = new List<List<String>>();
       (json['chips'] as List).forEach((v) {
@@ -108,6 +110,7 @@ class HomeDataTab {
     data['imageUrl'] = this.imageUrl;
     data['title'] = this.title;
     data['skipUrl'] = this.skipUrl;
+    data['action'] = this.action;
     if (this.chips != null) {
       data['chips'] = this.chips.map((v) => List.from(v)).toList();
     }

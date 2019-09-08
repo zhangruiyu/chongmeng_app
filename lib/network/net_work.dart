@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:chongmeng/constants/constants.dart';
@@ -104,6 +105,9 @@ class RequestClient {
 
     if (response.statusCode == HttpStatus.ok) {
       var data = response.data;
+
+      var string = json.encode(data);
+      debugPrint(string);
       if (data['status'].toString() == ErrorCode.Login.toString()) {
         UserHelper.logout(context);
         return new Future.error(new NetException(data['status'], data['msg']));
