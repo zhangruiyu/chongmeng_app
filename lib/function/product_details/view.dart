@@ -46,6 +46,7 @@ Widget buildView(
                 slivers: <Widget>[
                   SliverAppBar(
                     pinned: true,
+                    floating: true,
                     elevation: 0.0,
                     brightness: Brightness.light,
                     leading: BackButton(
