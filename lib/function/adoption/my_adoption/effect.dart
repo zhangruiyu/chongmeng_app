@@ -117,7 +117,7 @@ void _onShowAdoptionState(Action action, Context<MyAdoptionState> ctx) {
 Future _onUpdateAdoption(
     Context<MyAdoptionState> ctx, int adoptionId, int status) async {
   var result = await RequestClient.request<MyAdoptionEntity>(
-      ctx.context, HttpConstants.updateAdoption,
+      ctx.context, HttpConstants.UpdateAdoption,
       showLoadingIndicator: true,
       queryParameters: {'adoptionId': adoptionId, "status": status});
   if (result.hasSuccess) {

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/main/community/commit_media/model/upload_task.dart';
 import 'package:chongmeng/function/tally/add/action.dart';
@@ -87,7 +88,9 @@ Widget buildView(
               color: Theme.of(viewService.context).accentColor,
               shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(22.0)),
-              child: Text("提交"),
+              child: Text(state.adoptionAction == AdoptionBackendAction.add
+                  ? "提交"
+                  : "确认修改"),
               textColor: colorWhite,
               onPressed: () {
                 dispatch(AdoptionAddActionCreator.onCommit());
@@ -343,19 +346,35 @@ List<Widget> buildPicWidget(
   List<Widget> gridItems = new List<Widget>();
   List<UploadTask> selectedPics = state.selectPicList ?? [];
   double itemWidth = WindowUtils.getScreenWidth() / 5.toDouble();
-  selectedPics.forEach((UploadTask selectedPic) {
-    selectedPic.sequence = selectedPics.indexOf(selectedPic);
-    Widget item = new Padding(
-      padding: const EdgeInsets.all(3.0),
-      child: new Image.file(
-        new File(selectedPic.localUrl.toString()),
-        fit: BoxFit.cover,
-        width: itemWidth,
-        height: itemWidth,
-      ),
-    );
-    gridItems.add(item);
-  });
+  if (selectedPics.isEmpty && state.localAdoption != null) {
+    state.localAdoption.pic.forEach((itemUrl) {
+      Widget item = new Padding(
+        padding: const EdgeInsets.all(3.0),
+        child: new CachedNetworkImage(
+          imageUrl: itemUrl,
+          fit: BoxFit.cover,
+          width: itemWidth,
+          height: itemWidth,
+        ),
+      );
+      gridItems.add(item);
+    });
+  } else {
+    selectedPics.forEach((UploadTask selectedPic) {
+      selectedPic.sequence = selectedPics.indexOf(selectedPic);
+      Widget item = new Padding(
+        padding: const EdgeInsets.all(3.0),
+        child: new Image.file(
+          new File(selectedPic.localUrl.toString()),
+          fit: BoxFit.cover,
+          width: itemWidth,
+          height: itemWidth,
+        ),
+      );
+      gridItems.add(item);
+    });
+  }
+
   gridItems.add(Container(
     width: itemWidth,
     height: itemWidth,

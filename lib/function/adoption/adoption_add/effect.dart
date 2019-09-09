@@ -87,6 +87,133 @@ void _onSelectType(Action action, Context<AdoptionAddState> ctx) async {
 }
 
 Future _onCommit(Action action, Context<AdoptionAddState> ctx) async {
+  if (ctx.state.adoptionAction == AdoptionBackendAction.add) {
+    //添加
+    commitAdd(action, ctx);
+  } else {
+    //修改
+    commitAmend(action, ctx);
+  }
+}
+
+Future commitAmend(Action action, Context<AdoptionAddState> ctx) async {
+  var state = ctx.state;
+  var localAdoption = ctx.state.localAdoption;
+  Map<String, dynamic> params = {'adoptionId': localAdoption.id};
+  if (state.petNameTextEditingController.text != localAdoption.petName) {
+    params['petName'] = state.petNameTextEditingController.text;
+  }
+  if (state.petSubTypeId != null &&
+      state.petTypeIdTextEditingController.text != localAdoption.petTypeName) {
+    params['petTypeId'] = state.petTypeId;
+    params['petSubTypeId'] = state.petSubTypeId;
+  }
+  if (state.sex != localAdoption.sex && state.sex != null) {
+    params['sex'] = state.sex;
+  }
+  if (state.ageTextEditingController.text !=
+      localAdoption.age.replaceAll("个月", "")) {
+    params['age'] = state.ageTextEditingController.text;
+  }
+  //是否修改了
+  bool isChangeAdoptionType;
+  if (state.adoptionType == localAdoption.adoptionType) {
+    if (state.adoptionType == 1) {
+      isChangeAdoptionType = state.cashPledgeTextEditingController.text !=
+              localAdoption.money.toString() ||
+          state.cashPledgeDeadlineTextEditingController.text !=
+              localAdoption.cashPledgeDeadline.toString();
+    } else if (state.adoptionType == 2) {
+      isChangeAdoptionType = state.moneyPledgeTextEditingController.text !=
+          localAdoption.money.toString();
+    } else {
+      //为0 说明免费 没变
+      isChangeAdoptionType = false;
+    }
+  } else {
+    isChangeAdoptionType = true;
+  }
+  if (isChangeAdoptionType) {
+    //押金
+    if (ctx.state.adoptionType == 1) {
+      params["money"] = ctx.state.cashPledgeTextEditingController.text;
+      params["deadLine"] =
+          ctx.state.cashPledgeDeadlineTextEditingController.text;
+    } else if (ctx.state.adoptionType == 2) {
+      params["money"] = ctx.state.moneyPledgeTextEditingController.text;
+    }
+    params['adoptionType'] = state.adoptionType;
+  }
+
+  if ((state.isExpellingParasite == 1) != localAdoption.isExpellingParasite &&
+      state.isExpellingParasite != null) {
+    params['isExpellingParasite'] = state.isExpellingParasite;
+  }
+  if ((state.isSterilization == 1) != localAdoption.isSterilization &&
+      state.isSterilization != null) {
+    params['isSterilization'] = state.isSterilization;
+  }
+  if ((state.isImmune == 1) != localAdoption.isImmune &&
+      state.isImmune != null) {
+    params['isImmune'] = state.isImmune;
+  }
+
+  if (state.descriptionTextEditingController.text !=
+      localAdoption.description) {
+    params['description'] = state.descriptionTextEditingController.text;
+  }
+  if (state.requestTextEditingController.text != localAdoption.request) {
+    params['request'] = state.requestTextEditingController.text;
+  }
+  if (state.masterNameTextEditingController.text != localAdoption.masterName) {
+    params['masterName'] = state.masterNameTextEditingController.text;
+  }
+
+  if (state.cityTextEditingController.text !=
+      (localAdoption.provincename +
+          localAdoption.cityname +
+          localAdoption.areaname)) {
+    params['provinceId'] = state.city.provinceId;
+    params['cityId'] = state.city.cityId;
+    params['areaId'] = state.city.areaId;
+  }
+  // length 1是默认的值id
+  if (ctx.state.selectPicList == null && params.length == 1) {
+    showToast("必须修改其中一项");
+  } else {
+    //有图片就上传图片
+    try {
+      NavigatorHelper.showLoadingDialog(ctx.context, true);
+      if (ctx.state.selectPicList?.isNotEmpty == true) {
+        var cosEntity = await RequestClient.request<CosEntity>(
+            ctx.context, HttpConstants.PeriodEffectiveSign,
+            queryParameters: {'type': CosType.Adoption_TYPE});
+        if (cosEntity.hasSuccess) {
+          await Future.wait(
+              ctx.state.selectPicList.map((itemDynamicSelectedPicTask) {
+            return itemDynamicSelectedPicTask.uploadByData(cosEntity.data.data);
+          }));
+          //图片json串
+          params['images'] =
+              json.encode(ctx.state.selectPicList.map((UploadTask dspt) {
+            return dspt.resourcePath();
+          }).toList());
+        }
+      }
+      var result = await RequestClient.request<OutermostEntity>(
+          ctx.context, HttpConstants.UpdateAdoption,
+          queryParameters: params);
+      if (result.hasSuccess) {
+        showToast("发布成功");
+        Navigator.pop(ctx.context);
+      }
+    } catch (e) {} finally {
+      NavigatorHelper.showLoadingDialog(ctx.context, false);
+    }
+  }
+}
+
+Future commitAdd(Action action, Context<AdoptionAddState> ctx) async {
   var state = ctx.state;
   if (state.petTypeId == null) {
     showToast("请选择宠物种类");
@@ -165,7 +292,7 @@ Future _onCommit(Action action, Context<AdoptionAddState> ctx) async {
           json.encode(ctx.state.selectPicList.map((UploadTask dspt) {
         return dspt.resourcePath();
       }).toList());
-      var result = await commit(ctx, picJson);
+      var result = await commitAddUltimately(ctx, picJson);
       NavigatorHelper.showLoadingDialog(ctx.context, false);
       if (result.hasSuccess) {
         showToast("发布成功");
@@ -178,7 +305,7 @@ Future _onCommit(Action action, Context<AdoptionAddState> ctx) async {
   }
 }
 
-Future<netWork.Result<OutermostEntity>> commit(
+Future<netWork.Result<OutermostEntity>> commitAddUltimately(
     Context<AdoptionAddState> ctx, String picJson) async {
   var state = ctx.state;
   //动态参数
