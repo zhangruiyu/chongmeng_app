@@ -21,6 +21,7 @@ Effect<MyAdoptionState> buildEffect() {
 void _onShowAdoptionState(Action action, Context<MyAdoptionState> ctx) {
   MyAdoptionDataAdoption adoption = action.payload;
   var of = prefix0.Theme.of(ctx.context);
+
   showDialog(
       context: ctx.context,
       builder: (context) {
@@ -46,14 +47,30 @@ void _onShowAdoptionState(Action action, Context<MyAdoptionState> ctx) {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: RaisedButton(
-                            child: Text("下架"),
-                            onPressed: () {
-                              _onUpdateAdoption(ctx, adoption.id, 20);
-                            },
-                            color: of.accentColor,
-                          ),
+                          child: Text("修改 ${adoption.petName} 的领养状态"),
                         ),
+                        if (adoption.status != MyAdoptionState.soldOut)
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: RaisedButton(
+                              child: Text("下架"),
+                              onPressed: () {
+                                _onUpdateAdoption(ctx, adoption.id, 20);
+                              },
+                              color: of.accentColor,
+                            ),
+                          ),
+                        if (adoption.status == MyAdoptionState.soldOut)
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: RaisedButton(
+                              child: Text("上架"),
+                              onPressed: () {
+                                _onUpdateAdoption(ctx, adoption.id, 0);
+                              },
+                              color: of.accentColor,
+                            ),
+                          ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: RaisedButton(

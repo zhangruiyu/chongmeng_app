@@ -36,41 +36,60 @@ Widget buildView(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      CachedNetworkImage(
-                        width: 100.0,
-                        height: 100.0,
-                        fit: BoxFit.cover,
-                        imageUrl: adoption.pic[0],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(adoption.petName),
-                            Text("${adoption.petTypeName}" +
-                                "  ${adoption.age}"),
-                            Text(adoption.provincename +
-                                adoption.cityname +
-                                adoption.areaname),
-                            RaisedButton(
-                              color: Theme.of(viewService.context).accentColor,
-                              onPressed: adoption.status == 10
-                                  ? null
-                                  : () {
-                                      dispatch(MyAdoptionActionCreator
-                                          .onShowAdoptionState(adoption));
-                                    },
-                              child: Text(adoption.status == 0
-                                  ? "发布中"
-                                  : adoption.status == 10
-                                      ? "已被领养"
-                                      : adoption.status == 0 ? "下架" : "下架"),
-                            ),
-                          ],
+                      ClipRRect(
+                          borderRadius: BorderRadius.circular(3),
+                          child: CachedNetworkImage(
+                            width: 100.0,
+                            height: 100.0,
+                            fit: BoxFit.cover,
+                            imageUrl: adoption.pic[0],
+                          )),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text("名称: ${adoption.petName}"),
+                              Text("类型: ${adoption.petTypeName}"),
+                              Row(
+                                children: <Widget>[
+                                  Text("性别: ${adoption.sex == 1 ? "公" : "母"}"),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 18.0),
+                                    child: Text("性别 :${adoption.age}"),
+                                  ),
+                                ],
+                              ),
+                              Text("地址: " +
+                                  adoption.provincename +
+                                  adoption.cityname +
+                                  adoption.areaname),
+                            ],
+                          ),
                         ),
                       ),
                     ],
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: RaisedButton(
+                    elevation: 0.0,
+                    color: Theme.of(viewService.context).accentColor,
+                    onPressed: adoption.status == 10
+                        ? null
+                        : () {
+                            dispatch(
+                                MyAdoptionActionCreator.onShowAdoptionState(
+                                    adoption));
+                          },
+                    child: Text(adoption.status == 0
+                        ? "发布中"
+                        : adoption.status == 10
+                            ? "已被领养"
+                            : adoption.status == 0 ? "下架" : "下架"),
                   ),
                 ),
                 VerticalLine(
