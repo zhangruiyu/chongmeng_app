@@ -16,7 +16,9 @@ Widget buildView(
   var of = Theme.of(viewService.context);
   return Scaffold(
     appBar: Toolbar(
-      title: Text("送养信息"),
+      title: Text(state.adoptionAction == AdoptionBackendAction.add
+          ? "送养信息"
+          : "修改送养信息"),
     ),
     body: SingleChildScrollView(
       child: Column(

@@ -61,6 +61,9 @@ class MyAdoptionDataAdoption {
   List<String> pic;
   String petTypeName;
   String masterName;
+  int adoptionType;
+  int money;
+  int cashPledgeDeadline;
   bool isImmune;
   String petName;
   int userId;
@@ -114,6 +117,9 @@ class MyAdoptionDataAdoption {
     id = json['id'];
     age = json['age'];
     status = json['status'];
+    adoptionType = json['adoption_type'];
+    money = json['money'];
+    cashPledgeDeadline = json['cash_pledge_deadline'];
   }
 
   Map<String, dynamic> toJson() {
@@ -138,6 +144,9 @@ class MyAdoptionDataAdoption {
     data['id'] = this.id;
     data['age'] = this.age;
     data['status'] = this.status;
+    data['adoption_type'] = this.adoptionType;
+    data['money'] = this.money;
+    data['cash_pledge_deadline'] = this.cashPledgeDeadline;
     return data;
   }
 }

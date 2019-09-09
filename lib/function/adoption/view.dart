@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 import 'action.dart';
+import 'adoption_add/state.dart';
 import 'state.dart';
 
 Widget buildView(
@@ -27,7 +28,8 @@ Widget buildView(
             onTap: () {
               UserHelper.loginCheck(viewService.context, () {
                 Navigator.pushNamed(
-                    viewService.context, PageConstants.AdoptionAddPage);
+                    viewService.context, PageConstants.AdoptionAddPage,
+                    arguments: {'adoptionAction': AdoptionBackendAction.add});
               });
             },
             child: Container(

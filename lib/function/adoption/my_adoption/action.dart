@@ -2,7 +2,12 @@ import 'package:chongmeng/function/adoption/model/adoption_entity.dart';
 import 'package:chongmeng/function/adoption/my_adoption/model/my_adoption_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 
-enum MyAdoptionAction { ResetData, Refresh, ShowAdoptionState }
+enum MyAdoptionAction {
+  ResetData,
+  Refresh,
+  ShowAdoptionState,
+  EditAdoptionInfo
+}
 
 class MyAdoptionActionCreator {
   static Action onRefresh(params) {
@@ -15,5 +20,9 @@ class MyAdoptionActionCreator {
 
   static Action onShowAdoptionState(MyAdoptionDataAdoption adoption) {
     return Action(MyAdoptionAction.ShowAdoptionState, payload: adoption);
+  }
+
+  static Action onEditAdoptionInfo(MyAdoptionDataAdoption adoption) {
+    return Action(MyAdoptionAction.EditAdoptionInfo, payload: adoption);
   }
 }

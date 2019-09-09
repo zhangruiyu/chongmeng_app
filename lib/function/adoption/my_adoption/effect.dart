@@ -1,12 +1,13 @@
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/http_constants.dart';
+import 'package:chongmeng/function/adoption/adoption_add/state.dart';
 import 'package:chongmeng/function/adoption/model/adoption_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/widget/custom_dialog.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:flutter/material.dart' as prefix0;
 import 'action.dart';
 import 'model/my_adoption_entity.dart';
 import 'state.dart';
@@ -15,12 +16,23 @@ Effect<MyAdoptionState> buildEffect() {
   return combineEffects(<Object, Effect<MyAdoptionState>>{
     MyAdoptionAction.Refresh: _onRefresh,
     MyAdoptionAction.ShowAdoptionState: _onShowAdoptionState,
+    MyAdoptionAction.EditAdoptionInfo: _onEditAdoptionInfo,
   });
+}
+
+Future _onEditAdoptionInfo(Action action, Context<MyAdoptionState> ctx) async {
+  MyAdoptionDataAdoption adoption = action.payload;
+  await Navigator.pushNamed(ctx.context, PageConstants.AdoptionAddPage,
+      arguments: {
+        'adoptionAction': AdoptionBackendAction.amend,
+        'localAdoption': adoption
+      });
+  ctx.dispatch(MyAdoptionActionCreator.onRefresh(null));
 }
 
 void _onShowAdoptionState(Action action, Context<MyAdoptionState> ctx) {
   MyAdoptionDataAdoption adoption = action.payload;
-  var of = prefix0.Theme.of(ctx.context);
+  var of = Theme.of(ctx.context);
 
   showDialog(
       context: ctx.context,

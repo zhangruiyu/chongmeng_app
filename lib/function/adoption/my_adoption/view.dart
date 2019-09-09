@@ -28,74 +28,85 @@ Widget buildView(
               delegate:
                   SliverChildBuilderDelegate((BuildContext context, int index) {
             var adoption = state.data.adoption[index];
-            return Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 18.0, left: 18.0, bottom: 10.0, top: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      ClipRRect(
-                          borderRadius: BorderRadius.circular(3),
-                          child: CachedNetworkImage(
-                            width: 100.0,
-                            height: 100.0,
-                            fit: BoxFit.cover,
-                            imageUrl: adoption.pic[0],
-                          )),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text("名称: ${adoption.petName}"),
-                              Text("类型: ${adoption.petTypeName}"),
-                              Row(
-                                children: <Widget>[
-                                  Text("性别: ${adoption.sex == 1 ? "公" : "母"}"),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 18.0),
-                                    child: Text("性别 :${adoption.age}"),
-                                  ),
-                                ],
-                              ),
-                              Text("地址: " +
-                                  adoption.provincename +
-                                  adoption.cityname +
-                                  adoption.areaname),
-                            ],
+            return InkWell(
+              onTap: adoption.status == MyAdoptionState.finish
+                  ? null
+                  : () {
+                      dispatch(
+                          MyAdoptionActionCreator.onEditAdoptionInfo(adoption));
+                    },
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        right: 18.0, left: 18.0, bottom: 10.0, top: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        ClipRRect(
+                            borderRadius: BorderRadius.circular(3),
+                            child: CachedNetworkImage(
+                              width: 100.0,
+                              height: 100.0,
+                              fit: BoxFit.cover,
+                              imageUrl: adoption.pic[0],
+                            )),
+                        Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 8.0, right: 8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text("名称: ${adoption.petName}"),
+                                Text("类型: ${adoption.petTypeName}"),
+                                Row(
+                                  children: <Widget>[
+                                    Text(
+                                        "性别: ${adoption.sex == 1 ? "公" : "母"}"),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 18.0),
+                                      child: Text("年龄 :${adoption.age}"),
+                                    ),
+                                  ],
+                                ),
+                                Text("地址: " +
+                                    adoption.provincename +
+                                    adoption.cityname +
+                                    adoption.areaname),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.symmetric(horizontal: 20.0),
-                  child: RaisedButton(
-                    elevation: 0.0,
-                    color: Theme.of(viewService.context).accentColor,
-                    onPressed: adoption.status == 10
-                        ? null
-                        : () {
-                            dispatch(
-                                MyAdoptionActionCreator.onShowAdoptionState(
-                                    adoption));
-                          },
-                    child: Text(adoption.status == 0
-                        ? "发布中"
-                        : adoption.status == 10
-                            ? "已被领养"
-                            : adoption.status == 0 ? "下架" : "下架"),
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: RaisedButton(
+                      elevation: 0.0,
+                      color: Theme.of(viewService.context).accentColor,
+                      onPressed: adoption.status == 10
+                          ? null
+                          : () {
+                              dispatch(
+                                  MyAdoptionActionCreator.onShowAdoptionState(
+                                      adoption));
+                            },
+                      child: Text(adoption.status == 0
+                          ? "发布中"
+                          : adoption.status == 10
+                              ? "已被领养"
+                              : adoption.status == 0 ? "下架" : "下架"),
+                    ),
                   ),
-                ),
-                VerticalLine(
-                  height: 5.0,
-                )
-              ],
+                  VerticalLine(
+                    height: 5.0,
+                  )
+                ],
+              ),
             );
           }, childCount: state.data?.adoption?.length ?? 0))
         ]),
