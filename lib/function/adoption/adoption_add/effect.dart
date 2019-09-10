@@ -204,7 +204,7 @@ Future commitAmend(Action action, Context<AdoptionAddState> ctx) async {
           ctx.context, HttpConstants.UpdateAdoption,
           queryParameters: params);
       if (result.hasSuccess) {
-        showToast("发布成功");
+        showToast("修改成功");
         Navigator.pop(ctx.context);
       }
     } catch (e) {} finally {
