@@ -25,6 +25,7 @@ import 'package:chongmeng/function/main/account/model/account_entity.dart';
 import 'package:chongmeng/function/main/community/details/model/comment_entity.dart';
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
 import 'package:chongmeng/function/main/community/dynamic_component/model/dynamic_liked_entity.dart';
+import 'package:chongmeng/function/main/store/coupon_detail/model/coupon_entity.dart';
 import 'package:chongmeng/function/main/store/model/integral_commodity_entity.dart';
 import 'package:chongmeng/function/integral/model/total_integral_entity.dart';
 import 'package:chongmeng/function/integral/model/integral_record_entity.dart';
@@ -88,6 +89,8 @@ class EntityFactory {
       return DynamicListEntity.fromJson(json) as T;
     } else if (T.toString() == "DynamicLikedEntity") {
       return DynamicLikedEntity.fromJson(json) as T;
+    } else if (T.toString() == "CouponEntity") {
+      return CouponEntity.fromJson(json) as T;
     } else if (T.toString() == "IntegralCommodityEntity") {
       return IntegralCommodityEntity.fromJson(json) as T;
     } else if (T.toString() == "TotalIntegralEntity") {

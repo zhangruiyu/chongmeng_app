@@ -83,6 +83,7 @@ class HttpConstants {
   static String get UpdateAdoption =>
       "/app/adoption/common/updateAdoption"; //更改领养信息
   static String get PetList => "/app/pet/common/petList"; //当前用户宠物列表
+  static String get Elema => "/app/coupon/common/elema"; //获取优惠券
 }
 
 class CosType {

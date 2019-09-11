@@ -18,6 +18,7 @@ import 'function/main/community/commit_text/page.dart';
 import 'function/main/community/details/page.dart';
 import 'function/main/community/selecttalktype/page.dart';
 import 'function/main/page.dart';
+import 'function/main/store/coupon_detail/page.dart';
 import 'function/main/store/integral_commodity_detail/page.dart';
 import 'function/my_order/page.dart';
 import 'function/my_pet/add/page.dart';
@@ -99,6 +100,7 @@ class PageConstants {
   static String get SharePage => "cm://SharePage"; //分享弹框
   static String get MyAdoptionPage => "cm://MyAdoption"; //我发布的领养宠物
   static String get SafeCenterPage => "cm://SafeCenterPage"; //安全中心
+  static String get CouponDetailPage => "cm://CouponDetailPage"; //饿了吗优惠券详情
 }
 
 final AbstractRoutes routes = PageRoutes(
@@ -145,6 +147,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.MyAdoptionPage: MyAdoptionPage(),
     PageConstants.UpdatePage: UpdatePage(),
     PageConstants.SafeCenterPage: SafeCenterPage(),
+    PageConstants.CouponDetailPage: CouponDetailPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {
