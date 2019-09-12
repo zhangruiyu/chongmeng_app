@@ -66,6 +66,22 @@ class PermissionHelper {
     return isAgree;
   }
 
+  //检测麦克风.摄像头,存储
+  static Future<bool> checkStorageCameraMicrophonePhotoPermission() async {
+    var isAgree = (await PermissionHandler().requestPermissions([
+      if (Platform.isAndroid) PermissionGroup.storage,
+      if (Platform.isIOS) PermissionGroup.photos,
+      PermissionGroup.camera,
+      PermissionGroup.microphone,
+    ]))
+        .values
+        .every((item) => item == PermissionStatus.granted);
+    if (!isAgree) {
+      PermissionHandler().openAppSettings();
+    }
+    return isAgree;
+  }
+
   static Future<bool> checkUpdatePermission() async {
     var isAgree = (await PermissionHandler().requestPermissions([
       PermissionGroup.storage,

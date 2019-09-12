@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:camera/camera.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/auto/model/login_entity.dart';
@@ -98,9 +97,14 @@ class NavigatorHelper {
 
   static Future<List<String>> pushFileSelectPageString(BuildContext context,
       {int maxSelected = 9}) async {
-    return (await pushFileSelectPageFile(context, maxSelected: maxSelected))
-        .map<String>((File itemFile) => itemFile.path)
-        .toList();
+    if (await PermissionHelper.checkStorageCameraMicrophonePhotoPermission()) {
+      return (await pushFileSelectPageFile(context, maxSelected: maxSelected))
+          .map<String>((File itemFile) => itemFile.path)
+          .toList();
+    } else {
+      showToast("请先打开权限");
+      return null;
+    }
   }
 
   static Future pushPageLoginPage(BuildContext context) async {
