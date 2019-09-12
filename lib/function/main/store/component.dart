@@ -1,3 +1,4 @@
+import 'package:chongmeng/components/notice/component.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'adapter/adapter.dart';
@@ -14,6 +15,8 @@ class StoreComponent extends Component<StoreState> {
           view: buildView,
           dependencies: Dependencies<StoreState>(
               adapter: IntegralStoreConnector() + IntegralStoreAdapter(),
-              slots: <String, Dependent<StoreState>>{}),
+              slots: <String, Dependent<StoreState>>{
+                'notice': IntegralNoticeConnector() + NoticeComponent()
+              }),
         );
 }

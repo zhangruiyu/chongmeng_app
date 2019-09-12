@@ -2,7 +2,7 @@ import 'package:chongmeng/function/main/store/model/integral_commodity_entity.da
 import 'package:fish_redux/fish_redux.dart';
 
 class IntegralStoreState implements Cloneable<IntegralStoreState> {
-  List<IntegralCommodityData> integralCommodityData;
+  IntegralCommodityData integralCommodityData;
 
   @override
   IntegralStoreState clone() {

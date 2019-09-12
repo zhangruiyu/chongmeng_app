@@ -28,6 +28,9 @@ Widget buildView(StoreState state, Dispatch dispatch, ViewService viewService) {
             p['filtrateType'] = page.filtrateType;
           }),*/
       slivers: <Widget>[
+        SliverToBoxAdapter(
+          child: viewService.buildComponent('notice'),
+        ),
         SliverGrid(
           delegate: SliverChildBuilderDelegate(buildAdapter.itemBuilder,
               childCount: buildAdapter.itemCount),

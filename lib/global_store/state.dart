@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:chongmeng/helper/model/local_user.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:package_info/package_info.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class GlobalBaseState<T extends Cloneable<T>> implements Cloneable<T> {
   Locale get locale;
@@ -23,9 +24,12 @@ class GlobalState implements GlobalBaseState<GlobalState> {
   PackageInfo packageInfo;
   String channel;
 
+  SharedPreferences sp;
+
   @override
   GlobalState clone() {
     return GlobalState()
+      ..sp = sp
       ..channel = channel
       ..packageInfo = packageInfo
       ..locale = locale

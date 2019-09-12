@@ -4,7 +4,7 @@ import 'package:fish_redux/fish_redux.dart';
 class IntegralCommodityDetailState
     implements Cloneable<IntegralCommodityDetailState> {
   int index;
-  IntegralCommodityData itemData;
+  IntegralCommodityDataIntegralcommodity itemData;
 
   int totalIntegral;
 

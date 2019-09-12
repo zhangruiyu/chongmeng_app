@@ -1,3 +1,4 @@
+import 'package:chongmeng/components/notice/component.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'adapter/adapter.dart';
@@ -19,6 +20,7 @@ class HomeComponent extends Component<HomeState> {
               slots: <String, Dependent<HomeState>>{
                 'banner': bannerConnector() + BannerComponent(),
                 'tab': tabConnector() + TabComponent(),
+                'notice': HomeNoticeConnector() + NoticeComponent()
               }),
         );
 }

@@ -89,6 +89,7 @@ class RequestClient {
     }
     Dio dio = new Dio(baseOptions);
 //    String cookiePath = await UserHelper.getCookiePath();
+    //打不出日志看这里
     if (!isRelease) {
       dio.interceptors
           .add(LogInterceptor(requestBody: true, responseBody: true)); //开启请求日志
@@ -107,7 +108,6 @@ class RequestClient {
       var data = response.data;
 
       var string = json.encode(data);
-      debugPrint(string);
       if (data['status'].toString() == ErrorCode.Login.toString()) {
         UserHelper.logout(context);
         return new Future.error(new NetException(data['status'], data['msg']));

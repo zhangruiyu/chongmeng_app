@@ -8,7 +8,7 @@ class StoreActionCreator {
     return Action(StoreAction.Refresh, payload: data);
   }
 
-  static Action onResetPageData(List<IntegralCommodityData> map) {
+  static Action onResetPageData(IntegralCommodityData map) {
     return Action(StoreAction.ResetPageData, payload: map);
   }
 }

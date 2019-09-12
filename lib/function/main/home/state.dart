@@ -1,3 +1,4 @@
+import 'package:chongmeng/components/notice/state.dart';
 import 'package:chongmeng/function/main/home/tab/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class HomeState implements Cloneable<HomeState> {
   HomeData homeData;
   EasyRefreshController controller;
   ScrollController scrollController;
+
   @override
   HomeState clone() {
     return HomeState()
@@ -59,5 +61,17 @@ class HomeListConnector extends ConnOp<HomeState, HomeListState> {
   @override
   HomeListState get(HomeState state) {
     return HomeListState()..data = state.homeData?.recommendProduct ?? [];
+  }
+}
+
+class HomeNoticeConnector extends ConnOp<HomeState, NoticeState> {
+  @override
+  void set(HomeState state, NoticeState subState) {
+    super.set(state, subState);
+  }
+
+  @override
+  NoticeState get(HomeState state) {
+    return NoticeState()..itemData = state.homeData?.sysNotices;
   }
 }

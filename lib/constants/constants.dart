@@ -5,5 +5,5 @@ export 'package:chongmeng/widget/vertical_line.dart';
 export 'package:chongmeng/localizetion/default_localization.dart';
 export 'package:chongmeng/utils/completer_utils.dart';
 
-const bool isRelease = true;
+const bool isRelease = false;
 const bool isOnline = false;

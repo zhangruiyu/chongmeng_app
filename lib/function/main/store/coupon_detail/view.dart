@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/anim/slide_transition_x.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/utils/window_utils.dart';
@@ -12,10 +13,11 @@ import 'state.dart';
 Widget buildView(
     CouponDetailState state, Dispatch dispatch, ViewService viewService) {
   var of = Theme.of(viewService.context);
+  var itemData = state.itemData;
   return Scaffold(
 //    backgroundColor: of.accentColor,
     appBar: Toolbar(
-      title: Text("饿了么超大包"),
+      title: Text(itemData.title),
     ),
     body: SingleChildScrollView(
       child: Column(
@@ -180,7 +182,9 @@ Widget buildView(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Center(
                       child: Text(
-                        "不是100%成功，若一直失败联系客服。",
+                        itemData.type == 'big'
+                            ? "不是100%成功，若一直失败联系客服。"
+                            : "若在高峰期领，到账会延迟几分钟，耐心等待。",
                         style: TextStyle(color: colorWhite),
                       ),
                     ),
@@ -195,28 +199,36 @@ Widget buildView(
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
-                      "1、领取[饿了么超大包]需要花费5积分，失败不扣积分，领取后在[饿了么APP]内查看，不要用小程序。",
+                      itemData.type == 'big'
+                          ? "1、领取[饿了么超大包]需要花费${itemData.integralPrice}积分，失败不扣积分，领取后在[饿了么APP]内查看，不要用小程序。"
+                          : "1、领取[饿了么每日包]需要花费${itemData.integralPrice}积分，失败不扣积分，领取后在[饿了么APP]内查看，不要用小程序。",
                       style: TextStyle(color: colorWhite),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
-                      "2、超大包不是100%成功，少量手机号有问题会领取失败，换个手机号试试。一直失败的话，联系客服协助您解决。支持店铺满减，如图：点击查看。",
+                      itemData.type == 'big'
+                          ? "2、超大包不是100%成功，少量手机号有问题会领取失败，换个手机号试试。一直失败的话，联系客服协助您解决。支持店铺满减，如最下方图片。"
+                          : "2、每日包固定有四张券，满足一天所需。支持店铺满减，如最下方图片",
                       style: TextStyle(color: colorWhite),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
-                      "3、每个手机号每天限领1次，领过的手机号请明天再来，或换个手机号领",
+                      itemData.type == 'big'
+                          ? "3、每个手机号每天限领1次，领过的手机号请明天再来，或换个手机号领"
+                          : "3、每个手机号每天限领1次，领过的手机号请明天再来，或换个手机号领。",
                       style: TextStyle(color: colorWhite),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
-                      "4、超大包随机出[品质联盟]券和[全场通用]券：满减条件（20~40），金额（4~15）随机出。领取后有效期当天，尽快使用。",
+                      itemData.type == 'big'
+                          ? "4、超大包随机出[品质联盟]券和[全场通用]券：满减条件（20~40），金额（4~15）随机出。领取后有效期当天，尽快使用。"
+                          : "4、固定四张券包含：①、【满¥30-3 平台通用红包】②、【满¥30-4 下午茶红包】③、【满¥30-5 品质联盟红包】④、【满¥39-6 夜宵红包】。",
                       style: TextStyle(color: colorWhite),
                     ),
                   ),
@@ -230,6 +242,17 @@ Widget buildView(
                 ],
               ),
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("领取成功和使用示例"),
+          ),
+          CachedNetworkImage(
+            imageUrl: itemData.pic,
+          ),
+          CachedNetworkImage(
+            imageUrl:
+                "https://chomgwo-1253631018.cos.ap-beijing.myqcloud.com/eleme/instructions.jpeg",
           )
         ],
       ),

@@ -21,5 +21,4 @@ void _onSkipIntegralCommodityDetailPage(
           "index": ctx.state.index,
         });
   });
-  Navigator.pushNamed(ctx.context, PageConstants.CouponDetailPage);
 }

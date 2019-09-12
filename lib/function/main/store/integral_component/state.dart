@@ -3,7 +3,7 @@ import 'package:fish_redux/fish_redux.dart';
 
 class IntegralItemState implements Cloneable<IntegralItemState> {
   var index;
-  IntegralCommodityData itemData;
+  IntegralCommodityDataIntegralcommodity itemData;
 
   IntegralItemState({this.index, this.itemData});
 

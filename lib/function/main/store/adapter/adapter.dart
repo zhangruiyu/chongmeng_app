@@ -1,5 +1,9 @@
+import 'package:chongmeng/components/notice/component.dart';
+import 'package:chongmeng/components/notice/state.dart';
 import 'package:chongmeng/function/main/store/integral_component/component.dart';
 import 'package:chongmeng/function/main/store/integral_component/state.dart';
+import 'package:chongmeng/function/main/store/integral_eleme_component/component.dart';
+import 'package:chongmeng/function/main/store/integral_eleme_component/state.dart';
 import 'package:chongmeng/function/main/store/model/integral_commodity_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 
@@ -10,6 +14,7 @@ class IntegralStoreAdapter extends DynamicFlowAdapter<IntegralStoreState> {
   IntegralStoreAdapter()
       : super(
           pool: <String, Component<Object>>{
+            'integraleleme': IntegralElemeItemComponent(),
             'integral': IntegralItemComponent()
           },
           connector: _IntegralStoreConnector(),
@@ -21,17 +26,29 @@ class _IntegralStoreConnector
     extends ConnOp<IntegralStoreState, List<ItemBean>> {
   @override
   List<ItemBean> get(IntegralStoreState state) {
-    if (state.integralCommodityData?.isNotEmpty == true) {
-      return state.integralCommodityData
-          .map<ItemBean>((IntegralCommodityData item) => ItemBean(
-              "integral",
-              IntegralItemState(
-                  index: state.integralCommodityData.indexOf(item),
+    List<ItemBean> items = [];
+
+    if (state.integralCommodityData?.elemo?.isNotEmpty == true) {
+      items.addAll(state.integralCommodityData.elemo
+          .map<ItemBean>((IntegralCommodityDataElemo item) => ItemBean(
+              "integraleleme",
+              IntegralElemeItemState(
+                  index: state.integralCommodityData.elemo.indexOf(item),
                   itemData: item)))
-          .toList();
-    } else {
-      return <ItemBean>[];
+          .toList());
     }
+    if (state.integralCommodityData?.integralCommodity?.isNotEmpty == true) {
+      items.addAll(state.integralCommodityData.integralCommodity
+          .map<ItemBean>((IntegralCommodityDataIntegralcommodity item) =>
+              ItemBean(
+                  "integral",
+                  IntegralItemState(
+                      index: state.integralCommodityData.integralCommodity
+                          .indexOf(item),
+                      itemData: item)))
+          .toList());
+    }
+    return items;
   }
 
   @override

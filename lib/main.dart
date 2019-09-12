@@ -22,6 +22,7 @@ import 'package:flutter_easyrefresh/material_footer.dart';
 import 'package:flutter_easyrefresh/material_header.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:package_info/package_info.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'app.dart';
 import 'helper/permission_helper.dart';
 
@@ -46,6 +47,7 @@ void iniAsync() async {
   String channel = await PlatformUtils.getChannel();
   GlobalStore.store.getState()
     ..packageInfo = await PackageInfo.fromPlatform()
-    ..channel = channel;
+    ..channel = channel
+    ..sp = await SharedPreferences.getInstance();
   JiguangUtils.init(channel);
 }
