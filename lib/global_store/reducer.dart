@@ -24,11 +24,12 @@ GlobalState _onChangeLanguage(GlobalState state, Action action) {
 GlobalState _onUpdateLocalUser(GlobalState state, Action action) {
   var cloneState = state.clone();
   LocalUser loginData = action.payload;
-  UserHelper.setLogin(loginData);
   if (cloneState.localUser == null) {
     return cloneState..localUser = loginData;
   }
-  return cloneState..localUser = cloneState.localUser.merge(loginData);
+  var newLocalUser = cloneState.localUser.merge(loginData);
+  UserHelper.setLogin(newLocalUser);
+  return cloneState..localUser = newLocalUser;
 }
 
 GlobalState _onLoginOut(GlobalState state, Action action) {

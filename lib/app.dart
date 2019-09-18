@@ -15,8 +15,9 @@ import 'widget/no_scale_text_widget.dart';
 
 Future<Widget> createApp() async {
   //初始化用户数据
-  GlobalStore.store.getState().localUser = await UserHelper.initLocalUser();
-  println("localUser ${GlobalStore.store.getState().localUser}");
+  var initLocalUser = await UserHelper.initLocalUser();
+  GlobalStore.store.getState().localUser = initLocalUser;
+  println("localUser ${initLocalUser}");
   return OKToast(
     child: MaterialApp(
       debugShowCheckedModeBanner: false,

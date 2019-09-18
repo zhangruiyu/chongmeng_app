@@ -49,7 +49,7 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
     bottomNavigationBar: CMBottomAppBar(
         currentIndex: state.mainPageIndex,
         color: Colors.white,
-        fabLocation: FloatingActionButtonLocation.centerDocked,
+        fabLocation: FloatingActionButtonLocation.centerFloat,
         shape: CircularNotchedRectangle(),
         onTap: (int index) {
           dispatch(MainActionCreator.onChangeNewPage(index));

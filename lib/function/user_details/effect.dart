@@ -14,8 +14,20 @@ Effect<UserDetailsState> buildEffect() {
   return combineEffects(<Object, Effect<UserDetailsState>>{
     UserDetailsAction.Refresh: _onRefresh,
     UserDetailsAction.SkipEditUserPage: _onSkipEditUserPage,
+    Lifecycle.initState: _initState,
     Lifecycle.dispose: _dispose,
   });
+}
+
+void _initState(Action action, Context<UserDetailsState> ctx) {
+//  ctx.state.refreshController = EasyRefreshController();
+//  ctx.state.refreshController?.callRefresh();
+  final TickerProvider tickerProvider = ctx.stfState as UserDetailsPageState;
+  ctx.state
+    ..tabController = new TabController(
+        vsync: tickerProvider,
+        length: ctx.state.pageData.length,
+        initialIndex: 0);
 }
 
 Future _onRefresh(Action action, Context<UserDetailsState> ctx) async {

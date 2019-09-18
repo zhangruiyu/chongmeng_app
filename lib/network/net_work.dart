@@ -76,8 +76,8 @@ class RequestClient {
     var globalState = GlobalStore.store.getState();
     BaseOptions baseOptions = new BaseOptions(
         baseUrl: HttpConstants.BaseUrl,
-        connectTimeout: 10000,
-        receiveTimeout: 10000,
+        connectTimeout: 20000,
+        receiveTimeout: 20000,
         headers: {
           'os': Platform.operatingSystem,
           'version': globalState.packageInfo.version,

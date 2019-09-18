@@ -58,12 +58,12 @@ class LocalUser {
     if (other == null) return this;
 
     return copyWith(
-      userId: other.userId,
-      nickName: other.nickName,
-      sex: other.sex,
-      description: other.description,
-      avatar: other.avatar,
-      token: other.token,
+      userId: other.userId ?? userId,
+      nickName: other.nickName ?? nickName,
+      sex: other.sex ?? sex,
+      description: other.description ?? description,
+      avatar: other.avatar ?? avatar,
+      token: other.token ?? token,
     );
   }
 
