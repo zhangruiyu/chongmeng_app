@@ -88,6 +88,7 @@ Widget buildView(
       children: <Widget>[
         Expanded(
           child: EasyRefresh.custom(
+            key: PageStorageKey<String>("community_details"),
             firstRefresh: true,
             controller: state.easyRefreshController,
             firstRefreshWidget: LoadingWidget(),
