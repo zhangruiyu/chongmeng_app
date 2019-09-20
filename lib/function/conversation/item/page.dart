@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 
+import 'adapter/adapter.dart';
 import 'effect.dart';
 import 'message_body/component.dart';
 import 'reducer.dart';
@@ -15,7 +16,7 @@ class ConversationItemPage
           reducer: buildReducer(),
           view: buildView,
           dependencies: Dependencies<ConversationItemState>(
-              adapter: null,
+              adapter: NoneConn<ConversationItemState>() + MessageBodyAdapter(),
               slots: <String, Dependent<ConversationItemState>>{
 //                  'message':MessageBodyComponent()
               }),
