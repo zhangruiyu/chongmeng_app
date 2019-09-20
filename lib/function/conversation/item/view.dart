@@ -45,7 +45,6 @@ Widget buildView(
               slivers: <Widget>[
                 SliverAnimatedList(
                   key: state.listKey,
-//                  controller: state.controller,
                   itemBuilder:
                       (BuildContext context, int index, Animation animation) {
                     var message = state.messages[index];
