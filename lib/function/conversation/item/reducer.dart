@@ -14,6 +14,11 @@ Reducer<ConversationItemState> buildReducer() {
   );
 }
 
+ConversationItemState _onReSetPage(ConversationItemState state, Action action) {
+  final ConversationItemState newState = state.clone();
+  return newState;
+}
+
 ConversationItemState _onAddSendMessage(
     ConversationItemState state, Action action) {
   final ConversationItemState newState = state.clone();

@@ -34,13 +34,6 @@ void _initState(Action action, Context<ConversationItemState> ctx) {
       ctx.dispatch(ConversationItemActionCreator.onSetTextIsEmpty(textIsEmpty));
     }
   });
-  ctx.state.controller.addListener(() {
-    if (ctx.state.controller.position.pixels ==
-        ctx.state.controller.position.maxScrollExtent) {
-      ///load more when the listView attached the bottom
-      _onRefresh(action, ctx);
-    }
-  });
 
   //message 和 retractedMessage 可能是 JMTextMessage | JMVoiceMessage | JMImageMessage | JMFileMessage | JMEventMessage | JMCustomMessage;
   ctx.state.messageEventListener = (msg) {
@@ -76,17 +69,21 @@ Future _onRefresh(Action action, Context<ConversationItemState> ctx) async {
       .map((item) {
     return item as JMNormalMessage;
   }).toList();
+
   CompleterUtils.complete(action);
   //防止重复刷新数据
   if (messages.length > 0 && currentIndex == ctx.state.localIndex) {
-    println(
-        "加载更多 ${messages.map((itemMessage) => (itemMessage as JMTextMessage).text).toString()}");
+//    println(
+//        "加载更多 ${messages.map((itemMessage) => (itemMessage as JMTextMessage).text).toString()}");
     ctx.dispatch(ConversationItemActionCreator.onAddAllMessage(messages));
     for (int offset = 0; offset < messages.length; offset++) {
       ctx.state.listKey.currentState
           .insertItem(ctx.state.messages.length - messages.length + offset);
     }
   }
+  ctx.state.easyRefreshController.finishLoad(
+      success: true,
+      noMore: messages.length < ConversationItemPage.LocalMessagePageSize);
 }
 
 void _onSendImageMessage(
