@@ -7,7 +7,6 @@ import 'package:chongmeng/global_store/action.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
-import 'package:cookie_jar/cookie_jar.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:path_provider/path_provider.dart';

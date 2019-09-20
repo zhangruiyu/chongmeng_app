@@ -85,7 +85,7 @@ class RequestClient {
         });
 
     if (isPost) {
-      baseOptions.contentType = ContentType.parse(contentType);
+      baseOptions.contentType = contentType;
     }
     Dio dio = new Dio(baseOptions);
 //    String cookiePath = await UserHelper.getCookiePath();

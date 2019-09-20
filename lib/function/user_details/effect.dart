@@ -1,4 +1,5 @@
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/network/net_work.dart';
@@ -14,20 +15,21 @@ Effect<UserDetailsState> buildEffect() {
   return combineEffects(<Object, Effect<UserDetailsState>>{
     UserDetailsAction.Refresh: _onRefresh,
     UserDetailsAction.SkipEditUserPage: _onSkipEditUserPage,
+    UserDetailsAction.RefreshDynamic: _onRefreshDynamic,
+    UserDetailsAction.LoadMoreDynamic: _onSkipEditUserPage,
     Lifecycle.initState: _initState,
     Lifecycle.dispose: _dispose,
   });
 }
 
 void _initState(Action action, Context<UserDetailsState> ctx) {
-//  ctx.state.refreshController = EasyRefreshController();
-//  ctx.state.refreshController?.callRefresh();
   final TickerProvider tickerProvider = ctx.stfState as UserDetailsPageState;
   ctx.state
     ..tabController = new TabController(
         vsync: tickerProvider,
         length: ctx.state.pageData.length,
         initialIndex: 0);
+  ctx.dispatch(UserDetailsActionCreator.onRefresh(null));
 }
 
 Future _onRefresh(Action action, Context<UserDetailsState> ctx) async {
@@ -37,6 +39,27 @@ Future _onRefresh(Action action, Context<UserDetailsState> ctx) async {
   if (result.hasSuccess) {
     ctx.dispatch(UserDetailsActionCreator.onSetUserData(result.data.data));
   }
+}
+
+Future _onRefreshDynamic(Action action, Context<UserDetailsState> ctx) async {
+  var result = await RequestClient.request<DynamicListEntity>(
+    ctx.context,
+    HttpConstants.DynamicList,
+    queryParameters: {
+      'filtrateType': action.payload['filtrateType'],
+      "pageSize": 8,
+      "pageIndex": 0
+    },
+  );
+  action.payload['completer']();
+/*
+  if (result.hasSuccess) {
+    ctx.dispatch(CommunityActionCreator.onResetPageData({
+      'data': result.data.data,
+      'filtrateType': action.payload['filtrateType'],
+      'pageIndex': 1,
+    }));
+  }*/
 }
 
 Future _onSkipEditUserPage(Action action, Context<UserDetailsState> ctx) async {

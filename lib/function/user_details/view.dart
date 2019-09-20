@@ -9,6 +9,8 @@ import 'package:chongmeng/widget/loadling_widget.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart'
+    as extended;
 
 import '../../routes.dart';
 import 'action.dart';
@@ -19,26 +21,19 @@ Widget buildView(
   var of = Theme.of(viewService.context);
   return Scaffold(
     backgroundColor: colorWhite,
-    body: EasyRefresh.custom(
-      firstRefresh: true,
-      firstRefreshWidget: LoadingWidget(),
-      onRefresh: CompleterUtils.produceCompleterAction(
-        dispatch,
-        UserDetailsActionCreator.onRefresh,
-      ),
+    body: CustomScrollView(
       slivers: state.data == null
           ? <Widget>[]
           : <Widget>[
               SliverAppBar(
+                floating: false,
                 pinned: true,
-                forceElevated: true,
-                floating: true,
                 elevation: 0.0,
                 brightness: Brightness.light,
                 leading: BackButton(
                   color: colorBack,
                 ),
-                backgroundColor: Colors.transparent,
+//                backgroundColor: colorWhite,
                 actions: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
@@ -53,87 +48,104 @@ Widget buildView(
                     ),
                   )
                 ],
-                expandedHeight: 235,
+
+                bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(56.0 + 0),
+                  child: Container(
+                    color: colorWhite,
+                    width: double.infinity,
+//                    padding: const EdgeInsets.only(top: 28.0),
+                    child: TabBar(
+                        controller: state.tabController,
+//                        indicator: BoxDecoration(
+//                          color: Theme.of(viewService.context).accentColor,
+//                        ),
+                        indicator: UnderlineTabIndicator(
+                            borderSide: BorderSide(
+                              width: 5.0,
+                              color: Theme.of(viewService.context).accentColor,
+                            ),
+                            insets: EdgeInsets.symmetric(
+                                horizontal: WindowUtils.getScreenWidth() /
+                                    state.pageData.length /
+                                    1.9,
+                                vertical: 2.0)),
+                        tabs: state.pageData.values
+                            .map((item) => Tab(text: item.name))
+                            .toList()),
+                  ),
+                ),
+                expandedHeight: 340,
                 flexibleSpace: FlexibleSpaceBar(
                   collapseMode: CollapseMode.parallax,
-                  background: Stack(
-                    children: <Widget>[
-                      CachedNetworkImage(
-                        height: 230.0,
-                        width: WindowUtils.getScreenWidth(),
-                        fit: BoxFit.cover,
-                        imageUrl:
-                            "https://pics7.baidu.com/feed/14ce36d3d539b600ee906ba88895e02ec75cb799.jpeg?token=4cc8bcf04eaa479fcc085524d0fd2976&s=BB936F854663FEE41895BD230300A040",
-                      ),
-                      Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 18.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(60.0),
-                              ),
-                              border: Border.all(
-                                color: colorWhite,
-                                width: 1.0,
+                  background: Container(
+                    color: colorWhite,
+                    child: Column(
+                      children: <Widget>[
+                        Stack(
+                          children: <Widget>[
+                            CachedNetworkImage(
+                              height: 230.0,
+                              width: WindowUtils.getScreenWidth(),
+                              fit: BoxFit.cover,
+                              imageUrl:
+                                  "https://pics7.baidu.com/feed/14ce36d3d539b600ee906ba88895e02ec75cb799.jpeg?token=4cc8bcf04eaa479fcc085524d0fd2976&s=BB936F854663FEE41895BD230300A040",
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 18.0, top: 200.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(60.0),
+                                  ),
+                                  border: Border.all(
+                                    color: colorWhite,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                child: ClipOval(
+                                    child: CachedNetworkImage(
+                                  width: 60.0,
+                                  height: 60.0,
+                                  fit: BoxFit.cover,
+                                  imageUrl: state.data.avatar,
+                                )),
                               ),
                             ),
-                            child: ClipOval(
-                                child: CachedNetworkImage(
-                              width: 60.0,
-                              height: 60.0,
-                              fit: BoxFit.cover,
-                              imageUrl: state.data.avatar,
-                            )),
-                          ),
+                          ],
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: buildCenter(state, viewService),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-              SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 18.0, top: 20.0),
-                      child: Text(
-                        state.data.nickName,
-                        style: of.textTheme.subhead,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 18.0, top: 10.0),
-                      child: Text(state.data.description,
-                          style: of.textTheme.caption
-                              .merge(TextStyle(color: color7E7E7E))),
-                    ),
-                    buildCenter(state, viewService),
-                  ],
-                ),
-              ),
-              SliverPersistentHeader(
-                  pinned: true,
-                  floating: true,
-                  delegate: _SliverAppBarDelegate(Container(
-                      width: double.infinity,
-                      child: TabBar(
-                          controller: state.tabController,
-                          indicator: BoxDecoration(
-                            color: Theme.of(viewService.context).accentColor,
-                          ),
-                          tabs: state.pageData.values
-                              .map((item) => Tab(text: item.name))
-                              .toList()),
-                      padding: EdgeInsets.only(bottom: 2.0)))),
               SliverFillRemaining(
                 child: TabBarView(
                   controller: state.tabController,
                   children: state.pageData.values.map<Widget>((page) {
-                    return KeepAliveWidget(
-                      child: Text("131312"),
+                    return EasyRefresh.custom(
+                      firstRefresh: true,
+                      firstRefreshWidget: LoadingWidget(),
+                      onRefresh: CompleterUtils.produceCompleterAction(
+                          dispatch, UserDetailsActionCreator.onRefreshDynamic,
+                          params: (Map<String, dynamic> p) {
+                        p['filtrateType'] = page.filtrateType;
+                      }),
+                      onLoad: CompleterUtils.produceCompleterAction(
+                          dispatch, UserDetailsActionCreator.onLoadMoreDynamic,
+                          params: (Map<String, dynamic> p) {
+                        p['filtrateType'] = page.filtrateType;
+                      }),
+                      slivers: <Widget>[
+//                        SliverList(
+//                          delegate: SliverChildListDelegate(),
+//                        )
+                      ],
                     );
                   }).toList(),
                 ),
@@ -194,34 +206,4 @@ Container buildCenter(UserDetailsState state, ViewService viewService) {
       ],
     ),
   );
-}
-
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate(this._tabBar);
-
-  final Widget _tabBar;
-
-  @override
-  double get minExtent => 180.0;
-
-  @override
-  double get maxExtent => 180.0;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      decoration: new BoxDecoration(
-          gradient: LinearGradient(
-              colors: [Color(0xFFfafafa), Color(0xFFfcfcfc), Color(0xFFffffff)],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter)),
-      child: _tabBar,
-    );
-  }
-
-  @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return false;
-  }
 }

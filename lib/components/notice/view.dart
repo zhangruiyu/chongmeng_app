@@ -36,7 +36,7 @@ Widget buildView(
                         textList: state.itemData.map((itemNotice) {
                           return itemNotice;
                         }).toList(),
-                        controller: MarqueeController(),
+//                        controller: MarqueeController(),
                       ),
                     ),
                   ),
