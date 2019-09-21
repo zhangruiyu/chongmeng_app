@@ -16,7 +16,7 @@ Effect<UserDetailsState> buildEffect() {
     UserDetailsAction.Refresh: _onRefresh,
     UserDetailsAction.SkipEditUserPage: _onSkipEditUserPage,
     UserDetailsAction.RefreshDynamic: _onRefreshDynamic,
-    UserDetailsAction.LoadMoreDynamic: _onSkipEditUserPage,
+    UserDetailsAction.LoadMoreDynamic: _onLoadMoreDynamic,
     Lifecycle.initState: _initState,
     Lifecycle.dispose: _dispose,
   });
@@ -46,20 +46,44 @@ Future _onRefreshDynamic(Action action, Context<UserDetailsState> ctx) async {
     ctx.context,
     HttpConstants.DynamicList,
     queryParameters: {
-      'filtrateType': action.payload['filtrateType'],
+      'filtrateType': action.payload['filtrateType'] + "," + "UserIdType",
       "pageSize": 8,
-      "pageIndex": 0
+      "pageIndex": 0,
+      'user_id': UserHelper.getOnlineUser().userId
     },
   );
   action.payload['completer']();
-/*
   if (result.hasSuccess) {
-    ctx.dispatch(CommunityActionCreator.onResetPageData({
+    ctx.dispatch(UserDetailsActionCreator.onResetPageData({
       'data': result.data.data,
       'filtrateType': action.payload['filtrateType'],
       'pageIndex': 1,
     }));
-  }*/
+  }
+}
+
+Future _onLoadMoreDynamic(Action action, Context<UserDetailsState> ctx) async {
+  var filtrateType = action.payload['filtrateType'];
+  var itemPageData = ctx.state.pageData[filtrateType];
+  var result = await RequestClient.request<DynamicListEntity>(
+    ctx.context,
+    HttpConstants.DynamicList,
+    queryParameters: {
+      'filtrateType': action.payload['filtrateType'] + "," + "UserIdType",
+      "pageSize": 8,
+      "pageIndex": itemPageData.pageIndex,
+      'user_id': UserHelper.getOnlineUser().userId
+    },
+  );
+  action.payload['completer']();
+
+  if (result.hasSuccess) {
+    ctx.dispatch(UserDetailsActionCreator.onAddPageListData({
+      'data': result.data.data,
+      'filtrateType': action.payload['filtrateType'],
+      'pageIndex': (itemPageData.pageIndex + 1)
+    }));
+  }
 }
 
 Future _onSkipEditUserPage(Action action, Context<UserDetailsState> ctx) async {

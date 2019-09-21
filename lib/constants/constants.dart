@@ -6,4 +6,4 @@ export 'package:chongmeng/localizetion/default_localization.dart';
 export 'package:chongmeng/utils/completer_utils.dart';
 
 const bool isRelease = false;
-const bool isOnline = true;
+const bool isOnline = false;

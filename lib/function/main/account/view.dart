@@ -19,14 +19,10 @@ import 'state.dart';
 Widget buildView(
     AccountState state, Dispatch dispatch, ViewService viewService) {
   var theme = Theme.of(viewService.context);
-  return state.localUser == null
-      ? buildNoLoginView(theme, viewService)
-      : buildLoginView(theme, viewService, state);
-}
-
-Widget buildLoginView(
-    ThemeData theme, ViewService viewService, AccountState state) {
   var user = state.localUser;
+  if (user == null) {
+    state.data = null;
+  }
   return DefaultTextStyle(
     style: TextStyle(color: colorWhite),
     child: Column(
@@ -34,80 +30,104 @@ Widget buildLoginView(
         GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () {
-            Navigator.pushNamed(
-                viewService.context, PageConstants.UserDetailsPage);
+            UserHelper.loginCheck(viewService.context, () {
+              Navigator.pushNamed(
+                  viewService.context, PageConstants.UserDetailsPage);
+            });
           },
           child: Container(
             color: theme.accentColor,
             padding: EdgeInsets.only(left: 20.0, bottom: 30.0, top: 30.0),
             child: SafeArea(
-              child: Row(
-                children: <Widget>[
-                  ClipOval(
-                      child: CachedNetworkImage(
-                    width: 50.0,
-                    height: 50.0,
-                    imageUrl: user.avatar,
-                    fit: BoxFit.cover,
-                  )),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
+              child: user == null
+                  ? Row(
                       children: <Widget>[
-                        Text(
-                          user.nickName,
-                          style: theme.textTheme.subhead
-                              .merge(TextStyle(color: colorWhite)),
+                        CircleAvatar(
+                          child:
+                              Image.asset('assets/account_page_no_login.png'),
+                          backgroundColor: colorWhite,
                         ),
-                        Text(
-                          user.description?.isEmpty == true
-                              ? "这个人很懒,什么也没有留下~"
-                              : user.description,
-                          style: TextStyle(fontSize: 12.0),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.only(right: 20.0),
-                      alignment: Alignment.centerRight,
-                      child: Stack(
-                        children: <Widget>[
-                          IconButton(
-                            onPressed: () {
-                              NavigatorHelper.pushConversationPage(
-                                  viewService.context);
-                            },
-                            icon: Icon(
-                              Icons.message,
-                              color: colorWhite,
+                        GestureDetector(
+                          onTap: () {
+                            NavigatorHelper.pushPageLoginPage(
+                                viewService.context);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 15.0),
+                            child: Text(
+                              "登录/注册",
                             ),
                           ),
-                          if (state.allUnreadCount > 0)
-                            Positioned(
-                              right: 10.0,
-                              top: 7.0,
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: 10.0,
-                                height: 10.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10.0),
+                        ),
+                      ],
+                    )
+                  : Row(
+                      children: <Widget>[
+                        ClipOval(
+                            child: CachedNetworkImage(
+                          width: 50.0,
+                          height: 50.0,
+                          imageUrl: user.avatar,
+                          fit: BoxFit.cover,
+                        )),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Text(
+                                user.nickName,
+                                style: theme.textTheme.subhead
+                                    .merge(TextStyle(color: colorWhite)),
+                              ),
+                              Text(
+                                user.description?.isEmpty == true
+                                    ? "这个人很懒,什么也没有留下~"
+                                    : user.description,
+                                style: TextStyle(fontSize: 12.0),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.only(right: 20.0),
+                            alignment: Alignment.centerRight,
+                            child: Stack(
+                              children: <Widget>[
+                                IconButton(
+                                  onPressed: () {
+                                    NavigatorHelper.pushConversationPage(
+                                        viewService.context);
+                                  },
+                                  icon: Icon(
+                                    Icons.message,
+                                    color: colorWhite,
                                   ),
                                 ),
-                              ),
-                            )
-                        ],
-                      ),
+                                if (state.allUnreadCount > 0)
+                                  Positioned(
+                                    right: 10.0,
+                                    top: 7.0,
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      width: 10.0,
+                                      height: 10.0,
+                                      decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                  )
-                ],
-              ),
             ),
           ),
         ),

@@ -8,9 +8,8 @@ import 'package:flutter/material.dart';
 import 'model/user_details_entity.dart';
 
 class UserDetailsState implements Cloneable<UserDetailsState> {
-  static final String Main = "Main";
-  static final String AlbuAm = "AlbuAm";
-
+  static final String NewType = "NewType";
+  static final String PicType = "PicType";
   UserDetailsData data;
   TabController tabController;
   LinkedHashMap<String, ItemPageData> pageData;
@@ -27,14 +26,14 @@ class UserDetailsState implements Cloneable<UserDetailsState> {
 UserDetailsState initState(Map<String, dynamic> args) {
   return UserDetailsState()
     ..pageData = LinkedHashMap.from({
-      UserDetailsState.Main: ItemPageData(
+      UserDetailsState.NewType: ItemPageData(
           name: "主页",
-          filtrateType: UserDetailsState.Main,
+          filtrateType: UserDetailsState.NewType,
           data: [],
           pageIndex: 0),
-      UserDetailsState.AlbuAm: ItemPageData(
+      UserDetailsState.PicType: ItemPageData(
           name: "相册",
-          filtrateType: UserDetailsState.AlbuAm,
+          filtrateType: UserDetailsState.PicType,
           data: [],
           pageIndex: 0)
     });

@@ -7,7 +7,9 @@ enum UserDetailsAction {
   Refresh,
   SkipEditUserPage,
   RefreshDynamic,
-  LoadMoreDynamic
+  LoadMoreDynamic,
+  ResetPageData,
+  AddPageListData
 }
 
 class UserDetailsActionCreator {
@@ -29,5 +31,13 @@ class UserDetailsActionCreator {
 
   static Action onSkipEditUserPage() {
     return const Action(UserDetailsAction.SkipEditUserPage);
+  }
+
+  static Action onAddPageListData(Map<String, dynamic> map) {
+    return Action(UserDetailsAction.AddPageListData, payload: map);
+  }
+
+  static Action onResetPageData(Map<String, dynamic> map) {
+    return Action(UserDetailsAction.ResetPageData, payload: map);
   }
 }

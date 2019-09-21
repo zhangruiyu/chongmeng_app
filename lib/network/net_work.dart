@@ -46,7 +46,7 @@ class RequestClient {
       if (context != null &&
           !ignoreToast &&
           !ErrorCode.ignoreToastCode.contains(e.code)) {
-        showToast('$e');
+        showToast('${e.message}');
       }
       return Future<Result<T>>.value(Result.iniFail(e));
     } on DioError catch (e) {

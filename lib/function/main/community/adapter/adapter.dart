@@ -1,5 +1,5 @@
-import 'package:chongmeng/function/main/community/dynamic_component/component.dart';
-import 'package:chongmeng/function/main/community/dynamic_component/state.dart';
+import 'package:chongmeng/components/dynamic/dynamic_component/component.dart';
+import 'package:chongmeng/components/dynamic/dynamic_component/state.dart';
 import 'package:chongmeng/function/main/community/item_body/state.dart';
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
