@@ -46,19 +46,20 @@ Widget buildView(
                   ),
 //                backgroundColor: colorWhite,
                   actions: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: IconButton(
-                        onPressed: () {
-                          dispatch(
-                              UserDetailsActionCreator.onSkipEditUserPage());
-                        },
-                        icon: Icon(
-                          Icons.border_color,
-                          size: 17.0,
+                    if (isSelf)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: IconButton(
+                          onPressed: () {
+                            dispatch(
+                                UserDetailsActionCreator.onSkipEditUserPage());
+                          },
+                          icon: Icon(
+                            Icons.border_color,
+                            size: 17.0,
+                          ),
                         ),
-                      ),
-                    )
+                      )
                   ],
 
                   bottom: PreferredSize(
