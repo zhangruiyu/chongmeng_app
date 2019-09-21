@@ -1,6 +1,6 @@
+import 'package:chongmeng/components/dynamic/adapter/adapter.dart';
 import 'package:fish_redux/fish_redux.dart';
 
-import 'adapter/adapter.dart';
 import 'effect.dart';
 import 'reducer.dart';
 import 'state.dart';

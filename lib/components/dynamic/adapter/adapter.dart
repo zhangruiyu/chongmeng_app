@@ -1,7 +1,7 @@
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
+import 'package:chongmeng/function/user_details/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
-import '../state.dart';
 import 'item_dynamic_adapter_component/component.dart';
 import 'item_dynamic_adapter_component/state.dart';
 import 'state.dart';
@@ -39,7 +39,7 @@ class _UserDetailsDynamicConnector
     return super.subReducer(reducer);
   }
 }
-
+//个人详情页的连接器
 ConnOp<UserDetailsState, UserDetailsDynamicState>
     userDetailsDynamicListConnector() {
   return ConnOp<UserDetailsState, UserDetailsDynamicState>(
