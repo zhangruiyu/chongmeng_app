@@ -22,9 +22,7 @@ Widget buildView(
   var of = Theme.of(viewService.context);
   var buildAdapter = viewService.buildAdapter();
   //是不是用户本人 还是查看别人信息
-  bool isSelf = UserHelper
-      .getOnlineUser()
-      .userId == state.userId;
+  bool isSelf = UserHelper.getOnlineUser().userId == state.userId;
   return Scaffold(
     body: state.data == null
         ? Container()
@@ -50,27 +48,27 @@ Widget buildView(
                   actions: <Widget>[
                     isSelf
                         ? Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: IconButton(
-                        onPressed: () {
-                          dispatch(UserDetailsActionCreator
-                              .onSkipEditUserPage());
-                        },
-                        icon: Icon(
-                          Icons.border_color,
-                          size: 17.0,
-                        ),
-                      ),
-                    )
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: IconButton(
+                              onPressed: () {
+                                dispatch(UserDetailsActionCreator
+                                    .onSkipEditUserPage());
+                              },
+                              icon: Icon(
+                                Icons.border_color,
+                                size: 17.0,
+                              ),
+                            ),
+                          )
                         : Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: IconButton(
-                          onPressed: () {
-                            dispatch(UserDetailsActionCreator
-                                .onSkipConversationPage());
-                          },
-                          icon: Icon(Icons.message),
-                        ))
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: IconButton(
+                              onPressed: () {
+                                dispatch(UserDetailsActionCreator
+                                    .onSkipConversationPage());
+                              },
+                              icon: Icon(Icons.message),
+                            ))
                   ],
 
                   bottom: PreferredSize(

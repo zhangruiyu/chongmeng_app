@@ -110,8 +110,6 @@ Future _onSkipEditUserPage(Action action, Context<UserDetailsState> ctx) async {
 void _dispose(Action action, Context<UserDetailsState> ctx) {
   //不光不为null 还要是本人查看本人信息
   if (ctx.state.data != null &&
-      ctx.state.userId == UserHelper
-          .getOnlineUser()
-          .userId)
+      ctx.state.userId == UserHelper.getOnlineUser().userId)
     UserHelper.updateUserInfo(ctx.state.data);
 }
