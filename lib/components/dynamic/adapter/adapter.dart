@@ -39,6 +39,7 @@ class _UserDetailsDynamicConnector
     return super.subReducer(reducer);
   }
 }
+
 //个人详情页的连接器
 ConnOp<UserDetailsState, UserDetailsDynamicState>
     userDetailsDynamicListConnector() {
