@@ -1,9 +1,11 @@
 import 'dart:collection';
 
+import 'package:chongmeng/components/dynamic/model/item_page_data.dart';
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
 import 'package:chongmeng/function/main/community/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 import 'model/user_details_entity.dart';
 
@@ -30,23 +32,16 @@ UserDetailsState initState(Map<String, dynamic> args) {
           name: "主页",
           filtrateType: UserDetailsState.NewType,
           data: [],
-          pageIndex: 0),
+          pageIndex: 0,
+          easyRefreshController: EasyRefreshController()),
       UserDetailsState.PicType: ItemPageData(
           name: "相册",
           filtrateType: UserDetailsState.PicType,
           data: [],
-          pageIndex: 0)
+          pageIndex: 0,
+          easyRefreshController: EasyRefreshController())
     });
 }
 
 class UserDetailsPageState extends ComponentState<UserDetailsState>
     with SingleTickerProviderStateMixin {}
-
-class ItemPageData {
-  String name;
-  String filtrateType;
-  int pageIndex;
-  List<DynamicListData> data;
-
-  ItemPageData({this.name, this.filtrateType, this.data, this.pageIndex});
-}

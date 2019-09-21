@@ -47,13 +47,15 @@ Future _onRefreshDynamic(Action action, Context<UserDetailsState> ctx) async {
     HttpConstants.DynamicList,
     queryParameters: {
       'filtrateType': action.payload['filtrateType'] + "," + "UserIdType",
-      "pageSize": 8,
+      "pageSize": DynamicPageSize,
       "pageIndex": 0,
       'user_id': UserHelper.getOnlineUser().userId
     },
   );
   action.payload['completer']();
   if (result.hasSuccess) {
+    ctx.state.pageData[action.payload['filtrateType']].easyRefreshController
+        .finishLoad(success: true, noMore: false);
     ctx.dispatch(UserDetailsActionCreator.onResetPageData({
       'data': result.data.data,
       'filtrateType': action.payload['filtrateType'],
@@ -70,7 +72,7 @@ Future _onLoadMoreDynamic(Action action, Context<UserDetailsState> ctx) async {
     HttpConstants.DynamicList,
     queryParameters: {
       'filtrateType': action.payload['filtrateType'] + "," + "UserIdType",
-      "pageSize": 8,
+      "pageSize": DynamicPageSize,
       "pageIndex": itemPageData.pageIndex,
       'user_id': UserHelper.getOnlineUser().userId
     },
@@ -78,6 +80,10 @@ Future _onLoadMoreDynamic(Action action, Context<UserDetailsState> ctx) async {
   action.payload['completer']();
 
   if (result.hasSuccess) {
+    if (result.data.data.length < DynamicPageSize) {
+      ctx.state.pageData[action.payload['filtrateType']].easyRefreshController
+          .finishLoad(success: true, noMore: true);
+    }
     ctx.dispatch(UserDetailsActionCreator.onAddPageListData({
       'data': result.data.data,
       'filtrateType': action.payload['filtrateType'],

@@ -42,6 +42,7 @@ Widget buildView(
             children: state.pageData.values.map<Widget>((page) {
               return KeepAliveWidget(
                 child: EasyRefresh.custom(
+                  controller: page.easyRefreshController,
                   onRefresh: CompleterUtils.produceCompleterAction(
                       dispatch, CommunityActionCreator.onRefresh,
                       params: (Map<String, dynamic> p) {

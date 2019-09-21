@@ -5,5 +5,6 @@ export 'package:chongmeng/widget/vertical_line.dart';
 export 'package:chongmeng/localizetion/default_localization.dart';
 export 'package:chongmeng/utils/completer_utils.dart';
 
+const int DynamicPageSize = 8;
 const bool isRelease = false;
 const bool isOnline = false;

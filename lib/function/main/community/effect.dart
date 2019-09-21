@@ -1,3 +1,4 @@
+import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/network/entity/outermost_entity.dart';
@@ -18,8 +19,8 @@ Effect<CommunityState> buildEffect() {
 }
 
 void _initState(Action action, Context<CommunityState> ctx) {
-  ctx.state.refreshController = EasyRefreshController();
-  ctx.state.refreshController?.callRefresh();
+//  ctx.state.refreshController = EasyRefreshController();
+//  ctx.state.refreshController?.callRefresh();
   final TickerProvider tickerProvider = ctx.stfState as CommunityPageState;
   println("initstate: ${ctx.state.runtimeType}");
   ctx.state
@@ -39,13 +40,15 @@ Future _onRefresh(Action action, Context<CommunityState> ctx) async {
     HttpConstants.DynamicList,
     queryParameters: {
       'filtrateType': action.payload['filtrateType'],
-      "pageSize": 8,
+      "pageSize": DynamicPageSize,
       "pageIndex": 0
     },
   );
   action.payload['completer']();
 
   if (result.hasSuccess) {
+    ctx.state.pageData[action.payload['filtrateType']].easyRefreshController
+        .finishLoad(success: true, noMore: false);
     ctx.dispatch(CommunityActionCreator.onResetPageData({
       'data': result.data.data,
       'filtrateType': action.payload['filtrateType'],
@@ -62,13 +65,17 @@ Future _onLoadMore(Action action, Context<CommunityState> ctx) async {
     HttpConstants.DynamicList,
     queryParameters: {
       'filtrateType': action.payload['filtrateType'],
-      "pageSize": 8,
+      "pageSize": DynamicPageSize,
       "pageIndex": itemPageData.pageIndex
     },
   );
   action.payload['completer']();
 
   if (result.hasSuccess) {
+    if (result.data.data.length < DynamicPageSize) {
+      ctx.state.pageData[action.payload['filtrateType']].easyRefreshController
+          .finishLoad(success: true, noMore: true);
+    }
     ctx.dispatch(CommunityActionCreator.onAddPageListData({
       'data': result.data.data,
       'filtrateType': action.payload['filtrateType'],
