@@ -32,7 +32,8 @@ Widget buildView(
           onTap: () {
             UserHelper.loginCheck(viewService.context, () {
               Navigator.pushNamed(
-                  viewService.context, PageConstants.UserDetailsPage);
+                  viewService.context, PageConstants.UserDetailsPage,
+                  arguments: {'userId': UserHelper.getOnlineUser().userId});
             });
           },
           child: Container(

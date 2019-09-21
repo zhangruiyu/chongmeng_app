@@ -13,7 +13,7 @@ class HttpConstants {
       "app/auth/sendThirdLoginCode"; //发送验证码
   static final String LoginAndRegister = "app/auth/loginAndRegister";
 
-  static final String UserProfile = "app/auth/common/user/profile"; //当前用户信息
+  static final String UserProfile = "app/auth/user/profile"; //获取用户信息
   static final String UserUpdateProfile =
       "app/auth/common/user/updateProfile"; //修改用户信息
   static final String ImLogin = "app/auth/common/user/imLogin"; //极光im登录

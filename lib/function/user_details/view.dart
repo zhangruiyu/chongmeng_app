@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/global_store/store.dart';
+import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/keep_alive_widget.dart';
@@ -20,6 +21,8 @@ Widget buildView(
     UserDetailsState state, Dispatch dispatch, ViewService viewService) {
   var of = Theme.of(viewService.context);
   var buildAdapter = viewService.buildAdapter();
+  //是不是用户本人 还是查看别人信息
+  bool isSelf = state.userId == UserHelper.getOnlineUser().userId;
   return Scaffold(
     body: state.data == null
         ? Container()
@@ -127,7 +130,7 @@ Widget buildView(
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10.0),
-                            child: buildCenter(state, viewService),
+                            child: buildCenter(state, viewService, isSelf),
                           )
                         ],
                       ),
@@ -167,7 +170,8 @@ Widget buildView(
   );
 }
 
-Container buildCenter(UserDetailsState state, ViewService viewService) {
+Container buildCenter(
+    UserDetailsState state, ViewService viewService, bool isSelf) {
   return Container(
     padding: const EdgeInsets.only(bottom: 10.0),
     child: Row(
@@ -191,8 +195,9 @@ Container buildCenter(UserDetailsState state, ViewService viewService) {
         Expanded(
           child: InkResponse(
             onTap: () async {
-              Navigator.pushNamed(
-                  viewService.context, PageConstants.IntegralRecordPage);
+              if (isSelf)
+                Navigator.pushNamed(
+                    viewService.context, PageConstants.IntegralRecordPage);
             },
             child: Column(
               children: <Widget>[
@@ -205,7 +210,9 @@ Container buildCenter(UserDetailsState state, ViewService viewService) {
         Expanded(
           child: InkResponse(
             onTap: () async {
-              Navigator.pushNamed(viewService.context, PageConstants.MyPetPage);
+              if (isSelf)
+                Navigator.pushNamed(
+                    viewService.context, PageConstants.MyPetPage);
             },
             child: Column(
               children: <Widget>[

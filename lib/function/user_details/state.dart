@@ -15,10 +15,13 @@ class UserDetailsState implements Cloneable<UserDetailsState> {
   UserDetailsData data;
   TabController tabController;
   LinkedHashMap<String, ItemPageData> pageData;
+  //查询的id
+  int userId;
 
   @override
   UserDetailsState clone() {
     return UserDetailsState()
+      ..userId = userId
       ..data = data
       ..pageData = pageData
       ..tabController = tabController;
@@ -40,7 +43,8 @@ UserDetailsState initState(Map<String, dynamic> args) {
           data: [],
           pageIndex: 0,
           easyRefreshController: EasyRefreshController())
-    });
+    })
+    ..userId = args['userId'];
 }
 
 class UserDetailsPageState extends ComponentState<UserDetailsState>

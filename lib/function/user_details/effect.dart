@@ -34,7 +34,8 @@ void _initState(Action action, Context<UserDetailsState> ctx) {
 
 Future _onRefresh(Action action, Context<UserDetailsState> ctx) async {
   var result = await RequestClient.request<UserDetailsEntity>(
-      ctx.context, HttpConstants.UserProfile);
+      ctx.context, HttpConstants.UserProfile,
+      queryParameters: {'userId': ctx.state.userId});
   CompleterUtils.complete(action);
   if (result.hasSuccess) {
     ctx.dispatch(UserDetailsActionCreator.onSetUserData(result.data.data));
@@ -49,7 +50,7 @@ Future _onRefreshDynamic(Action action, Context<UserDetailsState> ctx) async {
       'filtrateType': action.payload['filtrateType'] + "," + "UserIdType",
       "pageSize": DynamicPageSize,
       "pageIndex": 0,
-      'user_id': UserHelper.getOnlineUser().userId
+      'user_id': ctx.state.userId
     },
   );
   action.payload['completer']();
@@ -74,7 +75,7 @@ Future _onLoadMoreDynamic(Action action, Context<UserDetailsState> ctx) async {
       'filtrateType': action.payload['filtrateType'] + "," + "UserIdType",
       "pageSize": DynamicPageSize,
       "pageIndex": itemPageData.pageIndex,
-      'user_id': UserHelper.getOnlineUser().userId
+      'user_id': ctx.state.userId
     },
   );
   action.payload['completer']();
