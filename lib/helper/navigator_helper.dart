@@ -233,4 +233,15 @@ class NavigatorHelper {
           });
     }
   }
+
+  ///跳转到对应userid会话页面
+  static Future skipConversationItemPageByUserId(BuildContext context,
+      int userId) async {
+    JMConversationInfo conversation = await jmessage.createConversation(
+        target: JMSingle.fromJson({
+          'username': JiguangUtils.imUserNamePrefix + userId.toString(),
+          "appKey": JiguangUtils.JpushKey
+        }));
+    NavigatorHelper.skipConversationItemPage(context, conversation);
+  }
 }

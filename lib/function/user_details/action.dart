@@ -9,7 +9,8 @@ enum UserDetailsAction {
   RefreshDynamic,
   LoadMoreDynamic,
   ResetPageData,
-  AddPageListData
+  AddPageListData,
+  SkipConversationPage
 }
 
 class UserDetailsActionCreator {
@@ -39,5 +40,11 @@ class UserDetailsActionCreator {
 
   static Action onResetPageData(Map<String, dynamic> map) {
     return Action(UserDetailsAction.ResetPageData, payload: map);
+  }
+
+  static Action onSkipConversationPage() {
+    return Action(
+      UserDetailsAction.SkipConversationPage,
+    );
   }
 }

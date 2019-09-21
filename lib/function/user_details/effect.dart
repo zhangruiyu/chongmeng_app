@@ -1,6 +1,7 @@
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
 import 'package:chongmeng/global_store/store.dart';
+import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
@@ -17,6 +18,7 @@ Effect<UserDetailsState> buildEffect() {
     UserDetailsAction.SkipEditUserPage: _onSkipEditUserPage,
     UserDetailsAction.RefreshDynamic: _onRefreshDynamic,
     UserDetailsAction.LoadMoreDynamic: _onLoadMoreDynamic,
+    UserDetailsAction.SkipConversationPage: _onSkipConversationPage,
     Lifecycle.initState: _initState,
     Lifecycle.dispose: _dispose,
   });
@@ -30,6 +32,11 @@ void _initState(Action action, Context<UserDetailsState> ctx) {
         length: ctx.state.pageData.length,
         initialIndex: 0);
   ctx.dispatch(UserDetailsActionCreator.onRefresh(null));
+}
+
+void _onSkipConversationPage(Action action, Context<UserDetailsState> ctx) {
+  NavigatorHelper.skipConversationItemPageByUserId(
+      ctx.context, ctx.state.userId);
 }
 
 Future _onRefresh(Action action, Context<UserDetailsState> ctx) async {
@@ -101,5 +108,10 @@ Future _onSkipEditUserPage(Action action, Context<UserDetailsState> ctx) async {
 }
 
 void _dispose(Action action, Context<UserDetailsState> ctx) {
-  if (ctx.state.data != null) UserHelper.updateUserInfo(ctx.state.data);
+  //不光不为null 还要是本人查看本人信息
+  if (ctx.state.data != null &&
+      ctx.state.userId == UserHelper
+          .getOnlineUser()
+          .userId)
+    UserHelper.updateUserInfo(ctx.state.data);
 }
