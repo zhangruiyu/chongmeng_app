@@ -144,20 +144,22 @@ Widget buildView(
                     buildAdapter.itemBuilder(viewService.context, index);
                 return extended.NestedScrollViewInnerScrollPositionKeyWidget(
                   Key(index.toString()),
-                  EasyRefresh.custom(
-                    firstRefresh: true,
-                    firstRefreshWidget: LoadingWidget(),
-                    onRefresh: CompleterUtils.produceCompleterAction(
-                        dispatch, UserDetailsActionCreator.onRefreshDynamic,
-                        params: (Map<String, dynamic> p) {
-                      p['filtrateType'] = page.filtrateType;
-                    }),
-                    onLoad: CompleterUtils.produceCompleterAction(
-                        dispatch, UserDetailsActionCreator.onLoadMoreDynamic,
-                        params: (Map<String, dynamic> p) {
-                      p['filtrateType'] = page.filtrateType;
-                    }),
-                    slivers: <Widget>[itemBody],
+                  KeepAliveWidget(
+                    child: EasyRefresh.custom(
+                      firstRefresh: true,
+                      firstRefreshWidget: LoadingWidget(),
+                      onRefresh: CompleterUtils.produceCompleterAction(
+                          dispatch, UserDetailsActionCreator.onRefreshDynamic,
+                          params: (Map<String, dynamic> p) {
+                        p['filtrateType'] = page.filtrateType;
+                      }),
+                      onLoad: CompleterUtils.produceCompleterAction(
+                          dispatch, UserDetailsActionCreator.onLoadMoreDynamic,
+                          params: (Map<String, dynamic> p) {
+                        p['filtrateType'] = page.filtrateType;
+                      }),
+                      slivers: <Widget>[itemBody],
+                    ),
                   ),
                 );
               }).toList(),

@@ -18,6 +18,7 @@ import 'state.dart';
 Widget buildView(
     CommunityState state, Dispatch dispatch, ViewService viewService) {
   println("name ${state.pageData.values}");
+  var buildAdapter = viewService.buildAdapter();
   return Container(
     color: colorWhite,
     child: Column(
@@ -52,7 +53,8 @@ Widget buildView(
                     p['filtrateType'] = page.filtrateType;
                   }),
                   slivers: <Widget>[
-                    viewService.buildComponent(page.filtrateType)
+                    buildAdapter.itemBuilder(viewService.context,
+                        state.pageData.values.toList().indexOf(page))
                   ],
                   firstRefreshWidget: LoadingWidget(),
                   firstRefresh: true,

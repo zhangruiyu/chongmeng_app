@@ -1,9 +1,7 @@
+import 'package:chongmeng/components/dynamic/adapter/adapter.dart';
 import 'package:fish_redux/fish_redux.dart';
 
-import 'adapter/adapter.dart';
 import 'effect.dart';
-import 'item_body/component.dart';
-import 'item_body/state.dart';
 import 'reducer.dart';
 import 'state.dart';
 import 'view.dart';
@@ -15,15 +13,9 @@ class CommunityComponent extends Component<CommunityState> {
           reducer: buildReducer(),
           view: buildView,
           dependencies: Dependencies<CommunityState>(
-              slots: <String, Dependent<CommunityState>>{
-                CommunityState.NewType:
-                    communityBodyConnector(CommunityState.NewType) +
-                        ItemBodyComponent(),
-                CommunityState.VideoType:
-                    communityBodyConnector(CommunityState.VideoType) +
-                        ItemBodyComponent()
-              },
-              adapter: null),
+            slots: <String, Dependent<CommunityState>>{},
+            adapter: communityListConnector() + UserDetailsDynamicAdapter(),
+          ),
         );
 
   @override

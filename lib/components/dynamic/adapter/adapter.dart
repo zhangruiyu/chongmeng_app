@@ -1,4 +1,5 @@
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
+import 'package:chongmeng/function/main/community/state.dart';
 import 'package:chongmeng/function/user_details/state.dart';
 import 'package:fish_redux/fish_redux.dart';
 
@@ -50,6 +51,20 @@ ConnOp<UserDetailsState, UserDetailsDynamicState>
             state.pageData.values.map(((itemTab) => itemTab.data)).toList();
     },
     set: (UserDetailsState state, UserDetailsDynamicState subState) {
+      throw Exception("不支持改变数据");
+    },
+  );
+}
+
+//个人详情页的连接器
+ConnOp<CommunityState, UserDetailsDynamicState> communityListConnector() {
+  return ConnOp<CommunityState, UserDetailsDynamicState>(
+    get: (CommunityState state) {
+      return UserDetailsDynamicState()
+        ..tabData =
+            state.pageData.values.map(((itemTab) => itemTab.data)).toList();
+    },
+    set: (CommunityState state, UserDetailsDynamicState subState) {
       throw Exception("不支持改变数据");
     },
   );
