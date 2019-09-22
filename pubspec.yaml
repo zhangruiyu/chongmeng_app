@@ -11,7 +11,7 @@ description: A new Flutter project.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.0+7
 
 environment:
   sdk: ">=2.3.0 <3.0.0"
@@ -69,6 +69,20 @@ dependencies:
   flutter_vertical_marquee:
     git:
       url: https://github.com/zhangruiyu/flutter_vertical_marquee.git
+  jverify:
+    git:
+      url: https://github.com/zhangruiyu/jverify-flutter-plugin.git
+  extended_text: 0.6.4
+  sliver_animated_list: ^1.0.0
+  jmessage_flutter:
+    git:
+      url: https://github.com/zhangruiyu/jmessage-flutter-plugin.git
+  image_picker_saver: ^0.3.0
+  downloads_path_provider: ^0.1.0
+  emoji_picker: ^0.0.2
+  extended_image: ^0.5.7
+  fluwx: ^1.1.0
+#  gallery_saver: ^1.0.1
 
 dev_dependencies:
   flutter_test:
