@@ -44,5 +44,6 @@ class Toolbar extends AppBar {
             centerTitle: centerTitle,
             titleSpacing: titleSpacing,
             toolbarOpacity: toolbarOpacity,
-            bottomOpacity: bottomOpacity);
+            bottomOpacity: bottomOpacity,
+            actionsIconTheme: IconThemeData(color: colorWhite));
 }

@@ -33,7 +33,9 @@ Widget buildView(
       appBar: Toolbar(
         leading: Row(
           children: <Widget>[
-            BackButtonArrows(),
+            BackButtonArrows(
+              color: colorWhite,
+            ),
           ],
         ),
         title: Text(state.title),
@@ -75,7 +77,7 @@ Widget buildView(
           },
         );
       }),
-      floatingActionButton: FutureBuilder<WebViewController>(
+      /*floatingActionButton: FutureBuilder<WebViewController>(
           future: state.controller.future,
           builder: (BuildContext context,
               AsyncSnapshot<WebViewController> controller) {
@@ -91,7 +93,7 @@ Widget buildView(
               );
             }
             return Container();
-          }),
+          }),*/
     ),
   );
 }

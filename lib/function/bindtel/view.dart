@@ -145,7 +145,7 @@ Widget buildView(
                             NavigatorHelper.pushWebPage(
                                 viewService.context,
                                 "服务及隐私服务协议",
-                                "https://app.dfq.mobi/protocal/privacy");
+                                "${HttpConstants.BaseUrl}/assets/protocol.html");
                           },
                         style: TextStyle(fontSize: 12.0, color: colorFF6000),
                       ),

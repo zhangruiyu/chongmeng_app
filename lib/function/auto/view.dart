@@ -145,7 +145,7 @@ Widget buildView(AutoState state, Dispatch dispatch, ViewService viewService) {
                             NavigatorHelper.pushWebPage(
                                 viewService.context,
                                 "服务及隐私服务协议",
-                                HttpConstants.BaseUrl + "assets/protocol.html");
+                                "${HttpConstants.BaseUrl}/assets/protocol.html");
                           },
                         style: TextStyle(fontSize: 12.0, color: colorFF6000),
                       ),
