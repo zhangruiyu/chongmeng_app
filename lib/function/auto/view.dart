@@ -139,12 +139,12 @@ Widget buildView(AutoState state, Dispatch dispatch, ViewService viewService) {
                     text: "登录即同意 ",
                     children: [
                       TextSpan(
-                        text: "《铲屎官协议》",
+                        text: "《隐私政策与用户协议》",
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             NavigatorHelper.pushWebPage(
                                 viewService.context,
-                                "服务及隐私服务协议",
+                                "隐私政策与用户协议",
                                 "${HttpConstants.BaseUrl}/assets/protocol.html");
                           },
                         style: TextStyle(fontSize: 12.0, color: colorFF6000),

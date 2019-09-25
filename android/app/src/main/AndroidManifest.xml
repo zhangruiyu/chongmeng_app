@@ -35,15 +35,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--微信-->
-        <activity
-            android:name="com.chongmeng.chongmeng.wxapi.WXEntryActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="guanwang" />
+
+
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:theme="@style/DisablePreviewTheme" />
+        <activity-alias
+            android:name="${applicationId}.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:targetActivity=".wxapi.WXEntryActivity"
+            tools:replace="android:targetActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="sdksample" />
+            </intent-filter>
+        </activity-alias>
 
     </application>
 

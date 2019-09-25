@@ -6,5 +6,6 @@ export 'package:chongmeng/localizetion/default_localization.dart';
 export 'package:chongmeng/utils/completer_utils.dart';
 
 const int DynamicPageSize = 8;
+const String WXKey = "wxe2cabfecd003404b";
 const bool isRelease = true;
 const bool isOnline = true;

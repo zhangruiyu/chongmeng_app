@@ -1,6 +1,6 @@
 package com.chongmeng.chongmeng.wxapi;
 
-import com.umeng.socialize.weixin.view.WXCallbackActivity;
+import com.jarvan.fluwx.wxapi.FluwxWXEntryActivity;
 
-public class WXEntryActivity extends WXCallbackActivity {
+public class WXEntryActivity extends FluwxWXEntryActivity {
 }

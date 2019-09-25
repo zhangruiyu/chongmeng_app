@@ -17,7 +17,6 @@ Future<Widget> createApp() async {
   //初始化用户数据
   var initLocalUser = await UserHelper.initLocalUser();
   GlobalStore.store.getState().localUser = initLocalUser;
-  println("localUser ${initLocalUser}");
   return OKToast(
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
