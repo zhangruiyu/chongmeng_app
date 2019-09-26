@@ -55,16 +55,17 @@ android {
         }
 */
         manifestPlaceholders = [
+                //小米 魅族已改
                 JPUSH_PKGNAME : "com.chongmeng.chongmeng",
                 JPUSH_APPKEY : "5273001af03971f6b56827d1", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
                 // 设置manifest.xml中的变量
                 HUAWEI_APPID : "您的应用对应华为的appID", // 华为平台注册的appid
                 // 设置manifest.xml中的变量
-                XIAOMI_APPKEY : "5821799899831", // 小米平台注册的appkey
-                XIAOMI_APPID : "2882303761517998831", // 小米平台注册的appid
-                MEIZU_APPKEY:"bc83ca3ac1e64bcfbca237e12837a1f8",//魅族平台注册的appkey
-                MEIZU_APPID:"3245543",//魅族平台注册的appid
+                XIAOMI_APPKEY : "5311818322318", // 小米平台注册的appkey
+                XIAOMI_APPID : "2882303761518183318", // 小米平台注册的appid
+                MEIZU_APPKEY:"f846969affa94d65bbb522511c4224a2",//魅族平台注册的appkey
+                MEIZU_APPID:"124382",//魅族平台注册的appid
                 // 设置manifest.xml中的变量
                 OPPO_APPKEY : "OP-您的应用对应的OPPO的APPKEY", // OPPO平台注册的appkey
                 OPPO_APPID : "OP-您的应用对应的OPPO的APPID", // OPPO平台注册的appid

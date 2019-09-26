@@ -193,21 +193,22 @@ Widget buildView(
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 18, right: 18),
-                    height: 40.0,
-                    decoration: new BoxDecoration(
-                      gradient: LinearGradient(
-                          colors: [Colors.pink[300], of.accentColor]),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(5.0),
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                      dispatch(ProductDetailsActionCreator.onSkipBuyPage());
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 18, right: 18),
+                      height: 40.0,
+                      decoration: new BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [Colors.pink[300], of.accentColor]),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5.0),
+                        ),
                       ),
-                    ),
-                    alignment: Alignment.center,
-                    child: GestureDetector(
-                      onTap: () {
-                        dispatch(ProductDetailsActionCreator.onSkipBuyPage());
-                      },
+                      alignment: Alignment.center,
                       child: Text(
                         "领券购买",
                         style: TextStyle(color: colorWhite),
@@ -344,6 +345,7 @@ Container buildButton(
     ),
     alignment: Alignment.center,
     child: GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () {
         dispatch(ProductDetailsActionCreator.onSkipBuyPage());
       },

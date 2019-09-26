@@ -4,6 +4,7 @@ import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
+import 'package:oktoast/oktoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'action.dart';
 import 'model/details_entity.dart';
@@ -53,7 +54,12 @@ Future _onShare(Action action, Context<ProductDetailsState> ctx) async {
 }
 
 Future _onSkipBuyPage(Action action, Context<ProductDetailsState> ctx) async {
-  launch(ctx.state.itemData.couponClickUrl);
+  bool isSuccess =
+      await launch(ctx.state.itemData.couponClickUrl, universalLinksOnly: true);
+  println(isSuccess);
+  if (!isSuccess) {
+    showToast("请安装淘宝客户端后重试");
+  }
 }
 
 Future _initState(Action action, Context<ProductDetailsState> ctx) async {

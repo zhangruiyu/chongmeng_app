@@ -18,6 +18,7 @@ Widget buildView(
   const textStyle = const TextStyle();
   var packageInfo = GlobalStore.store.getState().packageInfo;
   return new Scaffold(
+      backgroundColor: const Color(0xffffffff),
       appBar: new Toolbar(
         title: new Text('关于'),
       ),
@@ -27,7 +28,6 @@ Widget buildView(
           Expanded(
             child: new Container(
               padding: const EdgeInsets.only(top: 40.0),
-              color: const Color(0xffffffff),
               child: new Column(children: <Widget>[
                 ClipOval(
                   child: new Image.asset(
@@ -94,6 +94,13 @@ Widget buildView(
                         ])),
                 // onSubmitted：当用户在键盘上点击完成编辑时调用
               ]),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 18.0),
+            child: Text(
+              "Copyright©2019-2019  \n 宠窝工作室版权所有 ",
+              textAlign: TextAlign.center,
             ),
           ),
           if (user != null)
