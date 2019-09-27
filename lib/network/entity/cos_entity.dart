@@ -27,6 +27,9 @@ class CosData {
   String cosPath;
   String tmpSecretKey;
   String sessionToken;
+  String region;
+  String appid;
+  String bucket;
   int expiredTime;
 
   CosData(
@@ -42,6 +45,9 @@ class CosData {
     tmpSecretKey = json['tmpSecretKey'];
     sessionToken = json['sessionToken'];
     expiredTime = json['expiredTime'];
+    region = json['region'];
+    appid = json['appid'];
+    bucket = json['bucket'];
   }
 
   Map<String, dynamic> toJson() {
@@ -51,6 +57,9 @@ class CosData {
     data['tmpSecretKey'] = this.tmpSecretKey;
     data['sessionToken'] = this.sessionToken;
     data['expiredTime'] = this.expiredTime;
+    data['region'] = this.region;
+    data['appid'] = this.appid;
+    data['bucket'] = this.bucket;
     return data;
   }
 }

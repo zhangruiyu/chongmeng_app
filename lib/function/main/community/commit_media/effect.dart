@@ -141,10 +141,24 @@ Future _onUploadCommitVideo(
         "$cosPath${path.basename(File(ctx.state.videoFilePath.localUrl).path)}";
 */
 
-    var videoFutrue = ctx.state.videoFilePath
-        .upload(tmpSecretId, tmpSecretKey, sessionToken, expiredTime, cosPath);
-    var videoThumbnailFutrue = ctx.state.videoThumbnail
-        .upload(tmpSecretId, tmpSecretKey, sessionToken, expiredTime, cosPath);
+    var videoFutrue = ctx.state.videoFilePath.upload(
+        tmpSecretId,
+        tmpSecretKey,
+        sessionToken,
+        expiredTime,
+        cosPath,
+        data.region,
+        data.appid,
+        data.bucket);
+    var videoThumbnailFutrue = ctx.state.videoThumbnail.upload(
+        tmpSecretId,
+        tmpSecretKey,
+        sessionToken,
+        expiredTime,
+        cosPath,
+        data.region,
+        data.appid,
+        data.bucket);
     Future.wait([videoFutrue, videoThumbnailFutrue]).then((List onValue) async {
       var result = await commitComment(
           ctx.context,

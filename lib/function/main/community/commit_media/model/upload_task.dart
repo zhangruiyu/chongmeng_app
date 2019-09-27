@@ -26,12 +26,15 @@ class UploadTask {
     sessionToken,
     expiredTime,
     cosPath,
+    region,
+    appid,
+    bucket,
   ) async {
     this.cosPath = cosPath;
     await TencentCos.uploadByFile(
-        'ap-beijing',
-        '1253631018',
-        "mengchong",
+        region,
+        appid,
+        bucket,
         tmpSecretId,
         tmpSecretKey,
         sessionToken,
@@ -42,8 +45,16 @@ class UploadTask {
   }
 
   Future<String> uploadByData(CosData data) {
-    return upload(data.tmpSecretId, data.tmpSecretKey, data.sessionToken,
-        data.expiredTime, data.cosPath);
+    return upload(
+      data.tmpSecretId,
+      data.tmpSecretKey,
+      data.sessionToken,
+      data.expiredTime,
+      data.cosPath,
+      data.region,
+      data.appid,
+      data.bucket,
+    );
   }
 
   @override
