@@ -55,12 +55,12 @@ android {
         }
 */
         manifestPlaceholders = [
-                //小米 魅族已改
+                //小米 魅族 华为已改
                 JPUSH_PKGNAME : "com.chongmeng.chongmeng",
                 JPUSH_APPKEY : "5273001af03971f6b56827d1", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
                 // 设置manifest.xml中的变量
-                HUAWEI_APPID : "您的应用对应华为的appID", // 华为平台注册的appid
+                HUAWEI_APPID : "100951671", // 华为平台注册的appid
                 // 设置manifest.xml中的变量
                 XIAOMI_APPKEY : "5311818322318", // 小米平台注册的appkey
                 XIAOMI_APPID : "2882303761518183318", // 小米平台注册的appid
