@@ -11,6 +11,7 @@ class AliProductItem {
   String couponEndTime;
   String productId;
   String type;
+  String itemUrl;
 
   AliProductItem(
       {this.volume,
@@ -35,6 +36,7 @@ class AliProductItem {
     couponEndTime = json['coupon_end_time'];
     productId = json['product_id'];
     type = json['type'];
+    itemUrl = json['item_url'];
   }
 
   Map<String, dynamic> toJson() {
@@ -51,6 +53,7 @@ class AliProductItem {
     data['coupon_end_time'] = this.couponEndTime;
     data['product_id'] = this.productId;
     data['type'] = this.type;
+    data['item_url'] = this.itemUrl;
     return data;
   }
 }

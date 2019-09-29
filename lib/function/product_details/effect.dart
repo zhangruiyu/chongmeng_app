@@ -1,5 +1,6 @@
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/share/state.dart';
+import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -58,7 +59,8 @@ Future _onSkipBuyPage(Action action, Context<ProductDetailsState> ctx) async {
       await launch(ctx.state.itemData.couponClickUrl, universalLinksOnly: true);
   println(isSuccess);
   if (!isSuccess) {
-    showToast("请安装淘宝客户端后重试");
+    NavigatorHelper.pushWebPage(
+        ctx.context, ctx.state.itemData.title, ctx.state.itemData.itemUrl);
   }
 }
 
