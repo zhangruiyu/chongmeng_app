@@ -1,5 +1,4 @@
 import 'package:chongmeng/constants/http_constants.dart';
-import 'package:chongmeng/function/main/home/model/home_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/completer_utils.dart';

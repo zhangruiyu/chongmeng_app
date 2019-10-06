@@ -1,10 +1,6 @@
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/main/account/action.dart';
 import 'package:chongmeng/function/main/store/action.dart';
-import 'package:chongmeng/helper/navigator_helper.dart';
-import 'package:chongmeng/routes.dart';
-import 'package:chongmeng/widget/Toolbar.dart';
-import 'package:chongmeng/widget/keep_alive_widget.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/widgets.dart';
@@ -19,6 +15,7 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
       viewService.buildComponent('home'),
       Container(),
       Container(),
+      Container(),
       Container()
     ];
   }
@@ -26,10 +23,13 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
     state.views.replaceRange(1, 2, [viewService.buildComponent('community')]);
   }
   if (state.mainPageIndex == 2 && state.views[2] is Container) {
-    state.views.replaceRange(2, 3, [viewService.buildComponent('store')]);
+    state.views.replaceRange(2, 3, [viewService.buildComponent('adoption')]);
   }
   if (state.mainPageIndex == 3 && state.views[3] is Container) {
-    state.views.replaceRange(3, 4, [viewService.buildComponent('account')]);
+    state.views.replaceRange(3, 4, [viewService.buildComponent('store')]);
+  }
+  if (state.mainPageIndex == 4 && state.views[4] is Container) {
+    state.views.replaceRange(4, 5, [viewService.buildComponent('account')]);
   }
   return Scaffold(
     body: IndexedStack(
@@ -39,10 +39,13 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
     floatingActionButton: FloatingActionButton(
       elevation: 0.0,
       onPressed: () {
-        dispatch(MainActionCreator.onSkipSelectTalkTypePage());
+        dispatch(MainActionCreator.onChangeNewPage(2));
 //        NavigatorHelper.pushConversationPage(viewService.context);
       },
-      child: Text("领"),
+      child: Image.asset(
+        "assets/home_page_adopt.png",
+        width: 30.0,
+      ),
       backgroundColor: Theme.of(viewService.context).accentColor,
     ),
     floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -52,12 +55,13 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
         fabLocation: FloatingActionButtonLocation.centerFloat,
         shape: CircularNotchedRectangle(),
         onTap: (int index) {
-          dispatch(MainActionCreator.onChangeNewPage(index));
+          dispatch(MainActionCreator.onChangeNewPage(
+              index > 1 ? (index + 1) : index));
           if (index == 0) {
             dispatch(HomeActionCreator.onRefresh(null));
-          } else if (index == 2) {
-            dispatch(StoreActionCreator.onRefresh(null));
           } else if (index == 3) {
+            dispatch(StoreActionCreator.onRefresh(null));
+          } else if (index == 4) {
             dispatch(AccountActionCreator.onRefresh(null));
           }
         },
@@ -116,6 +120,16 @@ class _CMBottomAppBarState extends State<CMBottomAppBar> {
 
   addItem(List<Widget> rowContents, int index, BuildContext context) {
     var item = widget.items[index];
+    bool isSelect;
+    if (widget.currentIndex == 2) {
+      isSelect = false;
+    } else {
+      isSelect = (widget.currentIndex > 1
+              ? (widget.currentIndex - 1)
+              : widget.currentIndex) ==
+          index;
+    }
+
     rowContents.add(
       Expanded(
         child: new InkResponse(
@@ -127,7 +141,7 @@ class _CMBottomAppBarState extends State<CMBottomAppBar> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               IndexedStack(
-                index: widget.currentIndex == index ? 1 : 0,
+                index: isSelect ? 1 : 0,
                 children: <Widget>[
                   Image.asset(
                     item.normalIcon,
@@ -140,9 +154,8 @@ class _CMBottomAppBarState extends State<CMBottomAppBar> {
               new Text(
                 item.title,
                 style: TextStyle(
-                    color: widget.currentIndex == index
-                        ? Theme.of(context).accentColor
-                        : color333333,
+                    color:
+                        isSelect ? Theme.of(context).accentColor : color333333,
                     fontSize: 10.0),
               )
             ],

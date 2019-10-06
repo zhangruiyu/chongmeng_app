@@ -1,72 +1,40 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
-import 'package:chongmeng/constants/constants.dart';
-import 'package:chongmeng/routes.dart';
-import 'package:chongmeng/function/adoption/model/adoption_entity.dart';
-import 'package:chongmeng/global_store/store.dart';
-import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
-import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/loadling_widget.dart';
+import 'package:chongmeng/widget/vertical_line.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 import 'action.dart';
-import 'adoption_add/state.dart';
+import 'model/adoption_entity.dart';
 import 'state.dart';
 
 Widget buildView(
     AdoptionState state, Dispatch dispatch, ViewService viewService) {
-  return Scaffold(
-    appBar: Toolbar(
-      title: Text("领养中心"),
-      actions: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(right: 22.0),
-          child: InkResponse(
-            onTap: () {
-              UserHelper.loginCheck(viewService.context, () {
-                Navigator.pushNamed(
-                    viewService.context, PageConstants.AdoptionAddPage,
-                    arguments: {'adoptionAction': AdoptionBackendAction.add});
-              });
-            },
-            child: Container(
-              alignment: Alignment.center,
-              child: Text(
-                "发布更多",
-                style: TextStyle(color: colorWhite),
-              ),
-            ),
-          ),
-        )
-      ],
+  return EasyRefresh.custom(
+    onRefresh: CompleterUtils.produceCompleterAction(
+      dispatch,
+      AdoptionActionCreator.onRefresh,
     ),
-    body: EasyRefresh.custom(
-      onRefresh: CompleterUtils.produceCompleterAction(
-        dispatch,
-        AdoptionActionCreator.onRefresh,
-      ),
-      firstRefreshWidget: LoadingWidget(),
-      firstRefresh: true,
-      slivers: <Widget>[
-        if (state.data != null)
-          SliverToBoxAdapter(
-            child: CachedNetworkImage(
-              imageUrl: state.data.image,
-              fit: BoxFit.fitWidth,
-            ),
+    firstRefreshWidget: LoadingWidget(),
+    firstRefresh: true,
+    slivers: <Widget>[
+      if (state.data != null)
+        SliverToBoxAdapter(
+          child: CachedNetworkImage(
+            imageUrl: state.data.image,
+            fit: BoxFit.fitWidth,
           ),
-        SliverList(
-          delegate:
-              SliverChildBuilderDelegate((BuildContext context, int index) {
-            var data = state.data.adoption[index];
-            return buildItem(state, dispatch, viewService, data);
-          }, childCount: state.data?.adoption?.length ?? 0),
-        )
-      ],
-    ),
+        ),
+      SliverList(
+        delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+          var data = state.data.adoption[index];
+          return buildItem(state, dispatch, viewService, data);
+        }, childCount: state.data?.adoption?.length ?? 0),
+      )
+    ],
   );
 }
 

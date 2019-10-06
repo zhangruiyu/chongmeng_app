@@ -9,7 +9,6 @@ import 'package:chongmeng/function/recipe/model/recipe_entity.dart';
 import 'package:chongmeng/function/safe_center/model/safe_entity.dart';
 import 'package:chongmeng/function/my_order/model/my_order_entity.dart';
 import 'package:chongmeng/function/adoption/my_adoption/model/my_adoption_entity.dart';
-import 'package:chongmeng/function/adoption/model/adoption_entity.dart';
 import 'package:chongmeng/function/search/model/search_result_entity.dart';
 import 'package:chongmeng/function/tally/entity/current_user_tally_entity.dart';
 import 'package:chongmeng/function/tally/entity/tally_tag_entity.dart';
@@ -21,6 +20,7 @@ import 'package:chongmeng/function/my_pet/model/pet_entity.dart';
 import 'package:chongmeng/function/product_details/model/share_product_entity.dart';
 import 'package:chongmeng/function/product_details/model/details_entity.dart';
 import 'package:chongmeng/function/main/home/model/home_entity.dart';
+import 'package:chongmeng/function/main/adoption/model/adoption_entity.dart';
 import 'package:chongmeng/function/main/account/model/account_entity.dart';
 import 'package:chongmeng/function/main/community/details/model/comment_entity.dart';
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
@@ -57,8 +57,6 @@ class EntityFactory {
       return MyOrderEntity.fromJson(json) as T;
     } else if (T.toString() == "MyAdoptionEntity") {
       return MyAdoptionEntity.fromJson(json) as T;
-    } else if (T.toString() == "AdoptionEntity") {
-      return AdoptionEntity.fromJson(json) as T;
     } else if (T.toString() == "SearchResultEntity") {
       return SearchResultEntity.fromJson(json) as T;
     } else if (T.toString() == "CurrentUserTallyEntity") {
@@ -81,6 +79,8 @@ class EntityFactory {
       return DetailsEntity.fromJson(json) as T;
     } else if (T.toString() == "HomeEntity") {
       return HomeEntity.fromJson(json) as T;
+    } else if (T.toString() == "AdoptionEntity") {
+      return AdoptionEntity.fromJson(json) as T;
     } else if (T.toString() == "AccountEntity") {
       return AccountEntity.fromJson(json) as T;
     } else if (T.toString() == "CommentEntity") {

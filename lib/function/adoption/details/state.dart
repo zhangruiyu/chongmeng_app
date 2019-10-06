@@ -1,4 +1,4 @@
-import 'package:chongmeng/function/adoption/model/adoption_entity.dart';
+import 'package:chongmeng/function/main/adoption/model/adoption_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 class AdoptionDetailsState implements Cloneable<AdoptionDetailsState> {

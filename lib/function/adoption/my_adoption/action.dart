@@ -1,4 +1,3 @@
-import 'package:chongmeng/function/adoption/model/adoption_entity.dart';
 import 'package:chongmeng/function/adoption/my_adoption/model/my_adoption_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 

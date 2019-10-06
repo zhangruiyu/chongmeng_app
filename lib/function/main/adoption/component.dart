@@ -5,18 +5,15 @@ import 'reducer.dart';
 import 'state.dart';
 import 'view.dart';
 
-class AdoptionPage extends Page<AdoptionState, Map<String, dynamic>> {
-  AdoptionPage()
+class AdoptionComponent extends Component<AdoptionState> {
+  AdoptionComponent()
       : super(
-            initState: initState,
             effect: buildEffect(),
             reducer: buildReducer(),
             view: buildView,
             dependencies: Dependencies<AdoptionState>(
                 adapter: null,
                 slots: <String, Dependent<AdoptionState>>{
-                }),
-            middleware: <Middleware<AdoptionState>>[
-            ],);
+                }),);
 
 }

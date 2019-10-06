@@ -2,6 +2,7 @@ import 'package:chongmeng/function/main/store/component.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'account/component.dart';
+import 'adoption/component.dart';
 import 'community/component.dart';
 import 'effect.dart';
 import 'home/component.dart';
@@ -21,6 +22,7 @@ class MainPage extends Page<MainState, Map<String, dynamic>> {
               slots: <String, Dependent<MainState>>{
                 'home': homeConnector() + HomeComponent(),
                 'community': communityConnector() + CommunityComponent(),
+                'adoption': adoptionConnector() + AdoptionComponent(),
                 'store': storeConnector() + StoreComponent(),
                 'account': accountConnector() + AccountComponent()
               }),

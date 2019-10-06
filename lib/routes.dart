@@ -8,7 +8,6 @@ import 'package:fish_redux/fish_redux.dart';
 
 import 'function/adoption/adoption_add/page.dart';
 import 'function/adoption/details/page.dart';
-import 'function/adoption/page.dart';
 import 'function/auto/page.dart';
 import 'function/bindtel/page.dart';
 import 'function/conversation/item/page.dart';
@@ -134,7 +133,6 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.ProductDetailsPage: ProductDetailsPage(),
     PageConstants.SearchPage: SearchPage(),
     PageConstants.RecipePage: RecipePage(),
-    PageConstants.AdoptionPage: AdoptionPage(),
     PageConstants.AdoptionAddPage: AdoptionAddPage(),
     PageConstants.AdoptionDetailsPage: AdoptionDetailsPage(),
     PageConstants.MyPetPage: MyPetPage(),

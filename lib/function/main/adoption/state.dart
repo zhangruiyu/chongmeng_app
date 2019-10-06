@@ -9,8 +9,8 @@ class AdoptionState implements Cloneable<AdoptionState> {
   AdoptionState clone() {
     return AdoptionState()..data = data;
   }
-}
 
-AdoptionState initState(Map<String, dynamic> args) {
-  return AdoptionState();
+  static AdoptionState initState(Map<String, dynamic> args) {
+    return AdoptionState();
+  }
 }

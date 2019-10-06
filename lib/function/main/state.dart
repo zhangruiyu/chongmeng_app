@@ -9,12 +9,14 @@ import 'package:chongmeng/helper/model/local_user.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'adoption/state.dart';
 import 'community/state.dart';
 
 class MainState implements GlobalBaseState<MainState> {
   int mainPageIndex;
   HomeState homeState;
   CommunityState communityState;
+  AdoptionState adoptionState;
   AccountState accountState;
   StoreState storeState;
   List<Widget> views;
@@ -28,6 +30,7 @@ class MainState implements GlobalBaseState<MainState> {
       ..views = views
       ..storeState = storeState
       ..communityState = communityState
+      ..adoptionState = adoptionState
       ..accountState = accountState
       ..homeState = homeState;
   }
@@ -43,6 +46,7 @@ MainState initState(Map<String, dynamic> args) {
   return MainState()
     ..mainPageIndex = 0
     ..communityState = CommunityState.initState(args)
+    ..adoptionState = AdoptionState.initState(args)
     ..storeState = StoreState.initState(args)
     ..accountState = AccountState.initState(args)
     ..homeState = HomeState.initState(args);
@@ -66,6 +70,17 @@ ConnOp<MainState, CommunityState> communityConnector() {
     },
     set: (MainState state, CommunityState subState) {
       state.communityState = subState;
+    },
+  );
+}
+
+ConnOp<MainState, AdoptionState> adoptionConnector() {
+  return ConnOp<MainState, AdoptionState>(
+    get: (MainState state) {
+      return state.adoptionState;
+    },
+    set: (MainState state, AdoptionState subState) {
+      state.adoptionState = subState;
     },
   );
 }

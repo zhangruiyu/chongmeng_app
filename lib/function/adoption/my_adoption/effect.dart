@@ -1,7 +1,6 @@
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/function/adoption/adoption_add/state.dart';
-import 'package:chongmeng/function/adoption/model/adoption_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
