@@ -1,4 +1,5 @@
 import 'package:chongmeng/constants/colors.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/loadling_widget.dart';
@@ -21,11 +22,31 @@ Widget buildView(
     body: Column(
       children: <Widget>[
         Container(
-          height: 50.0,
+          height: 100.0,
           alignment: Alignment.center,
           width: double.infinity,
           color: accentColor,
-          child: Text("总萌镚:${state.totalIntegral}个"),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Text("账户余镚:${state.totalIntegral}个"),
+              Container(
+                width: 70.0,
+                child: RaisedButton(
+                  elevation: 0.0,
+                  color: Colors.white,
+                  shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(22.0)),
+                  child: Text("充值"),
+                  textColor: accentColor,
+                  onPressed: () {
+                    Navigator.pushNamed(
+                        viewService.context, PageConstants.RechargePage);
+                  },
+                ),
+              )
+            ],
+          ),
         ),
         Expanded(
           child: EasyRefresh.custom(

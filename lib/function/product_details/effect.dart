@@ -61,6 +61,8 @@ Future _onSkipBuyPage(Action action, Context<ProductDetailsState> ctx) async {
   if (!isSuccess) {
     NavigatorHelper.pushWebPage(
         ctx.context, ctx.state.itemData.title, ctx.state.itemData.itemUrl);
+//    NavigatorHelper.pushWebPage(
+//        ctx.context, ctx.state.itemData.title, "https://h5.m.taobao.com/");
   }
 }
 
