@@ -42,7 +42,7 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
         dispatch(MainActionCreator.onSkipSelectTalkTypePage());
 //        NavigatorHelper.pushConversationPage(viewService.context);
       },
-      child: Icon(Icons.add, semanticLabel: 'Action'),
+      child: Text("领"),
       backgroundColor: Theme.of(viewService.context).accentColor,
     ),
     floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

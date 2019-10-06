@@ -11,6 +11,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
+import '../action.dart';
 import 'action.dart';
 import 'index_inherited.dart';
 import 'state.dart';
@@ -19,9 +20,16 @@ Widget buildView(
     CommunityState state, Dispatch dispatch, ViewService viewService) {
   println("name ${state.pageData.values}");
   var buildAdapter = viewService.buildAdapter();
-  return Container(
-    color: colorWhite,
-    child: Column(
+  return Scaffold(
+    backgroundColor: colorWhite,
+    floatingActionButton: FloatingActionButton(
+      heroTag: "community_floatingActionButton",
+      onPressed: () {
+        dispatch(MainActionCreator.onSkipSelectTalkTypePage());
+      },
+      child: const Icon(Icons.add),
+    ),
+    body: Column(
       children: <Widget>[
         Container(
             width: double.infinity,
