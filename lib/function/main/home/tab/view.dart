@@ -15,13 +15,13 @@ Widget buildView(TabState state, Dispatch dispatch, ViewService viewService) {
         height: 80.0,
         child: Row(
           children: state.tabData
-              .sublist(0, 4)
+              .sublist(0, 5)
               .map<Widget>(
                   (itemMenu) => buildItem(state, itemMenu, viewService))
               .toList(),
         ),
       ),
-      if (state.tabData.length > 4)
+      /*if (state.tabData.length > 5)
         SizedBox(
           height: 80.0,
           child: Row(
@@ -31,7 +31,7 @@ Widget buildView(TabState state, Dispatch dispatch, ViewService viewService) {
                     (itemMenu) => buildItem(state, itemMenu, viewService))
                 .toList(),
           ),
-        ),
+        ),*/
     ],
   );
 }
@@ -44,18 +44,13 @@ buildItem(TabState state, HomeDataTab itemMenu, viewService) {
           UserHelper.loginCheck(viewService.context, () {
             Navigator.pushNamed(viewService.context, PageConstants.TallyPage);
           });
-        } else if (itemMenu.action == "signin") {
-          UserHelper.loginCheck(viewService.context, () {
-            Navigator.pushNamed(viewService.context, PageConstants.SignInPage);
-          });
+          UserHelper.loginCheck(viewService.context, () {});
         } else if (itemMenu.action == "cat" || itemMenu.action == "dog") {
           Navigator.pushNamed(viewService.context, PageConstants.SearchPage,
               arguments: {'initChip': itemMenu.chips});
         } else if (itemMenu.action == "recipe") {
           Navigator.pushNamed(viewService.context, PageConstants.RecipePage,
               arguments: {'recipe': state.recipe});
-        } else if (itemMenu.action == "adopt") {
-          Navigator.pushNamed(viewService.context, PageConstants.AdoptionPage);
         } else {
           showToast("此功能正在开发中");
         }

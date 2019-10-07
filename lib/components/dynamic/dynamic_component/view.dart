@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/global_store/store.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/vertical_line.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -72,6 +73,20 @@ Widget buildFunCell(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(right: 8.0),
+          child: IconButton(
+            onPressed: () {
+              Navigator.pushNamed(
+                  viewService.context, PageConstants.ComplainPage);
+            },
+            icon: Icon(
+              MdiIcons.dotsVertical,
+              size: 25.0,
+              color: Colors.grey,
+            ),
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.only(right: 8.0),
           child: IconButton(

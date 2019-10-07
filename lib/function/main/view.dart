@@ -55,13 +55,14 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
         fabLocation: FloatingActionButtonLocation.centerFloat,
         shape: CircularNotchedRectangle(),
         onTap: (int index) {
+          println("index" + index.toString());
           dispatch(MainActionCreator.onChangeNewPage(
               index > 1 ? (index + 1) : index));
           if (index == 0) {
             dispatch(HomeActionCreator.onRefresh(null));
-          } else if (index == 3) {
+          } else if (index == 2) {
             dispatch(StoreActionCreator.onRefresh(null));
-          } else if (index == 4) {
+          } else if (index == 3) {
             dispatch(AccountActionCreator.onRefresh(null));
           }
         },

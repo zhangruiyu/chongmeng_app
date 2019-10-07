@@ -10,6 +10,7 @@ import 'function/adoption/adoption_add/page.dart';
 import 'function/adoption/details/page.dart';
 import 'function/auto/page.dart';
 import 'function/bindtel/page.dart';
+import 'function/complain/page.dart';
 import 'function/conversation/item/page.dart';
 import 'function/integral/recharge/page.dart';
 import 'function/integral/record/page.dart';
@@ -102,6 +103,7 @@ class PageConstants {
   static String get SafeCenterPage => "cm://SafeCenterPage"; //安全中心
   static String get CouponDetailPage => "cm://CouponDetailPage"; //饿了吗优惠券详情
   static String get RechargePage => "cm://RechargePage"; //充值
+  static String get ComplainPage => "cm://ComplainPage"; //投诉
 }
 
 final AbstractRoutes routes = PageRoutes(
@@ -149,6 +151,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.SafeCenterPage: SafeCenterPage(),
     PageConstants.CouponDetailPage: CouponDetailPage(),
     PageConstants.RechargePage: RechargePage(),
+    PageConstants.ComplainPage: ComplainPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

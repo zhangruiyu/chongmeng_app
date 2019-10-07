@@ -81,7 +81,6 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
               ),
               SliverPersistentHeader(
                   pinned: true,
-                  floating: true,
                   delegate: _SliverAppBarDelegate(Card(
                     margin: const EdgeInsets.all(8.0),
                     child: viewService.buildComponent("tab"),
@@ -104,10 +103,10 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final Widget _tabBar;
 
   @override
-  double get minExtent => 180.0;
+  double get minExtent => 100.0;
 
   @override
-  double get maxExtent => 180.0;
+  double get maxExtent => 100.0;
 
   @override
   Widget build(
