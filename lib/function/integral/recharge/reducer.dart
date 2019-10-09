@@ -7,6 +7,7 @@ Reducer<RechargeState> buildReducer() {
   return asReducer(
     <Object, Reducer<RechargeState>>{
       RechargeAction.ChangeSelectPosition: _onChangeSelectPosition,
+      RechargeAction.ReSetData: _onReSetData,
     },
   );
 }
@@ -14,5 +15,10 @@ Reducer<RechargeState> buildReducer() {
 RechargeState _onChangeSelectPosition(RechargeState state, Action action) {
   final RechargeState newState = state.clone()
     ..selectItemPosition = action.payload;
+  return newState;
+}
+
+RechargeState _onReSetData(RechargeState state, Action action) {
+  final RechargeState newState = state.clone()..data = action.payload;
   return newState;
 }

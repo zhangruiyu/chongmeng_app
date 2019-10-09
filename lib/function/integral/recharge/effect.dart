@@ -1,9 +1,11 @@
+import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:fluwx/fluwx.dart';
 import 'package:oktoast/oktoast.dart';
 import 'action.dart';
+import 'model/recharge_commodity_entity.dart';
 import 'model/wx_pay_entity.dart';
 import 'state.dart';
 import 'package:fluwx/fluwx.dart' as fluwx;
@@ -13,7 +15,17 @@ Effect<RechargeState> buildEffect() {
     Lifecycle.initState: _initState,
     Lifecycle.dispose: _dispose,
     RechargeAction.Pay: _onPay,
+    RechargeAction.Refresh: _onRefresh,
   });
+}
+
+Future _onRefresh(Action action, Context<RechargeState> ctx) async {
+  var result = await RequestClient.request<RechargeCommodityEntity>(
+      ctx.context, HttpConstants.MoneyAllCommodity);
+  CompleterUtils.complete(action);
+  if (result.hasSuccess) {
+    ctx.dispatch(RechargeActionCreator.onReSetData(result.data.data));
+  }
 }
 
 void _dispose(Action action, Context<RechargeState> ctx) {}
@@ -31,9 +43,10 @@ void _initState(Action action, Context<RechargeState> ctx) {
 }
 
 Future _onPay(Action action, Context<RechargeState> ctx) async {
+  var itemCommodity = ctx.state.data[ctx.state.selectItemPosition];
   var result = await RequestClient.request<WxPayEntity>(
       ctx.context, HttpConstants.PayPre,
-      queryParameters: {'price': '0.1'});
+      queryParameters: {'commodityId': itemCommodity.id});
   if (result.hasSuccess) {
     var data = result.data.data;
     //安装微信

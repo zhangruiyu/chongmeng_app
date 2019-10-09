@@ -26,6 +26,7 @@ import 'package:chongmeng/function/main/community/details/model/comment_entity.d
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
 import 'package:chongmeng/function/main/store/coupon_detail/model/coupon_entity.dart';
 import 'package:chongmeng/function/main/store/model/integral_commodity_entity.dart';
+import 'package:chongmeng/function/integral/recharge/model/recharge_commodity_entity.dart';
 import 'package:chongmeng/function/integral/recharge/model/wx_pay_entity.dart';
 import 'package:chongmeng/function/integral/model/total_integral_entity.dart';
 import 'package:chongmeng/function/integral/model/integral_record_entity.dart';
@@ -92,6 +93,8 @@ class EntityFactory {
       return CouponEntity.fromJson(json) as T;
     } else if (T.toString() == "IntegralCommodityEntity") {
       return IntegralCommodityEntity.fromJson(json) as T;
+    } else if (T.toString() == "RechargeCommodityEntity") {
+      return RechargeCommodityEntity.fromJson(json) as T;
     } else if (T.toString() == "WxPayEntity") {
       return WxPayEntity.fromJson(json) as T;
     } else if (T.toString() == "TotalIntegralEntity") {

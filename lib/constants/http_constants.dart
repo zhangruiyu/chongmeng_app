@@ -85,6 +85,8 @@ class HttpConstants {
   static String get PetList => "/app/pet/common/petList"; //当前用户宠物列表
   static String get Elema => "/app/coupon/common/elema"; //获取优惠券
   static String get PayPre => "/app/money/common/pay/wx/pre"; //充值支付pre
+  static String get MoneyAllCommodity =>
+      "/app/money/common/pay/allCommodity"; //充值的所有商品
 }
 
 class CosType {
