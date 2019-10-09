@@ -25,6 +25,7 @@ import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app.dart';
 import 'helper/permission_helper.dart';
+import 'helper/qqwx_helper.dart';
 
 Future main() async {
   var isAgree = await PermissionHelper.checkStartAppPermission();
@@ -50,4 +51,5 @@ void iniAsync() async {
     ..channel = channel
     ..sp = await SharedPreferences.getInstance();
   JiguangUtils.init(channel);
+  QQWXHelper.init();
 }

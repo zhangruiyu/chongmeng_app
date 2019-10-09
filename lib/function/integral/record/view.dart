@@ -30,7 +30,7 @@ Widget buildView(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Text("账户余镚:${state.totalIntegral}个"),
-              /* Container(
+              Container(
                 width: 70.0,
                 child: RaisedButton(
                   elevation: 0.0,
@@ -44,7 +44,7 @@ Widget buildView(
                         viewService.context, PageConstants.RechargePage);
                   },
                 ),
-              )*/
+              )
             ],
           ),
         ),

@@ -5,8 +5,9 @@ class HttpConstants {
 //  static final String BaseUrl = "https://api.mustbe.xyz/";
 //  static final String BaseStaticUrl = "https://app.mustbe.xyz/";
 //上线 为家里 测试为公司
-  static final String BaseUrl =
-      isOnline ? "https://www.keleyuanyuan.xyz/" : "http://192.168.6.211:8080/";
+  static final String BaseUrl = isOnline
+      ? "https://www.keleyuanyuan.xyz/"
+      : "http://192.168.43.148:8080/";
 
   static final String SendCode = "app/auth/sendLoginCode"; //发送验证码
   static final String SendThirdLoginCode =
@@ -83,6 +84,7 @@ class HttpConstants {
       "/app/adoption/common/updateAdoption"; //更改领养信息
   static String get PetList => "/app/pet/common/petList"; //当前用户宠物列表
   static String get Elema => "/app/coupon/common/elema"; //获取优惠券
+  static String get PayPre => "/app/money/common/pay/wx/pre"; //充值支付pre
 }
 
 class CosType {
