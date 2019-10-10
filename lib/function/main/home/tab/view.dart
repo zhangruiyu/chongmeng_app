@@ -51,6 +51,11 @@ buildItem(TabState state, HomeDataTab itemMenu, viewService) {
         } else if (itemMenu.action == "recipe") {
           Navigator.pushNamed(viewService.context, PageConstants.RecipePage,
               arguments: {'recipe': state.recipe});
+        } else if (itemMenu.action == "signin") {
+          UserHelper.loginCheck(viewService.context, () {
+            Navigator.pushNamed(viewService.context, PageConstants.SignInPage);
+          });
+          UserHelper.loginCheck(viewService.context, () {});
         } else {
           showToast("此功能正在开发中");
         }
