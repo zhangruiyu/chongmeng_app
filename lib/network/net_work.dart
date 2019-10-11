@@ -107,7 +107,6 @@ class RequestClient {
     if (response.statusCode == HttpStatus.ok) {
       var data = response.data;
 
-      var string = json.encode(data);
       if (data['status'].toString() == ErrorCode.Login.toString()) {
         UserHelper.logout(context);
         return new Future.error(new NetException(data['status'], data['msg']));
@@ -183,5 +182,6 @@ class ErrorCode {
   static int NormalError = 500;
   static int BIND_TEL_ERROR_CODE = 1002; // 第三方登录需要绑定手机号
   static int Login = 1003; // 下线
-  static List<int> ignoreToastCode = [BIND_TEL_ERROR_CODE];
+  static int RECHARGE = 1004; // 积分不足,请充值
+  static List<int> ignoreToastCode = [BIND_TEL_ERROR_CODE, RECHARGE];
 }

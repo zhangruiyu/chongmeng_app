@@ -63,6 +63,10 @@ Future _onBuy(Action action, Context<IntegralCommodityDetailState> ctx) async {
           });
       if (result.hasSuccess) {
         showSuccessDialog(ctx);
+      } else {
+        if (result.error.code == ErrorCode.RECHARGE) {
+          Navigator.pushNamed(ctx.context, PageConstants.RechargePage);
+        }
       }
     }
   }
