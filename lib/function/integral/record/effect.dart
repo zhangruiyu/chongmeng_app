@@ -1,3 +1,4 @@
+import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/function/integral/model/integral_record_entity.dart';
 import 'package:chongmeng/function/integral/model/total_integral_entity.dart';
@@ -32,14 +33,16 @@ Future _onRefresh(Action action, Context<IntegralRecordState> ctx) async {
   var result = await RequestClient.request<IntegralRecordEntity>(
     ctx.context,
     HttpConstants.IntegralList,
-    queryParameters: {"pageSize": 5, "pageIndex": 0},
+    queryParameters: {"pageSize": 20, "pageIndex": 0},
   );
-  action.payload['completer']();
+  CompleterUtils.complete(action);
 
   if (result.hasSuccess) {
     ctx.dispatch(IntegralRecordActionCreator.onAddPageListData({
       'data': result.data.data,
     }));
+    ctx.state.easyRefreshController
+        .finishLoad(success: true, noMore: result.data.data.length < 20);
   }
 }
 
@@ -47,11 +50,13 @@ Future _onLoadMore(Action action, Context<IntegralRecordState> ctx) async {
   var result = await RequestClient.request<IntegralRecordEntity>(
     ctx.context,
     HttpConstants.IntegralList,
-    queryParameters: {"pageSize": 5, "pageIndex": ctx.state.index},
+    queryParameters: {"pageSize": 20, "pageIndex": ctx.state.index},
   );
   action.payload['completer']();
 
   if (result.hasSuccess) {
+    ctx.state.easyRefreshController
+        .finishLoad(success: true, noMore: result.data.data.length < 20);
     ctx.dispatch(IntegralRecordActionCreator.onAddPageMoreListData({
       'data': result.data.data,
     }));

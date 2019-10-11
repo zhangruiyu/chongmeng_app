@@ -29,6 +29,7 @@ class WxPayData {
   String partnerid;
   String prepayid;
   String noncestr;
+  String orderId;
   int timestamp;
 
   WxPayData(
@@ -38,6 +39,7 @@ class WxPayData {
       this.partnerid,
       this.prepayid,
       this.noncestr,
+      this.orderId,
       this.timestamp});
 
   WxPayData.fromJson(Map<String, dynamic> json) {
@@ -48,6 +50,7 @@ class WxPayData {
     prepayid = json['prepayid'];
     noncestr = json['noncestr'];
     timestamp = json['timestamp'];
+    orderId = json['orderId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -59,6 +62,7 @@ class WxPayData {
     data['prepayid'] = this.prepayid;
     data['noncestr'] = this.noncestr;
     data['timestamp'] = this.timestamp;
+    data['orderId'] = this.orderId;
     return data;
   }
 }

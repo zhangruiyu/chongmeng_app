@@ -1,10 +1,13 @@
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/network/net_work.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'package:fluwx/fluwx.dart';
 import 'package:oktoast/oktoast.dart';
 import 'action.dart';
+import 'model/pay_result_entity.dart';
 import 'model/recharge_commodity_entity.dart';
 import 'model/wx_pay_entity.dart';
 import 'state.dart';
@@ -31,10 +34,28 @@ Future _onRefresh(Action action, Context<RechargeState> ctx) async {
 void _dispose(Action action, Context<RechargeState> ctx) {}
 
 void _initState(Action action, Context<RechargeState> ctx) {
-  fluwx.responseFromPayment.listen((WeChatPaymentResponse response) {
+  //查询充值状态
+  fluwx.responseFromPayment.listen((WeChatPaymentResponse response) async {
     //支付成功
     if (response.errCode == 0) {
       //轮训请求
+      var orderId = response.extData;
+      var result = await RequestClient.request<PayResultEntity>(
+          ctx.context, HttpConstants.PayStatus,
+          queryParameters: {'order_id': orderId, "pay_type": "wechat"},
+          showLoadingIndicator: true);
+      if (result.hasSuccess) {
+        if (result.data.data.status == 1 || result.data.data.status == 2) {
+          Navigator.pushReplacementNamed(
+              ctx.context, PageConstants.PayResultPage,
+              arguments: {'data': result.data.data});
+        } else {
+          showToast("未查询到支付成功信息,请稍后在积分列表查看,或咨询加入QQ群咨询客服",
+              duration: Duration(
+                milliseconds: 5000,
+              ));
+        }
+      }
     } else {
       showToast(response.errStr);
     }
@@ -46,22 +67,22 @@ Future _onPay(Action action, Context<RechargeState> ctx) async {
   var itemCommodity = ctx.state.data[ctx.state.selectItemPosition];
   var result = await RequestClient.request<WxPayEntity>(
       ctx.context, HttpConstants.PayPre,
+      showLoadingIndicator: true,
       queryParameters: {'commodityId': itemCommodity.id});
   if (result.hasSuccess) {
     var data = result.data.data;
     //安装微信
     if (await fluwx.isWeChatInstalled()) {
       fluwx.pay(
-        appId: data.appid,
-        partnerId: data.partnerid,
-        prepayId: data.prepayid,
-        packageValue: data.package,
-        nonceStr: data.noncestr,
-        timeStamp: data.timestamp,
-        sign: data.sign,
+          appId: data.appid,
+          partnerId: data.partnerid,
+          prepayId: data.prepayid,
+          packageValue: data.package,
+          nonceStr: data.noncestr,
+          timeStamp: data.timestamp,
+          sign: data.sign,
 //          signType: '选填',
-//          extData: '选填'
-      );
+          extData: data.orderId);
     }
   }
 }

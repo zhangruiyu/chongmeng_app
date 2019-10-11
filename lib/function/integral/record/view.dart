@@ -39,9 +39,10 @@ Widget buildView(
                       borderRadius: new BorderRadius.circular(22.0)),
                   child: Text("充值"),
                   textColor: accentColor,
-                  onPressed: () {
-                    Navigator.pushNamed(
+                  onPressed: () async {
+                    await Navigator.pushNamed(
                         viewService.context, PageConstants.RechargePage);
+                    dispatch(IntegralRecordActionCreator.onRefresh(null));
                   },
                 ),
               )
@@ -50,7 +51,8 @@ Widget buildView(
         ),
         Expanded(
           child: EasyRefresh.custom(
-//            enableControlFinishLoad: true,
+            controller: state.easyRefreshController,
+            enableControlFinishLoad: true,
 //            enableControlFinishRefresh: true,
             onRefresh: CompleterUtils.produceCompleterAction(
               dispatch,
