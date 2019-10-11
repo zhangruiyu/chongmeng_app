@@ -29,7 +29,7 @@ Future _initState(
 
   if (result.hasSuccess) {
     ctx.dispatch(IntegralCommodityDetailActionCreator.onSetTotalIntegral(
-        result.data.data));
+        result.data.data.total));
   }
 }
 
@@ -40,7 +40,7 @@ Future _onBuy(Action action, Context<IntegralCommodityDetailState> ctx) async {
       HttpConstants.TotalIntegral,
     );
     if (result.hasSuccess) {
-      ctx.state.totalIntegral = result.data.data;
+      ctx.state.totalIntegral = result.data.data.total;
     }
   }
 

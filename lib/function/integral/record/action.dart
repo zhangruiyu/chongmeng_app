@@ -1,3 +1,4 @@
+import 'package:chongmeng/function/integral/model/total_integral_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 enum IntegralRecordAction {
@@ -30,7 +31,7 @@ class IntegralRecordActionCreator {
     return Action(IntegralRecordAction.AddPageMoreListData, payload: map);
   }
 
-  static Action onSetTotalIntegral(int total) {
+  static Action onSetTotalIntegral(TotalIntegralData total) {
     return Action(IntegralRecordAction.SetTotalIntegral, payload: total);
   }
 }

@@ -61,7 +61,7 @@ Widget buildView(
                               Text("  赠送${itemRecharge.give}"),
                             ],
                           ),
-                          Text("¥ ${itemRecharge.money}"),
+                          Text("¥ ${itemRecharge.showMoney} 元"),
                         ],
                       ),
                     ),

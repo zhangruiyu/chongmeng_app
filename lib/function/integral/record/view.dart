@@ -29,23 +29,24 @@ Widget buildView(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Text("账户余镚:${state.totalIntegral}个"),
-              Container(
-                width: 70.0,
-                child: RaisedButton(
-                  elevation: 0.0,
-                  color: Colors.white,
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(22.0)),
-                  child: Text("充值"),
-                  textColor: accentColor,
-                  onPressed: () async {
-                    await Navigator.pushNamed(
-                        viewService.context, PageConstants.RechargePage);
-                    dispatch(IntegralRecordActionCreator.onRefresh(null));
-                  },
-                ),
-              )
+              Text("账户余镚:${state.totalIntegral?.total ?? "正在获取"}个"),
+              if (state.totalIntegral?.showRecharge == false)
+                Container(
+                  width: 70.0,
+                  child: RaisedButton(
+                    elevation: 0.0,
+                    color: Colors.white,
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(22.0)),
+                    child: Text("充值"),
+                    textColor: accentColor,
+                    onPressed: () async {
+                      await Navigator.pushNamed(
+                          viewService.context, PageConstants.RechargePage);
+                      dispatch(IntegralRecordActionCreator.onRefresh(null));
+                    },
+                  ),
+                )
             ],
           ),
         ),

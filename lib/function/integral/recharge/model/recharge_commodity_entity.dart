@@ -31,6 +31,7 @@ class RechargeCommodityData {
   int give;
   int original;
   int money;
+  String showMoney;
   String createTime;
   int id;
 
@@ -43,6 +44,7 @@ class RechargeCommodityData {
     money = json['money'];
     createTime = json['create_time'];
     id = json['id'];
+    showMoney = json['showMoney'];
   }
 
   Map<String, dynamic> toJson() {
@@ -52,6 +54,7 @@ class RechargeCommodityData {
     data['money'] = this.money;
     data['create_time'] = this.createTime;
     data['id'] = this.id;
+    data['showMoney'] = this.showMoney;
     return data;
   }
 }

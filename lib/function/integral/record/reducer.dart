@@ -32,6 +32,6 @@ IntegralRecordState _onAddPageMoreListData(
 IntegralRecordState _onSetTotalIntegral(
     IntegralRecordState state, Action action) {
   final IntegralRecordState newState = state.clone()
-    ..totalIntegral = action.payload.toString();
+    ..totalIntegral = action.payload;
   return newState;
 }

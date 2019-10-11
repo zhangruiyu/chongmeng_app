@@ -67,6 +67,7 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>weixinULAPI</string>
 		<string>wechat</string>
 		<string>weixin</string>
 		<string>mqqapi</string>

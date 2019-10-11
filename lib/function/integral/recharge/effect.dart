@@ -37,9 +37,9 @@ void _initState(Action action, Context<RechargeState> ctx) {
   //查询充值状态
   fluwx.responseFromPayment.listen((WeChatPaymentResponse response) async {
     //支付成功
-    if (response.errCode == 0) {
+    if (response.errCode == 0 && ctx.state.payPre != null) {
       //轮训请求
-      var orderId = response.extData;
+      var orderId = ctx.state.payPre.orderId;
       var result = await RequestClient.request<PayResultEntity>(
           ctx.context, HttpConstants.PayStatus,
           queryParameters: {'order_id': orderId, "pay_type": "wechat"},
@@ -57,7 +57,7 @@ void _initState(Action action, Context<RechargeState> ctx) {
         }
       }
     } else {
-      showToast(response.errStr);
+      showToast("支付失败${response.errStr}");
     }
     println("response:::: ${response.errCode}");
   });
@@ -71,18 +71,20 @@ Future _onPay(Action action, Context<RechargeState> ctx) async {
       queryParameters: {'commodityId': itemCommodity.id});
   if (result.hasSuccess) {
     var data = result.data.data;
+    ctx.state.payPre = data;
     //安装微信
     if (await fluwx.isWeChatInstalled()) {
       fluwx.pay(
-          appId: data.appid,
-          partnerId: data.partnerid,
-          prepayId: data.prepayid,
-          packageValue: data.package,
-          nonceStr: data.noncestr,
-          timeStamp: data.timestamp,
-          sign: data.sign,
+        appId: data.appid,
+        partnerId: data.partnerid,
+        prepayId: data.prepayid,
+        packageValue: data.package,
+        nonceStr: data.noncestr,
+        timeStamp: data.timestamp,
+        sign: data.sign,
 //          signType: '选填',
-          extData: data.orderId);
+//          extData: data.orderId
+      );
     }
   }
 }

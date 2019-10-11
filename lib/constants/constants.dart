@@ -8,4 +8,4 @@ export 'package:chongmeng/utils/completer_utils.dart';
 const int DynamicPageSize = 8;
 const String WXKey = "wxe2cabfecd003404b";
 const bool isRelease = false;
-const bool isOnline = false;
+const bool isOnline = true;
