@@ -166,37 +166,36 @@ Widget buildView(
             Card(
               margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
               child: TableCalendar(
-                  locale: "zh",
-                  holidays: state.markers,
-                  daysOfWeekStyle: DaysOfWeekStyle(
-                    weekdayStyle: const TextStyle(
-                        color: const Color(0xFF616161)), // Material grey[700]
-                    weekendStyle:
-                        const TextStyle(color: const Color(0xFF616161)),
-                  ),
-                  calendarStyle: CalendarStyle(
-                    outsideDaysVisible: false,
-                    weekendStyle:
-                        const TextStyle(color: const Color(0xFF616161)),
-                    holidayStyle:
-                        const TextStyle(color: const Color(0xFF616161)),
-                  ),
-                  headerStyle: HeaderStyle(
-                    centerHeaderTitle: true,
-                    formatButtonVisible: false,
-                  ),
-                  builders: CalendarBuilders(markersBuilder:
-                      (BuildContext context, DateTime date, List events,
-                          List holidays) {
-                    final children = <Widget>[];
-                    children.add(
-                      Icon(
-                        Icons.check,
-                        color: accentColor,
-                      ),
-                    );
-                    return children;
-                  })),
+                locale: "zh",
+                holidays: state.markers,
+                daysOfWeekStyle: DaysOfWeekStyle(
+                  weekdayStyle: const TextStyle(
+                      color: const Color(0xFF616161)), // Material grey[700]
+                  weekendStyle: const TextStyle(color: const Color(0xFF616161)),
+                ),
+                calendarStyle: CalendarStyle(
+                  outsideDaysVisible: false,
+                  weekendStyle: const TextStyle(color: const Color(0xFF616161)),
+                  holidayStyle: const TextStyle(color: const Color(0xFF616161)),
+                ),
+                headerStyle: HeaderStyle(
+                  centerHeaderTitle: true,
+                  formatButtonVisible: false,
+                ),
+                builders: CalendarBuilders(markersBuilder:
+                    (BuildContext context, DateTime date, List events,
+                        List holidays) {
+                  final children = <Widget>[];
+                  children.add(
+                    Icon(
+                      Icons.check,
+                      color: accentColor,
+                    ),
+                  );
+                  return children;
+                }),
+                calendarController: state.calendarController,
+              ),
             )
           ]),
         )

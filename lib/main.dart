@@ -31,6 +31,7 @@ Future main() async {
   var isAgree = await PermissionHelper.checkStartAppPermission();
   if (isAgree) {
 //    await initializeDateFormatting("zh");
+    WidgetsFlutterBinding.ensureInitialized();
     runApp((await createApp()));
   }
   if (Platform.isAndroid) {
