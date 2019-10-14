@@ -28,10 +28,10 @@ import 'helper/permission_helper.dart';
 import 'helper/qqwx_helper.dart';
 
 Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   var isAgree = await PermissionHelper.checkStartAppPermission();
   if (isAgree) {
 //    await initializeDateFormatting("zh");
-    WidgetsFlutterBinding.ensureInitialized();
     runApp((await createApp()));
   }
   if (Platform.isAndroid) {
