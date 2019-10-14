@@ -42,6 +42,8 @@ Future _onGetCoupon(Action action, Context<CouponDetailState> ctx) async {
     }).no((err) async {
       if (err.code == ErrorCode.RECHARGE) {
         Navigator.pushNamed(ctx.context, PageConstants.RechargePage);
+      } else if (err.code == ErrorCode.ELEME_GET_CODE) {
+        ctx.dispatch(CouponDetailActionCreator.onElemeCode(itemType.type));
       }
     });
   }

@@ -55,8 +55,8 @@ class RequestClient {
       }
       // 非具体类型
       print('Something really unknown: ${e.message}');
-      return Future<Result<T>>.value(
-          Result.iniFail(NetException(ErrorCode.NormalError, "网络请求失败")));
+      return Future<Result<T>>.value(Result.iniFail(
+          NetException(code: ErrorCode.NormalError, message: "网络请求失败")));
     } finally {
       if (showLoadingIndicator) {
         NavigatorHelper.showLoadingDialog(context, false);
@@ -109,12 +109,16 @@ class RequestClient {
 
       if (data['status'].toString() == ErrorCode.Login.toString()) {
         UserHelper.logout(context);
-        return new Future.error(new NetException(data['status'], data['msg']));
+        return new Future.error(
+            new NetException(code: data['status'], message: data['msg']));
       } else if (data['status'].toString() == '0') {
         return new Future.value(EntityFactory.generateOBJ<T>(response.data));
       } else if (data['status'].toString() == '4') {
 //          NavigatorHelper.pushPage(context, PageConstants.AuthPage);
-        return new Future.error(new NetException(data['status'], data['msg']));
+        return new Future.error(new NetException(
+            code: data['status'],
+            message: data['msg'],
+            errorData: data['data']));
       } else {
         String toastMsg = data['msg'];
         String status = data['status']?.toString();
@@ -128,16 +132,19 @@ class RequestClient {
             showToast(toastMsg);
           }
         }
-        return new Future.error(new NetException(data['status'], data['msg']));
+        return new Future.error(
+            new NetException(code: data['status'], message: data['msg']));
       }
     } else {
       debugPrint(response.toString());
       if (response.statusCode == 400) {
-        return new Future.error(new NetException(response.statusCode,
-            "Error getting IP address:\nHttp status ${response.statusCode}"));
+        return new Future.error(new NetException(
+            code: response.statusCode,
+            message:
+                "Error getting IP address:\nHttp status ${response.statusCode}"));
       } else {
-        return new Future.error(
-            new NetException(response.statusCode, response.toString()));
+        return new Future.error(new NetException(
+            code: response.statusCode, message: response.toString()));
       }
     }
   }
@@ -183,5 +190,6 @@ class ErrorCode {
   static int BIND_TEL_ERROR_CODE = 1002; // 第三方登录需要绑定手机号
   static int Login = 1003; // 下线
   static int RECHARGE = 1004; // 积分不足,请充值
+  static int ELEME_GET_CODE = 1005; // 饿了么领券,需要验证码
   static List<int> ignoreToastCode = [BIND_TEL_ERROR_CODE, RECHARGE];
 }

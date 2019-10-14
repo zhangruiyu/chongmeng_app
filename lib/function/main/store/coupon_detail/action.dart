@@ -5,7 +5,8 @@ enum CouponDetailAction {
   SetCoupon,
   GetCoupon,
   OpenEleme,
-  ChangeSelectPosition
+  ChangeSelectPosition,
+  ElemeCode
 }
 
 class CouponDetailActionCreator {
@@ -23,5 +24,9 @@ class CouponDetailActionCreator {
 
   static Action onChangeSelectPosition(int index) {
     return Action(CouponDetailAction.ChangeSelectPosition, payload: index);
+  }
+
+  static Action onElemeCode(String type) {
+    return Action(CouponDetailAction.ElemeCode, payload: type);
   }
 }

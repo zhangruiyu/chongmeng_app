@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/anim/slide_transition_x.dart';
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/function/main/store/model/integral_commodity_entity.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -107,7 +108,8 @@ Widget buildView(
                           key: ValueKey("get"),
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            ...state.itemData.types.map((itemType) {
+                            ...state.itemData.types
+                                .map((IntegralCommodityDataElemoType itemType) {
                               var indexOf =
                                   state.itemData.types.indexOf(itemType);
                               return GestureDetector(
@@ -130,12 +132,12 @@ Widget buildView(
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                              "❤饿了么·每日①包",
+                                              itemType.title,
                                               textAlign: TextAlign.start,
                                             ),
                                             if (indexOf == state.position)
                                               Text(
-                                                """每日②包大概率四个红包:(全场通用25-4) + (下午茶30-5) + (品质联盟V25-5) + (夜宵45-6) 。成功领取扣5积分，每个手机号每天可领取1次。""",
+                                                itemType.content,
                                                 style: TextStyle(
                                                     fontSize: 12,
                                                     color: color7E7E7E),
@@ -197,49 +199,53 @@ Widget buildView(
                               keyboardType: TextInputType.phone,
                               style: TextStyle(fontSize: 17.0),
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                              child: Text(
-                                "请输入收到的饿了么验证码",
-                                style: TextStyle(color: color7E7E7E),
-                              ),
-                            ),
-                            TextField(
-                              controller: state.telEditingController,
-                              textInputAction: TextInputAction.go,
-                              onSubmitted: (str) {
-                                dispatch(
-                                    CouponDetailActionCreator.onGetCoupon());
-                              },
-                              decoration: InputDecoration(
-                                suffixIcon: GestureDetector(
-                                  onTap: () {
-                                    state.telEditingController.clear();
-                                  },
-                                  child: Icon(Icons.clear),
+                            if (state.positionType ==
+                                state.itemData.types[state.position].type)
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 8.0, bottom: 8.0),
+                                child: Text(
+                                  "请输入收到的饿了么验证码",
+                                  style: TextStyle(color: color7E7E7E),
                                 ),
-                                border: InputBorder.none,
-                                filled: true,
-                                fillColor: Color(0xfff1f1f1),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(15.0),
-                                    )),
                               ),
-                              autofocus: true,
-                              maxLines: 1,
-                              maxLength: 6,
-                              buildCounter: (BuildContext context,
-                                      {int currentLength,
-                                      int maxLength,
-                                      bool isFocused}) =>
-                                  null,
-                              keyboardType: TextInputType.phone,
-                              style: TextStyle(fontSize: 17.0),
-                            ),
+                            if (state.positionType ==
+                                state.itemData.types[state.position].type)
+                              TextField(
+                                controller: state.codeEditingController,
+                                textInputAction: TextInputAction.go,
+                                onSubmitted: (str) {
+                                  dispatch(
+                                      CouponDetailActionCreator.onGetCoupon());
+                                },
+                                decoration: InputDecoration(
+                                  suffixIcon: GestureDetector(
+                                    onTap: () {
+                                      state.codeEditingController.clear();
+                                    },
+                                    child: Icon(Icons.clear),
+                                  ),
+                                  border: InputBorder.none,
+                                  filled: true,
+                                  fillColor: Color(0xfff1f1f1),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.transparent),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(15.0),
+                                      )),
+                                ),
+                                autofocus: true,
+                                maxLines: 1,
+                                maxLength: 6,
+                                buildCounter: (BuildContext context,
+                                        {int currentLength,
+                                        int maxLength,
+                                        bool isFocused}) =>
+                                    null,
+                                keyboardType: TextInputType.phone,
+                                style: TextStyle(fontSize: 17.0),
+                              ),
                             Container(
                                 width: double.infinity,
                                 height: 45.0,
