@@ -266,79 +266,62 @@ Widget buildView(
                         ),
                 ),
               )),
-//          Card(
-//            margin: const EdgeInsets.all(12.0),
-//            color: of.accentColor,
-//            child: Padding(
-//              padding: const EdgeInsets.all(8.0),
-//              child: Column(
-//                crossAxisAlignment: CrossAxisAlignment.start,
-//                children: <Widget>[
-//                  Padding(
-//                    padding: const EdgeInsets.only(top: 20.0),
-//                    child: Center(
-//                      child: Text(
-//                        itemData.type == 'big'
-//                            ? "不是100%成功，若一直失败联系客服。"
-//                            : "若在高峰期领，到账会延迟几分钟，耐心等待。",
-//                        style: TextStyle(color: colorWhite),
-//                      ),
-//                    ),
-//                  ),
-//                  Padding(
-//                    padding: const EdgeInsets.symmetric(
-//                        horizontal: 18.0, vertical: 20.0),
-//                    child: VerticalLine(
-//                      height: 1.0,
-//                    ),
-//                  ),
-//                  Padding(
-//                    padding: const EdgeInsets.only(top: 20.0),
-//                    child: Text(
-//                      itemData.type == 'big'
-//                          ? "1、领取[饿了么超大包]需要花费${itemData.integralPrice}积分，失败不扣积分，领取后在[饿了么APP]内查看，不要用小程序。"
-//                          : "1、领取[饿了么每日包]需要花费${itemData.integralPrice}积分，失败不扣积分，领取后在[饿了么APP]内查看，不要用小程序。",
-//                      style: TextStyle(color: colorWhite),
-//                    ),
-//                  ),
-//                  Padding(
-//                    padding: const EdgeInsets.only(top: 20.0),
-//                    child: Text(
-//                      itemData.type == 'big'
-//                          ? "2、超大包不是100%成功，少量手机号有问题会领取失败，换个手机号试试。一直失败的话，联系客服协助您解决。支持店铺满减，如最下方图片。"
-//                          : "2、每日包固定有四张券，满足一天所需。支持店铺满减，如最下方图片",
-//                      style: TextStyle(color: colorWhite),
-//                    ),
-//                  ),
-//                  Padding(
-//                    padding: const EdgeInsets.only(top: 20.0),
-//                    child: Text(
-//                      itemData.type == 'big'
-//                          ? "3、每个手机号每天限领1次，领过的手机号请明天再来，或换个手机号领"
-//                          : "3、每个手机号每天限领1次，领过的手机号请明天再来，或换个手机号领。",
-//                      style: TextStyle(color: colorWhite),
-//                    ),
-//                  ),
-//                  Padding(
-//                    padding: const EdgeInsets.only(top: 20.0),
-//                    child: Text(
-//                      itemData.type == 'big'
-//                          ? "4、超大包随机出[品质联盟]券和[全场通用]券：满减条件（20~40），金额（4~15）随机出。领取后有效期当天，尽快使用。"
-//                          : "4、固定四张券包含：①、【满¥30-3 平台通用红包】②、【满¥30-4 下午茶红包】③、【满¥30-5 品质联盟红包】④、【满¥39-6 夜宵红包】。",
-//                      style: TextStyle(color: colorWhite),
-//                    ),
-//                  ),
-//                  Padding(
-//                    padding: const EdgeInsets.only(top: 20.0),
-//                    child: Text(
-//                      "5、客服QQ群（有问题随时联系）：609487304",
-//                      style: TextStyle(color: colorWhite),
-//                    ),
-//                  ),
-//                ],
-//              ),
-//            ),
-//          ),
+          Card(
+            margin: const EdgeInsets.all(12.0),
+            color: of.accentColor,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Center(
+                      child: Text(
+                        "不是100%成功，若一直失败联系客服。" + "若在高峰期领，到账会延迟几分钟，耐心等待。",
+                        style: TextStyle(color: colorWhite),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 18.0, vertical: 20.0),
+                    child: VerticalLine(
+                      height: 1.0,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Text(
+                      """1、每次领取红包需要花费5积分，失败不扣积分，领取后在[饿了么APP]内查看，不要用小程序。""",
+                      style: TextStyle(color: colorWhite),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Text(
+                      """2、部分不是100%成功，少量手机号有问题会领取失败，换个手机号试试。一直失败的话，联系客服协助您解决。""",
+                      style: TextStyle(color: colorWhite),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Text(
+                      """3、在选择红包时，请查看对应的规则。领过的请明天再来，或换手机号再试。""",
+                      style: TextStyle(color: colorWhite),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Text(
+                      "4、客服QQ群（有问题随时联系）：609487304",
+                      style: TextStyle(color: colorWhite),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text("领取成功和使用示例"),

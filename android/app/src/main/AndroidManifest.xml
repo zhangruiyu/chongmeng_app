@@ -15,7 +15,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/name"
         android:usesCleartextTraffic="true"
-        tools:replace="android:label">
+        tools:replace="android:label"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -37,6 +38,13 @@
         </activity>
         <meta-data
             android:name="UMENG_CHANNEL"
+            android:value="guanwang" />
+        <meta-data
+            android:name="MTA_APPKEY"
+            android:value="guanwang" />
+
+<meta-data
+            android:name="MTA_CHANNEL"
             android:value="guanwang" />
 
 

@@ -11,7 +11,9 @@ class CouponDetailState implements Cloneable<CouponDetailState> {
   IntegralCommodityDataElemo itemData;
   List<CouponData> data;
   int position;
+  //需要输入验证码的type
   String positionType;
+  String positionTypeData;
   CouponDetailPageStatus pageStatus;
 
   @override
@@ -21,6 +23,7 @@ class CouponDetailState implements Cloneable<CouponDetailState> {
       ..itemData = itemData
       ..position = position
       ..positionType = positionType
+      ..positionTypeData = positionTypeData
       ..pageStatus = pageStatus;
   }
 }

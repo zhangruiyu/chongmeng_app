@@ -97,7 +97,7 @@ DEPENDENCIES:
   - city_pickers (from `.symlinks/plugins/city_pickers/ios`)
   - device_info (from `.symlinks/plugins/device_info/ios`)
   - downloads_path_provider (from `.symlinks/plugins/downloads_path_provider/ios`)
-  - Flutter (from `.symlinks/flutter/ios`)
+  - Flutter (from `.symlinks/flutter/ios-release`)
   - flutter_ijkplayer (from `.symlinks/plugins/flutter_ijkplayer/ios`)
   - fluwx (from `.symlinks/plugins/fluwx/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
@@ -143,7 +143,7 @@ EXTERNAL SOURCES:
   downloads_path_provider:
     :path: ".symlinks/plugins/downloads_path_provider/ios"
   Flutter:
-    :path: ".symlinks/flutter/ios"
+    :path: ".symlinks/flutter/ios-release"
   flutter_ijkplayer:
     :path: ".symlinks/plugins/flutter_ijkplayer/ios"
   fluwx:
@@ -184,7 +184,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter/ios"
 
 SPEC CHECKSUMS:
-  camera: d56ad165545ae5a0ffb892376033760a969c68c8
+  camera: 38cc83ae9a5667bb5a71c7d9edaf60a91920fd4e
   city_pickers: b0370f4c35c201723b5b7fcce10ec29b59d5bc35
   device_info: 3ebad48f726348f69abd802f3334a8d1ed795fbd
   downloads_path_provider: fe0d06888d4b8c055a59edbc2f51f03e63cb0e28

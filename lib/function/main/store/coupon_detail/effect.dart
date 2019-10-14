@@ -31,10 +31,18 @@ Future _onGetCoupon(Action action, Context<CouponDetailState> ctx) async {
         .sp
         .setString('couponTel', ctx.state.telEditingController.text);
     var itemType = ctx.state.itemData.types[ctx.state.position];
+    //说明需要验证码
+    var params = {};
+    if (itemType.type == ctx.state.positionType &&
+        ctx.state.positionTypeData != null) {
+      params['validateCode'] = ctx.state.codeEditingController.text;
+      params['validateToken'] = ctx.state.positionTypeData;
+    }
     (await RequestClient.request<CouponEntity>(ctx.context, HttpConstants.Elema,
             queryParameters: {
               'phone': ctx.state.telEditingController.text,
-              'type': itemType.type
+              'type': itemType.type,
+              ...params
             },
             showLoadingIndicator: true))
         .yes((value) {
@@ -43,6 +51,7 @@ Future _onGetCoupon(Action action, Context<CouponDetailState> ctx) async {
       if (err.code == ErrorCode.RECHARGE) {
         Navigator.pushNamed(ctx.context, PageConstants.RechargePage);
       } else if (err.code == ErrorCode.ELEME_GET_CODE) {
+        ctx.state.positionTypeData = err.errorData;
         ctx.dispatch(CouponDetailActionCreator.onElemeCode(itemType.type));
       }
     });

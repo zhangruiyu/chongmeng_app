@@ -73,6 +73,10 @@ android {
                 // 设置manifest.xml中的变量
                 VIVO_APPKEY : "您的应用对应的VIVO的APPKEY", // VIVO平台注册的appkey
                 VIVO_APPID : "您的应用对应的VIVO的APPID", // VIVO平台注册的appid
+                MTA_APPKEY:"A15DAY5WE1VW",
+
+                MTA_CHANNEL:"MY CHANNEL"
+
 
         ]
     }
