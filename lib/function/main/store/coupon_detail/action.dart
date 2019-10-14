@@ -1,7 +1,12 @@
 import 'package:chongmeng/function/main/store/coupon_detail/model/coupon_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 
-enum CouponDetailAction { SetCoupon, GetCoupon, OpenEleme }
+enum CouponDetailAction {
+  SetCoupon,
+  GetCoupon,
+  OpenEleme,
+  ChangeSelectPosition
+}
 
 class CouponDetailActionCreator {
   static Action onSetCoupon(List<CouponData> data) {
@@ -14,5 +19,9 @@ class CouponDetailActionCreator {
 
   static Action onOpenEleme() {
     return const Action(CouponDetailAction.OpenEleme);
+  }
+
+  static Action onChangeSelectPosition(int index) {
+    return Action(CouponDetailAction.ChangeSelectPosition, payload: index);
   }
 }

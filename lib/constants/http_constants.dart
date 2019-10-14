@@ -64,8 +64,8 @@ class HttpConstants {
 
   static String get AddressList => "app/store/common/addressList";
 
-  static String get IntegralCommodityList =>
-      "app/store/integralCommodityList"; //积分商城列表
+  static String get StoreCommodityList =>
+      "app/store/storeCommodityList"; //积分商城列表
 
   static String get BuyIntegralCommodity =>
       "app/store/common/buyIntegralCommodity"; //

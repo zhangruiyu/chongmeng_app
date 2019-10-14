@@ -9,12 +9,16 @@ class CouponDetailState implements Cloneable<CouponDetailState> {
   TextEditingController telEditingController;
   IntegralCommodityDataElemo itemData;
   List<CouponData> data;
+  int position;
+  CouponDetailPageStatus pageStatus;
 
   @override
   CouponDetailState clone() {
     return CouponDetailState()
       ..telEditingController = telEditingController
-      ..itemData = itemData;
+      ..itemData = itemData
+      ..position = position
+      ..pageStatus = pageStatus;
   }
 }
 
@@ -22,5 +26,11 @@ CouponDetailState initState(Map<String, dynamic> args) {
   return CouponDetailState()
     ..telEditingController = TextEditingController(
         text: GlobalStore.store.getState().sp.getString('couponTel'))
-    ..itemData = args['itemData'];
+    ..itemData = args['itemData']
+    ..position = args['position']
+    ..pageStatus = CouponDetailPageStatus.NORMAL;
+}
+
+enum CouponDetailPageStatus {
+  NORMAL,
 }

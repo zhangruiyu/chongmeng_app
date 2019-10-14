@@ -39,3 +39,4 @@ const colored5949 = Color(0xffED5949);
 const colorffbe10 = Color(0xffffbe10);
 const colorD1D0D0 = Color(0xffD1D0D0);
 const colord9d9d9 = Color(0xffd9d9d9);
+const colordf0f0f0 = Color(0xffF0f0f0);

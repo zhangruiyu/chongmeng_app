@@ -30,10 +30,11 @@ Future _onGetCoupon(Action action, Context<CouponDetailState> ctx) async {
         .getState()
         .sp
         .setString('couponTel', ctx.state.telEditingController.text);
+    var itemType = ctx.state.itemData.types[ctx.state.position];
     (await RequestClient.request<CouponEntity>(ctx.context, HttpConstants.Elema,
             queryParameters: {
               'phone': ctx.state.telEditingController.text,
-              'type': ctx.state.itemData.type
+              'type': itemType.type
             },
             showLoadingIndicator: true))
         .yes((value) {

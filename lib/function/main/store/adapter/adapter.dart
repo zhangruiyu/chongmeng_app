@@ -28,14 +28,9 @@ class _IntegralStoreConnector
   List<ItemBean> get(IntegralStoreState state) {
     List<ItemBean> items = [];
 
-    if (state.integralCommodityData?.elemo?.isNotEmpty == true) {
-      items.addAll(state.integralCommodityData.elemo
-          .map<ItemBean>((IntegralCommodityDataElemo item) => ItemBean(
-              "integraleleme",
-              IntegralElemeItemState(
-                  index: state.integralCommodityData.elemo.indexOf(item),
-                  itemData: item)))
-          .toList());
+    if (state.integralCommodityData?.elemo != null) {
+      items.add(ItemBean("integraleleme",
+          IntegralElemeItemState(itemData: state.integralCommodityData.elemo)));
     }
     if (state.integralCommodityData?.integralCommodity?.isNotEmpty == true) {
       items.addAll(state.integralCommodityData.integralCommodity

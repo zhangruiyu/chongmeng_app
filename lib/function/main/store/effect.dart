@@ -15,7 +15,7 @@ Effect<StoreState> buildEffect() {
 
 Future _onRefresh(Action action, Context<StoreState> ctx) async {
   var result = await RequestClient.request<IntegralCommodityEntity>(
-      ctx.context, HttpConstants.IntegralCommodityList);
+      ctx.context, HttpConstants.StoreCommodityList);
   CompleterUtils.complete(action);
   if (result.hasSuccess) {
     ctx.dispatch(StoreActionCreator.onResetPageData(result.data.data));

@@ -25,19 +25,16 @@ class IntegralCommodityEntity {
 }
 
 class IntegralCommodityData {
-  List<IntegralCommodityDataElemo> elemo;
+  IntegralCommodityDataElemo elemo;
   List<IntegralCommodityDataIntegralcommodity> integralCommodity;
   List<String> sysNotices;
 
   IntegralCommodityData({this.elemo, this.integralCommodity, this.sysNotices});
 
   IntegralCommodityData.fromJson(Map<String, dynamic> json) {
-    if (json['elemo'] != null) {
-      elemo = new List<IntegralCommodityDataElemo>();
-      (json['elemo'] as List).forEach((v) {
-        elemo.add(new IntegralCommodityDataElemo.fromJson(v));
-      });
-    }
+    elemo = json['elemo'] != null
+        ? new IntegralCommodityDataElemo.fromJson(json['elemo'])
+        : null;
     if (json['integralCommodity'] != null) {
       integralCommodity = new List<IntegralCommodityDataIntegralcommodity>();
       (json['integralCommodity'] as List).forEach((v) {
@@ -51,42 +48,13 @@ class IntegralCommodityData {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.elemo != null) {
-      data['elemo'] = this.elemo.map((v) => v.toJson()).toList();
+      data['elemo'] = this.elemo.toJson();
     }
     if (this.integralCommodity != null) {
       data['integralCommodity'] =
           this.integralCommodity.map((v) => v.toJson()).toList();
     }
     data['sysNotices'] = this.sysNotices;
-    return data;
-  }
-}
-
-class IntegralCommodityDataElemo {
-  int integralPrice;
-  int count;
-  String pic;
-  String title;
-  String type;
-
-  IntegralCommodityDataElemo(
-      {this.integralPrice, this.count, this.pic, this.title, this.type});
-
-  IntegralCommodityDataElemo.fromJson(Map<String, dynamic> json) {
-    integralPrice = json['integral_price'];
-    count = json['count'];
-    pic = json['pic'];
-    title = json['title'];
-    type = json['type'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['integral_price'] = this.integralPrice;
-    data['count'] = this.count;
-    data['pic'] = this.pic;
-    data['title'] = this.title;
-    data['type'] = this.type;
     return data;
   }
 }
@@ -128,6 +96,64 @@ class IntegralCommodityDataIntegralcommodity {
     data['details'] = this.details;
     data['id'] = this.id;
     data['pic'] = this.pic;
+    return data;
+  }
+}
+
+class IntegralCommodityDataElemo {
+  List<IntegralCommodityDataElemoType> types;
+  String pic;
+  String title;
+  int integralPrice;
+
+  IntegralCommodityDataElemo({this.types, this.pic, this.title});
+
+  IntegralCommodityDataElemo.fromJson(Map<String, dynamic> json) {
+    if (json['types'] != null) {
+      types = new List<IntegralCommodityDataElemoType>();
+      (json['types'] as List).forEach((v) {
+        types.add(new IntegralCommodityDataElemoType.fromJson(v));
+      });
+    }
+    pic = json['pic'];
+    title = json['title'];
+    integralPrice = json['integral_price'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.types != null) {
+      data['types'] = this.types.map((v) => v.toJson()).toList();
+    }
+    data['pic'] = this.pic;
+    data['title'] = this.title;
+    data['integral_price'] = this.integralPrice;
+    return data;
+  }
+}
+
+class IntegralCommodityDataElemoType {
+  int integralPrice;
+  String title;
+  String type;
+  String content;
+
+  IntegralCommodityDataElemoType(
+      {this.integralPrice, this.title, this.type, this.content});
+
+  IntegralCommodityDataElemoType.fromJson(Map<String, dynamic> json) {
+    integralPrice = json['integral_price'];
+    title = json['title'];
+    type = json['type'];
+    content = json['content'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['integral_price'] = this.integralPrice;
+    data['title'] = this.title;
+    data['type'] = this.type;
+    data['content'] = this.content;
     return data;
   }
 }
