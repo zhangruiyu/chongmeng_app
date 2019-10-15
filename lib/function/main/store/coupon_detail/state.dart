@@ -8,6 +8,7 @@ import 'model/coupon_entity.dart';
 class CouponDetailState implements Cloneable<CouponDetailState> {
   TextEditingController telEditingController;
   TextEditingController codeEditingController;
+  FocusNode codeFocusNode;
   IntegralCommodityDataElemo itemData;
   List<CouponData> data;
   int position;
@@ -19,7 +20,9 @@ class CouponDetailState implements Cloneable<CouponDetailState> {
   @override
   CouponDetailState clone() {
     return CouponDetailState()
+      ..codeFocusNode = codeFocusNode
       ..telEditingController = telEditingController
+      ..codeEditingController = codeEditingController
       ..itemData = itemData
       ..position = position
       ..positionType = positionType
@@ -33,6 +36,7 @@ CouponDetailState initState(Map<String, dynamic> args) {
     ..telEditingController = TextEditingController(
         text: GlobalStore.store.getState().sp.getString('couponTel'))
     ..codeEditingController = TextEditingController()
+    ..codeFocusNode = FocusNode()
     ..itemData = args['itemData']
     ..position = args['position']
     ..pageStatus = CouponDetailPageStatus.NORMAL;

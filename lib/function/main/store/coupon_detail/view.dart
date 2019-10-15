@@ -212,6 +212,7 @@ Widget buildView(
                             if (state.positionType ==
                                 state.itemData.types[state.position].type)
                               TextField(
+                                focusNode: state.codeFocusNode,
                                 controller: state.codeEditingController,
                                 textInputAction: TextInputAction.go,
                                 onSubmitted: (str) {
@@ -324,7 +325,13 @@ Widget buildView(
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("领取成功和使用示例"),
+            child: Text(
+              "领取成功和使用示例(如下)",
+              style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
           CachedNetworkImage(
             imageUrl: itemData.pic,

@@ -132,8 +132,10 @@ class RequestClient {
             showToast(toastMsg);
           }
         }
-        return new Future.error(
-            new NetException(code: data['status'], message: data['msg']));
+        return new Future.error(new NetException(
+            code: data['status'],
+            message: data['msg'],
+            errorData: data['data']));
       }
     } else {
       debugPrint(response.toString());

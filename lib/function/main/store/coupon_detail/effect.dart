@@ -33,6 +33,9 @@ Future _onGetCoupon(Action action, Context<CouponDetailState> ctx) async {
     var itemType = ctx.state.itemData.types[ctx.state.position];
     //说明需要验证码
     var params = {};
+//    println("1231321312");
+//    println(ctx.state.positionType);
+//    println(ctx.state.positionTypeData);
     if (itemType.type == ctx.state.positionType &&
         ctx.state.positionTypeData != null) {
       params['validateCode'] = ctx.state.codeEditingController.text;
@@ -52,7 +55,9 @@ Future _onGetCoupon(Action action, Context<CouponDetailState> ctx) async {
         Navigator.pushNamed(ctx.context, PageConstants.RechargePage);
       } else if (err.code == ErrorCode.ELEME_GET_CODE) {
         ctx.state.positionTypeData = err.errorData;
+        ctx.state.positionType = itemType.type;
         ctx.dispatch(CouponDetailActionCreator.onElemeCode(itemType.type));
+        ctx.state.codeFocusNode.requestFocus();
       }
     });
   }
