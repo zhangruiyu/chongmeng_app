@@ -4,6 +4,7 @@ import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/color_utils.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
+import 'package:chongmeng/widget/empty_widget.dart';
 import 'package:chongmeng/widget/loadling_widget.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
@@ -37,7 +38,9 @@ Widget buildView(TallyState state, Dispatch dispatch, ViewService viewService) {
     body: EasyRefresh.custom(
       firstRefresh: true,
       firstRefreshWidget: LoadingWidget(),
-      controller: state.easyRefreshController,
+      emptyWidget: state.data?.isEmpty == true ? EmptyWidget() : null,
+      controller:
+          state.data?.isEmpty == true ? state.easyRefreshController : null,
       onRefresh: CompleterUtils.produceCompleterAction(
         dispatch,
         TallyActionCreator.onRefresh,
@@ -159,7 +162,7 @@ Widget buildView(TallyState state, Dispatch dispatch, ViewService viewService) {
                       )
               ],
             );
-          }, childCount: state.data.length),
+          }, childCount: state.data?.length ?? 0),
         ),
       ],
     ),

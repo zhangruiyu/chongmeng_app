@@ -49,10 +49,10 @@ Widget buildView(
                   padding: edgeInsets,
                   child: new Text('如有建议和问题,请加入群反馈'),
                 ),
-                new FlatButton(
+                /* new FlatButton(
                     onPressed: () {
-                      /*SnackBarUtils.showSnackBar(
-                          scaffoldStateKey.currentState, '个人作品,欢迎加入');*/
+                      */ /*SnackBarUtils.showSnackBar(
+                          scaffoldStateKey.currentState, '个人作品,欢迎加入');*/ /*
                     },
                     padding: const EdgeInsets.symmetric(
                         vertical: 13.0, horizontal: 4.0),
@@ -71,7 +71,7 @@ Widget buildView(
                             alignment: Alignment.centerLeft,
                           ),
                           new Icon(Icons.arrow_right),
-                        ])),
+                        ])),*/
                 new FlatButton(
                     onPressed: () {},
                     padding: const EdgeInsets.symmetric(

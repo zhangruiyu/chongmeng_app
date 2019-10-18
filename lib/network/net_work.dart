@@ -82,6 +82,7 @@ class RequestClient {
           'os': Platform.operatingSystem,
           'version': globalState.packageInfo.version,
           'token': UserHelper.getUserToken(),
+          'channel': GlobalStore.state.channel
         });
 
     if (isPost) {

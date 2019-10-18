@@ -82,6 +82,7 @@ dependencies:
   emoji_picker: ^0.0.2
   extended_image: ^0.5.7
   fluwx: ^1.1.1
+  markdown: 2.1.1
 #  gallery_saver: ^1.0.1
 
 dev_dependencies:

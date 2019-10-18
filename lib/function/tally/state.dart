@@ -16,7 +16,5 @@ class TallyState implements Cloneable<TallyState> {
 }
 
 TallyState initState(Map<String, dynamic> args) {
-  return TallyState()
-    ..data = []
-    ..easyRefreshController = EasyRefreshController();
+  return TallyState()..easyRefreshController = EasyRefreshController();
 }

@@ -18,6 +18,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:image_picker_saver/image_picker_saver.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
+import 'package:markdown/markdown.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:photo/photo.dart';
@@ -65,6 +66,15 @@ class NavigatorHelper {
   static void pushWebPage(BuildContext context, String title, String url) {
     Navigator.pushNamed(context, PageConstants.WebviewPage,
         arguments: {'title': title, 'url': url});
+  }
+
+  static void pushWebPageMarkdown(
+      BuildContext context, String title, String content) {
+    NavigatorHelper.pushWebPage(
+        context,
+        "title",
+        new Uri.dataFromString(markdownToHtml(content), mimeType: 'text/html')
+            .toString());
   }
 
   static Future<T> pushRecordPage<T>(BuildContext context,

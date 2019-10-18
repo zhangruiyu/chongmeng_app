@@ -13,4 +13,6 @@ class GlobalStore {
 */
   static Store<GlobalState> get store =>
       _globalStore ??= createStore<GlobalState>(GlobalState(), buildReducer());
+
+  static GlobalState get state => store.getState();
 }
