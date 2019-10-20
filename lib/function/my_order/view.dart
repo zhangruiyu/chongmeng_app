@@ -42,74 +42,82 @@ Widget buildView(
             delegate:
                 SliverChildBuilderDelegate((BuildContext context, int index) {
               var itemData = state.data[index];
-              return Column(
-                children: <Widget>[
-                  Container(
-                    height: WindowUtils.getScreenWidth() / 3,
-                    child: Row(
+              return InkWell(
+                onTap: itemData.virtualProduct == null
+                    ? null
+                    : () {
+                        dispatch(MyOrderActionCreator.onSkipReviewPage(
+                            itemData));
+                      },
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      height: WindowUtils.getScreenWidth() / 3,
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CachedNetworkImage(
+                              width: WindowUtils.getScreenWidth() / 3,
+                              fit: BoxFit.cover,
+                              imageUrl: itemData.pic[0],
+                            ),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(itemData.name),
+                              Text("${itemData.integral.abs()}萌镚"),
+                              Text(
+                                itemData.createTime,
+                                style: of.textTheme.caption,
+                              ),
+                            ],
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 18.0),
+                              child: Text(
+                                "X${itemData.count}",
+                                textAlign: TextAlign.end,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    VerticalLine(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CachedNetworkImage(
-                            width: WindowUtils.getScreenWidth() / 3,
-                            fit: BoxFit.cover,
-                            imageUrl: itemData.pic[0],
-                          ),
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(itemData.name),
-                            Text("${itemData.integral.abs()}萌镚"),
-                            Text(
-                              itemData.createTime,
-                              style: of.textTheme.caption,
-                            ),
-                          ],
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 18.0),
-                            child: Text(
-                              "X${itemData.count}",
-                              textAlign: TextAlign.end,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  VerticalLine(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 18.0, vertical: 8.0),
-                        child: Text(statusText[itemData.status]),
-                      ),
-                      InkWell(
-                        child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 18.0, vertical: 8.0),
-                          child: Text("查看收件信息"),
+                          child: Text(statusText[itemData.status]),
                         ),
-                        onTap: () {
-                          showToast(
-                              "收件人:${itemData.consigneeName},手机号:${itemData.tel},详细地址:" +
-                                  itemData.provincename +
-                                  itemData.cityname +
-                                  itemData.areaname +
-                                  itemData.addressDetail);
-                        },
-                      ),
-                    ],
-                  ),
-                  VerticalLine(
-                    height: 10.0,
-                  )
-                ],
+                        InkWell(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 18.0, vertical: 8.0),
+                            child: Text("查看收件信息"),
+                          ),
+                          onTap: () {
+                            showToast(
+                                "收件人:${itemData.consigneeName},手机号:${itemData.tel},详细地址:" +
+                                    itemData.provincename +
+                                    itemData.cityname +
+                                    itemData.areaname +
+                                    itemData.addressDetail);
+                          },
+                        ),
+                      ],
+                    ),
+                    VerticalLine(
+                      height: 10.0,
+                    )
+                  ],
+                ),
               );
             }, childCount: state.data?.length ?? 0),
           )

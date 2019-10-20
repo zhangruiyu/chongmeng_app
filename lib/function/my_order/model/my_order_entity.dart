@@ -36,6 +36,7 @@ class MyOrderData {
   String sourceType;
   List<String> pic;
   String remake;
+  String externalRemake;
   String type;
   String addressDetail;
   List<MyOrderDataVirtualProduct> virtualProduct;
@@ -88,6 +89,7 @@ class MyOrderData {
     tel = json['tel'];
     id = json['id'];
     status = json['status'];
+    externalRemake = json['external_remake'];
   }
 
   Map<String, dynamic> toJson() {
@@ -112,6 +114,7 @@ class MyOrderData {
     data['tel'] = this.tel;
     data['id'] = this.id;
     data['status'] = this.status;
+    data['external_remake'] = this.externalRemake;
     return data;
   }
 }

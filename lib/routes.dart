@@ -23,6 +23,7 @@ import 'function/main/page.dart';
 import 'function/main/store/coupon_detail/page.dart';
 import 'function/main/store/integral_commodity_detail/page.dart';
 import 'function/my_order/page.dart';
+import 'function/my_order/virtual_product_review/page.dart';
 import 'function/my_pet/add/page.dart';
 import 'function/my_pet/selectsubtype/page.dart';
 import 'function/my_pet/selecttype/page.dart';
@@ -106,6 +107,8 @@ class PageConstants {
   static String get RechargePage => "cm://RechargePage"; //充值
   static String get ComplainPage => "cm://ComplainPage"; //投诉
   static String get PayResultPage => "cm://PayResultPage"; //支付结果
+  static String get VirtualProductReviewPage =>
+      "cm://VirtualProductReviewPage"; //预览虚拟产品支付结果
 }
 
 final AbstractRoutes routes = PageRoutes(
@@ -155,6 +158,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.RechargePage: RechargePage(),
     PageConstants.ComplainPage: ComplainPage(),
     PageConstants.PayResultPage: PayResultPage(),
+    PageConstants.VirtualProductReviewPage: VirtualProductReviewPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {
