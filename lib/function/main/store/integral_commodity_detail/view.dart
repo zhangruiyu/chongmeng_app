@@ -4,6 +4,7 @@ import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/main/store/integral_component/view.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
+import 'package:chongmeng/widget/commodity_count.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 
@@ -59,7 +60,12 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text("兑换数量"),
-                      Text("1个"),
+                      CommodityCount(
+                        commodityCountController:
+                            state.commodityCountController,
+                        initCount: 1,
+                        maxCount: state.itemData.count,
+                      ),
                     ],
                   ),
                 ),

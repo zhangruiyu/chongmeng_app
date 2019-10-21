@@ -36,7 +36,7 @@ dependencies:
     sdk: flutter
   shared_preferences: any
   path_provider: any
-  permission_handler: ^3.1.0
+  permission_handler: ^3.3.0
   fish_redux: any
   flutter_swiper: any
   device_info: any

@@ -5,10 +5,11 @@ class HttpConstants {
 //  static final String BaseUrl = "https://api.mustbe.xyz/";
 //  static final String BaseStaticUrl = "https://app.mustbe.xyz/";
 //上线 为家里 测试为公司
-  static final String BaseUrl =
-      isOnline ? "https://www.keleyuanyuan.xyz/" : "http://192.168.6.211:8080/";
+  static final String BaseUrl = isOnline
+      ? "https://www.keleyuanyuan.xyz/"
+//          : "http://192.168.6.211:8080/";
 //      : "http://123.207.154.134:8080/";
-//      : "http://192.168.1.78:8080/";
+      : "http://192.168.1.78:8080/";
 
   static final String SendCode = "app/auth/sendLoginCode"; //发送验证码
   static final String SendThirdLoginCode =

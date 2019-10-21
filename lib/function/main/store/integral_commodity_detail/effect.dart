@@ -54,7 +54,7 @@ Future _onBuy(Action action, Context<IntegralCommodityDetailState> ctx) async {
       var result = await RequestClient.request<OutermostEntity>(
           ctx.context, HttpConstants.BuyIntegralCommodity,
           queryParameters: {
-            "buy_count": 1,
+            "buy_count": ctx.state.commodityCountController.count,
             "integral_commodity_id": ctx.state.itemData.id,
             "tel": selectAddress.tel,
             "city_id": selectAddress.id,
@@ -207,7 +207,8 @@ Future<int> showAffirmDialog(Context<IntegralCommodityDetailState> ctx,
                               style: TextStyle(
                                   fontSize: 15.0, color: Colors.black)),
                           TextSpan(
-                              text: "${ctx.state.itemData.integralPrice}",
+                              text:
+                                  "${ctx.state.itemData.integralPrice * ctx.state.commodityCountController.count}",
                               style: TextStyle(
                                   fontSize: 15.0,
                                   color: of.accentColor,
