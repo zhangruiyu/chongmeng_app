@@ -47,7 +47,8 @@ Widget buildView(
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(top: 8.0),
-                                child: Text("恭喜您,消耗40积分兑换成功"),
+                                child: Text(
+                                    "恭喜您,消耗${state.itemData.integralPrice}积分兑换成功"),
                               ),
                               ...state.data.map((itemCoupon) {
                                 return Container(
