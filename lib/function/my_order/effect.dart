@@ -1,3 +1,4 @@
+import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/function/main/store/model/integral_commodity_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
@@ -18,7 +19,7 @@ Effect<MyOrderState> buildEffect() {
 Future _onRefresh(Action action, Context<MyOrderState> ctx) async {
   var result = await RequestClient.request<MyOrderEntity>(
       ctx.context, HttpConstants.IntegralOrderList);
-  action.payload['completer']();
+  CompleterUtils.complete(action);
   if (result.hasSuccess) {
     ctx.dispatch(MyOrderActionCreator.onResetPageData(result.data.data));
   }
@@ -26,6 +27,12 @@ Future _onRefresh(Action action, Context<MyOrderState> ctx) async {
 
 Future _onSkipReviewPage(Action action, Context<MyOrderState> ctx) async {
   MyOrderData virtualProduct = action.payload;
-  Navigator.pushNamed(ctx.context, PageConstants.VirtualProductReviewPage,
-      arguments: {'data': virtualProduct});
+  if (virtualProduct.virtualProduct != null) {
+    if (virtualProduct.virtualProduct.length > 0) {
+      Navigator.pushNamed(ctx.context, PageConstants.VirtualProductReviewPage,
+          arguments: {'data': virtualProduct});
+    } else {
+      ctx.dispatch(MyOrderActionCreator.onRefresh(null));
+    }
+  }
 }

@@ -33,7 +33,7 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
                     fit: BoxFit.cover,
                     imageUrl: state.itemData.pic[0],
                     width: WindowUtils.getScreenWidth(),
-                    height: WindowUtils.getScreenWidth() * 0.55,
+                    height: WindowUtils.getScreenWidth(),
                   ),
                 ),
                 Padding(
