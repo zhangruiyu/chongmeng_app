@@ -146,12 +146,9 @@ Widget buildView(
                                 child: GestureDetector(
                                   behavior: HitTestBehavior.opaque,
                                   onTap: () {
-                                    showToast(
-                                        "收件人:${itemData.consigneeName},手机号:${itemData.tel},详细地址:" +
-                                            itemData.provincename +
-                                            itemData.cityname +
-                                            itemData.areaname +
-                                            itemData.addressDetail);
+                                    dispatch(
+                                        MyOrderActionCreator.onShowOrderAddress(
+                                            itemData));
                                   },
                                   child: Text("查看收件信息",
                                       style: TextStyle(
