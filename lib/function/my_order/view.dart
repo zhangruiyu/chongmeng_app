@@ -6,6 +6,7 @@ import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/empty_widget.dart';
 import 'package:chongmeng/widget/loadling_widget.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -16,8 +17,8 @@ import 'state.dart';
 var statusText = [
   "等待审核",
   "审核通过",
-  "发货",
-  "订单完成",
+  "发货中",
+  "已完成",
   "失败",
 ];
 
@@ -42,81 +43,154 @@ Widget buildView(
             delegate:
                 SliverChildBuilderDelegate((BuildContext context, int index) {
               var itemData = state.data[index];
-              return InkWell(
-                onTap: itemData.virtualProduct == null
-                    ? null
-                    : () {
-                        dispatch(MyOrderActionCreator.onSkipReviewPage(
-                            itemData));
-                      },
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: WindowUtils.getScreenWidth() / 3,
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CachedNetworkImage(
-                              width: WindowUtils.getScreenWidth() / 3,
-                              fit: BoxFit.cover,
-                              imageUrl: itemData.pic[0],
-                            ),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+              return Container(
+                color: Theme.of(viewService.context).dividerColor,
+                child: Card(
+                  elevation: 0.5,
+                  margin:
+                      const EdgeInsets.only(top: 12.0, left: 18.0, right: 18.0),
+                  child: InkWell(
+                    onTap: itemData.virtualProduct == null
+                        ? null
+                        : () {
+                            dispatch(MyOrderActionCreator.onSkipReviewPage(
+                                itemData));
+                          },
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          padding: const EdgeInsets.only(
+                              top: 16.0, left: 12, right: 12, bottom: 23),
+                          height: WindowUtils.getScreenWidth() / 3,
+                          child: Row(
                             children: <Widget>[
-                              Text(itemData.name),
-                              Text("${itemData.integral.abs()}萌镚"),
-                              Text(
-                                itemData.createTime,
-                                style: of.textTheme.caption,
+                              ExtendedImage.network(
+                                itemData.pic.first,
+                                cache: true,
+                                width: 85,
+                                height: 85,
+                                fit: BoxFit.cover,
+                                shape: BoxShape.rectangle,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5.0)),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  height: 85,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                              child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 20),
+                                            child: Text(
+                                              itemData.name,
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: color333333),
+                                            ),
+                                          )),
+                                          Text(
+                                            statusText[itemData.status],
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: of.accentColor),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Text("${itemData.integral.abs()}萌镚",
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: color333333)),
+                                          Text("x${itemData.count}",
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: color333333))
+                                        ],
+                                      ),
+                                      Text(itemData.createTime,
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: color999999)),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ],
                           ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 18.0),
-                              child: Text(
-                                "X${itemData.count}",
-                                textAlign: TextAlign.end,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: VerticalLine(),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 15.0, horizontal: 10),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0, vertical: 5.0),
+                                child: GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+                                  onTap: () {
+                                    showToast(
+                                        "收件人:${itemData.consigneeName},手机号:${itemData.tel},详细地址:" +
+                                            itemData.provincename +
+                                            itemData.cityname +
+                                            itemData.areaname +
+                                            itemData.addressDetail);
+                                  },
+                                  child: Text("查看收件信息",
+                                      style: TextStyle(
+                                          fontSize: 13, color: color333333)),
+                                ),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    border: Border.all(
+                                        width: 0.5, color: colorCCCCCC)),
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                    ),
-                    VerticalLine(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 18.0, vertical: 8.0),
-                          child: Text(statusText[itemData.status]),
-                        ),
-                        InkWell(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 18.0, vertical: 8.0),
-                            child: Text("查看收件信息"),
-                          ),
-                          onTap: () {
-                            showToast(
-                                "收件人:${itemData.consigneeName},手机号:${itemData.tel},详细地址:" +
-                                    itemData.provincename +
-                                    itemData.cityname +
-                                    itemData.areaname +
-                                    itemData.addressDetail);
-                          },
+                            if (itemData.virtualProduct != null)
+                              Padding(
+                                padding: const EdgeInsets.only(right: 12.0),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0, vertical: 5.0),
+                                  child: GestureDetector(
+                                    behavior: HitTestBehavior.opaque,
+                                    onTap: () {
+                                      dispatch(
+                                          MyOrderActionCreator.onSkipReviewPage(
+                                              itemData));
+                                    },
+                                    child: Text("二维码",
+                                        style: TextStyle(
+                                            fontSize: 13, color: color333333)),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                      border: Border.all(
+                                          width: 0.5, color: colorCCCCCC)),
+                                ),
+                              ),
+                          ],
                         ),
                       ],
                     ),
-                    VerticalLine(
-                      height: 10.0,
-                    )
-                  ],
+                  ),
                 ),
               );
             }, childCount: state.data?.length ?? 0),

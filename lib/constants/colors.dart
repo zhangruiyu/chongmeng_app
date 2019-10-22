@@ -25,6 +25,7 @@ const colorA4A4A4 = Color(0xffA4A4A4);
 const color648CEF = Color(0xff648CEF);
 const color181718 = Color(0xff181718);
 const color0C0D0C = Color(0xff0C0D0C);
+const colorCCCCCC = Color(0xffCCCCCC);
 const colorF6F6F6 = Color(0xfff6f6f6);
 const colorF9F9F9 = Color(0xfff9f9f9);
 const colorFf0000 = Color(0xffff0000);
