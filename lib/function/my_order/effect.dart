@@ -5,6 +5,7 @@ import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
+import 'package:oktoast/oktoast.dart';
 import 'action.dart';
 import 'model/my_order_entity.dart';
 import 'state.dart';
@@ -32,6 +33,7 @@ Future _onSkipReviewPage(Action action, Context<MyOrderState> ctx) async {
       Navigator.pushNamed(ctx.context, PageConstants.VirtualProductReviewPage,
           arguments: {'data': virtualProduct});
     } else {
+      showToast("已为您加急兑换中,下单后30分钟未兑换成功自动退货");
       ctx.dispatch(MyOrderActionCreator.onRefresh(null));
     }
   }
