@@ -104,7 +104,14 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
                 Padding(
                   padding: const EdgeInsets.only(left: 18.0, right: 18.0),
                   child: Text(
-                    "商品兑换成功后会在每周五根据您所填写的默认地址统一邮寄发放。",
+                    "代金券:商品兑换成功后会在30分钟内根据您所填写的手机号发放后进行提示。",
+                    style: of.textTheme.caption,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 18.0, right: 18.0),
+                  child: Text(
+                    "实物:商品兑换成功后会在每周五根据您所填写的默认地址统一邮寄发放。",
                     style: of.textTheme.caption,
                   ),
                 ),
