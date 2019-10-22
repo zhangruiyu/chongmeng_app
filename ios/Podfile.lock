@@ -46,7 +46,7 @@ PODS:
     - Flutter
   - path_provider (0.0.1):
     - Flutter
-  - permission_handler (3.2.2):
+  - permission_handler (3.3.0):
     - Flutter
   - photo_manager (0.0.1):
     - Flutter
@@ -206,7 +206,7 @@ SPEC CHECKSUMS:
   jverify: 5220ae1becb7f0a7d62730729003181fb109ee6a
   package_info: 78cabb3c322943c55d39676f4a5bfc748c01d055
   path_provider: f96fff6166a8867510d2c25fdcc346327cc4b259
-  permission_handler: d59f41439f5bc6c4d1005f3355e98f05ddc68ece
+  permission_handler: 67637977b227d62d46bfbf524f335f8568de5a73
   photo_manager: 47ca9adddeea702246c96c6f67769f03907cd953
   QCloudCore: 57cb8830b0f7adbd99f7467d23cf42a88257ac63
   QCloudCOSXML: 5589f274de85f2073b69a786c9eef9080009cd3b

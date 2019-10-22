@@ -86,6 +86,20 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
                 Padding(
                   padding: const EdgeInsets.only(
                       top: 18.0, left: 18.0, right: 18.0, bottom: 5.0),
+                  child: Text("使用说明"),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 18.0, right: 18.0, bottom: 18.0),
+                  child: Text(
+                    state.itemData.externalRemake,
+                    style: of.textTheme.caption,
+                  ),
+                ),
+                VerticalLine(height: 10.0),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 18.0, left: 18.0, right: 18.0, bottom: 5.0),
                   child: Text("商品简介"),
                 ),
                 Padding(

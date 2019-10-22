@@ -65,6 +65,7 @@ class IntegralCommodityDataIntegralcommodity {
   String name;
   int count;
   String details;
+  String externalRemake;
   int id;
   List<String> pic;
 
@@ -84,6 +85,7 @@ class IntegralCommodityDataIntegralcommodity {
     count = json['count'];
     details = json['details'];
     id = json['id'];
+    externalRemake = json['external_remake'];
     pic = json['pic']?.cast<String>();
   }
 
@@ -96,6 +98,7 @@ class IntegralCommodityDataIntegralcommodity {
     data['details'] = this.details;
     data['id'] = this.id;
     data['pic'] = this.pic;
+    data['external_remake'] = this.externalRemake;
     return data;
   }
 }
