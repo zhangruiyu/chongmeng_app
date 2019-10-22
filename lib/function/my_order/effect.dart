@@ -31,7 +31,7 @@ Future _onRefresh(Action action, Context<MyOrderState> ctx) async {
 Future _onSkipReviewPage(Action action, Context<MyOrderState> ctx) async {
   MyOrderData virtualProduct = action.payload;
   if (virtualProduct.virtualProduct != null) {
-    if (virtualProduct.virtualProduct.length > 0) {
+    if (virtualProduct.virtualProduct.isNotEmpty) {
       Navigator.pushNamed(ctx.context, PageConstants.VirtualProductReviewPage,
           arguments: {'data': virtualProduct});
     } else {
