@@ -326,12 +326,10 @@ packages:
   jpush_flutter:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: de83aaf8a9824402bf28a6674319ffb10bbbc89d
-      url: "https://github.com/jpush/jpush-flutter-plugin.git"
-    source: git
-    version: "0.2.0"
+      name: jpush_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   jverify:
     dependency: "direct main"
     description:
