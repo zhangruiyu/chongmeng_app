@@ -41,7 +41,8 @@ dependencies:
   flutter_swiper: any
   device_info: any
   janalytics: any
-  jpush_flutter: 0.0.11
+  jpush_flutter:
+    git: https://github.com/jpush/jpush-flutter-plugin.git
   webview_flutter: any
   material_design_icons_flutter: ^3.2.3695
   extended_nested_scroll_view: ^0.3.6
@@ -69,9 +70,7 @@ dependencies:
   flutter_vertical_marquee:
     git:
       url: https://github.com/zhangruiyu/flutter_vertical_marquee.git
-  jverify:
-    git:
-      url: https://github.com/zhangruiyu/jverify-flutter-plugin.git
+  jverify: 0.5.2
   extended_text: 0.6.4
   sliver_animated_list: ^1.0.0
   jmessage_flutter:

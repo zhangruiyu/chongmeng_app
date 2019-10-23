@@ -96,6 +96,7 @@ class JiguangUtils {
       if (text_widgetId == eventId) {
         print("receive listener - 点击【新加 button】");
         controller.complete({'code': 1011});
+        jverify.dismissLoginAuthView();
       }
     });
     jverify.setCustomAuthViewAllWidgets(
