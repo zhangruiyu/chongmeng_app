@@ -41,6 +41,8 @@ class MyOrderData {
   String addressDetail;
   List<MyOrderDataVirtualProduct> virtualProduct;
   String provincename;
+  String expressNumber;
+  String expressType;
   int integral;
   String name;
   String tel;
@@ -90,6 +92,8 @@ class MyOrderData {
     id = json['id'];
     status = json['status'];
     externalRemake = json['external_remake'];
+    expressNumber = json['express_number'];
+    expressType = json['express_type'];
   }
 
   Map<String, dynamic> toJson() {
@@ -115,6 +119,8 @@ class MyOrderData {
     data['id'] = this.id;
     data['status'] = this.status;
     data['external_remake'] = this.externalRemake;
+    data['express_number'] = this.expressNumber;
+    data['express_type'] = this.expressType;
     return data;
   }
 }

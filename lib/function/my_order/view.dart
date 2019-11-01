@@ -26,7 +26,7 @@ Widget buildView(
     MyOrderState state, Dispatch dispatch, ViewService viewService) {
   var of = Theme.of(viewService.context);
   return Scaffold(
-    backgroundColor: colorWhite,
+    backgroundColor: of.dividerColor,
     appBar: Toolbar(
       title: Text("我的订单"),
     ),
@@ -47,8 +47,11 @@ Widget buildView(
                 color: Theme.of(viewService.context).dividerColor,
                 child: Card(
                   elevation: 0.5,
-                  margin:
-                      const EdgeInsets.only(top: 12.0, left: 18.0, right: 18.0),
+                  margin: EdgeInsets.only(
+                      top: 12.0,
+                      left: 18.0,
+                      right: 18.0,
+                      bottom: state.data.length == (index + 1) ? 12.0 : 0.0),
                   child: InkWell(
                     onTap: itemData.virtualProduct == null
                         ? null
@@ -174,6 +177,30 @@ Widget buildView(
                                               itemData));
                                     },
                                     child: Text("二维码",
+                                        style: TextStyle(
+                                            fontSize: 13, color: color333333)),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                      border: Border.all(
+                                          width: 0.5, color: colorCCCCCC)),
+                                ),
+                              ),
+                            if (itemData.expressType != null &&
+                                itemData.expressNumber != null)
+                              Padding(
+                                padding: const EdgeInsets.only(right: 12.0),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0, vertical: 5.0),
+                                  child: GestureDetector(
+                                    behavior: HitTestBehavior.opaque,
+                                    onTap: () {
+                                      dispatch(
+                                          MyOrderActionCreator.onShowExpress(
+                                              itemData));
+                                    },
+                                    child: Text("查看快递信息",
                                         style: TextStyle(
                                             fontSize: 13, color: color333333)),
                                   ),

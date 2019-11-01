@@ -2,7 +2,13 @@ import 'package:fish_redux/fish_redux.dart';
 
 import 'model/my_order_entity.dart';
 
-enum MyOrderAction { ResetPageData, Refresh, SkipReviewPage, ShowOrderAddress }
+enum MyOrderAction {
+  ResetPageData,
+  Refresh,
+  SkipReviewPage,
+  ShowOrderAddress,
+  ShowExpress
+}
 
 class MyOrderActionCreator {
   static Action onResetPageData(List<MyOrderData> data) {
@@ -19,5 +25,9 @@ class MyOrderActionCreator {
 
   static Action onShowOrderAddress(MyOrderData virtualProduct) {
     return Action(MyOrderAction.ShowOrderAddress, payload: virtualProduct);
+  }
+
+  static Action onShowExpress(MyOrderData orderData) {
+    return Action(MyOrderAction.ShowExpress, payload: orderData);
   }
 }
