@@ -15,6 +15,23 @@ Widget buildView(
   return Scaffold(
     appBar: Toolbar(
       title: Text("添加宠物"),
+      actions: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(right: 22.0),
+          child: InkResponse(
+            onTap: () {
+              Navigator.pop(viewService.context);
+            },
+            child: Container(
+              alignment: Alignment.center,
+              child: Text(
+                "跳过",
+                style: TextStyle(color: colorWhite),
+              ),
+            ),
+          ),
+        )
+      ],
     ),
     body: Stack(
       children: <Widget>[
