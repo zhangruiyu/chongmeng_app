@@ -2,6 +2,7 @@ import 'package:chongmeng/network/entity/outermost_entity.dart';
 import 'package:chongmeng/network/entity/cos_entity.dart';
 import 'package:chongmeng/utils/model/jiguang_entity.dart';
 import 'package:chongmeng/function/user_details/model/user_details_entity.dart';
+import 'package:chongmeng/function/movie/model/hot_movie_entity.dart';
 import 'package:chongmeng/function/shipping_address/model/shipping_address_entity.dart';
 import 'package:chongmeng/function/update/model/update_entity.dart';
 import 'package:chongmeng/function/auto/model/login_entity.dart';
@@ -46,6 +47,8 @@ class EntityFactory {
       return JiguangEntity.fromJson(json) as T;
     } else if (T.toString() == "UserDetailsEntity") {
       return UserDetailsEntity.fromJson(json) as T;
+    } else if (T.toString() == "HotMovieEntity") {
+      return HotMovieEntity.fromJson(json) as T;
     } else if (T.toString() == "ShippingAddressEntity") {
       return ShippingAddressEntity.fromJson(json) as T;
     } else if (T.toString() == "UpdateEntity") {

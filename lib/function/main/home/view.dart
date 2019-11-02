@@ -88,6 +88,15 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
               SliverToBoxAdapter(
                 child: viewService.buildComponent("notice"),
               ),
+              SliverToBoxAdapter(
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(
+                        viewService.context, PageConstants.MoviePage);
+                  },
+                  child: Text("电影票"),
+                ),
+              ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(buildAdapter.itemBuilder,
                     childCount: buildAdapter.itemCount),

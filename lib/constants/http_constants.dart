@@ -5,11 +5,10 @@ class HttpConstants {
 //  static final String BaseUrl = "https://api.mustbe.xyz/";
 //  static final String BaseStaticUrl = "https://app.mustbe.xyz/";
 //上线 为家里 测试为公司
-  static final String BaseUrl = isOnline
-      ? "https://www.keleyuanyuan.xyz/"
-//          : "http://192.168.6.211:8080/";
+  static final String BaseUrl =
+      isOnline ? "https://www.keleyuanyuan.xyz/" : "http://192.168.6.211:8080/";
 //      : "http://123.207.154.134:8080/";
-      : "http://192.168.1.5:8080/";
+//      : "http://192.168.1.5:8080/";
 
   static final String SendCode = "app/auth/sendLoginCode"; //发送验证码
   static final String SendThirdLoginCode =
@@ -90,6 +89,8 @@ class HttpConstants {
   static String get PayStatus => "/app/money/common/payStatus"; //查询充值状态
   static String get MoneyAllCommodity =>
       "/app/money/common/pay/allCommodity"; //充值的所有商品
+
+  static String get MoiveHot => "/app/movie/movieOnInfoList"; //正在热映电影
 }
 
 class CosType {
