@@ -75,7 +75,7 @@ class RequestClient {
   }) async {
     var globalState = GlobalStore.store.getState();
     BaseOptions baseOptions = new BaseOptions(
-        baseUrl: HttpConstants.BaseUrl,
+        baseUrl: requestUrl.startsWith("http") ? "" : HttpConstants.BaseUrl,
         connectTimeout: 40000,
         receiveTimeout: 40000,
         headers: {
@@ -108,7 +108,9 @@ class RequestClient {
     if (response.statusCode == HttpStatus.ok) {
       var data = response.data;
 
-      if (data['status'].toString() == ErrorCode.Login.toString()) {
+      if (requestUrl.startsWith("http")) {
+        return new Future.value(EntityFactory.generateOBJ<T>(response.data));
+      } else if (data['status'].toString() == ErrorCode.Login.toString()) {
         UserHelper.logout(context);
         return new Future.error(
             new NetException(code: data['status'], message: data['msg']));
