@@ -8,15 +8,16 @@ import 'view.dart';
 class MovieDetailsPage extends Page<MovieDetailsState, Map<String, dynamic>> {
   MovieDetailsPage()
       : super(
-            initState: initState,
-            effect: buildEffect(),
-            reducer: buildReducer(),
-            view: buildView,
-            dependencies: Dependencies<MovieDetailsState>(
-                adapter: null,
-                slots: <String, Dependent<MovieDetailsState>>{
-                }),
-            middleware: <Middleware<MovieDetailsState>>[
-            ],);
-
+          initState: initState,
+          effect: buildEffect(),
+          reducer: buildReducer(),
+          view: buildView,
+          dependencies: Dependencies<MovieDetailsState>(
+              adapter: null, slots: <String, Dependent<MovieDetailsState>>{}),
+          middleware: <Middleware<MovieDetailsState>>[],
+        );
+  @override
+  ComponentState<MovieDetailsState> createState() {
+    return MovieDetailsPageState();
+  }
 }
