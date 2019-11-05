@@ -15,6 +15,7 @@ Effect<MovieDetailsState> buildEffect() {
   return combineEffects(<Object, Effect<MovieDetailsState>>{
     MovieDetailsAction.Refresh: _onRefresh,
     MovieDetailsAction.RefreshSchedule: _onRefreshSchedule,
+    MovieDetailsAction.LoadSchedule: _onLoadSchedule,
     Lifecycle.initState: _initState,
   });
 }
@@ -57,11 +58,37 @@ Future<void> _onRefreshSchedule(
           queryParameters: {
         "forceUpdate": new DateTime.now().millisecondsSinceEpoch,
         "movieId": ctx.state.itemMovie.id,
-        "day": DateUtils.formatData(itemPageData.filtrateType)
+        "day": DateUtils.formatData(itemPageData.filtrateType),
+        "offset": 0,
+        "limit": 20
       }))
       .yes((value) {
     ctx.dispatch(
         MovieDetailsActionCreator.onSetScheduleData(itemPageData, value));
+  });
+  CompleterUtils.complete(action);
+}
+
+Future<void> _onLoadSchedule(
+    Action action, Context<MovieDetailsState> ctx) async {
+  ItemMovieSchedulePageData itemPageData = action.payload['itemPageData'];
+
+  (await RequestClient.request<MovieScheduleEntity>(ctx.context,
+          "http://m.maoyan.com/ajax/movie?forceUpdate=${new DateTime.now().millisecondsSinceEpoch}",
+          isPost: true,
+          queryParameters: {
+        "forceUpdate": new DateTime.now().millisecondsSinceEpoch,
+        "movieId": ctx.state.itemMovie.id,
+        "day": DateUtils.formatData(itemPageData.filtrateType),
+        "offset": 20 * itemPageData.pageIndex,
+        "limit": 20
+      }))
+      .yes((value) {
+    itemPageData.easyRefreshController
+        .finishLoad(success: true, noMore: !value.paging.hasMore);
+    itemPageData.pageIndex++;
+    ctx.dispatch(
+        MovieDetailsActionCreator.onSetLoadScheduleData(itemPageData, value));
   });
   CompleterUtils.complete(action);
 }

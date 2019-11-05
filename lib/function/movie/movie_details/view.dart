@@ -181,11 +181,15 @@ Widget buildView(
                     child: Builder(
                       builder: (BuildContext context) {
                         return EasyRefresh.custom(
+                          controller: pageData.easyRefreshController,
 //                            firstRefresh: true,
 //                            firstRefreshWidget: LoadingWidget(),
-//                            onRefresh: CompleterUtils.produceCompleterAction(
-//                                dispatch,
-//                                MovieDetailsActionCreator.onRefreshSchedule),
+                          onLoad: CompleterUtils.produceCompleterAction(
+                              dispatch,
+                              MovieDetailsActionCreator.onLoadSchedule,
+                              params: (params) {
+                            params['itemPageData'] = pageData;
+                          }),
                           key: PageStorageKey<DateTime>(name),
                           slivers: <Widget>[
                             SliverOverlapInjector(

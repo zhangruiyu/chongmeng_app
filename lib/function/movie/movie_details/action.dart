@@ -8,7 +8,9 @@ enum MovieDetailsAction {
   SetDetailsData,
   Refresh,
   RefreshSchedule,
-  SetScheduleData
+  SetScheduleData,
+  LoadSchedule,
+  SetLoadScheduleData,
 }
 
 class MovieDetailsActionCreator {
@@ -24,9 +26,21 @@ class MovieDetailsActionCreator {
     return Action(MovieDetailsAction.RefreshSchedule, payload: p);
   }
 
+  static Action onLoadSchedule(Map<String, dynamic> p) {
+    return Action(MovieDetailsAction.LoadSchedule, payload: p);
+  }
+
   static Action onSetScheduleData(
       ItemMovieSchedulePageData p, MovieScheduleEntity movieScheduleEntity) {
     return Action(MovieDetailsAction.SetScheduleData, payload: {
+      "key": p.filtrateType,
+      "data": movieScheduleEntity,
+    });
+  }
+
+  static Action onSetLoadScheduleData(
+      ItemMovieSchedulePageData p, MovieScheduleEntity movieScheduleEntity) {
+    return Action(MovieDetailsAction.SetLoadScheduleData, payload: {
       "key": p.filtrateType,
       "data": movieScheduleEntity,
     });
