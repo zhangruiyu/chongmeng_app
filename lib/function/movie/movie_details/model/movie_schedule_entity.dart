@@ -1,9 +1,12 @@
 class MovieScheduleEntity {
   List<MovieScheduleCinema> cinemas;
   int random;
+  String movieId;
   MovieSchedulePaging paging;
+  String day;
 
-  MovieScheduleEntity({this.cinemas, this.random, this.paging});
+  MovieScheduleEntity(
+      {this.cinemas, this.random, this.movieId, this.paging, this.day});
 
   MovieScheduleEntity.fromJson(Map<String, dynamic> json) {
     if (json['cinemas'] != null) {
@@ -13,9 +16,11 @@ class MovieScheduleEntity {
       });
     }
     random = json['random'];
+    movieId = json['movieId'];
     paging = json['paging'] != null
         ? new MovieSchedulePaging.fromJson(json['paging'])
         : null;
+    day = json['day'];
   }
 
   Map<String, dynamic> toJson() {
@@ -24,26 +29,29 @@ class MovieScheduleEntity {
       data['cinemas'] = this.cinemas.map((v) => v.toJson()).toList();
     }
     data['random'] = this.random;
+    data['movieId'] = this.movieId;
     if (this.paging != null) {
       data['paging'] = this.paging.toJson();
     }
+    data['day'] = this.day;
     return data;
   }
 }
 
 class MovieScheduleCinema {
   String distance;
+  String showTimes;
   String sellPrice;
   int id;
   MovieScheduleCinemasTag tag;
   String addr;
-  String showTimes;
   int mark;
   String nm;
   MovieScheduleCinemasPromotion promotion;
 
   MovieScheduleCinema(
       {this.distance,
+      this.showTimes,
       this.sellPrice,
       this.id,
       this.tag,
@@ -54,6 +62,7 @@ class MovieScheduleCinema {
 
   MovieScheduleCinema.fromJson(Map<String, dynamic> json) {
     distance = json['distance'];
+    showTimes = json['showTimes'];
     sellPrice = json['sellPrice'];
     id = json['id'];
     tag = json['tag'] != null
@@ -62,7 +71,6 @@ class MovieScheduleCinema {
     addr = json['addr'];
     mark = json['mark'];
     nm = json['nm'];
-    showTimes = json['showTimes'];
     promotion = json['promotion'] != null
         ? new MovieScheduleCinemasPromotion.fromJson(json['promotion'])
         : null;
@@ -71,6 +79,7 @@ class MovieScheduleCinema {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['distance'] = this.distance;
+    data['showTimes'] = this.showTimes;
     data['sellPrice'] = this.sellPrice;
     data['id'] = this.id;
     if (this.tag != null) {
@@ -79,7 +88,6 @@ class MovieScheduleCinema {
     data['addr'] = this.addr;
     data['mark'] = this.mark;
     data['nm'] = this.nm;
-    data['showTimes'] = this.showTimes;
     if (this.promotion != null) {
       data['promotion'] = this.promotion.toJson();
     }

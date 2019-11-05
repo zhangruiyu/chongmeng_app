@@ -198,28 +198,35 @@ Widget buildView(
                                 delegate: SliverChildBuilderDelegate(
                                   (BuildContext context, int index) {
                                     var itemScheduleData = data[index];
+                                    List<String> blueTags =
+                                        itemScheduleData.tag.hallType;
                                     return Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        RichText(
-                                            text: TextSpan(children: [
-                                          TextSpan(
-                                              text: itemScheduleData.nm,
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  color: Colors.black)),
-                                          TextSpan(
-                                              text: itemScheduleData.sellPrice,
-                                              style: TextStyle(
-                                                  fontSize: 18.0,
-                                                  color: Colors.red[400])),
-                                          TextSpan(
-                                              text: "元起",
-                                              style: TextStyle(
-                                                  fontSize: 12.0,
-                                                  color: Colors.red[400])),
-                                        ])),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 8.0, bottom: 8.0),
+                                          child: RichText(
+                                              text: TextSpan(children: [
+                                            TextSpan(
+                                                text: itemScheduleData.nm,
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.black)),
+                                            TextSpan(
+                                                text:
+                                                    itemScheduleData.sellPrice,
+                                                style: TextStyle(
+                                                    fontSize: 18.0,
+                                                    color: Colors.red[400])),
+                                            TextSpan(
+                                                text: "元起",
+                                                style: TextStyle(
+                                                    fontSize: 12.0,
+                                                    color: Colors.red[400])),
+                                          ])),
+                                        ),
                                         Row(
                                           children: <Widget>[
                                             Expanded(
@@ -238,11 +245,65 @@ Widget buildView(
                                             ),
                                           ],
                                         ),
-                                        Text(
-                                          "近期场次: ${itemScheduleData.showTimes}",
-                                          style: TextStyle(
-                                              color: color7E7E7E, fontSize: 12),
-                                        ),
+                                        if (blueTags != null &&
+                                            blueTags.length > 0)
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 8.0),
+                                            child: SizedBox(
+                                              height: 18.0,
+                                              child: ListView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                children: blueTags
+                                                    .map((itmTag) => Container(
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      5.0),
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 5.0),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(
+                                                              Radius.circular(
+                                                                  5.0),
+                                                            ),
+                                                            border: Border.all(
+                                                              color: Color(
+                                                                  0xff589daf),
+                                                              width: 1.0,
+                                                            ),
+                                                          ),
+                                                          child: Text(
+                                                            itmTag,
+                                                            style: TextStyle(
+                                                                color: Color(
+                                                                    0xff589daf),
+                                                                fontSize: 10.0),
+                                                          ),
+                                                        ))
+                                                    .toList(),
+                                              ),
+                                            ),
+                                          ),
+                                        if (itemScheduleData.showTimes != null)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 8.0, bottom: 8.0),
+                                            child: Text(
+                                              "近期场次: ${itemScheduleData.showTimes}",
+                                              style: TextStyle(
+                                                  color: color7E7E7E,
+                                                  fontSize: 12),
+                                            ),
+                                          ),
+                                        VerticalLine(
+                                          height: 10.0,
+                                        )
                                       ],
                                     );
                                   },
