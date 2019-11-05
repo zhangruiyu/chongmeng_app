@@ -30,6 +30,10 @@ class DateUtils {
     print(timestamp.toString());
     return RelativeDateUtils.getTimestampString(int2dateTime(timestamp));
   }
+
+  static String formatDataMovie(DateTime dateTime) {
+    return DateFormat('MM月dd日').format(dateTime);
+  }
 }
 
 class RelativeDateUtils {

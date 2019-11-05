@@ -1,4 +1,4 @@
 #include "Pods/Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"
 #include "Generated.xcconfig"
-FLUTTER_BUILD_NAME=1.2.0
+FLUTTER_BUILD_NAME=1.5.0
 FLUTTER_BUILD_NUMBER=16

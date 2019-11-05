@@ -26,22 +26,23 @@ PODS:
     - JAnalytics
   - JAnalytics (2.1.0):
     - JCore (< 3.0.0, >= 1.2.0)
-  - JCore (2.1.2)
+  - JCore (2.1.4-noidfa)
   - JMessage (3.9.1):
     - JCore (< 3.0.0, >= 2.0.0)
   - jmessage_flutter (0.0.1):
     - Flutter
     - JMessage
-  - JPush (3.2.4):
+  - JPush (3.2.6):
     - JCore (< 3.0.0, >= 2.0.0)
   - jpush_flutter (0.0.2):
     - Flutter
     - JPush
-  - JVerification (2.3.6):
+  - JVerification (2.5.0):
     - JCore (< 3.0.0, >= 1.2.6)
   - jverify (0.0.1):
     - Flutter
-    - JVerification (= 2.3.6)
+    - JCore (= 2.1.4-noidfa)
+    - JVerification (= 2.5.0)
   - package_info (0.0.1):
     - Flutter
   - path_provider (0.0.1):
@@ -97,7 +98,7 @@ DEPENDENCIES:
   - city_pickers (from `.symlinks/plugins/city_pickers/ios`)
   - device_info (from `.symlinks/plugins/device_info/ios`)
   - downloads_path_provider (from `.symlinks/plugins/downloads_path_provider/ios`)
-  - Flutter (from `.symlinks/flutter/ios-release`)
+  - Flutter (from `.symlinks/flutter/ios`)
   - flutter_ijkplayer (from `.symlinks/plugins/flutter_ijkplayer/ios`)
   - fluwx (from `.symlinks/plugins/fluwx/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
@@ -143,7 +144,7 @@ EXTERNAL SOURCES:
   downloads_path_provider:
     :path: ".symlinks/plugins/downloads_path_provider/ios"
   Flutter:
-    :path: ".symlinks/flutter/ios-release"
+    :path: ".symlinks/flutter/ios"
   flutter_ijkplayer:
     :path: ".symlinks/plugins/flutter_ijkplayer/ios"
   fluwx:
@@ -197,13 +198,13 @@ SPEC CHECKSUMS:
   image_picker_saver: 4f28bd70e1efdca68ad88beab0f11d22cffe04f6
   JAnalytics: 3ae37a36b02cd06543c4d5a008a37470f577ec50
   janalytics: 7d0b5205a066d542772d544ce560e4490caaf510
-  JCore: 1a426120b510cdebfd67b82bfb9483238ee09413
+  JCore: 2f15311e6889ab43ed5d629802ef793cac566465
   JMessage: 43dfcd5348573b2f4f24357b12e9b19076322606
   jmessage_flutter: eb7c42cb2444efae6aa14c2083dc84929ca3c80a
-  JPush: 29466e5f30dbd703f640d70540e411e829cac1fa
+  JPush: 41dd48a69bd8c08abc692dc7f2b23c0fb281471f
   jpush_flutter: d7e3a79466eb9447fd940233f02661b514f137c6
-  JVerification: e7ff08f6fc8500e10ee9089e527ccf4c16ad0397
-  jverify: 5220ae1becb7f0a7d62730729003181fb109ee6a
+  JVerification: e51834e1c7f0f1b6b911987234a57bf80b9eeff8
+  jverify: 8a4261f246cf320f412d4f8fa8f7b3b2cb134dc9
   package_info: 78cabb3c322943c55d39676f4a5bfc748c01d055
   path_provider: f96fff6166a8867510d2c25fdcc346327cc4b259
   permission_handler: 67637977b227d62d46bfbf524f335f8568de5a73

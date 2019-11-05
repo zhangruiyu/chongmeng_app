@@ -70,7 +70,7 @@ class RequestClient {
     Map<String, dynamic> queryParameters,
     bool isPost = true,
     bool showLoadingIndicator = false,
-    String contentType = "application/x-www-form-urlencoded",
+    String contentType = "application/x-www-form-urlencoded; charset=UTF-8",
     bool ignoreToast = false,
   }) async {
     var globalState = GlobalStore.store.getState();
