@@ -9,6 +9,10 @@ class DateUtils {
     return DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
   }
 
+  static String formatHHmm(DateTime dateTime) {
+    return DateFormat('HH:mm').format(dateTime);
+  }
+
   static String toDay() {
     return DateFormat('yyyy-MM-dd').format(DateTime.now());
   }
