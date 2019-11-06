@@ -21,6 +21,7 @@ class RequestClient {
     BuildContext context,
     String requestUrl, {
     Map<String, dynamic> queryParameters,
+    Map<String, dynamic> header,
     bool isPost = true,
     bool showLoadingIndicator = false,
     String contentType = "application/x-www-form-urlencoded",
@@ -35,7 +36,8 @@ class RequestClient {
           isPost: isPost,
           showLoadingIndicator: showLoadingIndicator,
           contentType: contentType,
-          ignoreToast: ignoreToast);
+          ignoreToast: ignoreToast,
+          header: header);
       if (showLoadingIndicator) {
         NavigatorHelper.showLoadingDialog(context, false);
       }
@@ -68,6 +70,7 @@ class RequestClient {
     BuildContext context,
     String requestUrl, {
     Map<String, dynamic> queryParameters,
+    Map<String, dynamic> header,
     bool isPost = true,
     bool showLoadingIndicator = false,
     String contentType = "application/x-www-form-urlencoded; charset=UTF-8",
@@ -82,7 +85,8 @@ class RequestClient {
           'os': Platform.operatingSystem,
           'version': globalState.packageInfo.version,
           'token': UserHelper.getUserToken(),
-          'channel': GlobalStore.state.channel
+          'channel': GlobalStore.state.channel,
+          if (header != null) ...header
         });
 
     if (isPost) {

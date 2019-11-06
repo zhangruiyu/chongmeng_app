@@ -2,9 +2,12 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
+import 'package:chongmeng/function/movie/movie_details/model/movie_schedule_entity.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/utils/hex_color.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
+import 'package:chongmeng/widget/keep_alive_widget.dart';
 import 'package:chongmeng/widget/loadling_widget.dart';
 import 'package:chongmeng/widget/vertical_line.dart';
 import 'package:extended_image/extended_image.dart';
@@ -175,154 +178,147 @@ Widget buildView(
                   var pageData = state.pageData[name];
                   var data = pageData.data;
                   //SafeArea 适配刘海屏的一个widget
-                  return SafeArea(
-                    top: false,
-                    bottom: false,
-                    child: Builder(
-                      builder: (BuildContext context) {
-                        return EasyRefresh.custom(
-                          controller: pageData.easyRefreshController,
+                  return KeepAliveWidget(
+                    child: SafeArea(
+                      top: false,
+                      bottom: false,
+                      child: Builder(
+                        builder: (BuildContext context) {
+                          return EasyRefresh.custom(
+                            controller: pageData.easyRefreshController,
 //                            firstRefresh: true,
 //                            firstRefreshWidget: LoadingWidget(),
-                          onLoad: CompleterUtils.produceCompleterAction(
-                              dispatch,
-                              MovieDetailsActionCreator.onLoadSchedule,
-                              params: (params) {
-                            params['itemPageData'] = pageData;
-                          }),
-                          key: PageStorageKey<DateTime>(name),
-                          slivers: <Widget>[
-                            SliverOverlapInjector(
-                              handle: NestedScrollView
-                                  .sliverOverlapAbsorberHandleFor(context),
-                            ),
-                            SliverPadding(
-                              padding: const EdgeInsets.all(10.0),
-                              sliver: SliverList(
+                            onLoad: CompleterUtils.produceCompleterAction(
+                                dispatch,
+                                MovieDetailsActionCreator.onLoadSchedule,
+                                params: (params) {
+                              params['itemPageData'] = pageData;
+                            }),
+                            key: PageStorageKey<DateTime>(name),
+                            slivers: <Widget>[
+                              SliverOverlapInjector(
+                                handle: NestedScrollView
+                                    .sliverOverlapAbsorberHandleFor(context),
+                              ),
+                              SliverList(
                                 delegate: SliverChildBuilderDelegate(
                                   (BuildContext context, int index) {
                                     var itemScheduleData = data[index];
                                     List<String> blueTags =
                                         itemScheduleData.tag.hallType;
-                                    return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 8.0, bottom: 8.0),
-                                          child: RichText(
-                                              text: TextSpan(children: [
-                                            TextSpan(
-                                                text: itemScheduleData.nm,
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.black)),
-                                            TextSpan(
-                                                text:
-                                                    itemScheduleData.sellPrice,
-                                                style: TextStyle(
-                                                    fontSize: 18.0,
-                                                    color: Colors.red[400])),
-                                            TextSpan(
-                                                text: "元起",
-                                                style: TextStyle(
-                                                    fontSize: 12.0,
-                                                    color: Colors.red[400])),
-                                          ])),
-                                        ),
-                                        Row(
-                                          children: <Widget>[
-                                            Expanded(
-                                              child: Text(
-                                                itemScheduleData.addr,
-                                                style: TextStyle(
-                                                    color: color7E7E7E,
-                                                    fontSize: 12),
-                                              ),
-                                            ),
-                                            Text(
-                                              itemScheduleData.distance,
-                                              style: TextStyle(
-                                                  color: color7E7E7E,
-                                                  fontSize: 12),
-                                            ),
-                                          ],
-                                        ),
-                                        if (blueTags != null &&
-                                            blueTags.length > 0)
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 8.0),
-                                            child: SizedBox(
-                                              height: 18.0,
-                                              child: ListView(
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                children: blueTags
-                                                    .map((itmTag) => Container(
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                                  horizontal:
-                                                                      5.0),
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 5.0),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(
-                                                              Radius.circular(
-                                                                  5.0),
-                                                            ),
-                                                            border: Border.all(
-                                                              color: Color(
-                                                                  0xff589daf),
-                                                              width: 1.0,
-                                                            ),
-                                                          ),
-                                                          child: Text(
-                                                            itmTag,
-                                                            style: TextStyle(
-                                                                color: Color(
-                                                                    0xff589daf),
-                                                                fontSize: 10.0),
-                                                          ),
-                                                        ))
-                                                    .toList(),
-                                              ),
-                                            ),
-                                          ),
-                                        if (itemScheduleData.showTimes != null)
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 8.0, bottom: 8.0),
-                                            child: Text(
-                                              "近期场次: ${itemScheduleData.showTimes}",
-                                              style: TextStyle(
-                                                  color: color7E7E7E,
-                                                  fontSize: 12),
-                                            ),
-                                          ),
-                                        VerticalLine(
-                                          height: 10.0,
-                                        )
-                                      ],
-                                    );
+                                    return buildScheduleItem(
+                                        viewService,
+                                        itemScheduleData,
+                                        blueTags,
+                                        state.itemMovie.id);
                                   },
                                   childCount: data?.length ?? 0,
                                 ),
                               ),
-                            ),
-                          ],
-                        );
-                      },
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   );
                 }).toList(),
               ),
             ));
+}
+
+Column buildScheduleItem(ViewService viewService,
+    MovieScheduleCinema itemScheduleData, List<String> blueTags, int movieId) {
+  return Column(
+    children: <Widget>[
+      InkWell(
+        onTap: () {
+          Navigator.pushNamed(
+              viewService.context, PageConstants.MovieCinemaPage, arguments: {
+            'movieScheduleData': itemScheduleData,
+            'movieId': movieId
+          });
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                child: RichText(
+                    text: TextSpan(children: [
+                  TextSpan(
+                      text: itemScheduleData.nm,
+                      style: TextStyle(fontSize: 18, color: Colors.black)),
+                  TextSpan(
+                      text: itemScheduleData.sellPrice,
+                      style: TextStyle(fontSize: 18.0, color: Colors.red[400])),
+                  TextSpan(
+                      text: "元起",
+                      style: TextStyle(fontSize: 12.0, color: Colors.red[400])),
+                ])),
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      itemScheduleData.addr,
+                      style: TextStyle(color: color7E7E7E, fontSize: 12),
+                    ),
+                  ),
+                  Text(
+                    itemScheduleData.distance,
+                    style: TextStyle(color: color7E7E7E, fontSize: 12),
+                  ),
+                ],
+              ),
+              if (blueTags != null && blueTags.length > 0)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: SizedBox(
+                    height: 18.0,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: blueTags
+                          .map((itmTag) => Container(
+                                padding: EdgeInsets.symmetric(horizontal: 5.0),
+                                margin: EdgeInsets.only(right: 5.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5.0),
+                                  ),
+                                  border: Border.all(
+                                    color: Color(0xff589daf),
+                                    width: 1.0,
+                                  ),
+                                ),
+                                child: Text(
+                                  itmTag,
+                                  style: TextStyle(
+                                      color: Color(0xff589daf), fontSize: 10.0),
+                                ),
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                ),
+              if (itemScheduleData.showTimes != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                  child: Text(
+                    "近期场次: ${itemScheduleData.showTimes}",
+                    style: TextStyle(color: color7E7E7E, fontSize: 12),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+      VerticalLine(
+        height: 10.0,
+      )
+    ],
+  );
 }
 
 class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {

@@ -22,6 +22,7 @@ import 'function/main/community/selecttalktype/page.dart';
 import 'function/main/page.dart';
 import 'function/main/store/coupon_detail/page.dart';
 import 'function/main/store/integral_commodity_detail/page.dart';
+import 'function/movie/movie_cinema/page.dart';
 import 'function/movie/movie_details/page.dart';
 import 'function/movie/page.dart';
 import 'function/my_order/page.dart';
@@ -113,6 +114,7 @@ class PageConstants {
       "cm://VirtualProductReviewPage"; //预览虚拟产品支付结果
   static String get MoviePage => "cm://MoviePage"; //电影展示页面
   static String get MovieDetailsPage => "cm://MovieDetailsPage"; //电影详情页
+  static String get MovieCinemaPage => "cm://MovieCinemaPage"; //电影院选择场次
 }
 
 final AbstractRoutes routes = PageRoutes(
@@ -165,6 +167,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.VirtualProductReviewPage: VirtualProductReviewPage(),
     PageConstants.MoviePage: MoviePage(),
     PageConstants.MovieDetailsPage: MovieDetailsPage(),
+    PageConstants.MovieCinemaPage: MovieCinemaPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {
