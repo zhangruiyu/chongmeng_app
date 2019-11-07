@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/function/movie/movie_details/view.dart';
+import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/date_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
@@ -27,10 +28,11 @@ Widget buildView(
     appBar: Toolbar(
       title: Text(state.movieScheduleData.nm),
     ),
-    body: DefaultTabController(
-      child: state.cinemaMovies == null
-          ? Container()
-          : NestedScrollView(
+    body: state.cinemaMovies == null
+        ? Container()
+        : DefaultTabController(
+            length: selectCinemaMovie?.shows?.length ?? 0,
+            child: NestedScrollView(
               headerSliverBuilder:
                   (BuildContext context, bool innerBoxIsScrolled) {
                 // These are the slivers that show up in the "outer" scroll view.
@@ -155,83 +157,94 @@ Widget buildView(
                         var plist = itemShow.plist[index];
                         return Column(
                           children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: 60,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          plist.tm,
-                                          style: TextStyle(fontSize: 18),
-                                        ),
-                                        Text(
-                                          DateUtils.formatHHmm(
-                                                  DateUtils.string2dateTime(
-                                                          "${plist.dt} ${plist.tm}:00")
-                                                      .add(Duration(
-                                                          minutes:
-                                                              selectCinemaMovie
-                                                                  .dur))) +
-                                              "散场",
-                                          style: TextStyle(
-                                              color: color7E7E7E, fontSize: 14),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(left: 25),
-                                    height: 60,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: <Widget>[
-                                        Text(
-                                          plist.lang + plist.tp,
-                                          style: TextStyle(fontSize: 18),
-                                        ),
-                                        Text(
-                                          plist.th,
-                                          style: TextStyle(
-                                              color: color7E7E7E, fontSize: 14),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  //购买按钮
-                                  Expanded(
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 3.0, horizontal: 8.0),
-                                        decoration: BoxDecoration(
-                                          color: plist.ticketStatus != 0
-                                              ? Colors.grey[300]
-                                              : Colors.red[400],
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(5.0),
+                            InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(viewService.context,
+                                    PageConstants.MovieSeatPage,
+                                    arguments: {'cinemaMovie': plist});
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height: 60,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
+                                            plist.tm,
+                                            style: TextStyle(fontSize: 18),
                                           ),
-                                        ),
-                                        child: Text(
-                                          plist.ticketStatus != 0 ? "停售" : "购票",
-                                          style: TextStyle(
-                                              fontSize: 15.0,
-                                              color: colorWhite),
-                                        ),
+                                          Text(
+                                            DateUtils.formatHHmm(DateUtils
+                                                        .string2dateTime(
+                                                            "${plist.dt} ${plist.tm}:00")
+                                                    .add(Duration(
+                                                        minutes:
+                                                            selectCinemaMovie
+                                                                .dur))) +
+                                                "散场",
+                                            style: TextStyle(
+                                                color: color7E7E7E,
+                                                fontSize: 14),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  )
-                                ],
+                                    Container(
+                                      padding: EdgeInsets.only(left: 25),
+                                      height: 60,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: <Widget>[
+                                          Text(
+                                            plist.lang + plist.tp,
+                                            style: TextStyle(fontSize: 18),
+                                          ),
+                                          Text(
+                                            plist.th,
+                                            style: TextStyle(
+                                                color: color7E7E7E,
+                                                fontSize: 14),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    //购买按钮
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 3.0, horizontal: 8.0),
+                                          decoration: BoxDecoration(
+                                            color: plist.ticketStatus != 0
+                                                ? Colors.grey[300]
+                                                : Colors.red[400],
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(5.0),
+                                            ),
+                                          ),
+                                          child: Text(
+                                            plist.ticketStatus != 0
+                                                ? "停售"
+                                                : "购票",
+                                            style: TextStyle(
+                                                fontSize: 15.0,
+                                                color: colorWhite),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                             VerticalLine(
@@ -245,7 +258,6 @@ Widget buildView(
                 );
               }).toList()),
             ),
-      length: selectCinemaMovie.shows.length,
-    ),
+          ),
   );
 }
