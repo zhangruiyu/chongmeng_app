@@ -71,10 +71,12 @@ Widget buildView(
                           image = seat.image.seatLegends[1];
                         }
                         return GestureDetector(
-                          onTap: () {
-                            dispatch(
-                                MovieSeatActionCreator.onSelectSeat(itemRow));
-                          },
+                          onTap: itemRow.seatStatus == 1
+                              ? () {
+                                  dispatch(MovieSeatActionCreator.onSelectSeat(
+                                      itemRow));
+                                }
+                              : null,
                           child: ExtendedImage.network(
                             image.legendIcon,
                             width: itemWidth,
