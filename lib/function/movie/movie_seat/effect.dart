@@ -8,7 +8,7 @@ import 'state.dart';
 Effect<MovieSeatState> buildEffect() {
   return combineEffects(<Object, Effect<MovieSeatState>>{
     Lifecycle.initState: _initState,
-    MovieSeatAction.action: _onAction,
+//    MovieSeatAction.action: _onAction,
   });
 }
 
