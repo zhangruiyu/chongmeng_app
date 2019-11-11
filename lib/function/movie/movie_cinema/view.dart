@@ -70,7 +70,7 @@ Widget buildView(
                                 String localAdd = Uri.encodeFull(
                                     "${state.cinemaMovies.cinemaData.nm} (${state.cinemaMovies.cinemaData.addr})");
                                 String url = Platform.isAndroid
-                                    ? 'geo:${state.cinemaMovies.cinemaData.lat},${state.cinemaMovies.cinemaData.lng}?q=$localAdd)")}'
+                                    ? 'geo:${state.cinemaMovies.cinemaData.lat},${state.cinemaMovies.cinemaData.lng}?q=$localAdd'
                                     : 'https://maps.apple.com/?q=$localAdd&ll=${state.cinemaMovies.cinemaData.lat},${state.cinemaMovies.cinemaData.lng}';
                                 if (await canLaunch(url)) {
                                   await launch(url);

@@ -59,7 +59,7 @@ Widget buildView(
                       //是否显示阴影，直接取值innerBoxIsScrolled，展开不显示阴影，合并后会显示
                       forceElevated: innerBoxIsScrolled,
                       actions: <Widget>[
-                        new IconButton(
+                        /* new IconButton(
                           icon: Icon(
                             Icons.more_horiz,
                             color: colorWhite,
@@ -67,7 +67,7 @@ Widget buildView(
                           onPressed: () {
                             print("更多");
                           },
-                        ),
+                        ),*/
                       ],
 
                       flexibleSpace: new FlexibleSpaceBar(

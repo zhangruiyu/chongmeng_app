@@ -89,12 +89,19 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
                 child: viewService.buildComponent("notice"),
               ),
               SliverToBoxAdapter(
-                child: RaisedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(
-                        viewService.context, PageConstants.MoviePage);
-                  },
-                  child: Text("电影票"),
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Ink.image(
+                      width: WindowUtils.getScreenWidth() - 8 * 2,
+                      height: (WindowUtils.getScreenWidth() - 8 * 2) * 85 / 359,
+                      image: AssetImage("assets/home_movie_banner.png"),
+                      child: new InkWell(
+                        borderRadius: new BorderRadius.circular(7.0),
+                        onTap: () {
+                          Navigator.pushNamed(
+                              viewService.context, PageConstants.MoviePage);
+                        },
+                      )),
                 ),
               ),
               SliverList(
