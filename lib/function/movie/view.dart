@@ -46,6 +46,7 @@ Widget buildView(MovieState state, Dispatch dispatch, ViewService viewService) {
                           ExtendedImage.network(
                             itemMovie.img,
                             width: 80,
+                            enableLoadState: false,
                           ),
                           Expanded(
                             child: Column(

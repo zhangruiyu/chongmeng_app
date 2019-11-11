@@ -117,8 +117,11 @@ Widget buildView(
                               width: itemWidth,
                               padding: EdgeInsets.all(
                                   state.selectIndex == realIndex ? 2.0 : 10.0),
-                              child: ExtendedImage.network(itemCinemaMovie.img
-                                  .replaceAll("w.h", "148.208")),
+                              child: ExtendedImage.network(
+                                itemCinemaMovie.img
+                                    .replaceAll("w.h", "148.208"),
+                                enableLoadState: false,
+                              ),
                               duration: Duration(milliseconds: 500),
                             ),
                           );

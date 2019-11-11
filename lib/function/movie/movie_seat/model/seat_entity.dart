@@ -240,6 +240,11 @@ class SeatSeatdataSeatImageSeatlegend {
     data['legendName'] = this.legendName;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'SeatSeatdataSeatImageSeatlegend{legendIcon: $legendIcon, legendName: $legendName}';
+  }
 }
 
 class SeatSeatdataSeatLastselectedseat {
