@@ -161,11 +161,13 @@ Widget buildView(
                         return Column(
                           children: <Widget>[
                             InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(viewService.context,
-                                    PageConstants.MovieSeatPage,
-                                    arguments: {'cinemaMovie': plist});
-                              },
+                              onTap: plist.ticketStatus != 0
+                                  ? null
+                                  : () {
+                                      Navigator.pushNamed(viewService.context,
+                                          PageConstants.MovieSeatPage,
+                                          arguments: {'cinemaMovie': plist});
+                                    },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(

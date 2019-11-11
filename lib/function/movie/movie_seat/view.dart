@@ -237,7 +237,10 @@ Widget buildView(
 }
 
 itemSeatPrice(MovieSeatState state) {
-  return double.parse((state.seatEntity.seatData.price as Map)["1"]
-          ["seatsPriceDetail"]["1"]['originPrice']
-      .toString());
+  Map price = ((state.seatEntity.seatData.price as Map)
+          .values
+          .first["seatsPriceDetail"] as Map)
+      .values
+      .first;
+  return double.parse(price['originPrice']) / (price['detail'] as List).length;
 }
