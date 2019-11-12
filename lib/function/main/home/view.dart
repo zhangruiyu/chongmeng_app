@@ -92,6 +92,7 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
                 child: Container(
                   padding: const EdgeInsets.all(8.0),
                   child: Ink.image(
+                      fit: BoxFit.fill,
                       width: WindowUtils.getScreenWidth() - 8 * 2,
                       height: (WindowUtils.getScreenWidth() - 8 * 2) * 85 / 359,
                       image: AssetImage("assets/home_movie_banner.png"),

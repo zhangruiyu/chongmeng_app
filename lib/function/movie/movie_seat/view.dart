@@ -226,7 +226,7 @@ Widget buildView(
                         : "¥${itemSeatPrice(state) * state.localSelectMovie.length} 确认选座"),
                     textColor: colorWhite,
                     onPressed: () {
-                      Navigator.of(viewService.context).pop();
+                      dispatch(MovieSeatActionCreator.onCommit());
                     },
                   ),
                 ),

@@ -1,35 +1,38 @@
 import 'package:chongmeng/function/movie/movie_cinema/model/cinema_movies_entity.dart';
+import 'package:chongmeng/function/movie/movie_seat/model/seat_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 
-import 'model/seat_entity.dart';
-
-class MovieSeatState implements Cloneable<MovieSeatState> {
+class MovieOrderPreState implements Cloneable<MovieOrderPreState> {
   //场次信息
   CinemaMoviesShowdataMoviesShowsPlist cinemaMovie;
+
   //电影信息
   CinemaMoviesShowdataMovie selectCinemaMovie;
-  //电影信息加影院信息
+
+//电影信息加影院信息
   CinemaMoviesEntity cinemaMovies;
-  //座位信息
+
+//座位信息
   SeatEntity seatEntity;
+
   //用户选择的座位
   List<SeatSeatdataSeatRegionsRowsSeat> localSelectMovie;
 
   @override
-  MovieSeatState clone() {
-    return MovieSeatState()
+  MovieOrderPreState clone() {
+    return MovieOrderPreState()
       ..cinemaMovies = cinemaMovies
-      ..selectCinemaMovie = selectCinemaMovie
-      ..localSelectMovie = localSelectMovie
       ..cinemaMovie = cinemaMovie
-      ..seatEntity = seatEntity;
+      ..seatEntity = seatEntity
+      ..localSelectMovie = localSelectMovie;
   }
 }
 
-MovieSeatState initState(Map<String, dynamic> args) {
-  return MovieSeatState()
+MovieOrderPreState initState(Map<String, dynamic> args) {
+  return MovieOrderPreState()
     ..cinemaMovies = args['cinemaMovies']
-    ..selectCinemaMovie = args['selectCinemaMovie']
+    ..seatEntity = args['seatEntity']
+    ..localSelectMovie = args['localSelectMovie']
     ..cinemaMovie = args['cinemaMovie']
-    ..localSelectMovie = [];
+    ..selectCinemaMovie = args['selectCinemaMovie'];
 }

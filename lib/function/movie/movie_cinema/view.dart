@@ -166,7 +166,12 @@ Widget buildView(
                                   : () {
                                       Navigator.pushNamed(viewService.context,
                                           PageConstants.MovieSeatPage,
-                                          arguments: {'cinemaMovie': plist});
+                                          arguments: {
+                                            'cinemaMovies': state.cinemaMovies,
+                                            'cinemaMovie': plist,
+                                            'selectCinemaMovie':
+                                                selectCinemaMovie
+                                          });
                                     },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
