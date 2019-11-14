@@ -46,10 +46,6 @@ Future<void> _onCommit(Action action, Context<MovieSeatState> ctx) async {
       (await RequestClient.request<MovieOrderEntity>(
               ctx.context, HttpConstants.MovieOrderInfo,
               showLoadingIndicator: true,
-              header: {
-            'User-Agent':
-                "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Mobile Safari/537.36"
-          },
               queryParameters: {
             'seqNo': ctx.state.cinemaMovie.seqNo,
             'count': ctx.state.localSelectMovie.length,

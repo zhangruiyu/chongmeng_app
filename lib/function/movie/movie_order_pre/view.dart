@@ -96,7 +96,20 @@ Widget buildView(
                                     fontSize: 12.0,
                                     color: Colors.red,
                                   )),
-                            ]))
+                            ])),
+                            RichText(
+                                text: TextSpan(children: [
+                              TextSpan(
+                                  text: "用户余额: ",
+                                  style: TextStyle(
+                                      color: color333333, fontSize: 12)),
+                              TextSpan(
+                                  text: "${state.order.totalUserIntegral}萌币",
+                                  style: TextStyle(
+                                    fontSize: 12.0,
+                                    color: Colors.red,
+                                  )),
+                            ])),
                           ],
                         ),
                       ),

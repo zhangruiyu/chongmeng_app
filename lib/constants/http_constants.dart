@@ -95,6 +95,7 @@ class HttpConstants {
 
   static String get MovieOrderInfo =>
       "/app/movie/common/movieOrderInfo"; //电影订单信息
+  static String get payMovieOrder => "/app/movie/common/payMovieOrder"; //电影下单
 }
 
 class CosType {
