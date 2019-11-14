@@ -214,7 +214,7 @@ Future<int> showAffirmDialog(Context<IntegralCommodityDetailState> ctx,
                                   color: of.accentColor,
                                   fontWeight: FontWeight.bold)),
                           TextSpan(
-                              text: "萌镚兑换此商品吗?",
+                              text: "萌币兑换此商品吗?",
                               style: TextStyle(
                                   fontSize: 15.0, color: Colors.black)),
                         ]),

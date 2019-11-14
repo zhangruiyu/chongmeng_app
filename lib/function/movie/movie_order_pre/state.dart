@@ -1,4 +1,5 @@
 import 'package:chongmeng/function/movie/movie_cinema/model/cinema_movies_entity.dart';
+import 'package:chongmeng/function/movie/movie_seat/model/movie_order_entity.dart';
 import 'package:chongmeng/function/movie/movie_seat/model/seat_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 
@@ -17,10 +18,11 @@ class MovieOrderPreState implements Cloneable<MovieOrderPreState> {
 
   //用户选择的座位
   List<SeatSeatdataSeatRegionsRowsSeat> localSelectMovie;
-
+  MovieOrderData order;
   @override
   MovieOrderPreState clone() {
     return MovieOrderPreState()
+      ..order = order
       ..cinemaMovies = cinemaMovies
       ..cinemaMovie = cinemaMovie
       ..seatEntity = seatEntity
@@ -30,6 +32,7 @@ class MovieOrderPreState implements Cloneable<MovieOrderPreState> {
 
 MovieOrderPreState initState(Map<String, dynamic> args) {
   return MovieOrderPreState()
+    ..order = args['order']
     ..cinemaMovies = args['cinemaMovies']
     ..seatEntity = args['seatEntity']
     ..localSelectMovie = args['localSelectMovie']

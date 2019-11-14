@@ -113,7 +113,7 @@ Widget buildView(
                               RichText(
                                 text: TextSpan(children: [
                                   TextSpan(
-                                      text: "我的萌镚 ",
+                                      text: "我的萌币 ",
                                       style: TextStyle(
                                           fontSize: 15.0, color: Colors.black)),
                                   TextSpan(

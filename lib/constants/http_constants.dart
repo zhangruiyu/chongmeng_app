@@ -92,6 +92,7 @@ class HttpConstants {
       "/app/money/common/pay/allCommodity"; //充值的所有商品
 
   static String get MoiveHot => "/app/movie/movieOnInfoList"; //正在热映电影
+
   static String get MovieOrderInfo =>
       "/app/movie/common/movieOrderInfo"; //电影订单信息
 }

@@ -163,7 +163,7 @@ Widget buildView(
                   child: Column(
                     children: <Widget>[
                       Text(state.data?.totalIntegral?.toString() ?? "*"),
-                      Text("萌镚")
+                      Text("萌币")
                     ],
                   ),
                 ),

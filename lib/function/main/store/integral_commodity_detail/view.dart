@@ -75,7 +75,7 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text("可用萌镚"),
+                      Text("可用萌币"),
                       Text(state.totalIntegral == null
                           ? "正在获取"
                           : state.totalIntegral.toString()),
@@ -168,7 +168,7 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(viewService.context).padding.bottom),
               child: new Text(
-                '${state.itemData.integralPrice}萌镚兑换',
+                '${state.itemData.integralPrice}萌币兑换',
                 textAlign: TextAlign.center,
                 style: new TextStyle(fontSize: 18.0, color: colorWhite),
               ),

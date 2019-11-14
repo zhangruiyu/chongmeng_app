@@ -112,7 +112,7 @@ Widget buildView(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
-                                          Text("${itemData.integral.abs()}萌镚",
+                                          Text("${itemData.integral.abs()}萌币",
                                               style: TextStyle(
                                                   fontSize: 14,
                                                   color: color333333)),

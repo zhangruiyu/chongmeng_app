@@ -15,7 +15,7 @@ Widget buildView(
   var of = Theme.of(viewService.context);
   return Scaffold(
     appBar: Toolbar(
-      title: Text("充值萌镚喽"),
+      title: Text("充值萌币喽"),
     ),
     body: EasyRefresh.custom(
       onRefresh: CompleterUtils.produceCompleterAction(

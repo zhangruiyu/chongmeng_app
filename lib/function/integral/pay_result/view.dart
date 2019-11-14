@@ -48,7 +48,7 @@ Widget buildView(
               color: of.accentColor,
               shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(22.0)),
-              child: Text("返回萌镚记录页"),
+              child: Text("返回萌币记录页"),
               textColor: colorWhite,
               onPressed: () {
                 Navigator.of(viewService.context).pop();

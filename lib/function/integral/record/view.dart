@@ -17,7 +17,7 @@ Widget buildView(
   println(state.data.length);
   return Scaffold(
     appBar: Toolbar(
-      title: Text("我的萌镚"),
+      title: Text("我的萌币"),
     ),
     body: Column(
       children: <Widget>[
