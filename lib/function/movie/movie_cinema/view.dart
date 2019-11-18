@@ -117,12 +117,22 @@ Widget buildView(
                               width: itemWidth,
                               padding: EdgeInsets.all(
                                   state.selectIndex == realIndex ? 2.0 : 10.0),
-                              child: ExtendedImage.network(
-                                itemCinemaMovie.img
-                                    .replaceAll("w.h", "592.832"),
-                                width: 148,
-                                height: 208,
-                                enableLoadState: false,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                child: ExtendedImage.network(
+                                  itemCinemaMovie.img
+                                      .replaceAll("w.h", "592.832"),
+                                  width: 148,
+                                  fit: BoxFit.fill,
+//                                borderRadius: BorderRadius.circular(0.0),
+                                  shape: state.selectIndex == realIndex
+                                      ? BoxShape.rectangle
+                                      : null,
+                                  border:
+                                      Border.all(width: 1.5, color: colorWhite),
+                                  enableLoadState: false,
+                                ),
                               ),
                               duration: Duration(milliseconds: 500),
                             ),

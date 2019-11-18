@@ -56,10 +56,7 @@ Future _onBuy(Action action, Context<IntegralCommodityDetailState> ctx) async {
           queryParameters: {
             "buy_count": ctx.state.commodityCountController.count,
             "integral_commodity_id": ctx.state.itemData.id,
-            "tel": selectAddress.tel,
-            "city_id": selectAddress.id,
-            "address_detail": selectAddress.addressDetails,
-            "consignee": selectAddress.consignee
+            "address_id": selectAddress.id,
           });
       if (result.hasSuccess) {
         showSuccessDialog(ctx);

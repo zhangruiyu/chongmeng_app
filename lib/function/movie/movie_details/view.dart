@@ -53,8 +53,8 @@ Widget buildView(
                       floating: false,
                       snap: false,
                       primary: true,
-                      expandedHeight:
-                          232 + MediaQueryData.fromWindow(window).padding.top,
+                      expandedHeight: 208 * 0.8 +
+                          MediaQueryData.fromWindow(window).padding.top,
                       elevation: 1,
                       //是否显示阴影，直接取值innerBoxIsScrolled，展开不显示阴影，合并后会显示
                       forceElevated: innerBoxIsScrolled,
@@ -72,7 +72,6 @@ Widget buildView(
 
                       flexibleSpace: new FlexibleSpaceBar(
                         background: Container(
-                          height: 232,
                           padding: EdgeInsets.only(
                               top: MediaQueryData.fromWindow(window)
                                   .padding
@@ -91,61 +90,64 @@ Widget buildView(
                                 child: ExtendedImage.network(
                                   state.detailMovie.img
                                       .replaceAll("w.h", "592.832"),
-                                  width: 148,
-                                  height: 208,
+                                  width: 148 * 0.8,
+                                  height: 208 * 0.8,
                                 ),
                               ),
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    state.detailMovie.nm,
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: colorWhite,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    state.detailMovie.enm,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: colorWhite,
+                              SizedBox(
+                                height: 208 * 0.8,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      state.detailMovie.nm,
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          color: colorWhite,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
-                                  RichText(
-                                      text: TextSpan(children: [
-                                    TextSpan(
-                                        text: state.detailMovie.sc.toString(),
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            color: of.accentColor,
-                                            fontWeight: FontWeight.bold)),
-                                    TextSpan(
-                                      text:
-                                          "  (${state.detailMovie.snum.toString()}人评)",
+                                    Text(
+                                      state.detailMovie.enm,
                                       style: TextStyle(
                                         fontSize: 12,
                                         color: colorWhite,
                                       ),
                                     ),
-                                  ])),
-                                  Text(
-                                    state.detailMovie.cat.toString(),
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: colorWhite,
+                                    RichText(
+                                        text: TextSpan(children: [
+                                      TextSpan(
+                                          text: state.detailMovie.sc.toString(),
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: of.accentColor,
+                                              fontWeight: FontWeight.bold)),
+                                      TextSpan(
+                                        text:
+                                            "  (${state.detailMovie.snum.toString()}人评)",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: colorWhite,
+                                        ),
+                                      ),
+                                    ])),
+                                    Text(
+                                      state.detailMovie.cat.toString(),
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: colorWhite,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    state.detailMovie.pubDesc.toString(),
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: colorWhite,
+                                    Text(
+                                      state.detailMovie.pubDesc.toString(),
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: colorWhite,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               )
                             ],
                           ),

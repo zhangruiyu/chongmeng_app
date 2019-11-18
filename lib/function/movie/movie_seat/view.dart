@@ -46,9 +46,7 @@ Widget buildView(
               Container(
                 alignment: Alignment.center,
                 width: WindowUtils.getScreenWidth() * 2 / 3,
-                margin: const EdgeInsets.only(
-                  bottom: 40.0,
-                ),
+                margin: EdgeInsets.only(bottom: 40.0, left: numberWidth + 8.0),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(25.0),
@@ -87,10 +85,16 @@ Widget buildView(
                         } else if (itemRow.seatStatus == 1) {
                           //1是未选择
                           image = seat.image.seatLegends[0];
-                        } else if (itemRow.seatStatus == 3) {
-                          //3是已经被别人订了
+                        } else if (itemRow.seatStatus == 3 ||
+                            itemRow.seatStatus == 4) {
+                          //3,4是已经被别人订了
+                          image = seat.image.seatLegends[1];
+                        } else {
+                          //未知
                           image = seat.image.seatLegends[1];
                         }
+//                        println(itemRow.seatStatus);
+//                        println(seat.image.seatLegends);
                         return GestureDetector(
                           onTap: itemRow.seatStatus == 1
                               ? () {

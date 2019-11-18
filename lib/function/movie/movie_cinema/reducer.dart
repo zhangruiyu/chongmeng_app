@@ -26,5 +26,12 @@ MovieCinemaState _onChangeMovieIndex(MovieCinemaState state, Action action) {
 MovieCinemaState _onSetRefreshMovies(MovieCinemaState state, Action action) {
   final MovieCinemaState newState = state.clone()
     ..cinemaMovies = action.payload;
+  if (newState.movieScrollController == null) {
+    newState.movieScrollController = ScrollController(
+        initialScrollOffset: WindowUtils.getScreenWidth() /
+            5 *
+            newState.cinemaMovies.showData.movies
+                .indexWhere((itemMovie) => itemMovie.id == state.movieId));
+  }
   return newState;
 }

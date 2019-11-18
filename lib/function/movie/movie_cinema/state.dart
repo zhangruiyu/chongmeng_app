@@ -28,7 +28,6 @@ class MovieCinemaState implements Cloneable<MovieCinemaState> {
 
 MovieCinemaState initState(Map<String, dynamic> args) {
   return MovieCinemaState()
-    ..movieScrollController = ScrollController()
     ..movieId = args['movieId']
     ..movieScheduleData = args['movieScheduleData']
     ..selectIndex = 0

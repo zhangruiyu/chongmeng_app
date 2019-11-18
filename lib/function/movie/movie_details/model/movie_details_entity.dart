@@ -60,7 +60,7 @@ class MovieDetailsDetailmovie {
   int bingeWatch;
   int episodeDur;
   int viewedSt;
-  double sc;
+  dynamic sc;
   int proScore;
   String scoreLabel;
   bool modcsSt;

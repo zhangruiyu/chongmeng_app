@@ -32,5 +32,10 @@ Future<void> _onRefreshMovies(
       }))
       .yes((value) {
     ctx.dispatch(MovieCinemaActionCreator.onSetRefreshMovies(value));
+    Future.delayed(Duration(milliseconds: 200)).then((onValue) {
+      ctx.dispatch(MovieCinemaActionCreator.onChangeMovieIndex(value
+          .showData.movies
+          .indexWhere((itemMovie) => itemMovie.id == ctx.state.movieId)));
+    });
   });
 }
