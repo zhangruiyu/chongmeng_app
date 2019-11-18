@@ -27,10 +27,11 @@ class MovieOrderData {
   int totalPay;
   String originalPrice;
   int discountPrice;
-  double discountPriceRmb;
-  double totalDiscountPriceRmb;
-  int totalDiscountPrice;
-  int totalUserIntegral;
+  var discountPriceRmb;
+  var totalDiscountPriceRmb;
+  var totalDiscountPrice;
+  var totalUserIntegral;
+  var movieDiscount;
 
   MovieOrderData(
       {this.totalPay,
@@ -48,6 +49,7 @@ class MovieOrderData {
     totalDiscountPriceRmb = json['totalDiscountPriceRmb'];
     totalDiscountPrice = json['totalDiscountPrice'];
     totalUserIntegral = json['totalUserIntegral'];
+    movieDiscount = json['movieDiscount'];
   }
 
   Map<String, dynamic> toJson() {
@@ -59,6 +61,7 @@ class MovieOrderData {
     data['totalDiscountPriceRmb'] = this.totalDiscountPriceRmb;
     data['totalDiscountPrice'] = this.totalDiscountPrice;
     data['totalUserIntegral'] = this.totalUserIntegral;
+    data['movieDiscount'] = this.movieDiscount;
     return data;
   }
 }

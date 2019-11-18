@@ -186,7 +186,8 @@ Widget buildView(
                     color: of.accentColor,
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(22.0)),
-                    child: Text("87折${state.order.totalPay}萌币购买"),
+                    child: Text(
+                        "${state.order.movieDiscount}折${state.order.totalPay}萌币购买"),
                     textColor: colorWhite,
                     onPressed: () {
                       dispatch(MovieOrderPreActionCreator.onCommit());
