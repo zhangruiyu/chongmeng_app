@@ -32,7 +32,10 @@ Widget buildView(
     ),
     body: EasyRefresh.custom(
         firstRefresh: true,
-        emptyWidget: state.data?.isEmpty == true ? EmptyWidget() : null,
+        emptyWidget: (state.data?.storeOrder?.isEmpty == true &&
+                state.data?.movieOrder?.isEmpty == true)
+            ? EmptyWidget()
+            : null,
         firstRefreshWidget: LoadingWidget(),
         onRefresh: CompleterUtils.produceCompleterAction(
           dispatch,
@@ -42,7 +45,7 @@ Widget buildView(
           SliverList(
             delegate:
                 SliverChildBuilderDelegate((BuildContext context, int index) {
-              var itemData = state.data[index];
+              var itemData = state.data.storeOrder[index];
               return Container(
                 color: Theme.of(viewService.context).dividerColor,
                 child: Card(
@@ -51,7 +54,9 @@ Widget buildView(
                       top: 12.0,
                       left: 18.0,
                       right: 18.0,
-                      bottom: state.data.length == (index + 1) ? 12.0 : 0.0),
+                      bottom: state.data.storeOrder.length == (index + 1)
+                          ? 12.0
+                          : 0.0),
                   child: InkWell(
                     onTap: itemData.virtualProduct == null
                         ? null
@@ -217,7 +222,7 @@ Widget buildView(
                   ),
                 ),
               );
-            }, childCount: state.data?.length ?? 0),
+            }, childCount: state.data?.storeOrder?.length ?? 0),
           )
         ]),
   );

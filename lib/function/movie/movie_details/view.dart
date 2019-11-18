@@ -179,7 +179,6 @@ Widget buildView(
                 children: state.pageData.keys.map((DateTime name) {
                   var pageData = state.pageData[name];
                   var data = pageData.data;
-                  println(" itemShow.plist ${data}");
                   //SafeArea 适配刘海屏的一个widget
                   return KeepAliveWidget(
                     child: SafeArea(
@@ -203,16 +202,17 @@ Widget buildView(
                                 handle: NestedScrollView
                                     .sliverOverlapAbsorberHandleFor(context),
                               ),
-                              SliverToBoxAdapter(
-                                child: Container(
-                                    alignment: Alignment.center,
-                                    height: 200,
-                                    child: Text(
-                                      "今天暂无对应电影排挡",
-                                      style: TextStyle(
-                                          color: colorBack, fontSize: 20),
-                                    )),
-                              ),
+                              if ((data?.length ?? 0) == 0)
+                                SliverToBoxAdapter(
+                                  child: Container(
+                                      alignment: Alignment.center,
+                                      height: 200,
+                                      child: Text(
+                                        "今天暂无对应电影排挡",
+                                        style: TextStyle(
+                                            color: colorBack, fontSize: 20),
+                                      )),
+                                ),
                               SliverList(
                                 delegate: SliverChildBuilderDelegate(
                                   (BuildContext context, int index) {

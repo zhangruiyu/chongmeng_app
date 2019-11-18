@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 class VirtualProductReviewState
     implements Cloneable<VirtualProductReviewState> {
-  MyOrderData virtualProduct;
+  MyOrderDataStoreorder virtualProduct;
   PageController controller;
 
   @override

@@ -11,7 +11,7 @@ enum MyOrderAction {
 }
 
 class MyOrderActionCreator {
-  static Action onResetPageData(List<MyOrderData> data) {
+  static Action onResetPageData(MyOrderData data) {
     return Action(MyOrderAction.ResetPageData, payload: data);
   }
 
@@ -19,15 +19,15 @@ class MyOrderActionCreator {
     return Action(MyOrderAction.Refresh, payload: map);
   }
 
-  static Action onSkipReviewPage(MyOrderData virtualProduct) {
+  static Action onSkipReviewPage(MyOrderDataStoreorder virtualProduct) {
     return Action(MyOrderAction.SkipReviewPage, payload: virtualProduct);
   }
 
-  static Action onShowOrderAddress(MyOrderData virtualProduct) {
+  static Action onShowOrderAddress(MyOrderDataStoreorder virtualProduct) {
     return Action(MyOrderAction.ShowOrderAddress, payload: virtualProduct);
   }
 
-  static Action onShowExpress(MyOrderData orderData) {
+  static Action onShowExpress(MyOrderDataStoreorder orderData) {
     return Action(MyOrderAction.ShowExpress, payload: orderData);
   }
 }

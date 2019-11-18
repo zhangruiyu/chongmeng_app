@@ -31,13 +31,13 @@ Future _onRefresh(Action action, Context<MyOrderState> ctx) async {
 }
 
 Future _onShowExpress(Action action, Context<MyOrderState> ctx) async {
-  MyOrderData payload = action.payload;
+  MyOrderDataStoreorder payload = action.payload;
   NavigatorHelper.pushWebPage(ctx.context, "快递信息",
       "https://m.kuaidi100.com/app/query/?com=${payload.expressType}&nu=${payload.expressNumber}");
 }
 
 Future _onSkipReviewPage(Action action, Context<MyOrderState> ctx) async {
-  MyOrderData virtualProduct = action.payload;
+  MyOrderDataStoreorder virtualProduct = action.payload;
   if (virtualProduct.virtualProduct != null) {
     if (virtualProduct.virtualProduct.isNotEmpty) {
       Navigator.pushNamed(ctx.context, PageConstants.VirtualProductReviewPage,
@@ -50,7 +50,7 @@ Future _onSkipReviewPage(Action action, Context<MyOrderState> ctx) async {
 }
 
 Future _onShowOrderAddress(Action action, Context<MyOrderState> ctx) async {
-  MyOrderData virtualProduct = action.payload;
+  MyOrderDataStoreorder virtualProduct = action.payload;
   showDialog(
       context: ctx.context,
       builder: (c) {

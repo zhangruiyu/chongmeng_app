@@ -1,18 +1,13 @@
 class MyOrderEntity {
   String msg;
-  List<MyOrderData> data;
+  MyOrderData data;
   int status;
 
   MyOrderEntity({this.msg, this.data, this.status});
 
   MyOrderEntity.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
-    if (json['data'] != null) {
-      data = new List<MyOrderData>();
-      (json['data'] as List).forEach((v) {
-        data.add(new MyOrderData.fromJson(v));
-      });
-    }
+    data = json['data'] != null ? new MyOrderData.fromJson(json['data']) : null;
     status = json['status'];
   }
 
@@ -20,7 +15,7 @@ class MyOrderEntity {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['msg'] = this.msg;
     if (this.data != null) {
-      data['data'] = this.data.map((v) => v.toJson()).toList();
+      data['data'] = this.data.toJson();
     }
     data['status'] = this.status;
     return data;
@@ -28,25 +23,58 @@ class MyOrderEntity {
 }
 
 class MyOrderData {
+  List<MyOrderDataStoreorder> storeOrder;
+  List<MyOrderDataMovieorder> movieOrder;
+
+  MyOrderData({this.storeOrder, this.movieOrder});
+
+  MyOrderData.fromJson(Map<String, dynamic> json) {
+    if (json['storeOrder'] != null) {
+      storeOrder = new List<MyOrderDataStoreorder>();
+      (json['storeOrder'] as List).forEach((v) {
+        storeOrder.add(new MyOrderDataStoreorder.fromJson(v));
+      });
+    }
+    if (json['movieOrder'] != null) {
+      movieOrder = new List<MyOrderDataMovieorder>();
+      (json['movieOrder'] as List).forEach((v) {
+        movieOrder.add(new MyOrderDataMovieorder.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.storeOrder != null) {
+      data['storeOrder'] = this.storeOrder.map((v) => v.toJson()).toList();
+    }
+    if (this.movieOrder != null) {
+      data['movieOrder'] = this.movieOrder.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class MyOrderDataStoreorder {
   String createTime;
   String consigneeName;
   int count;
   String sourceType;
   List<String> pic;
   String remake;
-  String externalRemake;
   String type;
   String addressDetail;
-  List<MyOrderDataVirtualProduct> virtualProduct;
-  String expressNumber;
-  String expressType;
+  List<MyOrderDataStoreorderVirtualProduct> virtualProduct;
   int integral;
   String name;
   String tel;
   int id;
+  dynamic expressNumber;
   int status;
+  dynamic expressType;
+  String externalRemake;
 
-  MyOrderData(
+  MyOrderDataStoreorder(
       {this.createTime,
       this.consigneeName,
       this.count,
@@ -60,9 +88,12 @@ class MyOrderData {
       this.name,
       this.tel,
       this.id,
-      this.status});
+      this.expressNumber,
+      this.status,
+      this.expressType,
+      this.externalRemake});
 
-  MyOrderData.fromJson(Map<String, dynamic> json) {
+  MyOrderDataStoreorder.fromJson(Map<String, dynamic> json) {
     createTime = json['create_time'];
     consigneeName = json['consignee_name'];
     count = json['count'];
@@ -72,19 +103,19 @@ class MyOrderData {
     type = json['type'];
     addressDetail = json['address_detail'];
     if (json['virtual_product'] != null) {
-      virtualProduct = new List<MyOrderDataVirtualProduct>();
+      virtualProduct = new List<MyOrderDataStoreorderVirtualProduct>();
       (json['virtual_product'] as List).forEach((v) {
-        virtualProduct.add(new MyOrderDataVirtualProduct.fromJson(v));
+        virtualProduct.add(new MyOrderDataStoreorderVirtualProduct.fromJson(v));
       });
     }
     integral = json['integral'];
     name = json['name'];
     tel = json['tel'];
     id = json['id'];
-    status = json['status'];
-    externalRemake = json['external_remake'];
     expressNumber = json['express_number'];
+    status = json['status'];
     expressType = json['express_type'];
+    externalRemake = json['external_remake'];
   }
 
   Map<String, dynamic> toJson() {
@@ -105,27 +136,27 @@ class MyOrderData {
     data['name'] = this.name;
     data['tel'] = this.tel;
     data['id'] = this.id;
-    data['status'] = this.status;
-    data['external_remake'] = this.externalRemake;
     data['express_number'] = this.expressNumber;
+    data['status'] = this.status;
     data['express_type'] = this.expressType;
+    data['external_remake'] = this.externalRemake;
     return data;
   }
 }
 
-class MyOrderDataVirtualProduct {
+class MyOrderDataStoreorderVirtualProduct {
   String invalidTime;
   String virtualProductRepertoryStatus;
   String content;
   String convertTime;
 
-  MyOrderDataVirtualProduct(
+  MyOrderDataStoreorderVirtualProduct(
       {this.invalidTime,
       this.virtualProductRepertoryStatus,
       this.content,
       this.convertTime});
 
-  MyOrderDataVirtualProduct.fromJson(Map<String, dynamic> json) {
+  MyOrderDataStoreorderVirtualProduct.fromJson(Map<String, dynamic> json) {
     invalidTime = json['invalid_time'];
     virtualProductRepertoryStatus = json['virtual_product_repertory_status'];
     content = json['content'];
@@ -139,6 +170,129 @@ class MyOrderDataVirtualProduct {
         this.virtualProductRepertoryStatus;
     data['content'] = this.content;
     data['convert_time'] = this.convertTime;
+    return data;
+  }
+}
+
+class MyOrderDataMovieorder {
+  List<MyOrderDataMovieorderMovieSeat> movieSeat;
+  String showTime;
+  String lng;
+  String createTime;
+  List<Null> virtualProductRepertoryId;
+  int itemPrice;
+  String consigneeName;
+  String hall;
+  String dim;
+  String movieName;
+  dynamic content;
+  String addressDetail;
+  int totalPay;
+  String cinemaName;
+  String showDate;
+  String tel;
+  String cinemaAddr;
+  String lang;
+  String lat;
+  int status;
+
+  MyOrderDataMovieorder(
+      {this.movieSeat,
+      this.showTime,
+      this.lng,
+      this.createTime,
+      this.virtualProductRepertoryId,
+      this.itemPrice,
+      this.consigneeName,
+      this.hall,
+      this.dim,
+      this.movieName,
+      this.content,
+      this.addressDetail,
+      this.totalPay,
+      this.cinemaName,
+      this.showDate,
+      this.tel,
+      this.cinemaAddr,
+      this.lang,
+      this.lat,
+      this.status});
+
+  MyOrderDataMovieorder.fromJson(Map<String, dynamic> json) {
+    if (json['movie_seat'] != null) {
+      movieSeat = new List<MyOrderDataMovieorderMovieSeat>();
+      (json['movie_seat'] as List).forEach((v) {
+        movieSeat.add(new MyOrderDataMovieorderMovieSeat.fromJson(v));
+      });
+    }
+    showTime = json['show_time'];
+    lng = json['lng'];
+    createTime = json['create_time'];
+    if (json['virtual_product_repertory_id'] != null) {
+      virtualProductRepertoryId = new List<Null>();
+    }
+    itemPrice = json['item_price'];
+    consigneeName = json['consignee_name'];
+    hall = json['hall'];
+    dim = json['dim'];
+    movieName = json['movie_name'];
+    content = json['content'];
+    addressDetail = json['address_detail'];
+    totalPay = json['total_pay'];
+    cinemaName = json['cinema_name'];
+    showDate = json['show_date'];
+    tel = json['tel'];
+    cinemaAddr = json['cinema_addr'];
+    lang = json['lang'];
+    lat = json['lat'];
+    status = json['status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.movieSeat != null) {
+      data['movie_seat'] = this.movieSeat.map((v) => v.toJson()).toList();
+    }
+    data['show_time'] = this.showTime;
+    data['lng'] = this.lng;
+    data['create_time'] = this.createTime;
+    if (this.virtualProductRepertoryId != null) {
+      data['virtual_product_repertory_id'] = [];
+    }
+    data['item_price'] = this.itemPrice;
+    data['consignee_name'] = this.consigneeName;
+    data['hall'] = this.hall;
+    data['dim'] = this.dim;
+    data['movie_name'] = this.movieName;
+    data['content'] = this.content;
+    data['address_detail'] = this.addressDetail;
+    data['total_pay'] = this.totalPay;
+    data['cinema_name'] = this.cinemaName;
+    data['show_date'] = this.showDate;
+    data['tel'] = this.tel;
+    data['cinema_addr'] = this.cinemaAddr;
+    data['lang'] = this.lang;
+    data['lat'] = this.lat;
+    data['status'] = this.status;
+    return data;
+  }
+}
+
+class MyOrderDataMovieorderMovieSeat {
+  String columnId;
+  String rowId;
+
+  MyOrderDataMovieorderMovieSeat({this.columnId, this.rowId});
+
+  MyOrderDataMovieorderMovieSeat.fromJson(Map<String, dynamic> json) {
+    columnId = json['columnId'];
+    rowId = json['rowId'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['columnId'] = this.columnId;
+    data['rowId'] = this.rowId;
     return data;
   }
 }
