@@ -79,8 +79,7 @@ Future _onShowOrderAddress(Action action, Context<MyOrderState> ctx) async {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 21.0),
-                    child: Text(
-                        "收货地址: ${virtualProduct.provincename + virtualProduct.cityname + virtualProduct.areaname + virtualProduct.addressDetail}"),
+                    child: Text("收货地址: ${virtualProduct.addressDetail}"),
                   ),
                   VerticalLine(),
                   GestureDetector(

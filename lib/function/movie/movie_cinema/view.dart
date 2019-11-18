@@ -119,7 +119,9 @@ Widget buildView(
                                   state.selectIndex == realIndex ? 2.0 : 10.0),
                               child: ExtendedImage.network(
                                 itemCinemaMovie.img
-                                    .replaceAll("w.h", "148.208"),
+                                    .replaceAll("w.h", "592.832"),
+                                width: 148,
+                                height: 208,
                                 enableLoadState: false,
                               ),
                               duration: Duration(milliseconds: 500),

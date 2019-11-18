@@ -29,9 +29,7 @@ class MyOrderEntity {
 
 class MyOrderData {
   String createTime;
-  String areaname;
   String consigneeName;
-  String cityname;
   int count;
   String sourceType;
   List<String> pic;
@@ -40,7 +38,6 @@ class MyOrderData {
   String type;
   String addressDetail;
   List<MyOrderDataVirtualProduct> virtualProduct;
-  String provincename;
   String expressNumber;
   String expressType;
   int integral;
@@ -51,9 +48,7 @@ class MyOrderData {
 
   MyOrderData(
       {this.createTime,
-      this.areaname,
       this.consigneeName,
-      this.cityname,
       this.count,
       this.sourceType,
       this.pic,
@@ -61,7 +56,6 @@ class MyOrderData {
       this.type,
       this.addressDetail,
       this.virtualProduct,
-      this.provincename,
       this.integral,
       this.name,
       this.tel,
@@ -70,9 +64,7 @@ class MyOrderData {
 
   MyOrderData.fromJson(Map<String, dynamic> json) {
     createTime = json['create_time'];
-    areaname = json['areaname'];
     consigneeName = json['consignee_name'];
-    cityname = json['cityname'];
     count = json['count'];
     sourceType = json['source_type'];
     pic = json['pic']?.cast<String>();
@@ -85,7 +77,6 @@ class MyOrderData {
         virtualProduct.add(new MyOrderDataVirtualProduct.fromJson(v));
       });
     }
-    provincename = json['provincename'];
     integral = json['integral'];
     name = json['name'];
     tel = json['tel'];
@@ -99,9 +90,7 @@ class MyOrderData {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['create_time'] = this.createTime;
-    data['areaname'] = this.areaname;
     data['consignee_name'] = this.consigneeName;
-    data['cityname'] = this.cityname;
     data['count'] = this.count;
     data['source_type'] = this.sourceType;
     data['pic'] = this.pic;
@@ -112,7 +101,6 @@ class MyOrderData {
       data['virtual_product'] =
           this.virtualProduct.map((v) => v.toJson()).toList();
     }
-    data['provincename'] = this.provincename;
     data['integral'] = this.integral;
     data['name'] = this.name;
     data['tel'] = this.tel;

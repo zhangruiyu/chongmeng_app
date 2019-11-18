@@ -24,7 +24,10 @@ Widget buildView(
           child: Row(
             children: <Widget>[
               ExtendedImage.network(
-                  state.selectCinemaMovie.img.replaceAll("w.h", "148.208")),
+                state.selectCinemaMovie.img.replaceAll("w.h", "592.832"),
+                width: 148,
+                height: 208,
+              ),
               SizedBox(
                 height: 208,
                 child: Padding(

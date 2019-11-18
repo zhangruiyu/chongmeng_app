@@ -90,7 +90,7 @@ Widget buildView(
                                     right: 12.0),
                                 child: ExtendedImage.network(
                                   state.detailMovie.img
-                                      .replaceAll("w.h", "148.208"),
+                                      .replaceAll("w.h", "592.832"),
                                   width: 148,
                                   height: 208,
                                 ),
