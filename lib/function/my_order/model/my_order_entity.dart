@@ -179,17 +179,19 @@ class MyOrderDataMovieorder {
   String showTime;
   String lng;
   String createTime;
-  List<Null> virtualProductRepertoryId;
   int itemPrice;
   String consigneeName;
   String hall;
   String dim;
   String movieName;
-  dynamic content;
+  List<dynamic> remake;
+  List<String> content;
   String addressDetail;
   int totalPay;
+  int movieDuration;
   String cinemaName;
   String showDate;
+  String movieImg;
   String tel;
   String cinemaAddr;
   String lang;
@@ -201,7 +203,6 @@ class MyOrderDataMovieorder {
       this.showTime,
       this.lng,
       this.createTime,
-      this.virtualProductRepertoryId,
       this.itemPrice,
       this.consigneeName,
       this.hall,
@@ -210,8 +211,10 @@ class MyOrderDataMovieorder {
       this.content,
       this.addressDetail,
       this.totalPay,
+      this.movieDuration,
       this.cinemaName,
       this.showDate,
+      this.movieImg,
       this.tel,
       this.cinemaAddr,
       this.lang,
@@ -228,24 +231,24 @@ class MyOrderDataMovieorder {
     showTime = json['show_time'];
     lng = json['lng'];
     createTime = json['create_time'];
-    if (json['virtual_product_repertory_id'] != null) {
-      virtualProductRepertoryId = new List<Null>();
-    }
     itemPrice = json['item_price'];
     consigneeName = json['consignee_name'];
     hall = json['hall'];
     dim = json['dim'];
     movieName = json['movie_name'];
-    content = json['content'];
+    content = json['content']?.cast<String>();
     addressDetail = json['address_detail'];
     totalPay = json['total_pay'];
+    movieDuration = json['movie_duration'];
     cinemaName = json['cinema_name'];
     showDate = json['show_date'];
+    movieImg = json['movie_img'];
     tel = json['tel'];
     cinemaAddr = json['cinema_addr'];
     lang = json['lang'];
     lat = json['lat'];
     status = json['status'];
+    remake = json['remake'];
   }
 
   Map<String, dynamic> toJson() {
@@ -256,9 +259,6 @@ class MyOrderDataMovieorder {
     data['show_time'] = this.showTime;
     data['lng'] = this.lng;
     data['create_time'] = this.createTime;
-    if (this.virtualProductRepertoryId != null) {
-      data['virtual_product_repertory_id'] = [];
-    }
     data['item_price'] = this.itemPrice;
     data['consignee_name'] = this.consigneeName;
     data['hall'] = this.hall;
@@ -267,13 +267,16 @@ class MyOrderDataMovieorder {
     data['content'] = this.content;
     data['address_detail'] = this.addressDetail;
     data['total_pay'] = this.totalPay;
+    data['movie_duration'] = this.movieDuration;
     data['cinema_name'] = this.cinemaName;
     data['show_date'] = this.showDate;
+    data['movie_img'] = this.movieImg;
     data['tel'] = this.tel;
     data['cinema_addr'] = this.cinemaAddr;
     data['lang'] = this.lang;
     data['lat'] = this.lat;
     data['status'] = this.status;
+    data['remake'] = this.remake;
     return data;
   }
 }

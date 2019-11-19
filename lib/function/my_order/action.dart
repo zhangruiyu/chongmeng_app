@@ -1,3 +1,4 @@
+import 'package:chongmeng/function/my_order/virtual_product_review/model/virtual_pruduct.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'model/my_order_entity.dart';
@@ -19,12 +20,17 @@ class MyOrderActionCreator {
     return Action(MyOrderAction.Refresh, payload: map);
   }
 
-  static Action onSkipReviewPage(MyOrderDataStoreorder virtualProduct) {
+  static Action onSkipReviewPage(List<VirtualProduct> virtualProduct) {
     return Action(MyOrderAction.SkipReviewPage, payload: virtualProduct);
   }
 
-  static Action onShowOrderAddress(MyOrderDataStoreorder virtualProduct) {
-    return Action(MyOrderAction.ShowOrderAddress, payload: virtualProduct);
+  static Action onShowOrderAddress(
+      String tel, String consigneeName, String addressDetail) {
+    return Action(MyOrderAction.ShowOrderAddress, payload: {
+      'tel': tel,
+      'consigneeName': consigneeName,
+      'addressDetail': addressDetail,
+    });
   }
 
   static Action onShowExpress(MyOrderDataStoreorder orderData) {

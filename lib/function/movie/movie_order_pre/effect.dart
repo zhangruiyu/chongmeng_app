@@ -42,6 +42,7 @@ Future<void> _onCommit(Action action, Context<MovieOrderPreState> ctx) async {
               ctx.context, HttpConstants.payMovieOrder,
               queryParameters: {
             "movieImg": ctx.state.selectCinemaMovie.img,
+            "duration": ctx.state.selectCinemaMovie.dur,
             "cityId": selectAddress.id,
             //序列号
             'seqNo': ctx.state.cinemaMovie.seqNo,

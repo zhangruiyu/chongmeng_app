@@ -1,6 +1,7 @@
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/function/main/store/model/integral_commodity_entity.dart';
+import 'package:chongmeng/function/my_order/virtual_product_review/model/virtual_pruduct.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
@@ -37,9 +38,9 @@ Future _onShowExpress(Action action, Context<MyOrderState> ctx) async {
 }
 
 Future _onSkipReviewPage(Action action, Context<MyOrderState> ctx) async {
-  MyOrderDataStoreorder virtualProduct = action.payload;
-  if (virtualProduct.virtualProduct != null) {
-    if (virtualProduct.virtualProduct.isNotEmpty) {
+  List<VirtualProduct> virtualProduct = action.payload;
+  if (virtualProduct != null) {
+    if (virtualProduct.isNotEmpty) {
       Navigator.pushNamed(ctx.context, PageConstants.VirtualProductReviewPage,
           arguments: {'data': virtualProduct});
     } else {
@@ -50,7 +51,7 @@ Future _onSkipReviewPage(Action action, Context<MyOrderState> ctx) async {
 }
 
 Future _onShowOrderAddress(Action action, Context<MyOrderState> ctx) async {
-  MyOrderDataStoreorder virtualProduct = action.payload;
+  Map<String, String> virtualProduct = action.payload;
   showDialog(
       context: ctx.context,
       builder: (c) {
@@ -71,15 +72,15 @@ Future _onShowOrderAddress(Action action, Context<MyOrderState> ctx) async {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
-                    child: Text("收件人: ${virtualProduct.consigneeName}"),
+                    child: Text("收件人: ${virtualProduct["consigneeName"]}"),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 7),
-                    child: Text("手机号: ${virtualProduct.tel}"),
+                    child: Text("手机号: ${virtualProduct['tel']}"),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 21.0),
-                    child: Text("收货地址: ${virtualProduct.addressDetail}"),
+                    child: Text("收货地址: ${virtualProduct['addressDetail']}"),
                   ),
                   VerticalLine(),
                   GestureDetector(

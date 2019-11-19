@@ -16,21 +16,20 @@ Widget buildView(VirtualProductReviewState state, Dispatch dispatch,
     ),
     body: PageView(
       controller: state.controller,
-      children: state.virtualProduct.virtualProduct.map((item) {
-        var indexOf = state.virtualProduct.virtualProduct.indexOf(item);
+      children: state.virtualProduct.map((item) {
+        var indexOf = state.virtualProduct.indexOf(item);
         return SingleChildScrollView(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: <Widget>[
               Align(
                 alignment: Alignment.topRight,
-                child: Text(
-                    "${indexOf + 1}/${state.virtualProduct.virtualProduct.length}"),
+                child: Text("${indexOf + 1}/${state.virtualProduct.length}"),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 28.0),
                 child: Text(
-                  state.virtualProduct.name,
+                  item.name,
                   style: Theme.of(viewService.context).textTheme.title,
                 ),
               ),
@@ -51,7 +50,7 @@ Widget buildView(VirtualProductReviewState state, Dispatch dispatch,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(state.virtualProduct.externalRemake),
+                child: Text(item.remake),
               ),
             ],
           ),

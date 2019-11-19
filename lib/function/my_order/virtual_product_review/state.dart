@@ -2,9 +2,11 @@ import 'package:chongmeng/function/my_order/model/my_order_entity.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'model/virtual_pruduct.dart';
+
 class VirtualProductReviewState
     implements Cloneable<VirtualProductReviewState> {
-  MyOrderDataStoreorder virtualProduct;
+  List<VirtualProduct> virtualProduct;
   PageController controller;
 
   @override
