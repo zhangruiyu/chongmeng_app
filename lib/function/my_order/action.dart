@@ -20,8 +20,12 @@ class MyOrderActionCreator {
     return Action(MyOrderAction.Refresh, payload: map);
   }
 
-  static Action onSkipReviewPage(List<VirtualProduct> virtualProduct) {
-    return Action(MyOrderAction.SkipReviewPage, payload: virtualProduct);
+  static Action onSkipReviewPage(
+      List<VirtualProduct> virtualProduct, int productType) {
+    return Action(MyOrderAction.SkipReviewPage, payload: {
+      'virtualProduct': virtualProduct,
+      "productType": productType
+    });
   }
 
   static Action onShowOrderAddress(

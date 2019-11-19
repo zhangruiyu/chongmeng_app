@@ -88,23 +88,25 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
               SliverToBoxAdapter(
                 child: viewService.buildComponent("notice"),
               ),
-              SliverToBoxAdapter(
-                child: Container(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Ink.image(
-                      fit: BoxFit.fill,
-                      width: WindowUtils.getScreenWidth() - 8 * 2,
-                      height: (WindowUtils.getScreenWidth() - 8 * 2) * 85 / 359,
-                      image: AssetImage("assets/home_movie_banner.png"),
-                      child: new InkWell(
-                        borderRadius: new BorderRadius.circular(7.0),
-                        onTap: () {
-                          Navigator.pushNamed(
-                              viewService.context, PageConstants.MoviePage);
-                        },
-                      )),
+              if (!(state?.homeData?.isHiddenMovie ?? true))
+                SliverToBoxAdapter(
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Ink.image(
+                        fit: BoxFit.fill,
+                        width: WindowUtils.getScreenWidth() - 8 * 2,
+                        height:
+                            (WindowUtils.getScreenWidth() - 8 * 2) * 85 / 359,
+                        image: AssetImage("assets/home_movie_banner.png"),
+                        child: new InkWell(
+                          borderRadius: new BorderRadius.circular(7.0),
+                          onTap: () {
+                            Navigator.pushNamed(
+                                viewService.context, PageConstants.MoviePage);
+                          },
+                        )),
+                  ),
                 ),
-              ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(buildAdapter.itemBuilder,
                     childCount: buildAdapter.itemCount),

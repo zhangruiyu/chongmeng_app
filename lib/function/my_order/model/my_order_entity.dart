@@ -67,6 +67,7 @@ class MyOrderDataStoreorder {
   List<MyOrderDataStoreorderVirtualProduct> virtualProduct;
   int integral;
   String name;
+  int productType;
   String tel;
   int id;
   dynamic expressNumber;
@@ -116,6 +117,7 @@ class MyOrderDataStoreorder {
     status = json['status'];
     expressType = json['express_type'];
     externalRemake = json['external_remake'];
+    productType = json['product_type'];
   }
 
   Map<String, dynamic> toJson() {
@@ -140,6 +142,7 @@ class MyOrderDataStoreorder {
     data['status'] = this.status;
     data['express_type'] = this.expressType;
     data['external_remake'] = this.externalRemake;
+    data['product_type'] = this.productType;
     return data;
   }
 }
@@ -198,6 +201,8 @@ class MyOrderDataMovieorder {
   String lat;
   int status;
 
+  int productType;
+
   MyOrderDataMovieorder(
       {this.movieSeat,
       this.showTime,
@@ -249,6 +254,7 @@ class MyOrderDataMovieorder {
     lat = json['lat'];
     status = json['status'];
     remake = json['remake'];
+    productType = json['product_type'];
   }
 
   Map<String, dynamic> toJson() {
@@ -277,6 +283,7 @@ class MyOrderDataMovieorder {
     data['lat'] = this.lat;
     data['status'] = this.status;
     data['remake'] = this.remake;
+    data['product_type'] = this.productType;
     return data;
   }
 }

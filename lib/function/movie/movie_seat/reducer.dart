@@ -1,4 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:oktoast/oktoast.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -22,7 +23,11 @@ MovieSeatState _onSelectSeat(MovieSeatState state, Action action) {
   if (newState.localSelectMovie.contains(action.payload)) {
     newState.localSelectMovie.remove(action.payload);
   } else {
-    newState.localSelectMovie.add(action.payload);
+    if (newState.localSelectMovie.length == 5) {
+      showToast("最多选择5个座位");
+    } else {
+      newState.localSelectMovie.add(action.payload);
+    }
   }
   return newState;
 }

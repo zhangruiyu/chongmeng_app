@@ -38,14 +38,27 @@ Future _onShowExpress(Action action, Context<MyOrderState> ctx) async {
 }
 
 Future _onSkipReviewPage(Action action, Context<MyOrderState> ctx) async {
-  List<VirtualProduct> virtualProduct = action.payload;
-  if (virtualProduct != null) {
-    if (virtualProduct.isNotEmpty) {
-      Navigator.pushNamed(ctx.context, PageConstants.VirtualProductReviewPage,
-          arguments: {'data': virtualProduct});
-    } else {
-      showToast("已为您加急兑换中,下单后30分钟未兑换成功自动退货");
-      ctx.dispatch(MyOrderActionCreator.onRefresh(null));
+  List<VirtualProduct> virtualProduct = action.payload['virtualProduct'];
+  //productType为0代表是二维码,1是链接产品
+  if (action.payload['productType'] == 0) {
+    if (virtualProduct != null) {
+      if (virtualProduct.isNotEmpty) {
+        Navigator.pushNamed(ctx.context, PageConstants.VirtualProductReviewPage,
+            arguments: {'data': virtualProduct});
+      } else {
+        showToast("已为您加急兑换中,下单后30分钟未兑换成功自动退货");
+        ctx.dispatch(MyOrderActionCreator.onRefresh(null));
+      }
+    }
+  } else {
+    if (virtualProduct != null) {
+      if (virtualProduct.isNotEmpty) {
+        Navigator.pushNamed(ctx.context, PageConstants.VirtualProductReviewPage,
+            arguments: {'data': virtualProduct});
+      } else {
+        showToast("已为您加急兑换中,下单后30分钟未兑换成功自动退货");
+        ctx.dispatch(MyOrderActionCreator.onRefresh(null));
+      }
     }
   }
 }

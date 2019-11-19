@@ -98,7 +98,7 @@ Container storeItem(ViewService viewService, MyOrderState state, int index,
             ? null
             : () {
                 dispatch(MyOrderActionCreator.onSkipReviewPage(
-                    previewVirtualProduct));
+                    previewVirtualProduct, itemData.productType));
               },
         child: Column(
           children: <Widget>[
@@ -204,7 +204,7 @@ Container storeItem(ViewService viewService, MyOrderState state, int index,
                         behavior: HitTestBehavior.opaque,
                         onTap: () {
                           dispatch(MyOrderActionCreator.onSkipReviewPage(
-                              previewVirtualProduct));
+                              previewVirtualProduct, itemData.productType));
                         },
                         child: Text("二维码",
                             style: TextStyle(fontSize: 13, color: color333333)),
@@ -265,12 +265,11 @@ Container movieItem(ViewService viewService, MyOrderState state, int index,
           right: 8.0,
           bottom: state.data.storeOrder.length == (index + 1) ? 12.0 : 0.0),
       child: InkWell(
-        onTap: itemData.content == null
-            ? null
-            : () {
-                dispatch(MyOrderActionCreator.onSkipReviewPage(
-                    previewVirtualProduct));
-              },
+        onTap: () {
+          if (itemData.content.isNotEmpty == true)
+            dispatch(MyOrderActionCreator.onSkipReviewPage(
+                previewVirtualProduct, itemData.productType));
+        },
         child: Column(
           children: <Widget>[
             Container(
@@ -405,7 +404,7 @@ Container movieItem(ViewService viewService, MyOrderState state, int index,
                         border: Border.all(width: 0.5, color: colorCCCCCC)),
                   ),
                 ),
-                if (itemData.content != null)
+                if (itemData.content.isNotEmpty == true)
                   Padding(
                     padding: const EdgeInsets.only(right: 12.0),
                     child: Container(
@@ -415,7 +414,7 @@ Container movieItem(ViewService viewService, MyOrderState state, int index,
                         behavior: HitTestBehavior.opaque,
                         onTap: () {
                           dispatch(MyOrderActionCreator.onSkipReviewPage(
-                              previewVirtualProduct));
+                              previewVirtualProduct, itemData.productType));
                         },
                         child: Text("二维码",
                             style: TextStyle(fontSize: 13, color: color333333)),

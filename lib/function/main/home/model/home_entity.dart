@@ -30,6 +30,8 @@ class HomeData {
   List<AliProductItem> banner;
   List<String> sysNotices;
   List<HomeDataRecipe> recipe;
+
+  bool isHiddenMovie;
   HomeData({this.tab, this.recommendProduct, this.banner, this.sysNotices});
 
   HomeData.fromJson(Map<String, dynamic> json) {
@@ -58,6 +60,7 @@ class HomeData {
       });
     }
     sysNotices = json['sysNotices']?.cast<String>();
+    isHiddenMovie = json['isHiddenMovie'];
   }
 
   Map<String, dynamic> toJson() {
@@ -76,6 +79,7 @@ class HomeData {
       data['recipe'] = this.recipe.map((v) => v.toJson()).toList();
     }
     data['sysNotices'] = this.sysNotices;
+    data['isHiddenMovie'] = this.isHiddenMovie;
     return data;
   }
 }
