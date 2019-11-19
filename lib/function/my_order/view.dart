@@ -194,26 +194,25 @@ Container storeItem(ViewService viewService, MyOrderState state, int index,
                         border: Border.all(width: 0.5, color: colorCCCCCC)),
                   ),
                 ),
-                if (itemData.virtualProduct != null)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 12.0),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 5.0),
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {
-                          dispatch(MyOrderActionCreator.onSkipReviewPage(
-                              previewVirtualProduct, itemData.productType));
-                        },
-                        child: Text("二维码",
-                            style: TextStyle(fontSize: 13, color: color333333)),
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          border: Border.all(width: 0.5, color: colorCCCCCC)),
+                Padding(
+                  padding: const EdgeInsets.only(right: 12.0),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 5.0),
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () {
+                        dispatch(MyOrderActionCreator.onSkipReviewPage(
+                            previewVirtualProduct, itemData.productType));
+                      },
+                      child: Text(itemData.productType == 0 ? "二维码" : "电子凭证",
+                          style: TextStyle(fontSize: 13, color: color333333)),
                     ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        border: Border.all(width: 0.5, color: colorCCCCCC)),
                   ),
+                ),
                 if (itemData.expressType != null &&
                     itemData.expressNumber != null)
                   Padding(
@@ -404,26 +403,25 @@ Container movieItem(ViewService viewService, MyOrderState state, int index,
                         border: Border.all(width: 0.5, color: colorCCCCCC)),
                   ),
                 ),
-                if (itemData.content.isNotEmpty == true)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 12.0),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 5.0),
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {
-                          dispatch(MyOrderActionCreator.onSkipReviewPage(
-                              previewVirtualProduct, itemData.productType));
-                        },
-                        child: Text("二维码",
-                            style: TextStyle(fontSize: 13, color: color333333)),
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          border: Border.all(width: 0.5, color: colorCCCCCC)),
+                Padding(
+                  padding: const EdgeInsets.only(right: 12.0),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 5.0),
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () {
+                        dispatch(MyOrderActionCreator.onSkipReviewPage(
+                            previewVirtualProduct, itemData.productType));
+                      },
+                      child: Text(itemData.productType == 0 ? "二维码" : "电子凭证",
+                          style: TextStyle(fontSize: 13, color: color333333)),
                     ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        border: Border.all(width: 0.5, color: colorCCCCCC)),
                   ),
+                ),
               ],
             ),
           ],

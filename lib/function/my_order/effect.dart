@@ -53,7 +53,8 @@ Future _onSkipReviewPage(Action action, Context<MyOrderState> ctx) async {
   } else {
     if (virtualProduct != null) {
       if (virtualProduct.isNotEmpty) {
-        Navigator.pushNamed(ctx.context, PageConstants.VirtualProductReviewPage,
+        Navigator.pushNamed(
+            ctx.context, PageConstants.WebVirtualProductPreviewPage,
             arguments: {'data': virtualProduct});
       } else {
         showToast("已为您加急兑换中,下单后30分钟未兑换成功自动退货");
