@@ -5,18 +5,17 @@ import 'reducer.dart';
 import 'state.dart';
 import 'view.dart';
 
-class WebVirtualProductPreviewPage extends Page<WebVirtualProductPreviewState, Map<String, dynamic>> {
+class WebVirtualProductPreviewPage
+    extends Page<WebVirtualProductPreviewState, Map<String, dynamic>> {
   WebVirtualProductPreviewPage()
       : super(
-            initState: initState,
-            effect: buildEffect(),
-            reducer: buildReducer(),
-            view: buildView,
-            dependencies: Dependencies<WebVirtualProductPreviewState>(
-                adapter: null,
-                slots: <String, Dependent<WebVirtualProductPreviewState>>{
-                }),
-            middleware: <Middleware<WebVirtualProductPreviewState>>[
-            ],);
-
+          initState: initState,
+          effect: buildEffect(),
+          reducer: buildReducer(),
+          view: buildView,
+          dependencies: Dependencies<WebVirtualProductPreviewState>(
+              adapter: null,
+              slots: <String, Dependent<WebVirtualProductPreviewState>>{}),
+          middleware: <Middleware<WebVirtualProductPreviewState>>[],
+        );
 }
