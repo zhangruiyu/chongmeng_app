@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/function/movie/movie_details/model/movie_schedule_entity.dart';
 import 'package:chongmeng/routes.dart';

@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/anim/slide_transition_x.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/main/store/model/integral_commodity_entity.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -334,12 +334,11 @@ Widget buildView(
                   fontWeight: FontWeight.bold),
             ),
           ),
-          CachedNetworkImage(
-            imageUrl: itemData.pic,
+          ExtendedImage.network(
+            itemData.pic,
           ),
-          CachedNetworkImage(
-            imageUrl:
-                "https://chomgwo-1253631018.cos.ap-beijing.myqcloud.com/eleme/instructions.jpeg",
+          ExtendedImage.network(
+            "https://chomgwo-1253631018.cos.ap-beijing.myqcloud.com/eleme/instructions.jpeg",
           )
         ],
       ),

@@ -26,7 +26,7 @@ dependencies:
   package_info: any
   url_launcher: any
   flutter_spinkit: ^3.1.0
-  cached_network_image: any
+#  cached_network_image: any
   flutter_easyrefresh:
     git:
       url: https://github.com/xuelongqy/flutter_easyrefresh.git
@@ -48,7 +48,7 @@ dependencies:
   camera: any
   photo: any
   percent_indicator: "^2.1.0"
-  flutter_ijkplayer: "^0.3.3"
+  flutter_ijkplayer: 0.3.5+1
   city_pickers: ^0.1.27
   dragablegridview_flutter: any
   photo_view: ^0.4.2
@@ -78,7 +78,7 @@ dependencies:
   image_picker_saver: ^0.3.0
   downloads_path_provider: ^0.1.0
   emoji_picker: ^0.0.2
-  extended_image: ^0.6.4
+  extended_image: any
   fluwx: ^1.1.1
   markdown: 2.1.1
   qr_flutter: ^3.0.1

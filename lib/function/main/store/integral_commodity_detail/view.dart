@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/main/store/integral_component/view.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/commodity_count.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 
@@ -29,9 +29,9 @@ Widget buildView(IntegralCommodityDetailState state, Dispatch dispatch,
                 Hero(
                   transitionOnUserGestures: true,
                   tag: state.index.toString(),
-                  child: CachedNetworkImage(
+                  child: ExtendedImage.network(
+                    state.itemData.pic[0],
                     fit: BoxFit.cover,
-                    imageUrl: state.itemData.pic[0],
                     width: WindowUtils.getScreenWidth(),
                     height: WindowUtils.getScreenWidth(),
                   ),

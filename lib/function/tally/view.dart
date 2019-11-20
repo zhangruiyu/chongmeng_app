@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/color_utils.dart';
@@ -6,6 +5,7 @@ import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/empty_widget.dart';
 import 'package:chongmeng/widget/loadling_widget.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -69,10 +69,10 @@ Widget buildView(TallyState state, Dispatch dispatch, ViewService viewService) {
                           children: <Widget>[
                             itemData.image == null
                                 ? Container()
-                                : CachedNetworkImage(
+                                : ExtendedImage.network(
+                                    itemData.image,
                                     width: 60.0,
                                     height: 60.0,
-                                    imageUrl: itemData.image,
                                     fit: BoxFit.cover,
                                   ),
                             Expanded(

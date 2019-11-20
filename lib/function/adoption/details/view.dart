@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/oval_swiper_pagination_builder.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -64,12 +64,9 @@ Widget buildView(
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
                           height: 150.0,
-                          child: new CachedNetworkImage(
-                            imageUrl: state.data.pic[index],
+                          child: new ExtendedImage.network(
+                            state.data.pic[index],
                             fit: BoxFit.cover,
-                            errorWidget: (b, c, e) {
-                              return new Container();
-                            },
                           ),
                         );
                       },

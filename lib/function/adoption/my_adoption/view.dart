@@ -1,8 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/loadling_widget.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -45,11 +45,11 @@ Widget buildView(
                       children: <Widget>[
                         ClipRRect(
                             borderRadius: BorderRadius.circular(3),
-                            child: CachedNetworkImage(
+                            child: ExtendedImage.network(
+                              adoption.pic[0],
                               width: 100.0,
                               height: 100.0,
                               fit: BoxFit.cover,
-                              imageUrl: adoption.pic[0],
                             )),
                         Expanded(
                           child: Padding(

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
@@ -11,6 +10,7 @@ import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/utils/platform_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 
@@ -65,10 +65,10 @@ Widget buildView(
                   : Row(
                       children: <Widget>[
                         ClipOval(
-                            child: CachedNetworkImage(
+                            child: ExtendedImage.network(
+                          user.avatar,
                           width: 50.0,
                           height: 50.0,
-                          imageUrl: user.avatar,
                           fit: BoxFit.cover,
                         )),
                         Padding(

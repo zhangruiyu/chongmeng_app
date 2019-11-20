@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/utils/keyboard_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
+import 'package:chongmeng/widget/sliver_animated_list.dart';
 import 'package:emoji_picker/emoji_picker.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,6 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:sliver_animated_list/sliver_animated_list.dart';
 import 'dart:math';
 import 'action.dart';
 import 'state.dart';
@@ -148,7 +147,7 @@ Widget buildView(
                       sizeFactor: animation,
                     );
                   },
-                  reverse: true,
+//                  reverse: true,
                   initialItemCount: state.messages?.length ?? 0,
                 )
               ],

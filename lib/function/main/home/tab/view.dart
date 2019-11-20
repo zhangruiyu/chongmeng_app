@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/function/main/home/model/home_entity.dart';
 import 'package:chongmeng/helper/user_helper.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:oktoast/oktoast.dart';
@@ -64,8 +64,8 @@ buildItem(TabState state, HomeDataTab itemMenu, viewService) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           itemMenu.imageUrl.startsWith("http")
-              ? CachedNetworkImage(
-                  imageUrl: itemMenu.imageUrl,
+              ? ExtendedImage.network(
+                  itemMenu.imageUrl,
                 )
               : new Image.asset(
                   itemMenu.imageUrl,

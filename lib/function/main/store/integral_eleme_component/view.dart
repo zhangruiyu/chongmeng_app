@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 
@@ -12,9 +12,9 @@ Widget buildView(
     onTap: () {
       dispatch(IntegralElemeItemActionCreator.onSkipElemeDetailPage());
     },
-    child: CachedNetworkImage(
+    child: ExtendedImage.network(
+      state.itemData.pic,
       fit: BoxFit.fitWidth,
-      imageUrl: state.itemData.pic,
     ),
   );
   return GridTile(

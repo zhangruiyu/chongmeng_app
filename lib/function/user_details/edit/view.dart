@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/vertical_line.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 
@@ -59,8 +59,8 @@ Widget buildView(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(60),
                         child: state.localAvatar == null
-                            ? CachedNetworkImage(
-                                imageUrl: state.data.avatar,
+                            ? ExtendedImage.network(
+                                state.data.avatar,
                                 fit: BoxFit.cover,
                                 width: 60.0,
                                 height: 60.0,

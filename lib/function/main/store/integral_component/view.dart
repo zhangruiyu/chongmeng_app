@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +17,9 @@ Widget buildView(
       transitionOnUserGestures: true,
       key: Key(state.index.toString()),
       tag: state.index.toString(),
-      child: CachedNetworkImage(
+      child: ExtendedImage.network(
+        state.itemData.pic[0],
         fit: BoxFit.cover,
-        imageUrl: state.itemData.pic[0],
       ),
     ),
   );

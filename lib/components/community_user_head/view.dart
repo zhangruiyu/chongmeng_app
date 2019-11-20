@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/helper/user_helper.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 
@@ -23,11 +23,11 @@ Widget buildView(
       child: Row(
         children: <Widget>[
           ClipOval(
-              child: CachedNetworkImage(
+              child: ExtendedImage.network(
+            state.data.avatar,
             width: 40.0,
             height: 40.0,
             fit: BoxFit.cover,
-            imageUrl: state.data.avatar,
           )),
           Padding(
             padding: const EdgeInsets.only(left: 18.0),

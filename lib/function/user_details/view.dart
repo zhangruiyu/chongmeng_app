@@ -1,17 +1,14 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
-import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/utils/window_utils.dart';
-import 'package:chongmeng/widget/Toolbar.dart';
-import 'package:chongmeng/widget/keep_alive_widget.dart';
 import 'package:chongmeng/widget/loadling_widget.dart';
+import 'package:extended_image/extended_image.dart';
+import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart'
+    as extended;
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart'
-    as extended;
 
 import '../../routes.dart';
 import 'action.dart';
@@ -107,12 +104,11 @@ Widget buildView(
                         children: <Widget>[
                           Stack(
                             children: <Widget>[
-                              CachedNetworkImage(
+                              ExtendedImage.network(
+                                "https://pics7.baidu.com/feed/14ce36d3d539b600ee906ba88895e02ec75cb799.jpeg?token=4cc8bcf04eaa479fcc085524d0fd2976&s=BB936F854663FEE41895BD230300A040",
                                 height: 230.0,
                                 width: WindowUtils.getScreenWidth(),
                                 fit: BoxFit.cover,
-                                imageUrl:
-                                    "https://pics7.baidu.com/feed/14ce36d3d539b600ee906ba88895e02ec75cb799.jpeg?token=4cc8bcf04eaa479fcc085524d0fd2976&s=BB936F854663FEE41895BD230300A040",
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(
@@ -128,11 +124,11 @@ Widget buildView(
                                     ),
                                   ),
                                   child: ClipOval(
-                                      child: CachedNetworkImage(
+                                      child: ExtendedImage.network(
+                                    state.data.avatar,
                                     width: 60.0,
                                     height: 60.0,
                                     fit: BoxFit.cover,
-                                    imageUrl: state.data.avatar,
                                   )),
                                 ),
                               ),

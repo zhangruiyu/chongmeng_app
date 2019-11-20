@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
@@ -21,7 +21,7 @@ Widget buildView(
         var imageData = state.images[index];
         return PhotoViewGalleryPageOptions(
           imageProvider: imageData.startsWith("http")
-              ? CachedNetworkImageProvider(imageData)
+              ? ExtendedNetworkImageProvider(imageData)
               : FileImage(File(imageData)),
           initialScale: PhotoViewComputedScale.contained * 0.8,
 //            heroTag: galleryItems[index].id,

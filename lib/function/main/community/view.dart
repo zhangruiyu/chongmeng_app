@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
 import 'package:chongmeng/utils/completer_utils.dart';

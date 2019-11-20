@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 
@@ -49,8 +49,8 @@ Widget buildView(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Container(
-                        child: CachedNetworkImage(
-                          imageUrl: state.data[index].image,
+                        child: ExtendedImage.network(
+                          state.data[index].image,
                           width: 60.0,
                         ),
                         decoration: BoxDecoration(

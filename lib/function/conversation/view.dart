@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/function/conversation/item/page.dart';
 import 'package:chongmeng/helper/user_helper.dart';

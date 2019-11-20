@@ -1,11 +1,11 @@
 import 'package:chongmeng/function/main/home/model/ali_product_item.dart';
 import 'package:chongmeng/function/main/home/model/home_entity.dart';
 import 'package:chongmeng/widget/oval_swiper_pagination_builder.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'action.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'state.dart';
 
 Widget buildView(
@@ -28,12 +28,9 @@ Widget buildView(
                 },
                 child: Container(
                   height: 150.0,
-                  child: new CachedNetworkImage(
-                    imageUrl: itemBanner.pictUrl,
+                  child: new ExtendedImage.network(
+                    itemBanner.pictUrl,
                     fit: BoxFit.fill,
-                    errorWidget: (b, c, e) {
-                      return new Container();
-                    },
                   ),
                 ),
               );

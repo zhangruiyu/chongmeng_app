@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/main/community/commit_media/model/upload_task.dart';
 import 'package:chongmeng/function/tally/add/action.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 
@@ -350,8 +350,8 @@ List<Widget> buildPicWidget(
     state.localAdoption.pic.forEach((itemUrl) {
       Widget item = new Padding(
         padding: const EdgeInsets.all(3.0),
-        child: new CachedNetworkImage(
-          imageUrl: itemUrl,
+        child: new ExtendedImage.network(
+          itemUrl,
           fit: BoxFit.cover,
           width: itemWidth,
           height: itemWidth,

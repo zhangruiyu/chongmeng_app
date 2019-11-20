@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/main/store/integral_commodity_detail/effect.dart';
@@ -7,6 +6,7 @@ import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/custom_dialog.dart';
 import 'package:chongmeng/widget/loadling_widget.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -88,10 +88,10 @@ Widget buildView(
                               children: <Widget>[
                                 Padding(
                                   padding: const EdgeInsets.only(right: 8.0),
-                                  child: CachedNetworkImage(
+                                  child: ExtendedImage.network(
+                                    data.pic,
                                     width: 100.0,
                                     height: 100.0,
-                                    imageUrl: data.pic,
                                     fit: BoxFit.cover,
                                   ),
                                 ),

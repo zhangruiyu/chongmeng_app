@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/vertical_line.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
@@ -170,11 +170,11 @@ List<Widget> buildOnePicView(
                 onTap: () {
                   dispatch(DynamicItemActionCreator.onSkipReviewPage(0));
                 },
-                child: new CachedNetworkImage(
+                child: new ExtendedImage.network(
+                  itemImage,
                   fit: BoxFit.cover,
                   width: itemWidth * 1.2,
                   height: itemWidth,
-                  imageUrl: itemImage,
                 ),
               ),
             ),
@@ -214,11 +214,11 @@ List<Widget> buildTwoPicView(
                             dispatch(DynamicItemActionCreator.onSkipReviewPage(
                                 index));
                           },
-                          child: new CachedNetworkImage(
+                          child: new ExtendedImage.network(
+                            itemImage,
                             fit: BoxFit.cover,
                             height: itemWidth,
                             width: double.infinity,
-                            imageUrl: itemImage,
                           ),
                         ),
                       ),
@@ -274,11 +274,11 @@ List<Widget> buildThreePicView(
                                   DynamicItemActionCreator.onSkipReviewPage(
                                       index));
                             },
-                            child: new CachedNetworkImage(
+                            child: new ExtendedImage.network(
+                              itemImage,
                               fit: BoxFit.cover,
                               width: itemWidth,
                               height: itemWidth,
-                              imageUrl: itemImage,
                             ),
                           ),
                         ),
@@ -328,11 +328,11 @@ List<Widget> buildVideoView(
             transitionOnUserGestures: true,
             key: Key(video.videoThumbnailPath),
             tag: video.videoThumbnailPath,
-            child: new CachedNetworkImage(
+            child: new ExtendedImage.network(
+              video.videoThumbnailPath,
               fit: BoxFit.cover,
               height: WindowUtils.getScreenWidth() * 0.45,
               width: double.infinity,
-              imageUrl: video.videoThumbnailPath,
             ),
           ),
           IconButton(

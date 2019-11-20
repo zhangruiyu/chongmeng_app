@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/function/adoption/adoption_add/state.dart';
 import 'package:chongmeng/helper/user_helper.dart';
@@ -7,6 +6,7 @@ import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/loadling_widget.dart';
 import 'package:chongmeng/widget/vertical_line.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -53,8 +53,8 @@ Widget buildView(
       slivers: <Widget>[
         if (state.data != null)
           SliverToBoxAdapter(
-            child: CachedNetworkImage(
-              imageUrl: state.data.image,
+            child: ExtendedImage.network(
+              state.data.image,
               fit: BoxFit.fitWidth,
             ),
           ),
@@ -187,10 +187,10 @@ Widget buildItem(AdoptionState state, Dispatch dispatch,
                 ],
               ),
               ClipOval(
-                  child: CachedNetworkImage(
+                  child: ExtendedImage.network(
+                data.pic[0],
                 width: 70.0,
                 height: 70.0,
-                imageUrl: data.pic[0],
                 fit: BoxFit.cover,
               )),
             ],

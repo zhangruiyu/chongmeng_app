@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/function/main/home/model/ali_product_item.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 
@@ -31,8 +31,8 @@ Widget buildView(
           children: <Widget>[
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: CachedNetworkImage(
-                imageUrl: itemData.pictUrl,
+              child: ExtendedImage.network(
+                itemData.pictUrl,
                 fit: BoxFit.fill,
                 width: 120.0,
                 height: 120.0,

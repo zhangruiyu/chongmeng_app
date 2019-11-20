@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/main/home/model/ali_product_item.dart';
@@ -8,6 +7,7 @@ import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/dotline_widget.dart';
 import 'package:chongmeng/widget/loadling_widget.dart';
 import 'package:chongmeng/widget/oval_swiper_pagination_builder.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:extended_text/extended_text.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/foundation.dart';
@@ -234,8 +234,8 @@ List<Widget> buildShopDetailsWidget(ProductDetailsState state) {
       height: 50.0,
       child: Row(
         children: <Widget>[
-          CachedNetworkImage(
-            imageUrl: storeInfo.picPath,
+          ExtendedImage.network(
+            storeInfo.picPath,
             fit: BoxFit.fitHeight,
           ),
           Padding(
@@ -326,8 +326,8 @@ List<Widget> buildDetailsWidget(ProductDetailsState state) {
       child: Text("宝贝详情"),
     )
   ]..addAll(state.detailsEntity.data.pics
-      .map((item) => CachedNetworkImage(
-            imageUrl: item,
+      .map((item) => ExtendedImage.network(
+            item,
           ))
       .toList());
 }
@@ -400,14 +400,11 @@ SizedBox buildBanner(AliProductItem itemData, ThemeData of) {
     child: new Swiper(
       itemBuilder: (BuildContext context, int index) {
         String itemBanner = itemData.smallImages[index];
-        return new CachedNetworkImage(
-          imageUrl: itemBanner,
+        return new ExtendedImage.network(
+          itemBanner,
           fit: BoxFit.fill,
           width: WindowUtils.getScreenWidth(),
           height: WindowUtils.getScreenWidth(),
-          errorWidget: (b, c, e) {
-            return new Container();
-          },
         );
       },
       itemCount: itemData.smallImages.length,

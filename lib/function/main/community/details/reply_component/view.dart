@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/utils/date_utils.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +27,8 @@ Widget buildView(ReplyState state, Dispatch dispatch, ViewService viewService) {
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(35),
-                child: CachedNetworkImage(
-                  imageUrl: data.avatar,
+                child: ExtendedImage.network(
+                  data.avatar,
                   fit: BoxFit.cover,
                   width: 35.0,
                   height: 35.0,
@@ -51,8 +51,8 @@ Widget buildView(ReplyState state, Dispatch dispatch, ViewService viewService) {
                 onTap: () {
                   dispatch(ReplyActionCreator.onSkipReviewImagePage(data.pic));
                 },
-                child: CachedNetworkImage(
-                  imageUrl: data.pic,
+                child: ExtendedImage.network(
+                  data.pic,
                   fit: BoxFit.cover,
                   height: 80.0,
                 ),
@@ -161,8 +161,8 @@ Widget buildView(ReplyState state, Dispatch dispatch, ViewService viewService) {
                                     ReplyActionCreator.onSkipReviewImagePage(
                                         itemReply.pic));
                               },
-                              child: CachedNetworkImage(
-                                imageUrl: itemReply.pic,
+                              child: ExtendedImage.network(
+                                itemReply.pic,
                                 fit: BoxFit.cover,
                                 height: 80.0,
                               ),
