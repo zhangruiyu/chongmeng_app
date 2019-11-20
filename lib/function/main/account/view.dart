@@ -70,6 +70,7 @@ Widget buildView(
                           width: 50.0,
                           height: 50.0,
                           fit: BoxFit.cover,
+                          enableLoadState: false,
                         )),
                         Padding(
                           padding: const EdgeInsets.only(left: 15.0),

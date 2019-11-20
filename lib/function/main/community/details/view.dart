@@ -223,6 +223,7 @@ Widget buildVideoView(
             fit: BoxFit.cover,
             height: WindowUtils.getScreenWidth() * 0.45,
             width: double.infinity,
+            enableLoadState: false,
           ),
         ),
         IconButton(
@@ -247,6 +248,7 @@ Widget buildItemPic(itemImage, Dispatch dispatch, index) {
       itemImage,
       fit: BoxFit.cover,
       width: double.infinity,
+      enableLoadState: false,
     ),
   );
 }

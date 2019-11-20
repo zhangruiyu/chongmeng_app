@@ -237,6 +237,7 @@ List<Widget> buildShopDetailsWidget(ProductDetailsState state) {
           ExtendedImage.network(
             storeInfo.picPath,
             fit: BoxFit.fitHeight,
+            enableLoadState: false,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
@@ -328,6 +329,7 @@ List<Widget> buildDetailsWidget(ProductDetailsState state) {
   ]..addAll(state.detailsEntity.data.pics
       .map((item) => ExtendedImage.network(
             item,
+            enableLoadState: false,
           ))
       .toList());
 }
@@ -405,6 +407,7 @@ SizedBox buildBanner(AliProductItem itemData, ThemeData of) {
           fit: BoxFit.fill,
           width: WindowUtils.getScreenWidth(),
           height: WindowUtils.getScreenWidth(),
+          enableLoadState: false,
         );
       },
       itemCount: itemData.smallImages.length,

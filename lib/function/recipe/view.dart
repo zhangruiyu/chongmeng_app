@@ -93,6 +93,7 @@ Widget buildView(
                                     width: 100.0,
                                     height: 100.0,
                                     fit: BoxFit.cover,
+                                    enableLoadState: false,
                                   ),
                                 ),
                                 Expanded(

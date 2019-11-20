@@ -66,6 +66,7 @@ buildItem(TabState state, HomeDataTab itemMenu, viewService) {
           itemMenu.imageUrl.startsWith("http")
               ? ExtendedImage.network(
                   itemMenu.imageUrl,
+                  enableLoadState: false,
                 )
               : new Image.asset(
                   itemMenu.imageUrl,

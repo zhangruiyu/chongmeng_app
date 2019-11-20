@@ -355,6 +355,7 @@ List<Widget> buildPicWidget(
           fit: BoxFit.cover,
           width: itemWidth,
           height: itemWidth,
+          enableLoadState: false,
         ),
       );
       gridItems.add(item);

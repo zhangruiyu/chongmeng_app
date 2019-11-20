@@ -74,6 +74,7 @@ Widget buildView(TallyState state, Dispatch dispatch, ViewService viewService) {
                                     width: 60.0,
                                     height: 60.0,
                                     fit: BoxFit.cover,
+                                    enableLoadState: false,
                                   ),
                             Expanded(
                               child: Padding(

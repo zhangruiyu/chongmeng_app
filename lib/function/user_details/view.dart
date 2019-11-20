@@ -109,6 +109,7 @@ Widget buildView(
                                 height: 230.0,
                                 width: WindowUtils.getScreenWidth(),
                                 fit: BoxFit.cover,
+                                enableLoadState: false,
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(
@@ -129,6 +130,7 @@ Widget buildView(
                                     width: 60.0,
                                     height: 60.0,
                                     fit: BoxFit.cover,
+                                    enableLoadState: false,
                                   )),
                                 ),
                               ),

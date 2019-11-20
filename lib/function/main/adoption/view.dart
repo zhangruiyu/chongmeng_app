@@ -56,6 +56,7 @@ Widget buildView(
             child: ExtendedImage.network(
               state.data.image,
               fit: BoxFit.fitWidth,
+              enableLoadState: false,
             ),
           ),
         /* SliverToBoxAdapter(
@@ -192,6 +193,7 @@ Widget buildItem(AdoptionState state, Dispatch dispatch,
                 width: 70.0,
                 height: 70.0,
                 fit: BoxFit.cover,
+                enableLoadState: false,
               )),
             ],
           ),

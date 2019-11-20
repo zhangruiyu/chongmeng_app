@@ -27,6 +27,7 @@ Widget buildView(
                 state.selectCinemaMovie.img.replaceAll("w.h", "592.832"),
                 width: 148,
                 height: 208,
+                enableLoadState: false,
               ),
               SizedBox(
                 height: 208,

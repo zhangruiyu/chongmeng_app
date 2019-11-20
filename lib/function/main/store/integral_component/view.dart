@@ -20,6 +20,7 @@ Widget buildView(
       child: ExtendedImage.network(
         state.itemData.pic[0],
         fit: BoxFit.cover,
+        enableLoadState: false,
       ),
     ),
   );

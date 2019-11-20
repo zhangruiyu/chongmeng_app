@@ -64,6 +64,7 @@ Widget buildView(
                                 fit: BoxFit.cover,
                                 width: 60.0,
                                 height: 60.0,
+                                enableLoadState: false,
                               )
                             : Image.asset(
                                 state.localAvatar.path,

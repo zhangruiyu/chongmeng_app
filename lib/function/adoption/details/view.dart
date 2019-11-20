@@ -67,6 +67,7 @@ Widget buildView(
                           child: new ExtendedImage.network(
                             state.data.pic[index],
                             fit: BoxFit.cover,
+                            enableLoadState: false,
                           ),
                         );
                       },

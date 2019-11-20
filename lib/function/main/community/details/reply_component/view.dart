@@ -30,6 +30,7 @@ Widget buildView(ReplyState state, Dispatch dispatch, ViewService viewService) {
                 child: ExtendedImage.network(
                   data.avatar,
                   fit: BoxFit.cover,
+                  enableLoadState: false,
                   width: 35.0,
                   height: 35.0,
                 ),
@@ -54,6 +55,7 @@ Widget buildView(ReplyState state, Dispatch dispatch, ViewService viewService) {
                 child: ExtendedImage.network(
                   data.pic,
                   fit: BoxFit.cover,
+                  enableLoadState: false,
                   height: 80.0,
                 ),
               ),
@@ -164,6 +166,7 @@ Widget buildView(ReplyState state, Dispatch dispatch, ViewService viewService) {
                               child: ExtendedImage.network(
                                 itemReply.pic,
                                 fit: BoxFit.cover,
+                                enableLoadState: false,
                                 height: 80.0,
                               ),
                             ),

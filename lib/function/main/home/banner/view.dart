@@ -31,6 +31,7 @@ Widget buildView(
                   child: new ExtendedImage.network(
                     itemBanner.pictUrl,
                     fit: BoxFit.fill,
+                    enableLoadState: false,
                   ),
                 ),
               );

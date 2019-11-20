@@ -36,6 +36,7 @@ Widget buildView(
                 fit: BoxFit.fill,
                 width: 120.0,
                 height: 120.0,
+                enableLoadState: false,
               ),
             ),
             Expanded(

@@ -35,6 +35,7 @@ Widget buildView(MyPetState state, Dispatch dispatch, ViewService viewService) {
                               fit: BoxFit.cover,
                               width: 70.0,
                               height: 70.0,
+                              enableLoadState: false,
                             ),
                           ),
                           Padding(

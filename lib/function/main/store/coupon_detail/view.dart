@@ -336,9 +336,11 @@ Widget buildView(
           ),
           ExtendedImage.network(
             itemData.pic,
+            enableLoadState: false,
           ),
           ExtendedImage.network(
             "https://chomgwo-1253631018.cos.ap-beijing.myqcloud.com/eleme/instructions.jpeg",
+            enableLoadState: false,
           )
         ],
       ),
