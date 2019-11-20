@@ -55,8 +55,9 @@ Future _onShare(Action action, Context<ProductDetailsState> ctx) async {
 }
 
 Future _onSkipBuyPage(Action action, Context<ProductDetailsState> ctx) async {
-  bool isSuccess =
-      await launch(ctx.state.itemData.couponClickUrl, universalLinksOnly: true);
+  bool isSuccess = await launch(
+      "taobao://uland.taobao.com/coupon/edetail?e=AhrLCDoks38GQASttHIRqVRBjM%2Fp8%2BRze9ayVR0DiTdVFjCLs0ELwzZuHnl1jW4bTHd9c8AySpaKlfhDF9cWUf4LZl1us6qQ5MS0TQxqBjPu1JKRrXPdgVxt%2B4ETnpKT0QI6VQ%2Fe3243djWqqJtHtA%3D%3D&union_lens=lensId:0bb0d4fb_3768_16e87f26f95_e1e2",
+      universalLinksOnly: false);
   println(isSuccess);
   if (!isSuccess) {
     NavigatorHelper.pushWebPage(

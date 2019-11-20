@@ -38,7 +38,11 @@ Widget buildView(
             ),
           ],
         ),
-        title: Text(state.title),
+        title: Text(
+          state.title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
         // This drop down menu demonstrates that Flutter widgets can be shown over the web view.
         actions: <Widget>[
           new IconButton(
