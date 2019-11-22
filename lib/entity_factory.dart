@@ -18,6 +18,7 @@ import 'package:chongmeng/function/adoption/my_adoption/model/my_adoption_entity
 import 'package:chongmeng/function/search/model/search_result_entity.dart';
 import 'package:chongmeng/function/tally/entity/current_user_tally_entity.dart';
 import 'package:chongmeng/function/tally/entity/tally_tag_entity.dart';
+import 'package:chongmeng/function/invite/model/invite_entity.dart';
 import 'package:chongmeng/function/signin/model/sign_in_result_entity.dart';
 import 'package:chongmeng/function/signin/model/sign_list_entity.dart';
 import 'package:chongmeng/function/my_pet/selecttype/model/pet_type_entity.dart';
@@ -84,6 +85,8 @@ class EntityFactory {
       return CurrentUserTallyEntity.fromJson(json) as T;
     } else if (T.toString() == "TallyTagEntity") {
       return TallyTagEntity.fromJson(json) as T;
+    } else if (T.toString() == "InviteEntity") {
+      return InviteEntity.fromJson(json) as T;
     } else if (T.toString() == "SignInResultEntity") {
       return SignInResultEntity.fromJson(json) as T;
     } else if (T.toString() == "SignListEntity") {

@@ -186,164 +186,174 @@ Widget buildView(
             ],
           ),
         ),
-        ListTile(
-          onTap: () {
-            UserHelper.loginCheck(viewService.context, () {
-              Navigator.pushNamed(
-                viewService.context,
-                PageConstants.MyAdoptionPage,
-              );
-            });
-          },
-          title: Text("我发布的领养"),
-          trailing: new Icon(
-            Icons.keyboard_arrow_right,
-            size: 30.0,
-            color: const Color(0x40808080),
-          ),
-        ),
-        VerticalLine(),
-        ListTile(
-          onTap: () {
-            UserHelper.loginCheck(viewService.context, () {
-              Navigator.pushNamed(
-                  viewService.context, PageConstants.ShippingAddressPage,
-                  arguments: {"type": ShippingAddressState.SEE});
-            });
-          },
-          title: Text("收货地址"),
-          trailing: new Icon(
-            Icons.keyboard_arrow_right,
-            size: 30.0,
-            color: const Color(0x40808080),
-          ),
-        ),
-        VerticalLine(),
-        ListTile(
-          onTap: () {
-            UserHelper.loginCheck(viewService.context, () {
-              Navigator.pushNamed(
-                viewService.context,
-                PageConstants.MyOrderPage,
-              );
-            });
-          },
-          title: Text("我的订单"),
-          trailing: new Icon(
-            Icons.keyboard_arrow_right,
-            size: 30.0,
-            color: const Color(0x40808080),
-          ),
-        ),
-        VerticalLine(),
-        ListTile(
-          onTap: () {
-            UserHelper.loginCheck(viewService.context, () {
-              Navigator.pushNamed(
-                viewService.context,
-                PageConstants.SafeCenterPage,
-              );
-            });
-          },
-          title: Text("安全中心"),
-          trailing: new Icon(
-            Icons.keyboard_arrow_right,
-            size: 30.0,
-            color: const Color(0x40808080),
-          ),
-        ),
-        VerticalLine(),
-        ListTile(
-          onTap: () {
-            UserHelper.loginCheck(viewService.context, () {
-              Navigator.pushNamed(
-                  viewService.context, PageConstants.SettingPage);
-            });
-          },
-          title: Text("设置"),
-          trailing: new Icon(
-            Icons.keyboard_arrow_right,
-            size: 30.0,
-            color: const Color(0x40808080),
-          ),
-        ),
-        VerticalLine(
-          height: 10.0,
-        ),
-        /* Container(
-          margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: CachedNetworkImage(
-              width: WindowUtils.getScreenWidth(),
-              fit: BoxFit.cover,
-              height: WindowUtils.getScreenHeight() * 0.17,
-              imageUrl:
-                  "https://img.alicdn.com/tfscom/i4/2246956324/O1CN01NYCDli1waRH6UqMg0_!!0-item_pic.jpg",
-            ),
-          ),
-        ),*/
-        Expanded(
-          child: Container(),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 18.0),
+        SingleChildScrollView(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              GestureDetector(
-                onTap: () async {
-                  state.count++;
-                  if (state.count > 25) {
-                    Navigator.pushNamed(
-                        viewService.context, PageConstants.AppInfoPage,
-                        arguments: {
-                          "registrationID":
-                              await JiguangUtils.getRegistrationID(),
-                          "channel": GlobalStore.store.getState().channel,
-//                        "idfa": Platform.isAndroid
-//                            ? await yuanmengDeviceInfo.getImei
-//                            : (await yuanmengDeviceInfo.idfa),
-                        });
-                  }
-                },
-                child: Container(
-                  height: 24.0,
-                  width: 100.0,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: colorF9F9F9,
-                      border: Border.all(color: color999999),
-                      borderRadius: BorderRadius.circular(12.0)),
-                  child: Text(
-                      "${GlobalStore.store.getState().packageInfo.appName ?? "宠窝"} v${GlobalStore.store.getState().packageInfo.version}",
-                      style: TextStyle(
-                        color: color999999,
-                        fontSize: 12.0,
-                      )),
-                ),
-              ),
-              GestureDetector(
-                onTap: () async {
-//                  await launch("tel:4006016868");
-                },
-                behavior: HitTestBehavior.opaque,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 18.0, bottom: 18.0),
-                  child: Text("QQ服务群：609487304",
-                      style: TextStyle(
-                        color: color999999,
-                        fontSize: 12.0,
-                      )),
-                ),
-              ),
-            ],
+            children: buildList(viewService, state),
           ),
         )
       ],
     ),
   );
+}
+
+List<Widget> buildList(ViewService viewService, AccountState state) {
+  return [
+    ListTile(
+      onTap: () {
+        UserHelper.loginCheck(viewService.context, () {
+          Navigator.pushNamed(
+            viewService.context,
+            PageConstants.MyAdoptionPage,
+          );
+        });
+      },
+      title: Text("我发布的领养"),
+      trailing: new Icon(
+        Icons.keyboard_arrow_right,
+        size: 30.0,
+        color: const Color(0x40808080),
+      ),
+    ),
+    VerticalLine(),
+    ListTile(
+      onTap: () {
+        UserHelper.loginCheck(viewService.context, () {
+          Navigator.pushNamed(
+              viewService.context, PageConstants.ShippingAddressPage,
+              arguments: {"type": ShippingAddressState.SEE});
+        });
+      },
+      title: Text("收货地址"),
+      trailing: new Icon(
+        Icons.keyboard_arrow_right,
+        size: 30.0,
+        color: const Color(0x40808080),
+      ),
+    ),
+    VerticalLine(),
+    ListTile(
+      onTap: () {
+        UserHelper.loginCheck(viewService.context, () {
+          Navigator.pushNamed(
+            viewService.context,
+            PageConstants.MyOrderPage,
+          );
+        });
+      },
+      title: Text("我的订单"),
+      trailing: new Icon(
+        Icons.keyboard_arrow_right,
+        size: 30.0,
+        color: const Color(0x40808080),
+      ),
+    ),
+    VerticalLine(),
+    ListTile(
+      onTap: () {
+        UserHelper.loginCheck(viewService.context, () {
+          Navigator.pushNamed(
+            viewService.context,
+            PageConstants.SafeCenterPage,
+          );
+        });
+      },
+      title: Text("安全中心"),
+      trailing: new Icon(
+        Icons.keyboard_arrow_right,
+        size: 30.0,
+        color: const Color(0x40808080),
+      ),
+    ),
+    VerticalLine(),
+    ListTile(
+      onTap: () {
+        UserHelper.loginCheck(viewService.context, () {
+          Navigator.pushNamed(viewService.context, PageConstants.SettingPage);
+        });
+      },
+      title: Text("设置"),
+      trailing: new Icon(
+        Icons.keyboard_arrow_right,
+        size: 30.0,
+        color: const Color(0x40808080),
+      ),
+    ),
+    VerticalLine(
+      height: 10.0,
+    ),
+    GestureDetector(
+      onTap: () {
+        UserHelper.loginCheck(viewService.context, () {
+          Navigator.pushNamed(viewService.context, PageConstants.InvitePage);
+        });
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: ExtendedImage.asset(
+            "assets/invite.png",
+            fit: BoxFit.cover,
+            width: WindowUtils.getScreenWidth(),
+          ),
+        ),
+      ),
+    ),
+    Padding(
+      padding: const EdgeInsets.only(bottom: 18.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          GestureDetector(
+            onTap: () async {
+              state.count++;
+              if (state.count > 20) {
+                Navigator.pushNamed(
+                    viewService.context, PageConstants.AppInfoPage,
+                    arguments: {
+                      "registrationID": await JiguangUtils.getRegistrationID(),
+                      "channel": GlobalStore.store.getState().channel,
+//                        "idfa": Platform.isAndroid
+//                            ? await yuanmengDeviceInfo.getImei
+//                            : (await yuanmengDeviceInfo.idfa),
+                    });
+              }
+            },
+            child: Container(
+              height: 24.0,
+              width: 100.0,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: colorF9F9F9,
+                  border: Border.all(color: color999999),
+                  borderRadius: BorderRadius.circular(12.0)),
+              child: Text(
+                  "${GlobalStore.store.getState().packageInfo.appName ?? "宠窝"} v${GlobalStore.store.getState().packageInfo.version}",
+                  style: TextStyle(
+                    color: color999999,
+                    fontSize: 12.0,
+                  )),
+            ),
+          ),
+          GestureDetector(
+            onTap: () async {
+//                  await launch("tel:4006016868");
+            },
+            behavior: HitTestBehavior.opaque,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 18.0, bottom: 18.0),
+              child: Text("QQ服务群：609487304",
+                  style: TextStyle(
+                    color: color999999,
+                    fontSize: 12.0,
+                  )),
+            ),
+          ),
+        ],
+      ),
+    )
+  ];
 }
 
 Container buildNoLoginView(ThemeData theme, ViewService viewService) {
