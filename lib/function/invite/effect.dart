@@ -29,9 +29,10 @@ Future _onShare(Action action, Context<InviteState> ctx) async {
       context: ctx.context,
       builder: (BuildContext context) {
         return routes.buildPage(PageConstants.SharePage, {
-          "type": ShareState.text,
-          "content": ""
-//          """${ctx.state.itemData.title}\n【在售价】${ctx.state.itemData.zkFinalPriceWap}元\n【券后价】${ctx.state.itemData.couponValue}元\n【下单链接】${result.data.data.clickUrl} \n----------------- \n复制这条信息，${result.data.data.tpwd}，到【手机淘宝】即可查看"""
+          "type": ShareState.h5,
+          "content": "我正在使用宠窝app,邀请您一起来省钱",
+          "dec": "宠窝邀请您领取电影票肯德基,必胜客,家乐福,沃尔玛,饿了么等产品代金券",
+          "url": ctx.state.data.inviteUrl,
         });
       });
 }

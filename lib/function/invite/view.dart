@@ -14,28 +14,31 @@ Widget buildView(
     appBar: Toolbar(
       title: Text("我的邀请"),
       actions: <Widget>[
-        IconButton(
-          onPressed: () {
-            dispatch(InviteActionCreator.onShare());
-          },
-          icon: Icon(
-            Icons.share,
-            color: Colors.white,
-          ),
-        )
+        if (state.data != null)
+          IconButton(
+            onPressed: () {
+              dispatch(InviteActionCreator.onShare());
+            },
+            icon: Icon(
+              Icons.share,
+              color: Colors.white,
+            ),
+          )
       ],
     ),
-    floatingActionButton: FloatingActionButton(
-      elevation: 0.0,
-      onPressed: () {
-        dispatch(InviteActionCreator.onShare());
-      },
-      child: Icon(
-        Icons.share,
-        color: Colors.red,
-      ),
-      backgroundColor: Theme.of(viewService.context).accentColor,
-    ),
+    floatingActionButton: state.data != null
+        ? FloatingActionButton(
+            elevation: 0.0,
+            onPressed: () {
+              dispatch(InviteActionCreator.onShare());
+            },
+            child: Icon(
+              Icons.share,
+              color: Colors.red,
+            ),
+            backgroundColor: Theme.of(viewService.context).accentColor,
+          )
+        : null,
     body: EasyRefresh.custom(
       firstRefresh: true,
       firstRefreshWidget: LoadingWidget(),

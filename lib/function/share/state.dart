@@ -9,6 +9,7 @@ class ShareState implements Cloneable<ShareState> {
   }
 
   static String text = "text";
+  static String h5 = "h5";
 }
 
 ShareState initState(Map<String, dynamic> args) {

@@ -24,11 +24,13 @@ class InviteEntity {
 
 class InviteData {
   int totalInviteIntegral;
+  String inviteUrl;
   List<InviteDataInviterecord> inviteRecord;
 
   InviteData({this.totalInviteIntegral, this.inviteRecord});
 
   InviteData.fromJson(Map<String, dynamic> json) {
+    inviteUrl = json['inviteUrl'];
     totalInviteIntegral = json['totalInviteIntegral'];
     if (json['inviteRecord'] != null) {
       inviteRecord = new List<InviteDataInviterecord>();
@@ -40,6 +42,7 @@ class InviteData {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['inviteUrl'] = this.inviteUrl;
     data['totalInviteIntegral'] = this.totalInviteIntegral;
     if (this.inviteRecord != null) {
       data['inviteRecord'] = this.inviteRecord.map((v) => v.toJson()).toList();

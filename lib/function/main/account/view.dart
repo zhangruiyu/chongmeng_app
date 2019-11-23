@@ -186,9 +186,11 @@ Widget buildView(
             ],
           ),
         ),
-        SingleChildScrollView(
-          child: Column(
-            children: buildList(viewService, state),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: buildList(viewService, state),
+            ),
           ),
         )
       ],
