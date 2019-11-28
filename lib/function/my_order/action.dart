@@ -8,7 +8,8 @@ enum MyOrderAction {
   Refresh,
   SkipReviewPage,
   ShowOrderAddress,
-  ShowExpress
+  ShowExpress,
+  SkipMap
 }
 
 class MyOrderActionCreator {
@@ -39,5 +40,9 @@ class MyOrderActionCreator {
 
   static Action onShowExpress(MyOrderDataStoreorder orderData) {
     return Action(MyOrderAction.ShowExpress, payload: orderData);
+  }
+
+  static Action onSkipMap(MyOrderDataMovieorder orderData) {
+    return Action(MyOrderAction.SkipMap, payload: orderData);
   }
 }

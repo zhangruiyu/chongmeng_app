@@ -5,6 +5,7 @@ import 'package:chongmeng/function/my_order/virtual_product_review/model/virtual
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
+import 'package:chongmeng/utils/map_utils.dart';
 import 'package:chongmeng/widget/custom_dialog.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
@@ -19,6 +20,7 @@ Effect<MyOrderState> buildEffect() {
     MyOrderAction.SkipReviewPage: _onSkipReviewPage,
     MyOrderAction.ShowOrderAddress: _onShowOrderAddress,
     MyOrderAction.ShowExpress: _onShowExpress,
+    MyOrderAction.SkipMap: _onSkipMap,
   });
 }
 
@@ -35,6 +37,13 @@ Future _onShowExpress(Action action, Context<MyOrderState> ctx) async {
   MyOrderDataStoreorder payload = action.payload;
   NavigatorHelper.pushWebPage(ctx.context, "快递信息",
       "https://m.kuaidi100.com/app/query/?com=${payload.expressType}&nu=${payload.expressNumber}");
+}
+
+Future _onSkipMap(Action action, Context<MyOrderState> ctx) async {
+  MyOrderDataMovieorder payload = action.payload;
+  String localAdd =
+      Uri.encodeFull("${payload.cinemaName} (${payload.cinemaAddr})");
+  MapUtils.openMap(localAdd, payload.lat.toString(), payload.lng.toString());
 }
 
 Future _onSkipReviewPage(Action action, Context<MyOrderState> ctx) async {

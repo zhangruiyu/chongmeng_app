@@ -325,7 +325,9 @@ Container movieItem(ViewService viewService, MyOrderState state, int index,
                             style: TextStyle(fontSize: 12, color: color333333),
                           ),
                           Row(
-                            children: itemData.movieSeat
+                            children: (itemData.movieSeat.length > 3
+                                    ? itemData.movieSeat.sublist(0, 3).toList()
+                                    : itemData.movieSeat)
                                 .map((itemSeat) => Padding(
                                       padding:
                                           const EdgeInsets.only(right: 8.0),
@@ -380,6 +382,31 @@ Container movieItem(ViewService viewService, MyOrderState state, int index,
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15.0, horizontal: 10),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 5.0),
+                        child: GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+                          onTap: () {
+                            dispatch(MyOrderActionCreator.onSkipMap(itemData));
+                          },
+                          child: Text("导航",
+                              style:
+                                  TextStyle(fontSize: 13, color: color333333)),
+                        ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                            border: Border.all(width: 0.5, color: colorCCCCCC)),
+                      ),
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 15.0, horizontal: 10),

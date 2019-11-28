@@ -4,6 +4,7 @@ import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/function/movie/movie_details/view.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/date_utils.dart';
+import 'package:chongmeng/utils/map_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/vertical_line.dart';
@@ -69,14 +70,12 @@ Widget buildView(
                               onPressed: () async {
                                 String localAdd = Uri.encodeFull(
                                     "${state.cinemaMovies.cinemaData.nm} (${state.cinemaMovies.cinemaData.addr})");
-                                String url = Platform.isAndroid
-                                    ? 'geo:${state.cinemaMovies.cinemaData.lat},${state.cinemaMovies.cinemaData.lng}?q=$localAdd'
-                                    : 'https://maps.apple.com/?q=$localAdd&ll=${state.cinemaMovies.cinemaData.lat},${state.cinemaMovies.cinemaData.lng}';
-                                if (await canLaunch(url)) {
-                                  await launch(url);
-                                } else {
-                                  showToast("请安装地图软件");
-                                }
+                                MapUtils.openMap(
+                                    localAdd,
+                                    state.cinemaMovies.cinemaData.lat
+                                        .toString(),
+                                    state.cinemaMovies.cinemaData.lng
+                                        .toString());
                               },
                               icon: Icon(
                                 MdiIcons.mapMarkerRadius,
