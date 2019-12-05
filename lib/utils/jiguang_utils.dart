@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:janalytics/janalytics.dart';
@@ -22,14 +23,15 @@ class JiguangUtils {
     if (isRelease) {
       janalytics.initCrashHandler();
     }
+    if (UserHelper.getOnlineUser()?.userId?.toString()?.isNotEmpty == true) {
+      janalytics
+          .identifyAccount(UserHelper.getOnlineUser()?.userId?.toString());
+    }
     janalytics.setup(
       appKey: JpushKey,
       channel: channel,
     );
     janalytics.setDebugMode(!isRelease);
-    if (isRelease) {
-      janalytics.initCrashHandler();
-    }
     jpush.setup(
       appKey: JpushKey,
       channel: channel,

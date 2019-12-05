@@ -20,6 +20,16 @@ Widget buildView(
     appBar: Toolbar(
       title: Text(itemData.title),
     ),
+    floatingActionButton: (state.data?.isNotEmpty == true)
+        ? FloatingActionButton(
+            elevation: 0.0,
+            onPressed: () {
+              dispatch(CouponDetailActionCreator.onShare());
+            },
+            child: Text("赚"),
+            backgroundColor: Theme.of(viewService.context).accentColor,
+          )
+        : null,
     body: SingleChildScrollView(
       child: Column(
         children: <Widget>[
@@ -295,7 +305,7 @@ Widget buildView(
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
-                      """1、每次领取红包需要花费5积分，失败不扣积分，领取后在[饿了么APP]内查看，不要用小程序。""",
+                      """1、每次领取红包需要花费30积分，失败不扣积分，领取后在[饿了么APP]内查看，不要用小程序。""",
                       style: TextStyle(color: colorWhite),
                     ),
                   ),

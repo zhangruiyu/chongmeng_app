@@ -9,7 +9,7 @@ class HttpConstants {
       ? "https://www.keleyuanyuan.xyz/"
 //          : "http://192.168.6.211:8080/";
 //      : "http://123.207.154.134:8080/";
-      : "http://192.168.1.42:8080/";
+      : "http://192.168.1.7:8080/";
 
   static final String SendCode = "app/auth/sendLoginCode"; //发送验证码
   static final String SendThirdLoginCode =

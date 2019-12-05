@@ -6,7 +6,8 @@ enum CouponDetailAction {
   GetCoupon,
   OpenEleme,
   ChangeSelectPosition,
-  ElemeCode
+  ElemeCode,
+  Share
 }
 
 class CouponDetailActionCreator {
@@ -28,5 +29,9 @@ class CouponDetailActionCreator {
 
   static Action onElemeCode(String type) {
     return Action(CouponDetailAction.ElemeCode, payload: type);
+  }
+
+  static Action onShare() {
+    return Action(CouponDetailAction.Share);
   }
 }
