@@ -20,6 +20,17 @@ Widget buildView(MovieState state, Dispatch dispatch, ViewService viewService) {
     appBar: Toolbar(
       title: Text("电影大厅"),
     ),
+    floatingActionButton: FloatingActionButton(
+      elevation: 0.0,
+      onPressed: () {
+        dispatch(MovieActionCreator.onShare());
+      },
+      child: Text(
+        "赚",
+        style: TextStyle(color: colorWhite, fontSize: 20),
+      ),
+      backgroundColor: Colors.red,
+    ),
     body: EasyRefresh.custom(
         firstRefresh: true,
         firstRefreshWidget: LoadingWidget(),

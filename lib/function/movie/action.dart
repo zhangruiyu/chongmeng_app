@@ -1,6 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 
-enum MovieAction { ResetData, Refresh, SkipMovieDetailsPage }
+enum MovieAction { ResetData, Refresh, SkipMovieDetailsPage, Share }
 
 class MovieActionCreator {
   static Action onRefresh(p) {
@@ -13,5 +13,9 @@ class MovieActionCreator {
 
   static Action onSkipMovieDetailsPage(p) {
     return Action(MovieAction.SkipMovieDetailsPage, payload: p);
+  }
+
+  static Action onShare() {
+    return Action(MovieAction.Share);
   }
 }

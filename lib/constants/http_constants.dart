@@ -57,6 +57,10 @@ class HttpConstants {
   //积分
   static String get IntegralList => "app/integral/common/integralList";
 
+  //当前用户分享url
+  static String get shareUrl => "app/integral/common/shareUrl";
+  static String get shareAward => "app/integral/common/shareAward";
+
   static String get TotalIntegral => "app/integral/common/totalIntegral";
 
   //商城

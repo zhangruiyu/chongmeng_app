@@ -1,5 +1,7 @@
 import 'package:chongmeng/network/entity/outermost_entity.dart';
+import 'package:chongmeng/network/entity/share_url_entity.dart';
 import 'package:chongmeng/network/entity/cos_entity.dart';
+import 'package:chongmeng/network/entity/share_result_entity.dart';
 import 'package:chongmeng/utils/model/jiguang_entity.dart';
 import 'package:chongmeng/function/user_details/model/user_details_entity.dart';
 import 'package:chongmeng/function/movie/movie_details/model/movie_details_entity.dart';
@@ -47,8 +49,12 @@ class EntityFactory {
       return null;
     } else if (T.toString() == "OutermostEntity") {
       return OutermostEntity.fromJson(json) as T;
+    } else if (T.toString() == "ShareUrlEntity") {
+      return ShareUrlEntity.fromJson(json) as T;
     } else if (T.toString() == "CosEntity") {
       return CosEntity.fromJson(json) as T;
+    } else if (T.toString() == "ShareResultEntity") {
+      return ShareResultEntity.fromJson(json) as T;
     } else if (T.toString() == "JiguangEntity") {
       return JiguangEntity.fromJson(json) as T;
     } else if (T.toString() == "UserDetailsEntity") {

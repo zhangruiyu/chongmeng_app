@@ -17,6 +17,7 @@ Widget buildView(ShareState state, Dispatch dispatch, ViewService viewService) {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          if (state.title != null) state.title,
           Row(
             children: <Widget>[
               _buildShareItem(state, "assets/qq.png", "QQ", UMSharePlatform.QQ,
@@ -70,11 +71,13 @@ Widget _buildShareItem(ShareState state, String image, String name,
     UMSharePlatform platformType, BuildContext context) {
   return Expanded(
     child: InkWell(
-      onTap: () {
+      onTap: () async {
+        var result;
         if (state.args['type'] == ShareState.text) {
-          UMengShare.shareText(platformType, state.args['content']);
+          result =
+              await UMengShare.shareText(platformType, state.args['content']);
         } else if (state.args['type'] == ShareState.h5) {
-          UMengShare.shareMedia(
+          result = await UMengShare.shareMedia(
               platformType,
               UMShareMediaType.WebUrl,
               state.args['content'],
@@ -82,7 +85,7 @@ Widget _buildShareItem(ShareState state, String image, String name,
               "https://chomgwo-1253631018.cos.ap-beijing.myqcloud.com/common/logo.png",
               state.args['url']);
         }
-        Navigator.pop(context);
+        Navigator.pop(context, result);
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),

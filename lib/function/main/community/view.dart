@@ -1,18 +1,13 @@
 import 'package:chongmeng/constants/colors.dart';
-import 'package:chongmeng/function/main/community/model/dynamic_list_entity.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
-import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/keep_alive_widget.dart';
 import 'package:chongmeng/widget/loadling_widget.dart';
-import 'package:chongmeng/widget/refresh_widget.dart';
-import 'package:chongmeng/widget/vertical_line.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 import '../action.dart';
 import 'action.dart';
-import 'index_inherited.dart';
 import 'state.dart';
 
 Widget buildView(
