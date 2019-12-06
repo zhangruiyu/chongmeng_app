@@ -39,11 +39,12 @@ void _initState(Action action, Context<MovieDetailsState> ctx) {
 
 Future<void> _onRefresh(Action action, Context<MovieDetailsState> ctx) async {
   var itemMovie = ctx.state.itemMovie;
-  (await RequestClient.request<MovieDetailsEntity>(ctx.context,
-          "http://m.maoyan.com/ajax/detailmovie?movieId=${itemMovie.id}",
-          isPost: false))
+  (await RequestClient.request<MovieDetailsEntity>(
+          ctx.context, HttpConstants.detailmovie,
+          queryParameters: {'movieId': itemMovie.id.toString()}, isPost: true))
       .yes((value) {
-    ctx.dispatch(MovieDetailsActionCreator.onSetDetailsData(value.detailMovie));
+    ctx.dispatch(
+        MovieDetailsActionCreator.onSetDetailsData(value.data.detailMovie));
   });
   CompleterUtils.complete(action);
 }

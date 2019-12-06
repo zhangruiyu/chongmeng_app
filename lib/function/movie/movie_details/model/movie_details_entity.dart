@@ -1,9 +1,29 @@
 class MovieDetailsEntity {
-  MovieDetailsDetailmovie detailMovie;
+  MovieDetailsData data;
 
-  MovieDetailsEntity({this.detailMovie});
+  MovieDetailsEntity({this.data});
 
   MovieDetailsEntity.fromJson(Map<String, dynamic> json) {
+    data = json['data'] != null
+        ? new MovieDetailsData.fromJson(json['data'])
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.data != null) {
+      data['data'] = this.data.toJson();
+    }
+    return data;
+  }
+}
+
+class MovieDetailsData {
+  MovieDetailsDetailmovie detailMovie;
+
+  MovieDetailsData({this.detailMovie});
+
+  MovieDetailsData.fromJson(Map<String, dynamic> json) {
     detailMovie = json['detailMovie'] != null
         ? new MovieDetailsDetailmovie.fromJson(json['detailMovie'])
         : null;
