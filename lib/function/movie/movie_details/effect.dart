@@ -1,5 +1,6 @@
 import 'package:chongmeng/components/dynamic/model/item_page_data.dart';
 import 'package:chongmeng/constants/constants.dart';
+import 'package:chongmeng/function/movie/model/movie_params_entity.dart';
 import 'package:chongmeng/function/recipe/state.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
@@ -52,44 +53,57 @@ Future<void> _onRefresh(Action action, Context<MovieDetailsState> ctx) async {
 Future<void> _onRefreshSchedule(
     Action action, Context<MovieDetailsState> ctx) async {
   ItemMovieSchedulePageData itemPageData = action.payload['itemPageData'];
-
-  (await RequestClient.request<MovieScheduleEntity>(ctx.context,
-          "http://m.maoyan.com/ajax/movie?forceUpdate=${new DateTime.now().millisecondsSinceEpoch}",
-          isPost: true,
-          queryParameters: {
-        "forceUpdate": new DateTime.now().millisecondsSinceEpoch,
-        "movieId": ctx.state.itemMovie.id,
-        "day": DateUtils.formatData(itemPageData.filtrateType),
-        "offset": 0,
-        "limit": 20
-      }))
-      .yes((value) {
-    ctx.dispatch(
-        MovieDetailsActionCreator.onSetScheduleData(itemPageData, value));
+  (await RequestClient.request<MovieParamsEntity>(
+          ctx.context, HttpConstants.movieParams,
+          queryParameters: {'urlSuffix': "movie"}))
+      .yes((paramsData) async {
+    (await RequestClient.request<MovieScheduleEntity>(
+            ctx.context, paramsData.data.url,
+            isPost: paramsData.data.isPost,
+            header: paramsData.data.headers,
+            queryParameters: {
+          ...paramsData.data.params,
+          "forceUpdate": new DateTime.now().millisecondsSinceEpoch,
+          "movieId": ctx.state.itemMovie.id,
+          "day": DateUtils.formatData(itemPageData.filtrateType),
+          "offset": 0,
+          "limit": 20
+        }))
+        .yes((value) {
+      ctx.dispatch(
+          MovieDetailsActionCreator.onSetScheduleData(itemPageData, value));
+    });
   });
+
   CompleterUtils.complete(action);
 }
 
 Future<void> _onLoadSchedule(
     Action action, Context<MovieDetailsState> ctx) async {
   ItemMovieSchedulePageData itemPageData = action.payload['itemPageData'];
-
-  (await RequestClient.request<MovieScheduleEntity>(ctx.context,
-          "http://m.maoyan.com/ajax/movie?forceUpdate=${new DateTime.now().millisecondsSinceEpoch}",
-          isPost: true,
-          queryParameters: {
-        "forceUpdate": new DateTime.now().millisecondsSinceEpoch,
-        "movieId": ctx.state.itemMovie.id,
-        "day": DateUtils.formatData(itemPageData.filtrateType),
-        "offset": 20 * itemPageData.pageIndex,
-        "limit": 20
-      }))
-      .yes((value) {
-    itemPageData.easyRefreshController
-        .finishLoad(success: true, noMore: !value.paging.hasMore);
-    itemPageData.pageIndex++;
-    ctx.dispatch(
-        MovieDetailsActionCreator.onSetLoadScheduleData(itemPageData, value));
+  (await RequestClient.request<MovieParamsEntity>(
+          ctx.context, HttpConstants.movieParams,
+          queryParameters: {'urlSuffix': "movie"}))
+      .yes((paramsData) async {
+    (await RequestClient.request<MovieScheduleEntity>(
+            ctx.context, paramsData.data.url,
+            isPost: paramsData.data.isPost,
+            header: paramsData.data.headers,
+            queryParameters: {
+          ...paramsData.data.params,
+          "forceUpdate": new DateTime.now().millisecondsSinceEpoch,
+          "movieId": ctx.state.itemMovie.id,
+          "day": DateUtils.formatData(itemPageData.filtrateType),
+          "offset": 20 * itemPageData.pageIndex,
+          "limit": 20
+        }))
+        .yes((value) {
+      itemPageData.easyRefreshController
+          .finishLoad(success: true, noMore: !value.paging.hasMore);
+      itemPageData.pageIndex++;
+      ctx.dispatch(
+          MovieDetailsActionCreator.onSetLoadScheduleData(itemPageData, value));
+    });
   });
   CompleterUtils.complete(action);
 }
