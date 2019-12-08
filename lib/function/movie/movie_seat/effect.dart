@@ -1,5 +1,6 @@
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/movie/model/movie_params_entity.dart';
+import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
@@ -22,7 +23,11 @@ Effect<MovieSeatState> buildEffect() {
 Future<void> _initState(Action action, Context<MovieSeatState> ctx) async {
   (await RequestClient.request<MovieParamsEntity>(
           ctx.context, HttpConstants.movieParams,
-          queryParameters: {'urlSuffix': "seatingPlan"}))
+          queryParameters: {
+        'urlSuffix': "seatingPlan",
+        "ci": GlobalStore.store.getState().ci,
+        "ciName": GlobalStore.store.getState().ciName,
+      }))
       .yes((paramsData) async {
     (await RequestClient.request<SeatEntity>(ctx.context, paramsData.data.url,
             isPost: paramsData.data.isPost,
@@ -45,6 +50,8 @@ Future<void> _onCommit(Action action, Context<MovieSeatState> ctx) async {
               ctx.context, HttpConstants.MovieOrderInfo,
               showLoadingIndicator: true,
               queryParameters: {
+            "ci": GlobalStore.store.getState().ci,
+            "ciName": GlobalStore.store.getState().ciName,
             'seqNo': ctx.state.cinemaMovie.seqNo,
             'count': ctx.state.localSelectMovie.length,
           }))

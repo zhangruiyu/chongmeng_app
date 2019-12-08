@@ -50,7 +50,9 @@ void iniAsync() async {
   GlobalStore.store.getState()
     ..packageInfo = await PackageInfo.fromPlatform()
     ..channel = channel
-    ..sp = await SharedPreferences.getInstance();
+    ..sp = await SharedPreferences.getInstance()
+    ..ci = 1
+    ..ciName = "北京";
   JiguangUtils.init(channel);
   QQWXHelper.init();
 }

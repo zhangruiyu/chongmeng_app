@@ -2,6 +2,7 @@ import 'package:chongmeng/components/dynamic/model/item_page_data.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/function/movie/model/movie_params_entity.dart';
 import 'package:chongmeng/function/recipe/state.dart';
+import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/network/net_work.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/date_utils.dart';
@@ -41,8 +42,15 @@ void _initState(Action action, Context<MovieDetailsState> ctx) {
 Future<void> _onRefresh(Action action, Context<MovieDetailsState> ctx) async {
   var itemMovie = ctx.state.itemMovie;
   (await RequestClient.request<MovieDetailsEntity>(
-          ctx.context, HttpConstants.detailmovie,
-          queryParameters: {'movieId': itemMovie.id.toString()}, isPost: true))
+    ctx.context,
+    HttpConstants.detailmovie,
+    queryParameters: {
+      'movieId': itemMovie.id.toString(),
+      "ci": GlobalStore.store.getState().ci,
+      "ciName": GlobalStore.store.getState().ciName,
+    },
+    isPost: true,
+  ))
       .yes((value) {
     ctx.dispatch(
         MovieDetailsActionCreator.onSetDetailsData(value.data.detailMovie));
@@ -55,7 +63,11 @@ Future<void> _onRefreshSchedule(
   ItemMovieSchedulePageData itemPageData = action.payload['itemPageData'];
   (await RequestClient.request<MovieParamsEntity>(
           ctx.context, HttpConstants.movieParams,
-          queryParameters: {'urlSuffix': "movie"}))
+          queryParameters: {
+        'urlSuffix': "movie",
+        "ci": GlobalStore.store.getState().ci,
+        "ciName": GlobalStore.store.getState().ciName,
+      }))
       .yes((paramsData) async {
     (await RequestClient.request<MovieScheduleEntity>(
             ctx.context, paramsData.data.url,
@@ -83,7 +95,11 @@ Future<void> _onLoadSchedule(
   ItemMovieSchedulePageData itemPageData = action.payload['itemPageData'];
   (await RequestClient.request<MovieParamsEntity>(
           ctx.context, HttpConstants.movieParams,
-          queryParameters: {'urlSuffix': "movie"}))
+          queryParameters: {
+        'urlSuffix': "movie",
+        "ci": GlobalStore.store.getState().ci,
+        "ciName": GlobalStore.store.getState().ciName,
+      }))
       .yes((paramsData) async {
     (await RequestClient.request<MovieScheduleEntity>(
             ctx.context, paramsData.data.url,

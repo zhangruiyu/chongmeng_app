@@ -25,10 +25,14 @@ class GlobalState implements GlobalBaseState<GlobalState> {
   String channel;
 
   SharedPreferences sp;
+  int ci;
+  String ciName;
 
   @override
   GlobalState clone() {
     return GlobalState()
+      ..ci = ci
+      ..ciName = ciName
       ..sp = sp
       ..channel = channel
       ..packageInfo = packageInfo

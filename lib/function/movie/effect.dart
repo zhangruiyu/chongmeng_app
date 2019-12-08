@@ -1,6 +1,7 @@
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/function/share/state.dart';
+import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/network/entity/share_result_entity.dart';
 import 'package:chongmeng/network/entity/share_url_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
@@ -22,7 +23,11 @@ Effect<MovieState> buildEffect() {
 
 Future<void> _onRefresh(Action action, Context<MovieState> ctx) async {
   (await RequestClient.request<HotMovieEntity>(
-          ctx.context, HttpConstants.MoiveHot))
+          ctx.context, HttpConstants.MoiveHot,
+          queryParameters: {
+        "ci": GlobalStore.store.getState().ci,
+        "ciName": GlobalStore.store.getState().ciName,
+      }))
       .yes((value) {
     ctx.dispatch(MovieActionCreator.onResetData(value.data));
   });
