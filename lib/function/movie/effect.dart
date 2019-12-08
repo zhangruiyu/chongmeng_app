@@ -18,7 +18,28 @@ Effect<MovieState> buildEffect() {
   return combineEffects(<Object, Effect<MovieState>>{
     MovieAction.Refresh: _onRefresh,
     MovieAction.Share: _onShare,
+    MovieAction.SelectCity: _onSelectCity,
+    Lifecycle.initState: _initState,
   });
+}
+
+void _initState(Action action, Context<MovieState> ctx) {
+  final TickerProvider tickerProvider = ctx.stfState as MoviePageState;
+  ctx.state
+    ..tabController = TabController(
+        vsync: tickerProvider,
+        length: ctx.state.pageData.length,
+        initialIndex: 0);
+  /*ctx.state
+    ..tabController.addListener(() {
+      ctx.dispatch(MovieDetailsActionCreator.onRefreshSchedule({
+        'itemPageData':
+        ctx.state.pageData.values.toList()[ctx.state.tabController.index]
+      }));
+    });
+  ctx.dispatch(MovieDetailsActionCreator.onRefresh(null));
+  ctx.dispatch(MovieDetailsActionCreator.onRefreshSchedule(
+      {'itemPageData': ctx.state.pageData.values.first}));*/
 }
 
 Future<void> _onRefresh(Action action, Context<MovieState> ctx) async {
@@ -32,6 +53,10 @@ Future<void> _onRefresh(Action action, Context<MovieState> ctx) async {
     ctx.dispatch(MovieActionCreator.onResetData(value.data));
   });
   CompleterUtils.complete(action);
+}
+
+Future<void> _onSelectCity(Action action, Context<MovieState> ctx) async {
+  Navigator.pushNamed(ctx.context, PageConstants.MovieCityPage);
 }
 
 Future<void> _onShare(Action action, Context<MovieState> ctx) async {

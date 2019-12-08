@@ -334,7 +334,7 @@ Column buildScheduleItem(ViewService viewService,
 }
 
 class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
-  final TabBar child;
+  final PreferredSizeWidget child;
   final Color backgroundColor;
 
   StickyTabBarDelegate({@required this.child, this.backgroundColor});

@@ -24,6 +24,7 @@ import 'function/main/page.dart';
 import 'function/main/store/coupon_detail/page.dart';
 import 'function/main/store/integral_commodity_detail/page.dart';
 import 'function/movie/movie_cinema/page.dart';
+import 'function/movie/movie_city/page.dart';
 import 'function/movie/movie_details/page.dart';
 import 'function/movie/movie_order_pre/page.dart';
 import 'function/movie/movie_seat/page.dart';
@@ -124,6 +125,7 @@ class PageConstants {
   static String get MovieSeatPage => "cm://MovieSeatPage"; //电影院选择座位
   static String get MovieOrderPrePage => "cm://MovieOrderPrePage"; //电影院选择座位订单确认
   static String get InvitePage => "cm://InvitePage"; //邀请好友结果
+  static String get MovieCityPage => "cm://MovieCityPage"; //电影城市选择
   static String get WebVirtualProductPreviewPage =>
       "cm://WebVirtualProductPreviewPage"; //h5的订单
 }
@@ -183,6 +185,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.MovieOrderPrePage: MovieOrderPrePage(),
     PageConstants.WebVirtualProductPreviewPage: WebVirtualProductPreviewPage(),
     PageConstants.InvitePage: InvitePage(),
+    PageConstants.MovieCityPage: MovieCityPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

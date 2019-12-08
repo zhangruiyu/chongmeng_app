@@ -11,6 +11,7 @@ import 'package:chongmeng/function/movie/movie_seat/model/seat_entity.dart';
 import 'package:chongmeng/function/movie/movie_cinema/model/cinema_movies_entity.dart';
 import 'package:chongmeng/function/movie/model/movie_params_entity.dart';
 import 'package:chongmeng/function/movie/model/hot_movie_entity.dart';
+import 'package:chongmeng/function/movie/movie_city/model/cinema_city_entity.dart';
 import 'package:chongmeng/function/shipping_address/model/shipping_address_entity.dart';
 import 'package:chongmeng/function/update/model/update_entity.dart';
 import 'package:chongmeng/function/auto/model/login_entity.dart';
@@ -74,6 +75,8 @@ class EntityFactory {
       return MovieParamsEntity.fromJson(json) as T;
     } else if (T.toString() == "HotMovieEntity") {
       return HotMovieEntity.fromJson(json) as T;
+    } else if (T.toString() == "CinemaCityEntity") {
+      return CinemaCityEntity.fromJson(json) as T;
     } else if (T.toString() == "ShippingAddressEntity") {
       return ShippingAddressEntity.fromJson(json) as T;
     } else if (T.toString() == "UpdateEntity") {

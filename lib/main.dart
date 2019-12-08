@@ -51,8 +51,8 @@ void iniAsync() async {
     ..packageInfo = await PackageInfo.fromPlatform()
     ..channel = channel
     ..sp = await SharedPreferences.getInstance()
-    ..ci = 1
-    ..ciName = "北京";
+    ..ci = 10
+    ..ciName = "上海";
   JiguangUtils.init(channel);
   QQWXHelper.init();
 }
