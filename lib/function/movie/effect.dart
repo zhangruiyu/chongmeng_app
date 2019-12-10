@@ -12,6 +12,7 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:oktoast/oktoast.dart';
 import 'action.dart';
 import 'model/hot_movie_entity.dart';
+import 'model/movie_params_entity.dart';
 import 'state.dart';
 
 Effect<MovieState> buildEffect() {
@@ -43,15 +44,28 @@ void _initState(Action action, Context<MovieState> ctx) {
 }
 
 Future<void> _onRefresh(Action action, Context<MovieState> ctx) async {
-  (await RequestClient.request<HotMovieEntity>(
-          ctx.context, HttpConstants.MoiveHot,
+  (await RequestClient.request<MovieParamsEntity>(
+          ctx.context, HttpConstants.movieParams,
           queryParameters: {
+        'urlSuffix': "movieOnInfoList",
         "ci": GlobalStore.store.getState().ci,
         "ciName": GlobalStore.store.getState().ciName,
       }))
-      .yes((value) {
-    ctx.dispatch(MovieActionCreator.onResetData(value.data));
+      .yes((paramsData) async {
+    (await RequestClient.request<HotMovieEntity>(
+            ctx.context, paramsData.data.url,
+            isPost: paramsData.data.isPost,
+            header: paramsData.data.headers,
+            queryParameters: {
+          ...paramsData.data.params,
+          if (GlobalStore.store.getState().ci != null)
+            "ci": GlobalStore.store.getState().ci,
+        }))
+        .yes((value) {
+      ctx.dispatch(MovieActionCreator.onResetData(value));
+    });
   });
+
   CompleterUtils.complete(action);
 }
 

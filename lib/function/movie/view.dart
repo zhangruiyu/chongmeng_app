@@ -92,7 +92,7 @@ Widget buildView(MovieState state, Dispatch dispatch, ViewService viewService) {
                       child: Row(
                         children: <Widget>[
                           ExtendedImage.network(
-                            itemMovie.img,
+                            itemMovie.img.replaceFirst("w.h", "592.832"),
                             width: 80,
                             enableLoadState: false,
                           ),

@@ -1,4 +1,4 @@
-class HotMovieEntity {
+/*class HotMovieEntity {
   String msg;
   HotMovieData data;
   int status;
@@ -21,9 +21,9 @@ class HotMovieEntity {
     data['status'] = this.status;
     return data;
   }
-}
+}*/
 
-class HotMovieData {
+class HotMovieEntity {
   int total;
   String stid;
   List<HotMovieDataMovielist> movieList;
@@ -31,7 +31,7 @@ class HotMovieData {
   List<Null> coming;
   List<int> movieIds;
 
-  HotMovieData(
+  HotMovieEntity(
       {this.total,
       this.stid,
       this.movieList,
@@ -39,7 +39,7 @@ class HotMovieData {
       this.coming,
       this.movieIds});
 
-  HotMovieData.fromJson(Map<String, dynamic> json) {
+  HotMovieEntity.fromJson(Map<String, dynamic> json) {
     total = json['total'];
     stid = json['stid'];
     if (json['movieList'] != null) {

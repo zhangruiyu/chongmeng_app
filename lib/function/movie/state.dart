@@ -8,7 +8,7 @@ import 'model/hot_movie_entity.dart';
 import 'movie_details/model/movie_schedule_entity.dart';
 
 class MovieState implements Cloneable<MovieState> {
-  HotMovieData data;
+  HotMovieEntity data;
 
   TabController tabController;
   LinkedHashMap<String, ItemMoviePageData> pageData;
