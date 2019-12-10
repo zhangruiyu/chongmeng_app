@@ -56,7 +56,13 @@ Future<void> _onRefresh(Action action, Context<MovieState> ctx) async {
 }
 
 Future<void> _onSelectCity(Action action, Context<MovieState> ctx) async {
-  Navigator.pushNamed(ctx.context, PageConstants.MovieCityPage);
+  var cityResult =
+      (await Navigator.pushNamed(ctx.context, PageConstants.MovieCityPage))
+          as Map;
+  GlobalStore.state
+    ..ci = cityResult['id']
+    ..ciName = cityResult['name'];
+  ctx.dispatch(MovieActionCreator.onRefresh(null));
 }
 
 Future<void> _onShare(Action action, Context<MovieState> ctx) async {

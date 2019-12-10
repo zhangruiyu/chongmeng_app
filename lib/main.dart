@@ -48,11 +48,12 @@ Future main() async {
 void iniAsync() async {
   String channel = await PlatformUtils.getChannel();
   GlobalStore.store.getState()
-    ..packageInfo = await PackageInfo.fromPlatform()
-    ..channel = channel
-    ..sp = await SharedPreferences.getInstance()
-    ..ci = 10
-    ..ciName = "上海";
+        ..packageInfo = await PackageInfo.fromPlatform()
+        ..channel = channel
+        ..sp = await SharedPreferences.getInstance()
+//    ..ci = 10
+//    ..ciName = "上海"
+      ;
   JiguangUtils.init(channel);
   QQWXHelper.init();
 }

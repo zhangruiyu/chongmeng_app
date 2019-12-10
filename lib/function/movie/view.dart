@@ -26,8 +26,7 @@ Widget buildView(MovieState state, Dispatch dispatch, ViewService viewService) {
           padding: const EdgeInsets.only(right: 22.0),
           child: InkResponse(
             onTap: () {
-              Navigator.pushNamed(
-                  viewService.context, PageConstants.MovieCityPage);
+              dispatch(MovieActionCreator.onSelectCity());
             },
             child: Container(
               alignment: Alignment.center,
