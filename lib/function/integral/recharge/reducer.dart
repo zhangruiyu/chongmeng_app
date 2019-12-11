@@ -14,11 +14,15 @@ Reducer<RechargeState> buildReducer() {
 
 RechargeState _onChangeSelectPosition(RechargeState state, Action action) {
   final RechargeState newState = state.clone()
-    ..selectItemPosition = action.payload;
+    ..selectItemPosition = action.payload
+    ..moneyTextEditingController.text = state.data[action.payload].showMoney;
   return newState;
 }
 
 RechargeState _onReSetData(RechargeState state, Action action) {
   final RechargeState newState = state.clone()..data = action.payload;
+  newState
+    ..moneyTextEditingController.text =
+        newState.data[state.selectItemPosition].showMoney;
   return newState;
 }

@@ -28,32 +28,19 @@ class RechargeCommodityEntity {
 }
 
 class RechargeCommodityData {
-  int give;
-  int original;
-  int money;
   String showMoney;
   String createTime;
-  int id;
 
-  RechargeCommodityData(
-      {this.give, this.original, this.money, this.createTime, this.id});
+  RechargeCommodityData({this.createTime});
 
   RechargeCommodityData.fromJson(Map<String, dynamic> json) {
-    give = json['give'];
-    original = json['original'];
-    money = json['money'];
     createTime = json['create_time'];
-    id = json['id'];
     showMoney = json['showMoney'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['give'] = this.give;
-    data['original'] = this.original;
-    data['money'] = this.money;
     data['create_time'] = this.createTime;
-    data['id'] = this.id;
     data['showMoney'] = this.showMoney;
     return data;
   }
