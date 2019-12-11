@@ -1,7 +1,6 @@
 import 'package:chongmeng/constants/colors.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
-import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/loadling_widget.dart';
 import 'package:extended_image/extended_image.dart';
@@ -12,7 +11,6 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 import 'action.dart';
 import 'model/hot_movie_entity.dart';
-import 'movie_details/view.dart';
 import 'state.dart';
 
 Widget buildView(MovieState state, Dispatch dispatch, ViewService viewService) {
@@ -58,24 +56,6 @@ Widget buildView(MovieState state, Dispatch dispatch, ViewService viewService) {
           MovieActionCreator.onRefresh,
         ),
         slivers: [
-          SliverPersistentHeader(
-            pinned: true,
-            floating: true,
-            delegate: StickyTabBarDelegate(
-              child: TabBar(
-                controller: state.tabController,
-                labelStyle: TextStyle(),
-                labelColor: of.accentColor,
-                unselectedLabelColor: colorBack,
-                indicatorColor: of.accentColor,
-                tabs: state.pageData.values
-                    .map((itemTab) => Tab(
-                          text: itemTab.name,
-                        ))
-                    .toList(),
-              ),
-            ),
-          ),
           if (state.data != null)
             SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {

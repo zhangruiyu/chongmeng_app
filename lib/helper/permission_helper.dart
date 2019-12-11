@@ -11,9 +11,16 @@ class PermissionHelper {
   } //检测需要的权限
 
   static Future<bool> requestLocationPermission() async {
-    final permissions = await PermissionHandler()
-        .requestPermissions([PermissionGroup.location]);
-    return permissions[PermissionGroup.location] == PermissionStatus.granted;
+    if (Platform.isIOS) {
+      return (await PermissionHandler().requestPermissions([
+            PermissionGroup.locationWhenInUse,
+          ]))[PermissionGroup.locationWhenInUse] ==
+          PermissionStatus.granted;
+    } else {
+      return (await PermissionHandler().requestPermissions(
+              [PermissionGroup.location]))[PermissionGroup.location] ==
+          PermissionStatus.granted;
+    }
   }
 
   static Future<Map<PermissionGroup, PermissionStatus>>

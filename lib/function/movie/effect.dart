@@ -28,11 +28,11 @@ Effect<MovieState> buildEffect() {
 
 void _initState(Action action, Context<MovieState> ctx) {
   final TickerProvider tickerProvider = ctx.stfState as MoviePageState;
-  ctx.state
+  /* ctx.state
     ..tabController = TabController(
         vsync: tickerProvider,
         length: ctx.state.pageData.length,
-        initialIndex: 0);
+        initialIndex: 0);*/
   /*ctx.state
     ..tabController.addListener(() {
       ctx.dispatch(MovieDetailsActionCreator.onRefreshSchedule({

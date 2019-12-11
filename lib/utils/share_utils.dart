@@ -18,6 +18,9 @@ class ShareUtils {
   }
 
   static bool isShareSuccess(result) {
+    if (result == null) {
+      return false;
+    }
     return result['um_status'] == 'SUCCESS';
   }
 }
