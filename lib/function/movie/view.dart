@@ -31,7 +31,7 @@ Widget buildView(MovieState state, Dispatch dispatch, ViewService viewService) {
             child: Container(
               alignment: Alignment.center,
               child: Text(
-                "定位失败",
+                state.districtText,
                 style: TextStyle(color: Colors.white),
               ),
             ),

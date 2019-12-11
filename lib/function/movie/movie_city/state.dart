@@ -1,3 +1,4 @@
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 import 'package:azlistview/azlistview.dart';
 import 'package:fish_redux/fish_redux.dart';
 
@@ -9,10 +10,14 @@ class MovieCityState implements Cloneable<MovieCityState> {
   List<CinemaCitySuspensionBean> allCity;
 
   List<CinemaCitySuspensionBean> hotCity;
+  String districtText;
+  Location location;
 
   @override
   MovieCityState clone() {
     return MovieCityState()
+      ..location = location
+      ..districtText = districtText
       ..hotCity = hotCity
       ..allCity = allCity
       ..suspensionTag = suspensionTag;
@@ -20,7 +25,7 @@ class MovieCityState implements Cloneable<MovieCityState> {
 }
 
 MovieCityState initState(Map<String, dynamic> args) {
-  return MovieCityState();
+  return MovieCityState()..districtText = "正在定位";
 }
 
 class CinemaCitySuspensionBean extends ISuspensionBean {

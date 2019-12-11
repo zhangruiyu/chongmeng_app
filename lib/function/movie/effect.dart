@@ -1,7 +1,9 @@
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/function/share/state.dart';
 import 'package:chongmeng/global_store/store.dart';
+import 'package:chongmeng/helper/permission_helper.dart';
 import 'package:chongmeng/network/entity/share_result_entity.dart';
 import 'package:chongmeng/network/entity/share_url_entity.dart';
 import 'package:chongmeng/network/net_work.dart';
@@ -41,6 +43,21 @@ void _initState(Action action, Context<MovieState> ctx) {
   ctx.dispatch(MovieDetailsActionCreator.onRefresh(null));
   ctx.dispatch(MovieDetailsActionCreator.onRefreshSchedule(
       {'itemPageData': ctx.state.pageData.values.first}));*/
+  Future(() async {
+    if (await PermissionHelper.requestLocationPermission()) {
+      final location = await AmapLocation.fetchLocation();
+      ctx.state.location = location;
+      print("location ${await location.city}");
+      print("location ${await location.district}");
+      //如果是空,那么就展示位置就行啦
+      if (GlobalStore.state.ci == null) {
+        ctx.dispatch(
+            MovieActionCreator.onSetDistrictText(await location.district));
+      }
+    } else {
+      ctx.dispatch(MovieActionCreator.onSetDistrictText("定位失败"));
+    }
+  });
 }
 
 Future<void> _onRefresh(Action action, Context<MovieState> ctx) async {
@@ -71,11 +88,17 @@ Future<void> _onRefresh(Action action, Context<MovieState> ctx) async {
 
 Future<void> _onSelectCity(Action action, Context<MovieState> ctx) async {
   var cityResult =
-      (await Navigator.pushNamed(ctx.context, PageConstants.MovieCityPage))
-          as Map;
-  GlobalStore.state
-    ..ci = cityResult['id']
-    ..ciName = cityResult['name'];
+      (await Navigator.pushNamed(ctx.context, PageConstants.MovieCityPage));
+  if (cityResult is String) {
+    GlobalStore.state.ci = null;
+    GlobalStore.state.ciName = null;
+    ctx.dispatch(MovieActionCreator.onSetDistrictText(cityResult));
+  } else if (cityResult is Map) {
+    GlobalStore.state
+      ..ci = cityResult['id']
+      ..ciName = cityResult['name'];
+    ctx.dispatch(MovieActionCreator.onSetDistrictText(cityResult['name']));
+  }
   ctx.dispatch(MovieActionCreator.onRefresh(null));
 }
 

@@ -20,9 +20,9 @@ class KeyboardUtils {
     var value = _textEditingController.value;
     var start = value.selection.baseOffset;
     var end = value.selection.extentOffset;
-    if (value.selection.isValid) {
+    if (value.composing.isValid) {
       String newText = "";
-      if (value.selection.isCollapsed) {
+      if (value.composing.isCollapsed) {
         if (end > 0) {
           newText += value.text.substring(0, end);
         }

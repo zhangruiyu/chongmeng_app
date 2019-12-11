@@ -1,6 +1,13 @@
 import 'package:fish_redux/fish_redux.dart';
 
-enum MovieAction { ResetData, Refresh, SkipMovieDetailsPage, Share, SelectCity }
+enum MovieAction {
+  ResetData,
+  Refresh,
+  SkipMovieDetailsPage,
+  Share,
+  SelectCity,
+  SetDistrictText
+}
 
 class MovieActionCreator {
   static Action onRefresh(p) {
@@ -21,5 +28,9 @@ class MovieActionCreator {
 
   static Action onSelectCity() {
     return Action(MovieAction.SelectCity);
+  }
+
+  static Action onSetDistrictText(t) {
+    return Action(MovieAction.SetDistrictText, payload: t);
   }
 }

@@ -10,6 +10,12 @@ class PermissionHelper {
         .every((item) => item == PermissionStatus.granted);
   } //检测需要的权限
 
+  static Future<bool> requestLocationPermission() async {
+    final permissions = await PermissionHandler()
+        .requestPermissions([PermissionGroup.location]);
+    return permissions[PermissionGroup.location] == PermissionStatus.granted;
+  }
+
   static Future<Map<PermissionGroup, PermissionStatus>>
       checkPermissionStatus() async {
     Map<PermissionGroup, PermissionStatus> permissions;

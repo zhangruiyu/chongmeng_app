@@ -1,6 +1,7 @@
 import 'package:azlistview/azlistview.dart';
 import 'package:chongmeng/function/my_pet/selectsubtype/model/pet_sub_type_entity.dart';
 import 'package:chongmeng/function/my_pet/selectsubtype/view.dart';
+import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
 import 'package:chongmeng/widget/loadling_widget.dart';
@@ -35,6 +36,10 @@ Widget buildView(
           : Column(
               children: <Widget>[
                 ListTile(
+                    onTap: () {
+                      Navigator.pop(viewService.context,
+                          state.location == null ? null : state.districtText);
+                    },
                     title: Text("当前城市"),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -43,7 +48,7 @@ Widget buildView(
                           Icons.place,
                           size: 20.0,
                         ),
-                        Text(" 成都市"),
+                        Text(" ${state.districtText}"),
                       ],
                     )),
                 Divider(

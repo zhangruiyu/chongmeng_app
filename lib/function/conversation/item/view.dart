@@ -6,7 +6,6 @@ import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/utils/keyboard_utils.dart';
 import 'package:chongmeng/utils/window_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
-import 'package:chongmeng/widget/sliver_animated_list.dart';
 import 'package:emoji_picker/emoji_picker.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';

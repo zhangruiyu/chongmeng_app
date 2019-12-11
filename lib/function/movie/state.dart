@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:amap_location_fluttify/src/dart/models.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -13,9 +14,14 @@ class MovieState implements Cloneable<MovieState> {
   TabController tabController;
   LinkedHashMap<String, ItemMoviePageData> pageData;
 
+  Location location;
+  String districtText;
+
   @override
   MovieState clone() {
     return MovieState()
+      ..districtText = districtText
+      ..location = location
       ..data = data
       ..tabController = tabController
       ..pageData = pageData;
@@ -37,7 +43,8 @@ MovieState initState(Map<String, dynamic> args) {
           data: [],
           pageIndex: 0,
           easyRefreshController: EasyRefreshController()),
-    });
+    })
+    ..districtText = "正在定位";
 }
 
 class MoviePageState extends ComponentState<MovieState>

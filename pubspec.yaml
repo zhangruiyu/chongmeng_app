@@ -26,7 +26,7 @@ dependencies:
   package_info: any
   url_launcher: any
   flutter_spinkit: ^3.1.0
-#  cached_network_image: any
+  #  cached_network_image: any
   flutter_easyrefresh:
     git:
       url: https://github.com/xuelongqy/flutter_easyrefresh.git
@@ -71,7 +71,7 @@ dependencies:
       url: https://github.com/zhangruiyu/flutter_vertical_marquee.git
   jverify: 0.5.2
   extended_text: 0.6.4
-  sliver_animated_list: ^1.0.0
+  #  sliver_animated_list: ^1.0.0
   jmessage_flutter:
     git:
       url: https://github.com/zhangruiyu/jmessage-flutter-plugin.git
@@ -82,7 +82,14 @@ dependencies:
   fluwx: ^1.1.1
   markdown: 2.1.1
   qr_flutter: ^3.0.1
+  amap_location_fluttify: 0.5.1+a918944
 #  gallery_saver: ^1.0.1
+
+dependency_overrides:
+  extended_image_library:
+    git:
+      url: https://github.com/fluttercandies/extended_image_library.git
+      ref: dev
 
 dev_dependencies:
   flutter_test:

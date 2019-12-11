@@ -1,3 +1,4 @@
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 import 'package:azlistview/azlistview.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:lpinyin/lpinyin.dart';
@@ -11,12 +12,19 @@ Reducer<MovieCityState> buildReducer() {
     <Object, Reducer<MovieCityState>>{
       MovieCityAction.ResetData: _onResetData,
       MovieCityAction.ChangeTag: _onChangeTag,
+      MovieCityAction.SetDistrictText: _onSetDistrictText,
     },
   );
 }
 
 MovieCityState _onChangeTag(MovieCityState state, Action action) {
   return state.clone()..suspensionTag = action.payload;
+}
+
+MovieCityState _onSetDistrictText(MovieCityState state, Action action) {
+  return state.clone()
+    ..districtText = action.payload['district']
+    ..location = action.payload['location'];
 }
 
 MovieCityState _onResetData(MovieCityState state, Action action) {
