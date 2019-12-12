@@ -120,13 +120,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.5"
-  downloads_path_provider:
-    dependency: "direct main"
-    description:
-      name: downloads_path_provider
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
   dragablegridview_flutter:
     dependency: "direct main"
     description:
@@ -147,15 +140,13 @@ packages:
       name: extended_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.5"
+    version: "0.6.8"
   extended_image_library:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "."
-      ref: dev
-      resolved-ref: c005601d2aef37d3f76c33cf8e3c41768ed2fe6f
-      url: "https://github.com/fluttercandies/extended_image_library.git"
-    source: git
+      name: extended_image_library
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.1.9"
   extended_nested_scroll_view:
     dependency: "direct main"
@@ -366,7 +357,7 @@ packages:
       name: markdown
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.3"
   matcher:
     dependency: transitive
     description:
@@ -394,7 +385,7 @@ packages:
       name: oktoast
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.0"
+    version: "2.2.1"
   package_info:
     dependency: "direct main"
     description:
@@ -436,7 +427,7 @@ packages:
       name: permission_handler
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.3.0"
+    version: "4.0.0"
   petitparser:
     dependency: transitive
     description:
@@ -632,5 +623,5 @@ packages:
     source: hosted
     version: "3.5.0"
 sdks:
-  dart: ">2.4.0 <3.0.0"
+  dart: ">=2.6.0 <3.0.0"
   flutter: ">=1.9.1+hotfix.4 <2.0.0"

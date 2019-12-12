@@ -15,6 +15,7 @@ import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/utils/map_utils.dart';
 import 'package:chongmeng/utils/platform_utils.dart';
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/services.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -47,7 +48,7 @@ Future main() async {
 
 void iniAsync() async {
   String channel = await PlatformUtils.getChannel();
-  GlobalStore.store.getState()
+  GlobalStore.state
         ..packageInfo = await PackageInfo.fromPlatform()
         ..channel = channel
         ..sp = await SharedPreferences.getInstance()

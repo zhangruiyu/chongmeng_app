@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:chongmeng/global_store/store.dart';
+import 'package:device_info/device_info.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PermissionHelper {
@@ -109,14 +111,19 @@ class PermissionHelper {
 
   static Future<bool> checkPhonePermission() async {
     if (Platform.isIOS) return true;
-    var isAgree =
-        (await PermissionHandler().requestPermissions([PermissionGroup.phone]))
-            .values
-            .every((item) => item == PermissionStatus.granted);
-    if (!isAgree) {
-      PermissionHandler().openAppSettings();
+    var androidInfo = await DeviceInfoPlugin().androidInfo;
+    if (androidInfo.version.sdkInt < 29) {
+      var isAgree = (await PermissionHandler()
+              .requestPermissions([PermissionGroup.phone]))
+          .values
+          .every((item) => item == PermissionStatus.granted);
+      if (!isAgree) {
+        PermissionHandler().openAppSettings();
+      }
+      return isAgree;
+    } else {
+      return true;
     }
-    return isAgree;
   }
 
   //开启app需要的权限 必须给

@@ -80,21 +80,24 @@ Widget buildView(
                       color: of.accentColor,
                     ),
                     Expanded(
-                      child: TextField(
-                        scrollPadding: const EdgeInsets.all(0.0),
-                        controller: state.textEditingController,
-                        textInputAction: TextInputAction.search,
-                        onSubmitted: (str) {
-                          dispatch(SearchActionCreator.onSearch());
-                        },
-                        decoration: InputDecoration(
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 22,
+                        child: TextField(
+                          scrollPadding: const EdgeInsets.all(0.0),
+                          controller: state.textEditingController,
+                          textInputAction: TextInputAction.search,
+                          onSubmitted: (str) {
+                            dispatch(SearchActionCreator.onSearch());
+                          },
+                          decoration: InputDecoration(
+                            isDense: true,
                             contentPadding: EdgeInsets.zero,
                             border: InputBorder.none,
-                            hintText: "",
-                            hintStyle:
-                                TextStyle(color: colorD1D0D0, fontSize: 12.0)),
-                        autofocus: true,
-                        style: TextStyle(fontSize: 14.0),
+                          ),
+                          autofocus: true,
+                          style: TextStyle(fontSize: 14.0),
+                        ),
                       ),
                     ),
                   ],

@@ -12,7 +12,6 @@ import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/jiguang_utils.dart';
 import 'package:chongmeng/utils/model/jiguang_entity.dart';
 import 'package:dio/dio.dart';
-import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Action;
@@ -203,9 +202,8 @@ class NavigatorHelper {
 
       debugPrint(response.statusCode.toString());
 
-      File path = await File(
-              (await DownloadsPathProvider.downloadsDirectory).path +
-                  "/${DateTime.now().millisecondsSinceEpoch}.png")
+      File path = await File((await getApplicationDocumentsDirectory()).path +
+              "/${DateTime.now().millisecondsSinceEpoch}.png")
           .writeAsBytes(Uint8List.fromList(response.data));
       await jmessage.updateMyAvatar(imgPath: path.path);
       path.delete();

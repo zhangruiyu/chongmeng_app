@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:chongmeng/helper/model/local_user.dart';
+import 'package:device_info/device_info.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';

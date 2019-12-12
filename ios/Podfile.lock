@@ -12,8 +12,6 @@ PODS:
     - Flutter
   - device_info (0.0.1):
     - Flutter
-  - downloads_path_provider (0.0.1):
-    - Flutter
   - Flutter (1.0.0)
   - flutter_ijkplayer (0.0.1):
     - Flutter
@@ -66,6 +64,10 @@ PODS:
     - QCloudCore (= 5.6.6)
   - shared_preferences (0.0.1):
     - Flutter
+  - shared_preferences_macos (0.0.1):
+    - Flutter
+  - shared_preferences_web (0.0.1):
+    - Flutter
   - tencent_cos (0.0.1):
     - Flutter
     - QCloudCOSXML
@@ -93,6 +95,10 @@ PODS:
     - UMCShare/Social/ReducedWeChat
   - url_launcher (0.0.1):
     - Flutter
+  - url_launcher_macos (0.0.1):
+    - Flutter
+  - url_launcher_web (0.0.1):
+    - Flutter
   - webview_flutter (0.0.1):
     - Flutter
 
@@ -102,7 +108,6 @@ DEPENDENCIES:
   - camera (from `.symlinks/plugins/camera/ios`)
   - city_pickers (from `.symlinks/plugins/city_pickers/ios`)
   - device_info (from `.symlinks/plugins/device_info/ios`)
-  - downloads_path_provider (from `.symlinks/plugins/downloads_path_provider/ios`)
   - Flutter (from `Flutter`)
   - flutter_ijkplayer (from `.symlinks/plugins/flutter_ijkplayer/ios`)
   - fluwx (from `.symlinks/plugins/fluwx/ios`)
@@ -118,10 +123,14 @@ DEPENDENCIES:
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - photo_manager (from `.symlinks/plugins/photo_manager/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
+  - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
   - tencent_cos (from `.symlinks/plugins/tencent_cos/ios`)
   - thumbnails (from `.symlinks/plugins/thumbnails/ios`)
   - umengshare (from `.symlinks/plugins/umengshare/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
+  - url_launcher_macos (from `.symlinks/plugins/url_launcher_macos/ios`)
+  - url_launcher_web (from `.symlinks/plugins/url_launcher_web/ios`)
   - webview_flutter (from `.symlinks/plugins/webview_flutter/ios`)
 
 SPEC REPOS:
@@ -149,8 +158,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/city_pickers/ios"
   device_info:
     :path: ".symlinks/plugins/device_info/ios"
-  downloads_path_provider:
-    :path: ".symlinks/plugins/downloads_path_provider/ios"
   Flutter:
     :path: Flutter
   flutter_ijkplayer:
@@ -181,6 +188,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/photo_manager/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
+  shared_preferences_macos:
+    :path: ".symlinks/plugins/shared_preferences_macos/ios"
+  shared_preferences_web:
+    :path: ".symlinks/plugins/shared_preferences_web/ios"
   tencent_cos:
     :path: ".symlinks/plugins/tencent_cos/ios"
   thumbnails:
@@ -189,6 +200,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/umengshare/ios"
   url_launcher:
     :path: ".symlinks/plugins/url_launcher/ios"
+  url_launcher_macos:
+    :path: ".symlinks/plugins/url_launcher_macos/ios"
+  url_launcher_web:
+    :path: ".symlinks/plugins/url_launcher_web/ios"
   webview_flutter:
     :path: ".symlinks/plugins/webview_flutter/ios"
 
@@ -198,7 +213,6 @@ SPEC CHECKSUMS:
   camera: 38cc83ae9a5667bb5a71c7d9edaf60a91920fd4e
   city_pickers: b0370f4c35c201723b5b7fcce10ec29b59d5bc35
   device_info: cbf09d2ec12aa7110e0b09fabe54b5bd6c8efe74
-  downloads_path_provider: fe0d06888d4b8c055a59edbc2f51f03e63cb0e28
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_ijkplayer: ef9006131553deb6d8ae6d7fbd3bcbf93b135930
   FlutterIJK: 68b00c1d11162b5016f3611853aa699e198bd1d2
@@ -222,6 +236,8 @@ SPEC CHECKSUMS:
   QCloudCore: 57cb8830b0f7adbd99f7467d23cf42a88257ac63
   QCloudCOSXML: 5589f274de85f2073b69a786c9eef9080009cd3b
   shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
+  shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
+  shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
   tencent_cos: e9f00a02054d13f1ef93e79b59ae28ca3c08e892
   thumbnails: bb4f4e9bb4b51c8ae4e6ad9a2fa81373f9b634ad
   UMCCommon: 971f324a5a99c9d662ae040a815e7e3d7ef8b2a8
@@ -229,6 +245,8 @@ SPEC CHECKSUMS:
   UMCShare: e0cef55c0fd6051254c8cda1d0630eb578b27bad
   umengshare: e4059463956e0d417822a7aae9a8fdd22874517c
   url_launcher: a1c0cc845906122c4784c542523d8cacbded5626
+  url_launcher_macos: fd7894421cd39320dce5f292fc99ea9270b2a313
+  url_launcher_web: e5527357f037c87560776e36436bf2b0288b965c
   webview_flutter: db3aba222b23e4dc432e0c5882834123dc50ff9f
 
 PODFILE CHECKSUM: 3dbe063e9c90a5d7c9e4e76e70a821b9e2c1d271

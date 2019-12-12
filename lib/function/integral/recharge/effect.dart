@@ -5,7 +5,6 @@ import 'package:chongmeng/routes.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:fluwx/fluwx.dart';
-import 'package:oktoast/oktoast.dart';
 import 'action.dart';
 import 'model/pay_result_entity.dart';
 import 'model/recharge_commodity_entity.dart';
@@ -65,7 +64,7 @@ void _initState(Action action, Context<RechargeState> ctx) {
 }
 
 Future _onPay(Action action, Context<RechargeState> ctx) async {
-  var money = ctx.state.moneyTextEditingController.text;
+  var money = ctx.state.moneyTextEditingController.text.trim();
   if (int.tryParse(money) != null) {
     var result = await RequestClient.request<WxPayEntity>(
         ctx.context, HttpConstants.PayPre,
