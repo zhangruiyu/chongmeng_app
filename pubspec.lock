@@ -14,7 +14,7 @@ packages:
       name: amap_core_fluttify
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.3+324aaff"
+    version: "0.2.4+bb1f005"
   amap_location_fluttify:
     dependency: "direct main"
     description:
@@ -63,7 +63,7 @@ packages:
       name: camera
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.6+3"
+    version: "0.5.7+2"
   charcode:
     dependency: transitive
     description:
@@ -77,7 +77,7 @@ packages:
       name: city_pickers
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.28"
+    version: "0.1.29"
   collection:
     dependency: transitive
     description:
@@ -105,21 +105,21 @@ packages:
       name: cupertino_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.2"
+    version: "0.1.3"
   device_info:
     dependency: "direct main"
     description:
       name: device_info
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.1+1"
+    version: "0.4.1+4"
   dio:
     dependency: "direct main"
     description:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.5"
+    version: "3.0.7"
   dragablegridview_flutter:
     dependency: "direct main"
     description:
@@ -193,10 +193,10 @@ packages:
     description:
       path: "."
       ref: v2
-      resolved-ref: "97481405686ff6d1ba294669cdc74626b043ed7d"
+      resolved-ref: b532c91074857765abe0f746c800a5233be115cd
       url: "https://github.com/xuelongqy/flutter_easyrefresh.git"
     source: git
-    version: "2.0.4"
+    version: "2.0.6"
   flutter_ijkplayer:
     dependency: "direct main"
     description:
@@ -244,6 +244,11 @@ packages:
       url: "https://github.com/zhangruiyu/flutter_vertical_marquee.git"
     source: git
     version: "0.2.3"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   fluwx:
     dependency: "direct main"
     description:
@@ -257,7 +262,7 @@ packages:
       name: foundation_fluttify
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.3"
+    version: "0.2.5"
   http:
     dependency: transitive
     description:
@@ -292,7 +297,7 @@ packages:
       name: image_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.2"
+    version: "0.6.2+3"
   image_picker_saver:
     dependency: "direct main"
     description:
@@ -371,7 +376,7 @@ packages:
       name: material_design_icons_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.3.4595"
+    version: "3.4.4795"
   meta:
     dependency: transitive
     description:
@@ -392,7 +397,7 @@ packages:
       name: package_info
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.0+10"
+    version: "0.4.0+13"
   path:
     dependency: transitive
     description:
@@ -406,7 +411,7 @@ packages:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.2"
+    version: "1.5.1"
   pedantic:
     dependency: transitive
     description:
@@ -441,14 +446,14 @@ packages:
       name: photo
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.4"
+    version: "0.4.5"
   photo_manager:
     dependency: transitive
     description:
       name: photo_manager
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.4"
+    version: "0.4.5"
   photo_view:
     dependency: "direct main"
     description:
@@ -463,6 +468,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.1"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   qr:
     dependency: transitive
     description:
@@ -490,7 +502,28 @@ packages:
       name: shared_preferences
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.4+5"
+    version: "0.5.6"
+  shared_preferences_macos:
+    dependency: transitive
+    description:
+      name: shared_preferences_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+2"
+  shared_preferences_platform_interface:
+    dependency: transitive
+    description:
+      name: shared_preferences_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
+  shared_preferences_web:
+    dependency: transitive
+    description:
+      name: shared_preferences_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2+2"
   simple_gesture_detector:
     dependency: transitive
     description:
@@ -593,14 +626,28 @@ packages:
       name: url_launcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.2.5"
+    version: "5.4.1"
+  url_launcher_macos:
+    dependency: transitive
+    description:
+      name: url_launcher_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+1"
   url_launcher_platform_interface:
     dependency: transitive
     description:
       name: url_launcher_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.4"
+  url_launcher_web:
+    dependency: transitive
+    description:
+      name: url_launcher_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0+2"
   vector_math:
     dependency: transitive
     description:
@@ -614,7 +661,7 @@ packages:
       name: webview_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.15+1"
+    version: "0.3.18+1"
   xml:
     dependency: transitive
     description:
@@ -624,4 +671,4 @@ packages:
     version: "3.5.0"
 sdks:
   dart: ">=2.6.0 <3.0.0"
-  flutter: ">=1.9.1+hotfix.4 <2.0.0"
+  flutter: ">=1.12.13+hotfix.4 <2.0.0"
