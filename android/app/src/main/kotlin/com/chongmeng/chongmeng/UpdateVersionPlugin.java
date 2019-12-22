@@ -69,7 +69,7 @@ public class UpdateVersionPlugin implements EventChannel.StreamHandler {
             }
 
             @Override
-            public void onProgress(int progress, int total, boolean isChange) {
+            public void onProgress(long progress, long total, boolean isChange) {
                 int percent = (int)(progress * 1.0 / total * 100);
                 if (isChange && percent > 0) {
                     data.put("percent", percent);
