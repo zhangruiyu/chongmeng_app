@@ -9,6 +9,7 @@ import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/helper/user_helper.dart';
 import 'package:chongmeng/network/net_exception.dart';
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:oktoast/oktoast.dart';

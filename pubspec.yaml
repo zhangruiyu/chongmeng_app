@@ -13,6 +13,9 @@ description: A new Flutter project.
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 1.5.3+22
 
+flutter-json:
+  enable: true
+
 environment:
   sdk: ">=2.6.0 <3.0.0"
 
@@ -31,7 +34,7 @@ dependencies:
     git:
       url: https://github.com/xuelongqy/flutter_easyrefresh.git
       ref: v2
-  dio: any
+  dio: 3.0.0
   flutter_localizations:
     sdk: flutter
   shared_preferences: any

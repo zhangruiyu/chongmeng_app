@@ -6,18 +6,18 @@ import 'state.dart';
 Reducer<MovieState> buildReducer() {
   return asReducer(
     <Object, Reducer<MovieState>>{
-      MovieAction.ResetData: _onResetData,
       MovieAction.SetDistrictText: _onSetDistrictText,
+      MovieAction.ChangeNewPage: _onChangeNewPage,
     },
   );
 }
 
-MovieState _onResetData(MovieState state, Action action) {
-  final MovieState newState = state.clone()..data = action.payload;
+MovieState _onSetDistrictText(MovieState state, Action action) {
+  final MovieState newState = state.clone()..districtText = action.payload;
   return newState;
 }
 
-MovieState _onSetDistrictText(MovieState state, Action action) {
-  final MovieState newState = state.clone()..districtText = action.payload;
+MovieState _onChangeNewPage(MovieState state, Action action) {
+  final MovieState newState = state.clone()..pageIndex = action.payload;
   return newState;
 }

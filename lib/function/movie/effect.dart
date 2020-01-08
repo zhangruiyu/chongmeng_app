@@ -11,15 +11,13 @@ import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/share_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:oktoast/oktoast.dart';
+
 import 'action.dart';
-import 'model/hot_movie_entity.dart';
-import 'model/movie_params_entity.dart';
+import 'movie_list/action.dart';
 import 'state.dart';
 
 Effect<MovieState> buildEffect() {
   return combineEffects(<Object, Effect<MovieState>>{
-    MovieAction.Refresh: _onRefresh,
     MovieAction.Share: _onShare,
     MovieAction.SelectCity: _onSelectCity,
     Lifecycle.initState: _initState,
@@ -27,22 +25,6 @@ Effect<MovieState> buildEffect() {
 }
 
 void _initState(Action action, Context<MovieState> ctx) {
-  final TickerProvider tickerProvider = ctx.stfState as MoviePageState;
-  /* ctx.state
-    ..tabController = TabController(
-        vsync: tickerProvider,
-        length: ctx.state.pageData.length,
-        initialIndex: 0);*/
-  /*ctx.state
-    ..tabController.addListener(() {
-      ctx.dispatch(MovieDetailsActionCreator.onRefreshSchedule({
-        'itemPageData':
-        ctx.state.pageData.values.toList()[ctx.state.tabController.index]
-      }));
-    });
-  ctx.dispatch(MovieDetailsActionCreator.onRefresh(null));
-  ctx.dispatch(MovieDetailsActionCreator.onRefreshSchedule(
-      {'itemPageData': ctx.state.pageData.values.first}));*/
   Future(() async {
     if (await PermissionHelper.requestLocationPermission()) {
       final location = await AmapLocation.fetchLocation();
@@ -60,32 +42,6 @@ void _initState(Action action, Context<MovieState> ctx) {
   });
 }
 
-Future<void> _onRefresh(Action action, Context<MovieState> ctx) async {
-  (await RequestClient.request<MovieParamsEntity>(
-          ctx.context, HttpConstants.movieParams,
-          queryParameters: {
-        'urlSuffix': "movieOnInfoList",
-        "ci": GlobalStore.store.getState().ci,
-        "ciName": GlobalStore.store.getState().ciName,
-      }))
-      .yes((paramsData) async {
-    (await RequestClient.request<HotMovieEntity>(
-            ctx.context, paramsData.data.url,
-            isPost: paramsData.data.isPost,
-            header: paramsData.data.headers,
-            queryParameters: {
-          ...paramsData.data.params,
-          if (GlobalStore.store.getState().ci != null)
-            "ci": GlobalStore.store.getState().ci,
-        }))
-        .yes((value) {
-      ctx.dispatch(MovieActionCreator.onResetData(value));
-    });
-  });
-
-  CompleterUtils.complete(action);
-}
-
 Future<void> _onSelectCity(Action action, Context<MovieState> ctx) async {
   var cityResult =
       (await Navigator.pushNamed(ctx.context, PageConstants.MovieCityPage));
@@ -99,7 +55,7 @@ Future<void> _onSelectCity(Action action, Context<MovieState> ctx) async {
       ..ciName = cityResult['name'];
     ctx.dispatch(MovieActionCreator.onSetDistrictText(cityResult['name']));
   }
-  ctx.dispatch(MovieActionCreator.onRefresh(null));
+  ctx.dispatch(MovieListActionCreator.onRefresh(null));
 }
 
 Future<void> _onShare(Action action, Context<MovieState> ctx) async {
