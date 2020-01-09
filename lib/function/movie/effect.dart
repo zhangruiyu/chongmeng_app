@@ -13,6 +13,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 
 import 'action.dart';
+import 'cinema_list/action.dart';
 import 'movie_list/action.dart';
 import 'state.dart';
 
@@ -56,6 +57,7 @@ Future<void> _onSelectCity(Action action, Context<MovieState> ctx) async {
     ctx.dispatch(MovieActionCreator.onSetDistrictText(cityResult['name']));
   }
   ctx.dispatch(MovieListActionCreator.onRefresh(null));
+  ctx.dispatch(CinemaListActionCreator.onRefresh(null));
 }
 
 Future<void> _onShare(Action action, Context<MovieState> ctx) async {
