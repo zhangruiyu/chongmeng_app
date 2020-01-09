@@ -175,14 +175,9 @@ Widget buildView(
                               onTap: plist.ticketStatus != 0
                                   ? null
                                   : () {
-                                      Navigator.pushNamed(viewService.context,
-                                          PageConstants.MovieSeatPage,
-                                          arguments: {
-                                            'cinemaMovies': state.cinemaMovies,
-                                            'cinemaMovie': plist,
-                                            'selectCinemaMovie':
-                                                selectCinemaMovie
-                                          });
+                                      dispatch(MovieCinemaActionCreator
+                                          .onSkipMovieSeatPage(
+                                              plist, selectCinemaMovie));
                                     },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),

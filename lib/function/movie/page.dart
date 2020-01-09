@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 
+import 'cinema_list/component.dart';
 import 'effect.dart';
 import 'movie_list/component.dart';
 import 'reducer.dart';
@@ -17,6 +18,7 @@ class MoviePage extends Page<MovieState, Map<String, dynamic>> {
               adapter: null,
               slots: <String, Dependent<MovieState>>{
                 'move_list': moveListConnector() + MovieListComponent(),
+                'cinema_list': cinemaListConnector() + CinemaListComponent(),
               }),
           middleware: <Middleware<MovieState>>[],
         );

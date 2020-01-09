@@ -98,6 +98,7 @@ class HttpConstants {
   static String get movieCity => "/app/movie/movieCity"; //电影城市选择
   static String get detailmovie => "/app/movie/detailmovie"; //电影详情
   static String get movieParams => "/app/movie/movieParams"; //电影接口参数
+  static String get movieItemPrice => "/app/movie/movieItemPrice"; //获取电影单价
 
   static String get MovieOrderInfo =>
       "/app/movie/common/movieOrderInfo"; //电影订单信息

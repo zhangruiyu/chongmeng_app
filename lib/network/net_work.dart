@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:chongmeng/constants/constants.dart';
 import 'package:chongmeng/constants/http_constants.dart';
 import 'package:chongmeng/entity_factory.dart';
+import 'package:chongmeng/generated/json/base/json_convert_content.dart';
 import 'package:chongmeng/global_store/store.dart';
 import 'package:chongmeng/helper/navigator_helper.dart';
 import 'package:chongmeng/helper/user_helper.dart';
@@ -84,7 +85,7 @@ class RequestClient {
         receiveTimeout: 40000,
         headers: {
           'os': Platform.operatingSystem,
-          'version': globalState.packageInfo.version,
+          'version': globalState?.packageInfo?.version,
           'token': UserHelper.getUserToken(),
           'channel': GlobalStore.state.channel,
           if (header != null) ...header
@@ -114,13 +115,15 @@ class RequestClient {
       var data = response.data;
 
       if (requestUrl.startsWith("http")) {
-        return new Future.value(EntityFactory.generateOBJ<T>(response.data));
+        return new Future.value(EntityFactory.generateOBJ<T>(response.data) ??
+            JsonConvert.fromJsonAsT<T>(response.data));
       } else if (data['status'].toString() == ErrorCode.Login.toString()) {
         UserHelper.logout(context);
         return new Future.error(
             new NetException(code: data['status'], message: data['msg']));
       } else if (data['status'].toString() == '0') {
-        return new Future.value(EntityFactory.generateOBJ<T>(response.data));
+        return new Future.value(EntityFactory.generateOBJ<T>(response.data) ??
+            JsonConvert.fromJsonAsT<T>(response.data));
       } else if (data['status'].toString() == '4') {
 //          NavigatorHelper.pushPage(context, PageConstants.AuthPage);
         return new Future.error(new NetException(

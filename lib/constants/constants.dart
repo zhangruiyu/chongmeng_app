@@ -10,4 +10,4 @@ export 'package:oktoast/oktoast.dart';
 const int DynamicPageSize = 8;
 const String WXKey = "wxe2cabfecd003404b";
 const bool isRelease = false;
-const bool isOnline = true;
+const bool isOnline = false;

@@ -14,10 +14,13 @@ class MovieSeatState implements Cloneable<MovieSeatState> {
   SeatEntity seatEntity;
   //用户选择的座位
   List<SeatSeatdataSeatRegionsRowsSeat> localSelectMovie;
+  //电影票单价
+  int itemMoney;
 
   @override
   MovieSeatState clone() {
     return MovieSeatState()
+      ..itemMoney = itemMoney
       ..cinemaMovies = cinemaMovies
       ..selectCinemaMovie = selectCinemaMovie
       ..localSelectMovie = localSelectMovie
@@ -28,6 +31,7 @@ class MovieSeatState implements Cloneable<MovieSeatState> {
 
 MovieSeatState initState(Map<String, dynamic> args) {
   return MovieSeatState()
+    ..itemMoney = args['itemMoney']
     ..cinemaMovies = args['cinemaMovies']
     ..selectCinemaMovie = args['selectCinemaMovie']
     ..cinemaMovie = args['cinemaMovie']

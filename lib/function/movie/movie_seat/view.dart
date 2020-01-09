@@ -161,7 +161,7 @@ Widget buildView(
                         seatRowId = item.rowId;
                       }
                     });
-                    var price = itemSeatPrice(state);
+                    var price = state.itemMoney;
 
                     return Container(
                       child: GestureDetector(
@@ -227,7 +227,7 @@ Widget buildView(
                         borderRadius: new BorderRadius.circular(5.0)),
                     child: Text(state.localSelectMovie.isEmpty
                         ? "请先选择座位"
-                        : "¥${itemSeatPrice(state) * state.localSelectMovie.length} 确认选座"),
+                        : "¥${state.itemMoney * state.localSelectMovie.length} 确认选座"),
                     textColor: colorWhite,
                     onPressed: () {
                       dispatch(MovieSeatActionCreator.onCommit());
@@ -238,13 +238,4 @@ Widget buildView(
             ],
           ),
   );
-}
-
-itemSeatPrice(MovieSeatState state) {
-  Map price = ((state.seatEntity.seatData.price as Map)
-          .values
-          .first["seatsPriceDetail"] as Map)
-      .values
-      .first;
-  return double.parse(price['originPrice']) / (price['detail'] as List).length;
 }

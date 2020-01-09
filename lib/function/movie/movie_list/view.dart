@@ -52,6 +52,8 @@ Widget buildView(
                                   children: <Widget>[
                                     Text(
                                       itemMovie.nm,
+                                      overflow: TextOverflow.ellipsis,
+                                      softWrap: true,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18),

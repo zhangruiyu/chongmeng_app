@@ -49,8 +49,6 @@ class EntityFactory {
   static T generateOBJ<T>(json) {
     if (1 == 0) {
       return null;
-    } else if (T.toString() == "OutermostEntity") {
-      return OutermostEntity.fromJson(json) as T;
     } else if (T.toString() == "ShareUrlEntity") {
       return ShareUrlEntity.fromJson(json) as T;
     } else if (T.toString() == "CosEntity") {

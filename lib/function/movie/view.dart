@@ -17,14 +17,41 @@ Widget buildView(MovieState state, Dispatch dispatch, ViewService viewService) {
   if (state.views == null) {
     state.views = [
       viewService.buildComponent('move_list'),
-      Text("123"),
+      viewService.buildComponent('cinema_list'),
     ];
   }
   var of = Theme.of(viewService.context);
   var infoTextStyle = TextStyle(color: color7E7E7E);
   return Scaffold(
     appBar: Toolbar(
-      title: Text("电影大厅"),
+      title: GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(viewService.context, PageConstants.SearchPage);
+        },
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Row(
+              children: <Widget>[
+                new Icon(
+                  Icons.search,
+                  size: 25.0,
+                  color: of.accentColor,
+                ),
+                Text(
+                  "搜影院",
+                  style: TextStyle(fontSize: 14.0, color: of.accentColor),
+                )
+              ],
+            ),
+          ),
+          decoration: BoxDecoration(
+              color: Color(0xc8ffffff),
+              borderRadius: BorderRadius.all(Radius.circular(30.0))),
+        ),
+      ),
       actions: <Widget>[
         Padding(
           padding: const EdgeInsets.only(right: 22.0),
