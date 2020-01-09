@@ -13,7 +13,18 @@ class CinemaSearchDelegate extends SearchDelegate<String> {
   List<SearchCinemaCinemasList> localData;
   MovieParamsData params;
 
-  CinemaSearchDelegate(this.params);
+  CinemaSearchDelegate(this.params) : super(searchFieldLabel: "搜影院");
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    var of = Theme.of(context);
+    return super.appBarTheme(context).copyWith(
+          primaryColor: of.accentColor,
+          primaryIconTheme: of.primaryIconTheme.copyWith(color: Colors.white),
+          primaryColorBrightness: Brightness.dark,
+          primaryTextTheme: of.textTheme,
+        );
+  }
 
   @override
   List<Widget> buildActions(BuildContext context) {
