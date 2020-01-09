@@ -14,6 +14,8 @@ import 'package:flutter/material.dart' hide Action;
 
 import 'action.dart';
 import 'cinema_list/action.dart';
+import 'cinema_search_delegate.dart';
+import 'model/movie_params_entity.dart';
 import 'movie_list/action.dart';
 import 'state.dart';
 
@@ -21,6 +23,7 @@ Effect<MovieState> buildEffect() {
   return combineEffects(<Object, Effect<MovieState>>{
     MovieAction.Share: _onShare,
     MovieAction.SelectCity: _onSelectCity,
+    MovieAction.ShowSearch: _onShowSearch,
     Lifecycle.initState: _initState,
   });
 }
@@ -92,4 +95,22 @@ Future<void> _onShare(Action action, Context<MovieState> ctx) async {
       });
     }
   });
+}
+
+Future<void> _onShowSearch(Action action, Context<MovieState> ctx) async {
+  if (GlobalStore.store.getState().ci == null) {
+    ctx.dispatch(MovieActionCreator.onSelectCity());
+  } else {
+    (await RequestClient.request<MovieParamsEntity>(
+            ctx.context, HttpConstants.movieParams,
+            queryParameters: {
+          'urlSuffix': "search",
+          "ci": GlobalStore.store.getState().ci,
+          "ciName": GlobalStore.store.getState().ciName,
+        }))
+        .yes((paramsData) async {
+      var params = paramsData.data;
+      showSearch(context: ctx.context, delegate: CinemaSearchDelegate(params));
+    });
+  }
 }

@@ -2,6 +2,7 @@ import 'package:chongmeng/function/adoption/my_adoption/page.dart';
 import 'package:chongmeng/function/app_info/page.dart';
 import 'package:chongmeng/function/conversation/page.dart';
 import 'package:chongmeng/function/edit_text/page.dart';
+import 'package:chongmeng/function/movie/seartch_cinema/page.dart';
 import 'package:chongmeng/function/my_pet/page.dart';
 import 'package:chongmeng/function/signin/signinresult/page.dart';
 import 'package:fish_redux/fish_redux.dart';
@@ -31,8 +32,6 @@ import 'function/movie/movie_seat/page.dart';
 import 'function/movie/page.dart';
 import 'function/my_order/page.dart';
 import 'function/my_order/virtual_product_review/page.dart';
-import 'function/my_order/web_virtual_product_preview/page.dart';
-import 'function/my_order/web_virtual_product_preview/page.dart';
 import 'function/my_order/web_virtual_product_preview/page.dart';
 import 'function/my_pet/add/page.dart';
 import 'function/my_pet/selectsubtype/page.dart';
@@ -126,6 +125,7 @@ class PageConstants {
   static String get MovieOrderPrePage => "cm://MovieOrderPrePage"; //电影院选择座位订单确认
   static String get InvitePage => "cm://InvitePage"; //邀请好友结果
   static String get MovieCityPage => "cm://MovieCityPage"; //电影城市选择
+  static String get SearchCinemaPage => "cm://SearchCinemaPage"; //电影院搜索
   static String get WebVirtualProductPreviewPage =>
       "cm://WebVirtualProductPreviewPage"; //h5的订单
 }
@@ -186,6 +186,7 @@ final AbstractRoutes routes = PageRoutes(
     PageConstants.WebVirtualProductPreviewPage: WebVirtualProductPreviewPage(),
     PageConstants.InvitePage: InvitePage(),
     PageConstants.MovieCityPage: MovieCityPage(),
+    PageConstants.SearchCinemaPage: SearchCinemaPage(),
   },
   visitor: (String path, Page<Object, dynamic> page) {
     if (page.isTypeof<GlobalBaseState>()) {

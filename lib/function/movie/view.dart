@@ -26,7 +26,7 @@ Widget buildView(MovieState state, Dispatch dispatch, ViewService viewService) {
     appBar: Toolbar(
       title: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(viewService.context, PageConstants.SearchPage);
+          dispatch(MovieActionCreator.onShowSearch());
         },
         child: Container(
           width: double.infinity,

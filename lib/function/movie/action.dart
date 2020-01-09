@@ -1,10 +1,20 @@
 import 'package:fish_redux/fish_redux.dart';
 
-enum MovieAction { Share, SelectCity, SetDistrictText, ChangeNewPage }
+enum MovieAction {
+  Share,
+  SelectCity,
+  SetDistrictText,
+  ChangeNewPage,
+  ShowSearch
+}
 
 class MovieActionCreator {
   static Action onShare() {
     return Action(MovieAction.Share);
+  }
+
+  static Action onShowSearch() {
+    return Action(MovieAction.ShowSearch);
   }
 
   static Action onSelectCity() {
