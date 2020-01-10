@@ -21,7 +21,7 @@ class CinemaSearchDelegate extends SearchDelegate<String> {
     return super.appBarTheme(context).copyWith(
           primaryColor: of.accentColor,
           primaryIconTheme: of.primaryIconTheme.copyWith(color: Colors.white),
-          primaryColorBrightness: Brightness.dark,
+          primaryColorBrightness: Brightness.light,
           primaryTextTheme: of.textTheme,
         );
   }
