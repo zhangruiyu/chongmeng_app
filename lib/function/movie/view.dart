@@ -1,4 +1,5 @@
 import 'package:chongmeng/constants/colors.dart';
+import 'package:chongmeng/function/main/view.dart';
 import 'package:chongmeng/routes.dart';
 import 'package:chongmeng/utils/completer_utils.dart';
 import 'package:chongmeng/widget/Toolbar.dart';
@@ -91,8 +92,14 @@ Widget buildView(MovieState state, Dispatch dispatch, ViewService viewService) {
         dispatch(MovieActionCreator.onChangeNewPage(index));
       },
       items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: Icon(Icons.phone), title: Text("电影")),
-        BottomNavigationBarItem(icon: Icon(Icons.phone), title: Text("影院")),
+        BottomNavigationBarItem(
+            icon: Image.asset('assets/movie_movie_icon_normal.png'),
+            activeIcon: Image.asset('assets/movie_movie_icon_select.png'),
+            title: Text("电影")),
+        BottomNavigationBarItem(
+            icon: Image.asset('assets/movie_cinema_icon_normal.png'),
+            activeIcon: Image.asset('assets/movie_cinema_icon_select.png'),
+            title: Text("影院")),
       ],
     ),
   );

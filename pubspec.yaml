@@ -117,4 +117,8 @@ flutter:
     - assets/update_page_cancle.png
     - assets/splash_text.png
     - assets/home_movie_banner.png
+    - assets/movie_movie_icon_normal.png
+    - assets/movie_movie_icon_select.png
+    - assets/movie_cinema_icon_normal.png
+    - assets/movie_cinema_icon_select.png
 
